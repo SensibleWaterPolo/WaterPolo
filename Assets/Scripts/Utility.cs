@@ -36,6 +36,8 @@ public static class Utility //M: Classe statica che contiene funzioni di utilit√
      
     }
 
+    
+
    
     }
     
