@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Pool
+  - PlayerY
+  - Ball
+  - PlayerR
+  - Yellow
+  - Red
+  - GK
+  - Battle
+  - EndYellow
+  - EndRed
+  - Side
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Pool
+  - PlayerY
+  - Ball
+  - PlayerR
+  - PlayerY1
+  - PlayerY6
+  - PlayerY5
+  - PlayerY3
+  - PlayerR1
+  - PlayerR5
+  - PlayerR6
+  - PlayerR3
+  - Side
+  - Battle
+  - Goal
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Pool
+    uniqueID: 472306065
+    locked: 0
+  - name: Shoot
+    uniqueID: 4058883111
+    locked: 0
+  - name: Player
+    uniqueID: 246582865
+    locked: 0
+  - name: MarcaBoa
+    uniqueID: 1267284513
+    locked: 0
+  - name: Ball
+    uniqueID: 1423109139
+    locked: 0
+  - name: Goal
+    uniqueID: 2808214753
+    locked: 0
+  - name: Score
+    uniqueID: 2322319815
+    locked: 0
