@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Principal;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -18,6 +19,8 @@ public class Player : MonoBehaviour
     [Range(0f, 10f)]
     public float shoot;
     public int stamina;//M: forza del giocatore per vincere lo scontro, se mosso da cpu ha un minimo X e un massimo Y
+    public Vector2 clickCPU; //range di click della cpu, da un minimo X ad un massimo Y, utilizzati per decidere chi vince uno scontro 
+    protected bool armDx; //M: true se è destro, false se è un mancino
 
     [Header("FLAG")]
     public bool cpuFlag; //M: true se muove la cpu
@@ -28,6 +31,7 @@ public class Player : MonoBehaviour
     public bool arrivedFlagAtt;//M: true se è arrivato a destinazione
     public bool arrivedFlagBall;//M: true se è arrivato a destinazione
     public bool arrivedFlagDef;//M: true se è arrivato a destinazione
+    
     [Header("STATE")]
     public bool bicy; //M: bicicletta
     public bool swim; //M: nuota
@@ -61,22 +65,30 @@ public class Player : MonoBehaviour
     protected int ballExit=0; //M: risolve un bug per il quale la palla esce due volte dalla collisione
 
     
-    private bool pause;
+    private bool pause; //M: per la pausa del gioco
        
     public ShootSignal shootSignalPrefab;
     public ShootSignal shootSignal;
 
     public int idTeam; //M: 0:YELLOW 1:RED
     public int idBall; //M: 0: libera non nel mio settore, 1: libera nel mio settore, 2: in possesso amico, 3: in possesso avversario, 4: sono io in possesso, 5: palla nel mio settore e sono il più vicino -1 indefinito  
-    public int idAnim;
+    public int idAnim; //m: ID ANIMAZIONE
 
     public bool marcaFlag; //M:Variabile utilizzata per far ruotare le boe
-   
-    public bool boaFlag;
+   public bool boaFlag;  //M: per le animazione delle boe
     
     public float distaceBall; //M:distanza dalla palla
     public float distanceAtt; //M:distanza dal punto di attacco
     public float distanceDef; //M:distanza dal punto di difesa
+
+    //VARIABILI PER IL CONTROLLO DELLE COLLISIONI E CAMBIO DI DIREZIONE
+  /*  protected Transform sensorRight;
+    protected Transform sensorLeft;
+    protected bool obstacleFront, obstacleLeft, obstacleRight;
+    protected bool dodgeObstacle;
+    protected LayerMask layer = 1 << 9;
+    protected float rotSensor=40; //gradi dei sensori*/
+
    
 
     public virtual void Awake()
@@ -96,13 +108,20 @@ public class Player : MonoBehaviour
         posFinal = Vector3.zero;
         idAnim = 0;
         ballFlag = false;
+        clickCPU = new Vector2(1, 10);
     }
     private void Start()
     {
         pass = Random.Range(7, 10);
         speed = Random.Range(7,10);
         stamina = Random.Range(6,10);
+      /*  sensorRight = transform.GetChild(4).transform;
+        sensorRight.transform.localRotation = Quaternion.Euler(0,0,-rotSensor);
+        sensorLeft = transform.GetChild(5).transform;
+        sensorLeft.transform.localRotation = Quaternion.Euler(0, 0, rotSensor);*/
         
+
+
     }
         
     public virtual void FixedUpdate()
@@ -113,9 +132,13 @@ public class Player : MonoBehaviour
             UpdateState();
             CheckAnim();
             UpdateFlagCounterAtt();
-            
             if (swim || backSwim)
+            {
+                //  CheckObstacle();
+                // SwimV2();
                 Swim();
+            }
+
         }
     }
 
@@ -321,11 +344,11 @@ public class Player : MonoBehaviour
         {
             Vector3 nuova_Pos = Vector3.MoveTowards(transform.position, posFinal, speed * Time.deltaTime);
             GetComponent<Rigidbody2D>().MovePosition(nuova_Pos);
-            Utility.RotateObjToPoint(this.gameObject, posFinal);
-            distanzaMancante = (this.transform.position - posFinal).sqrMagnitude;
+             Utility.RotateObjToPoint(this.gameObject, posFinal);
+           
         }
-
-        {
+        else
+        {  
             CheckArrivedToPos();
             SetBicy();
         }
@@ -480,9 +503,145 @@ public class Player : MonoBehaviour
         else counterAttFlag = false;
     }
     
+  /*  protected void CheckObstacle() 
+    {
+        float speedRotDx = -150;
+        float speedRotSx = -speedRotDx;
+        int dist = 7;
+        RaycastHit2D hitfront = Physics2D.Raycast(transform.position, transform.right, dist,layer);
+        RaycastHit2D hitRight = Physics2D.Raycast(sensorRight.position, sensorRight.right, dist,layer);
+        RaycastHit2D hitLeft = Physics2D.Raycast(sensorLeft.position, sensorLeft.right, dist,layer);
 
-    
-   
+
+        Debug.DrawLine(transform.position, transform.position + transform.right * dist, Color.blue);
+
+         Debug.DrawLine(sensorRight.position, sensorRight.position + sensorRight.right *( dist) ,Color.black);
+         Debug.DrawLine(sensorLeft.position, sensorLeft.position + sensorLeft.right * (dist), Color.red);
+
+
+        if (hitfront.collider != null)
+            Debug.Log(name+ "    TOCCATO DAVANTI ->" + hitfront.collider.name);
+        if (hitLeft.collider != null)
+            Debug.Log(name + "    TOCCATO SINISTRA ->" + hitLeft.collider.name );
+
+        if (hitRight.collider != null)
+            Debug.Log(name + "    TOCCATO SINISTRA ->" + hitRight.collider.name);
+
+        if (hitfront.collider!=null)
+        {   if(!hitfront.collider.CompareTag("GK"))
+            obstacleFront = true;
+            dodgeObstacle = true;
+        }
+        else
+            obstacleFront = false;
+
+        if (hitLeft.collider != null)
+        {
+            if (!hitLeft.collider.CompareTag("GK") && !obstacleFront)
+                obstacleLeft = true;
+            dodgeObstacle = true;
+        }
+        else
+            obstacleLeft = false;
+
+        if (hitRight.collider != null)
+        {
+            if (!hitRight.collider.CompareTag("GK") && !obstacleFront)
+                obstacleRight = true;
+            dodgeObstacle = true;
+        }
+        else
+            obstacleRight = false;
+
+        if (hitfront.collider == null && hitLeft.collider == null && hitRight.collider == null)
+        {
+            dodgeObstacle = false;
+        
+        }
+        
+        
+        if (obstacleFront && !obstacleLeft && !obstacleRight)
+        {
+            Debug.Log(name + " 1");
+            if (armDx)
+                transform.Rotate(Vector3.forward * Time.deltaTime * speedRotDx);
+            else
+                transform.Rotate(Vector3.forward * Time.deltaTime * speedRotSx);
+        }
+
+        if (obstacleLeft && !obstacleFront)
+        {
+            Debug.Log(name + " 2");
+            transform.Rotate(Vector3.forward * Time.deltaTime * speedRotDx);
+        }
+
+        if (obstacleLeft && obstacleFront)
+        {
+            Debug.Log(name + " 3");
+            transform.Rotate(Vector3.forward * Time.deltaTime * speedRotDx);
+        }
+
+        if (obstacleRight && !obstacleFront)
+        {
+            Debug.Log(name + " 4");
+            transform.Rotate(Vector3.forward * Time.deltaTime * speedRotSx);
+        }
+        if (obstacleRight && obstacleFront)
+        {
+            Debug.Log(name + " 5");
+            transform.Rotate(Vector3.forward * Time.deltaTime * speedRotSx);
+        }
+
+        /*if (obstacleFront && obstacleLeft && obstacleRight)
+            SetBicy();*/
+
+       /* if (hitfront.collider != null && hitLeft.collider != null && hitRight)
+        { Debug.Log(name + "TROPPA GENTE");
+            speed = 0;
+        }
+         
+       
+           }
+
+    public void SwimV2()
+    {
+        float distanzaMancante = (this.transform.position - posFinal).sqrMagnitude;
+
+        if (distanzaMancante > 0.5)
+        {
+            Transform nuovaPos = transform;
+            
+            if (!dodgeObstacle)
+            {
+
+               
+               //  transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, Utility.GetAngleBetweenPosAB(transform.position, Vector3.MoveTowards(transform.position, posFinal, 1 * Time.deltaTime))), Time.deltaTime);
+                // transform.rotation = Quaternion.Euler(0, 0, Utility.GetAngleBetweenPosAB(transform.position, Vector3.MoveTowards(transform.position, posFinal, 1* Time.deltaTime)));
+                
+ 
+                Vector3 relativePos = Vector3.MoveTowards(transform.position, posFinal, 1 * Time.deltaTime) - transform.position;
+                Quaternion rotation = Quaternion.Euler(relativePos);
+                transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime);
+
+
+            }
+
+            
+            nuovaPos.Translate(Vector3.right*speed*Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position,nuovaPos.position , speed/2 * Time.deltaTime);
+            //  transform.Translate((transform.position - nuova_Pos).normalized * speed * Time.deltaTime);
+            //  GetComponent<Rigidbody2D>().MovePosition
+        }
+        else
+        {
+            transform.position = posFinal;
+            CheckArrivedToPos();
+            SetBicy();
+
+        }
+    }*/
+
+
 }
 
     

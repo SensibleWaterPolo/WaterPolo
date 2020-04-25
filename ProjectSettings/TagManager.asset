@@ -25,17 +25,17 @@ TagManager:
   - 
   - 
   - Pool
-  - PlayerY
+  - Player
   - Ball
   - PlayerR
-  - PlayerY1
-  - PlayerY6
-  - PlayerY5
-  - PlayerY3
-  - PlayerR1
-  - PlayerR5
-  - PlayerR6
-  - PlayerR3
+  - Fight
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - Side
   - Battle
   - Goal
@@ -63,6 +63,9 @@ TagManager:
     locked: 0
   - name: MarcaBoa
     uniqueID: 1267284513
+    locked: 0
+  - name: Fight
+    uniqueID: 346129965
     locked: 0
   - name: Ball
     uniqueID: 1423109139

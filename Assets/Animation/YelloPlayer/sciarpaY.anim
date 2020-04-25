@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ShootSx
+  m_Name: sciarpaY
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -20,16 +20,19 @@ AnimationClip:
   m_PPtrCurves:
   - curve:
     - time: 0
-      value: {fileID: 3866169742736487148, guid: dd65a647b89b914408c08e13cc5cb607,
+      value: {fileID: -8541194879131156665, guid: f052c03b14a944a4bb95712a45908ca6,
         type: 3}
     - time: 0.083333336
-      value: {fileID: -6846305290730326797, guid: dd65a647b89b914408c08e13cc5cb607,
+      value: {fileID: -509416391489426016, guid: f052c03b14a944a4bb95712a45908ca6,
+        type: 3}
+    - time: 0.16666667
+      value: {fileID: 2098517286091715934, guid: f052c03b14a944a4bb95712a45908ca6,
         type: 3}
     - time: 0.25
-      value: {fileID: -5820756783148744247, guid: dd65a647b89b914408c08e13cc5cb607,
+      value: {fileID: -7641768473298067642, guid: f052c03b14a944a4bb95712a45908ca6,
         type: 3}
     - time: 0.33333334
-      value: {fileID: 2131183617824052063, guid: dd65a647b89b914408c08e13cc5cb607,
+      value: {fileID: 5018442900238657345, guid: f052c03b14a944a4bb95712a45908ca6,
         type: 3}
     attribute: m_Sprite
     path: 
@@ -50,10 +53,11 @@ AnimationClip:
       customType: 23
       isPPtrCurve: 1
     pptrCurveMapping:
-    - {fileID: 3866169742736487148, guid: dd65a647b89b914408c08e13cc5cb607, type: 3}
-    - {fileID: -6846305290730326797, guid: dd65a647b89b914408c08e13cc5cb607, type: 3}
-    - {fileID: -5820756783148744247, guid: dd65a647b89b914408c08e13cc5cb607, type: 3}
-    - {fileID: 2131183617824052063, guid: dd65a647b89b914408c08e13cc5cb607, type: 3}
+    - {fileID: -8541194879131156665, guid: f052c03b14a944a4bb95712a45908ca6, type: 3}
+    - {fileID: -509416391489426016, guid: f052c03b14a944a4bb95712a45908ca6, type: 3}
+    - {fileID: 2098517286091715934, guid: f052c03b14a944a4bb95712a45908ca6, type: 3}
+    - {fileID: -7641768473298067642, guid: f052c03b14a944a4bb95712a45908ca6, type: 3}
+    - {fileID: 5018442900238657345, guid: f052c03b14a944a4bb95712a45908ca6, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
@@ -78,11 +82,4 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events:
-  - time: 0.25
-    functionName: Shoot
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
+  m_Events: []

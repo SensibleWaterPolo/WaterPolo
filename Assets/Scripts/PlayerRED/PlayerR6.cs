@@ -18,10 +18,7 @@ public class PlayerR6 : Player
         posGoal = GameObject.Find("GolLineYellow").transform.position;
         opponent = GameObject.Find("PlayerY3").GetComponent<Player>();
         boaFlag = true;
+        armDx = true;
     }
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-        
-    }
+  
 }

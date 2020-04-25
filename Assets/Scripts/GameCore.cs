@@ -15,7 +15,7 @@ public class GameCore : MonoBehaviour
     }
     void Start()
     {
-        Invoke("Play", 2);
+        Invoke("Play", 1f);
     }
 
     // Update is called once per frame

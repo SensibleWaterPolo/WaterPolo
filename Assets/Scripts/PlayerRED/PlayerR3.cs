@@ -21,6 +21,7 @@ public class PlayerR3 : Player
         posGoal = GameObject.Find("GolLineYellow").transform.position;
         opponent = GameObject.Find("PlayerY6").GetComponent<Player>();
         boaFlag = true;
+        armDx = true;
     }
     public override void OnTriggerStay2D(Collider2D collision)
     {

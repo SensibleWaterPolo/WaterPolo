@@ -17,12 +17,9 @@ public class PlayerY6 : Player
         if(CheckOpponent("PlayerR3"))
         opponent = GameObject.Find("PlayerR3").GetComponent<Player>();
         boaFlag = true;
+        armDx = true;
     }
 
 
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-      
-    }
+
 }

@@ -14,6 +14,7 @@ public class PlayerY5 : Player
         posGoal = GameObject.Find("GolLineRed").transform.position;
         if (CheckOpponent("PlayerR1"))
             opponent = GameObject.Find("PlayerR1").GetComponent<Player>();
+        armDx = true;
     }
 
     
