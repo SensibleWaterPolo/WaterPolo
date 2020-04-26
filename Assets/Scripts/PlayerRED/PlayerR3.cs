@@ -8,6 +8,7 @@ public class PlayerR3 : Player
 
     public Battle battle;
     public Battle battlePrefab;
+   
     
     public override void Awake()
     {
@@ -20,19 +21,20 @@ public class PlayerR3 : Player
        // posStart = GameObject.Find("PosStartR3").transform.position;
         posGoal = GameObject.Find("GolLineYellow").transform.position;
         opponent = GameObject.Find("PlayerY6").GetComponent<Player>();
-        boaFlag = true;
-        armDx = true;
+         armDx = true;
+        cpuFlag = true;
     }
     public override void OnTriggerStay2D(Collider2D collision)
     {
         base.OnTriggerStay2D(collision);
-        if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep)
+        if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && idBall!=2)
         {
             marcaFlag = true;
-            opponent.boaFlag = true;
+            opponent.marcaFlag = true;
             battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, Utility.GetAngleBetweenObjAB(opponent.gameObject, Ball.current.gameObject))));
             battlePrefab.CreateBattle(opponent, this);
         }
     }
 
+   
 }

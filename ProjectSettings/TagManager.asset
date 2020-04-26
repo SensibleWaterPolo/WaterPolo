@@ -15,6 +15,7 @@ TagManager:
   - EndYellow
   - EndRed
   - Side
+  - Fight
   layers:
   - Default
   - TransparentFX
@@ -29,7 +30,7 @@ TagManager:
   - Ball
   - PlayerR
   - Fight
-  - 
+  - SignalShoot
   - 
   - 
   - 

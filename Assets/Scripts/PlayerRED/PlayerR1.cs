@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerR1 : Player
-{
+{   
+    
+    
     // Start is called before the first frame update
     public override void Awake()
     {
@@ -17,5 +19,7 @@ public class PlayerR1 : Player
         posGoal = GameObject.Find("GolLineYellow").transform.position;
         opponent = GameObject.Find("PlayerY5").GetComponent<Player>();
         armDx = false;
+        cpuFlag = true;
     }
+    
 }

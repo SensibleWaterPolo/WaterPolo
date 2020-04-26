@@ -98,15 +98,13 @@ public class  Ball : MonoBehaviour
         else
         {
             GetComponent<Rigidbody2D>().AddForce(direct * pas * 500);
+            decelerateFlag = true;
         }  
-        
-      
+              
         isShooted = true;
         player.ballFlag = false;
-        decelerateFlag = true;
-        freeFlag = true;
+         freeFlag = true;
         
-
     }
 
     public void DisableBall() 

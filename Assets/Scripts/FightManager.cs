@@ -4,20 +4,28 @@ using UnityEngine;
 
 public class FightManager : MonoBehaviour
 {
-    private float lenghtFight = 4f;
+    private float lenghtFight;
+    private float startFight;
+    private bool start;
     private Player playerY, playerR;
     public int numClickP1;
     public int numClickP2;
     private int idWhoWin; //0:win Player1, 1: win Player2
     private bool solve;
 
+    private void Awake()
+    {
+        lenghtFight = 4f;
+        start = false;
+    }
 
-    
-    
+
     // Start is called before the first frame update
     void Start()
     {
         
+        numClickP1 = 0;
+        numClickP2 = 0;
     }
 
     // Update is called once per frame
@@ -79,11 +87,16 @@ public class FightManager : MonoBehaviour
 
         if (id == 0)
         {
-            //vince il Y, playerR viene messo nello stato di affogato
+            playerR.SetStun();
+            playerY.SetFightFlag(false);
+            playerR.SetFightFlag(false);
+
         }
         else 
-        { 
-         // vince R, player Y viene messo nello stato di affofato
+        {
+            playerY.SetStun();
+            playerY.SetFightFlag(false);
+            playerR.SetFightFlag(false);
         }
         Destroy(this.gameObject);    
     }
@@ -91,17 +104,53 @@ public class FightManager : MonoBehaviour
     {
         solve = true;
         int id = WhoWinVSP2();
-
+        
         if (id == 0)
         {
-            //Vince Y
+            playerR.SetStun();
+            playerY.SetFightFlag(false);
+            playerR.SetFightFlag(false);
         }
         else
         {
-            //Vince R
+            playerY.SetStun();
+            playerY.SetFightFlag(false);
+            playerR.SetFightFlag(false);
         }
         Destroy(this.gameObject);
     }
+
+    public void P1AddClickLocal() 
+    {
+        numClickP1++;
+        Debug.Log("Click: "+numClickP1);
+    }
+    public void P2AddClickLocal()
+    {
+        numClickP2++;
+    }
+
+    public void CreateFight(Player pY, Player pR)
+    {   playerY=pY;
+        playerR = pR;
+        playerY.SetFightFlag(true);
+        playerR.SetFightFlag(true);
+        playerR.SetBicy();
+        playerY.SetBicy();
+        playerR.transform.position = transform.position;
+        playerY.transform.position = transform.position;
+        start = true;
+        if (playerR.cpuFlag)
+        {
+            Invoke("SolveFightVsCPU", lenghtFight);
+        }
+        else
+        {
+            Invoke("SolveFightVsP2", lenghtFight);
+        }
+
+    }
+        
 
 
 }

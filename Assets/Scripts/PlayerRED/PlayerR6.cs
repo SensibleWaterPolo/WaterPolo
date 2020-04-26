@@ -19,6 +19,7 @@ public class PlayerR6 : Player
         opponent = GameObject.Find("PlayerY3").GetComponent<Player>();
         boaFlag = true;
         armDx = true;
+        cpuFlag = true;
     }
   
 }

@@ -328,11 +328,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 31590398}
+  - component: {fileID: 31590399}
   - component: {fileID: 31590403}
   - component: {fileID: 31590402}
   - component: {fileID: 31590401}
   - component: {fileID: 31590400}
-  - component: {fileID: 31590399}
   m_Layer: 9
   m_Name: PlayerY5
   m_TagString: Player
@@ -357,8 +357,9 @@ Transform:
   - {fileID: 1891352504}
   - {fileID: 745991318}
   - {fileID: 14099197}
+  - {fileID: 1692288668}
   m_Father: {fileID: 1784266191}
-  m_RootOrder: 2
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &31590399
 MonoBehaviour:
@@ -381,7 +382,7 @@ MonoBehaviour:
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
-  stunFlag: 0
+  fightFlag: 0
   flagShoot: 0
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
@@ -391,8 +392,11 @@ MonoBehaviour:
   keep: 0
   def: 0
   backSwim: 0
+  stun: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
+  posAtt: {x: 0, y: 0, z: 0}
+  posDef: {x: 0, y: 0, z: 0}
   posFinal: {x: 0, y: 0, z: 0}
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
@@ -401,7 +405,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   limitVelBall: 0
   shootSignalPrefab: {fileID: 0}
-  shootSignal: {fileID: 0}
+  shootSignal: {fileID: 1757995352016197712, guid: 60fd9f9e352d9f045889b25fac15d944,
+    type: 3}
+  signalOK: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -410,6 +416,11 @@ MonoBehaviour:
   distaceBall: 0
   distanceAtt: 0
   distanceDef: 0
+  pushAtt: 0
+  beginPush: 0
+  speedToPush: 0
+  fight: {fileID: 0}
+  fightPrefab: {fileID: 0}
 --- !u!61 &31590400
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5414,11 +5425,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 73869355}
+  - component: {fileID: 73869356}
   - component: {fileID: 73869360}
   - component: {fileID: 73869359}
   - component: {fileID: 73869358}
   - component: {fileID: 73869357}
-  - component: {fileID: 73869356}
   m_Layer: 9
   m_Name: PlayerR5
   m_TagString: Player
@@ -5434,7 +5445,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73869354}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 19, y: 28.8, z: 0}
+  m_LocalPosition: {x: 19.3, y: 41.5, z: 0}
   m_LocalScale: {x: 1.3000001, y: 1.3000001, z: 1}
   m_Children:
   - {fileID: 2007471499}
@@ -5443,6 +5454,7 @@ Transform:
   - {fileID: 2060707659}
   - {fileID: 1607301039}
   - {fileID: 1989183491}
+  - {fileID: 821769180}
   m_Father: {fileID: 446404942}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -5467,7 +5479,7 @@ MonoBehaviour:
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
-  stunFlag: 0
+  fightFlag: 0
   flagShoot: 0
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
@@ -5477,8 +5489,11 @@ MonoBehaviour:
   keep: 0
   def: 0
   backSwim: 0
+  stun: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
+  posAtt: {x: 0, y: 0, z: 0}
+  posDef: {x: 0, y: 0, z: 0}
   posFinal: {x: 0, y: 0, z: 0}
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
@@ -5487,7 +5502,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   limitVelBall: 0
   shootSignalPrefab: {fileID: 0}
-  shootSignal: {fileID: 0}
+  shootSignal: {fileID: 1757995352016197712, guid: 60fd9f9e352d9f045889b25fac15d944,
+    type: 3}
+  signalOK: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -5496,6 +5513,9 @@ MonoBehaviour:
   distaceBall: 0
   distanceAtt: 0
   distanceDef: 0
+  pushAtt: 0
+  beginPush: 0
+  speedToPush: 0
 --- !u!95 &73869357
 Animator:
   serializedVersion: 3
@@ -20670,11 +20690,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 267972306}
+  - component: {fileID: 267972307}
   - component: {fileID: 267972311}
   - component: {fileID: 267972310}
   - component: {fileID: 267972309}
   - component: {fileID: 267972308}
-  - component: {fileID: 267972307}
   m_Layer: 9
   m_Name: PlayerR3
   m_TagString: Player
@@ -20690,7 +20710,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 267972305}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 11.2, y: 35.5, z: 0}
+  m_LocalPosition: {x: 0.3, y: 37.9, z: 0}
   m_LocalScale: {x: 1.3000001, y: 1.3000001, z: 1}
   m_Children:
   - {fileID: 1784856030}
@@ -20699,6 +20719,7 @@ Transform:
   - {fileID: 1334154689}
   - {fileID: 747029099}
   - {fileID: 1752934961}
+  - {fileID: 474262090}
   m_Father: {fileID: 446404942}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -20723,7 +20744,7 @@ MonoBehaviour:
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
-  stunFlag: 0
+  fightFlag: 0
   flagShoot: 0
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
@@ -20733,8 +20754,11 @@ MonoBehaviour:
   keep: 0
   def: 0
   backSwim: 0
+  stun: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
+  posAtt: {x: 0, y: 0, z: 0}
+  posDef: {x: 0, y: 0, z: 0}
   posFinal: {x: 0, y: 0, z: 0}
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
@@ -20743,7 +20767,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   limitVelBall: 0
   shootSignalPrefab: {fileID: 0}
-  shootSignal: {fileID: 0}
+  shootSignal: {fileID: 1757995352016197712, guid: 60fd9f9e352d9f045889b25fac15d944,
+    type: 3}
+  signalOK: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -20752,6 +20778,9 @@ MonoBehaviour:
   distaceBall: 0
   distanceAtt: 0
   distanceDef: 0
+  pushAtt: 0
+  beginPush: 0
+  speedToPush: 0
   battle: {fileID: 6785614088860273912, guid: 1bbd3c657494e7647bbc225939b02d8b, type: 3}
   battlePrefab: {fileID: 0}
 --- !u!95 &267972308
@@ -21040,6 +21069,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -21118,6 +21148,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.8867924, g: 0.8548959, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -21591,6 +21622,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -21636,7 +21668,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367001049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.9, z: 0}
+  m_LocalPosition: {x: -0.6, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2050683472}
@@ -21810,7 +21842,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 396083541}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.9, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 267972306}
@@ -21869,6 +21901,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -22087,7 +22120,7 @@ GameObject:
   m_Component:
   - component: {fileID: 407808808}
   - component: {fileID: 407808809}
-  m_Layer: 9
+  m_Layer: 20
   m_Name: 'Arm '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27273,6 +27306,36 @@ Transform:
   m_Father: {fileID: 650206489}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &474262089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 474262090}
+  m_Layer: 9
+  m_Name: SensorDef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &474262090
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 474262089}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 267972306}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &502280328
 GameObject:
   m_ObjectHideFlags: 0
@@ -27453,7 +27516,7 @@ Transform:
   - {fileID: 1351736045}
   - {fileID: 1253822815}
   m_Father: {fileID: 1784266191}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &504041442
 GameObject:
@@ -32291,7 +32354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 505075350}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.9, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 73869355}
@@ -32600,11 +32663,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 563600096}
+  - component: {fileID: 563600097}
   - component: {fileID: 563600101}
   - component: {fileID: 563600100}
   - component: {fileID: 563600099}
   - component: {fileID: 563600098}
-  - component: {fileID: 563600097}
   m_Layer: 9
   m_Name: PlayerY1
   m_TagString: Player
@@ -32620,8 +32683,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 563600095}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 20.2, y: -34.4, z: 0}
-  m_LocalScale: {x: 1.3000002, y: 1.3000002, z: 1}
+  m_LocalPosition: {x: 18.6, y: -23.4, z: 0}
+  m_LocalScale: {x: 1.3000002, y: 1.3, z: 1}
   m_Children:
   - {fileID: 1136918032}
   - {fileID: 1248991021}
@@ -32629,8 +32692,9 @@ Transform:
   - {fileID: 148671728}
   - {fileID: 126316889}
   - {fileID: 279835691}
+  - {fileID: 570848977}
   m_Father: {fileID: 1784266191}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!114 &563600097
 MonoBehaviour:
@@ -32653,7 +32717,7 @@ MonoBehaviour:
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
-  stunFlag: 0
+  fightFlag: 0
   flagShoot: 0
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
@@ -32663,8 +32727,11 @@ MonoBehaviour:
   keep: 0
   def: 0
   backSwim: 0
+  stun: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
+  posAtt: {x: 0, y: 0, z: 0}
+  posDef: {x: 0, y: 0, z: 0}
   posFinal: {x: 0, y: 0, z: 0}
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
@@ -32673,7 +32740,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   limitVelBall: 0
   shootSignalPrefab: {fileID: 0}
-  shootSignal: {fileID: 0}
+  shootSignal: {fileID: 1757995352016197712, guid: 60fd9f9e352d9f045889b25fac15d944,
+    type: 3}
+  signalOK: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -32682,6 +32751,11 @@ MonoBehaviour:
   distaceBall: 0
   distanceAtt: 0
   distanceDef: 0
+  pushAtt: 0
+  beginPush: 0
+  speedToPush: 0
+  fight: {fileID: 4510739488602134470, guid: b4c42f95f4d546e4d9e10f6bfde188e8, type: 3}
+  fightPrefab: {fileID: 0}
 --- !u!61 &563600098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -32787,7 +32861,7 @@ SpriteRenderer:
   m_SortingLayerID: 246582865
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Sprite: {fileID: 6392403835133178728, guid: e127e7cdb4df43f4489f21671286f824,
+  m_Sprite: {fileID: 3064229058888926463, guid: e127e7cdb4df43f4489f21671286f824,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -32799,6 +32873,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &570848976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 570848977}
+  m_Layer: 9
+  m_Name: SensorDef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &570848977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 570848976}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 563600096}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &574695732
 GameObject:
   m_ObjectHideFlags: 0
@@ -37743,6 +37847,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -47670,7 +47775,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 727032837}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.9, z: 0}
+  m_LocalPosition: {x: -0.6, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1559964686}
@@ -52653,6 +52758,36 @@ Transform:
   m_Father: {fileID: 267972306}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -35}
+--- !u!1 &757938241
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 757938242}
+  m_Layer: 9
+  m_Name: SensorDef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &757938242
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757938241}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1559964686}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &776994315
 GameObject:
   m_ObjectHideFlags: 0
@@ -52758,6 +52893,36 @@ MonoBehaviour:
   text: {fileID: 0}
   score: 0
   goal: 0
+--- !u!1 &821769179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 821769180}
+  m_Layer: 9
+  m_Name: SensorDef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &821769180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 821769179}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 73869355}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &824107434
 GameObject:
   m_ObjectHideFlags: 0
@@ -53009,7 +53174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 881219642}
   - component: {fileID: 881219643}
-  m_Layer: 9
+  m_Layer: 20
   m_Name: 'Arm '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57950,6 +58115,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -63175,11 +63341,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1013302000}
+  - component: {fileID: 1013301996}
   - component: {fileID: 1013301999}
   - component: {fileID: 1013301998}
   - component: {fileID: 1013301997}
   - component: {fileID: 1013301995}
-  - component: {fileID: 1013301996}
   m_Layer: 9
   m_Name: PlayerY6
   m_TagString: Player
@@ -63234,7 +63400,7 @@ MonoBehaviour:
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
-  stunFlag: 0
+  fightFlag: 0
   flagShoot: 0
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
@@ -63244,8 +63410,11 @@ MonoBehaviour:
   keep: 0
   def: 0
   backSwim: 0
+  stun: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
+  posAtt: {x: 0, y: 0, z: 0}
+  posDef: {x: 0, y: 0, z: 0}
   posFinal: {x: 0, y: 0, z: 0}
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
@@ -63254,7 +63423,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   limitVelBall: 0
   shootSignalPrefab: {fileID: 0}
-  shootSignal: {fileID: 0}
+  shootSignal: {fileID: 1757995352016197712, guid: 60fd9f9e352d9f045889b25fac15d944,
+    type: 3}
+  signalOK: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -63263,6 +63434,9 @@ MonoBehaviour:
   distaceBall: 0
   distanceAtt: 0
   distanceDef: 0
+  pushAtt: 0
+  beginPush: 0
+  speedToPush: 0
 --- !u!50 &1013301997
 Rigidbody2D:
   serializedVersion: 4
@@ -63362,7 +63536,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013301994}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.8, y: 17.7, z: 0}
+  m_LocalPosition: {x: -1, y: -18.4, z: 0}
   m_LocalScale: {x: 1.3000002, y: 1.3000002, z: 1}
   m_Children:
   - {fileID: 1510570622}
@@ -63371,6 +63545,7 @@ Transform:
   - {fileID: 933817380}
   - {fileID: 1607451166}
   - {fileID: 247817688}
+  - {fileID: 1930411673}
   m_Father: {fileID: 1784266191}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -63432,7 +63607,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1079766974}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.9, z: 0}
+  m_LocalPosition: {x: -0.6, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1013302000}
@@ -63448,7 +63623,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1100062383}
   - component: {fileID: 1100062384}
-  m_Layer: 9
+  m_Layer: 20
   m_Name: 'Arm '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -63606,6 +63781,36 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1132228911
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1132228912}
+  m_Layer: 9
+  m_Name: SensorDef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1132228912
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1132228911}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1290246201}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1136918031
 GameObject:
   m_ObjectHideFlags: 0
@@ -68700,6 +68905,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -68806,7 +69012,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1248991020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.9, z: 0}
+  m_LocalPosition: {x: -0.6, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 563600096}
@@ -68822,7 +69028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1250509703}
   - component: {fileID: 1250509704}
-  m_Layer: 9
+  m_Layer: 20
   m_Name: 'Arm '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69101,11 +69307,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1290246201}
+  - component: {fileID: 1290246202}
   - component: {fileID: 1290246206}
   - component: {fileID: 1290246205}
   - component: {fileID: 1290246204}
   - component: {fileID: 1290246203}
-  - component: {fileID: 1290246202}
   m_Layer: 9
   m_Name: PlayerR6
   m_TagString: Player
@@ -69121,7 +69327,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1290246200}
   m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0.8, y: 3.4, z: 0}
+  m_LocalPosition: {x: 1, y: 22.9, z: 0}
   m_LocalScale: {x: 1.3000002, y: 1.3000002, z: 1}
   m_Children:
   - {fileID: 28069766}
@@ -69130,6 +69336,7 @@ Transform:
   - {fileID: 72163613}
   - {fileID: 1853275759}
   - {fileID: 1138177833}
+  - {fileID: 1132228912}
   m_Father: {fileID: 446404942}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -69154,7 +69361,7 @@ MonoBehaviour:
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
-  stunFlag: 0
+  fightFlag: 0
   flagShoot: 0
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
@@ -69164,8 +69371,11 @@ MonoBehaviour:
   keep: 0
   def: 0
   backSwim: 0
+  stun: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
+  posAtt: {x: 0, y: 0, z: 0}
+  posDef: {x: 0, y: 0, z: 0}
   posFinal: {x: 0, y: 0, z: 0}
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
@@ -69174,7 +69384,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   limitVelBall: 0
   shootSignalPrefab: {fileID: 0}
-  shootSignal: {fileID: 0}
+  shootSignal: {fileID: 1757995352016197712, guid: 60fd9f9e352d9f045889b25fac15d944,
+    type: 3}
+  signalOK: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -69183,6 +69395,9 @@ MonoBehaviour:
   distaceBall: 0
   distanceAtt: 0
   distanceDef: 0
+  pushAtt: 0
+  beginPush: 0
+  speedToPush: 0
 --- !u!95 &1290246203
 Animator:
   serializedVersion: 3
@@ -74191,6 +74406,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -84201,6 +84417,7 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -93798,7 +94015,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1482365764}
   - component: {fileID: 1482365765}
-  m_Layer: 9
+  m_Layer: 20
   m_Name: 'Arm '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93999,11 +94216,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1559964686}
+  - component: {fileID: 1559964687}
   - component: {fileID: 1559964691}
   - component: {fileID: 1559964690}
   - component: {fileID: 1559964689}
   - component: {fileID: 1559964688}
-  - component: {fileID: 1559964687}
   m_Layer: 9
   m_Name: PlayerR1
   m_TagString: Player
@@ -94019,7 +94236,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559964685}
   m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -16.2, y: -2.7, z: 0}
+  m_LocalPosition: {x: -15.7, y: 35.7, z: 0}
   m_LocalScale: {x: 1.3000001, y: 1.3000001, z: 1}
   m_Children:
   - {fileID: 574695733}
@@ -94028,6 +94245,7 @@ Transform:
   - {fileID: 471079660}
   - {fileID: 1892355175}
   - {fileID: 316472564}
+  - {fileID: 757938242}
   m_Father: {fileID: 446404942}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
@@ -94052,7 +94270,7 @@ MonoBehaviour:
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
-  stunFlag: 0
+  fightFlag: 0
   flagShoot: 0
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
@@ -94062,8 +94280,11 @@ MonoBehaviour:
   keep: 0
   def: 0
   backSwim: 0
+  stun: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
+  posAtt: {x: 0, y: 0, z: 0}
+  posDef: {x: 0, y: 0, z: 0}
   posFinal: {x: 0, y: 0, z: 0}
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
@@ -94072,7 +94293,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   limitVelBall: 0
   shootSignalPrefab: {fileID: 0}
-  shootSignal: {fileID: 0}
+  shootSignal: {fileID: 1757995352016197712, guid: 60fd9f9e352d9f045889b25fac15d944,
+    type: 3}
+  signalOK: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -94081,6 +94304,9 @@ MonoBehaviour:
   distaceBall: 0
   distanceAtt: 0
   distanceDef: 0
+  pushAtt: 0
+  beginPush: 0
+  speedToPush: 0
 --- !u!95 &1559964688
 Animator:
   serializedVersion: 3
@@ -108784,6 +109010,36 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &1692288667
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1692288668}
+  m_Layer: 9
+  m_Name: SensorDef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1692288668
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692288667}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 31590398}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1715258794
 GameObject:
   m_ObjectHideFlags: 0
@@ -113836,6 +114092,36 @@ Transform:
   m_Father: {fileID: 267972306}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 35}
+--- !u!1 &1776647382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1776647383}
+  m_Layer: 9
+  m_Name: SensorDef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1776647383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776647382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2050683472}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784266190
 GameObject:
   m_ObjectHideFlags: 0
@@ -113865,9 +114151,9 @@ Transform:
   m_Children:
   - {fileID: 1013302000}
   - {fileID: 2050683472}
-  - {fileID: 31590398}
   - {fileID: 563600096}
   - {fileID: 502280334}
+  - {fileID: 31590398}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -128555,7 +128841,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872280686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -22.5, y: -0, z: 0}
+  m_LocalPosition: {x: 16.8, y: -2.7, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -128710,7 +128996,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1904965080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.75, y: 0.9, z: 0}
+  m_LocalPosition: {x: -0.6, y: -0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 31590398}
@@ -128745,6 +129031,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 776994317}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1930411672
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1930411673}
+  m_Layer: 9
+  m_Name: SensorDef
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1930411673
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1930411672}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1013302000}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1937199316
 GameObject:
@@ -138354,7 +138670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1980648126}
   - component: {fileID: 1980648127}
-  m_Layer: 9
+  m_Layer: 20
   m_Name: Arm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148181,11 +148497,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2050683472}
+  - component: {fileID: 2050683473}
   - component: {fileID: 2050683477}
   - component: {fileID: 2050683476}
   - component: {fileID: 2050683475}
   - component: {fileID: 2050683474}
-  - component: {fileID: 2050683473}
   m_Layer: 9
   m_Name: PlayerY3
   m_TagString: Player
@@ -148201,7 +148517,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2050683471}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 1.2, y: -22.1, z: 0}
+  m_LocalPosition: {x: -0.3, y: -28.6, z: 0}
   m_LocalScale: {x: 1.3000002, y: 1.3, z: 1}
   m_Children:
   - {fileID: 462297684}
@@ -148210,6 +148526,7 @@ Transform:
   - {fileID: 190630116}
   - {fileID: 2133536251}
   - {fileID: 1314674931}
+  - {fileID: 1776647383}
   m_Father: {fileID: 1784266191}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
@@ -148234,7 +148551,7 @@ MonoBehaviour:
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
-  stunFlag: 0
+  fightFlag: 0
   flagShoot: 0
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
@@ -148244,8 +148561,11 @@ MonoBehaviour:
   keep: 0
   def: 0
   backSwim: 0
+  stun: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
+  posAtt: {x: 0, y: 0, z: 0}
+  posDef: {x: 0, y: 0, z: 0}
   posFinal: {x: 0, y: 0, z: 0}
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
@@ -148254,7 +148574,9 @@ MonoBehaviour:
   animator: {fileID: 0}
   limitVelBall: 0
   shootSignalPrefab: {fileID: 0}
-  shootSignal: {fileID: 0}
+  shootSignal: {fileID: 1757995352016197712, guid: 60fd9f9e352d9f045889b25fac15d944,
+    type: 3}
+  signalOK: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -148263,6 +148585,9 @@ MonoBehaviour:
   distaceBall: 0
   distanceAtt: 0
   distanceDef: 0
+  pushAtt: 0
+  beginPush: 0
+  speedToPush: 0
   battle: {fileID: 6785614088860273912, guid: 1bbd3c657494e7647bbc225939b02d8b, type: 3}
   battlePrefab: {fileID: 0}
 --- !u!61 &2050683474
@@ -148392,7 +148717,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2055832723}
   - component: {fileID: 2055832724}
-  m_Layer: 9
+  m_Layer: 20
   m_Name: 'Arm '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148482,7 +148807,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2076731705}
   - component: {fileID: 2076731706}
-  m_Layer: 9
+  m_Layer: 20
   m_Name: 'Arm '
   m_TagString: Untagged
   m_Icon: {fileID: 0}

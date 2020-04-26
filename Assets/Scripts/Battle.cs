@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Xml;
+using UnityEditor;
 using UnityEngine;
 
 public class Battle : MonoBehaviour
@@ -55,18 +56,17 @@ public class Battle : MonoBehaviour
     {
         this.att = att;
         this.def = def;
-             
-        Utility.RotateObjAtoB(att.gameObject,Ball.current.gameObject);
+
+        Utility.RotateObjAtoB(att.gameObject, Ball.current.gameObject);
         Utility.RotateObjAtoB(def.gameObject, Ball.current.gameObject);
 
         att.transform.parent = transform;
         def.transform.parent = transform;
-        def.SetDef();
-        
+
         start = true;
         GetComponent<CircleCollider2D>().enabled = true;
-        
-          }
+
+    }
 
     public void UpdateAngle()
     {
@@ -89,7 +89,7 @@ public class Battle : MonoBehaviour
             whoWin = true;
             Invoke("WhoWin",3f);
         }
-        if (att.swim || att.keep || def.swim || def.keep || att.idBall==3)
+        if (att.swim || att.keep || def.swim || def.keep || att.idBall==3 || def.idBall==2)
             StopBattle();
     }
 
@@ -99,7 +99,7 @@ public class Battle : MonoBehaviour
         GetComponent<CircleCollider2D>().enabled = start;
         att.transform.parent = null;
         def.transform.parent = null;
-        att.boaFlag = false;
+        att.marcaFlag = false;
         def.marcaFlag = false;
          Destroy(this.gameObject);
 
