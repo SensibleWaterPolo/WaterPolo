@@ -16,6 +16,8 @@ TagManager:
   - EndRed
   - Side
   - Fight
+  - SignalShoot
+  - TapZone
   layers:
   - Default
   - TransparentFX
@@ -31,7 +33,7 @@ TagManager:
   - PlayerR
   - Fight
   - SignalShoot
-  - 
+  - TapZone
   - 
   - 
   - 

@@ -15,7 +15,8 @@ public class  Ball : MonoBehaviour
     [Header("FLAG Var")]
     public bool freeFlag; //M: TRUE se non è in possesso di un giocatore
     public bool inGameFlag; //M: TRUE se la palla è in gioco e non uscita fuori
-    public bool decelerateFlag; //M: decelera la palla
+    public bool deceleratePass; //M: decelera la palla dopo un passaggio 
+    public bool decelerateShoot; //M:decelera in caso di tiro
     public bool motionlessFlag; //M: true se la palla è ferma
     public bool shootFlag; //M: true se è un tiro, false se è un passaggio
     public bool isShooted; //M: True se la palla è in movimento dopo un tiro/passaggio
@@ -40,7 +41,8 @@ public class  Ball : MonoBehaviour
         current = this;
         freeFlag = true;
         inGameFlag = true;
-        decelerateFlag = true;
+        deceleratePass = true;
+        decelerateShoot = true;
         rb = GetComponent<Rigidbody2D>();
         shootFlag = true;
         isShooted = false;
@@ -64,9 +66,16 @@ public class  Ball : MonoBehaviour
     private void FixedUpdate()
     {
         CheckVel(); //M: se la velocità è prossima allo zero ferma la palla
+
+        if (deceleratePass)
+        {
+            DecelerateVelPass();
+        }
+        else if (decelerateShoot)
+        {
+            DecelerateVelShoot();
         
-        if (decelerateFlag)
-            DecelerateVel();
+        }
        
         if (!shootFlag) 
             CheckPositionPass();
@@ -94,11 +103,14 @@ public class  Ball : MonoBehaviour
         if (shootFlag)
         {
             GetComponent<Rigidbody2D>().AddForce(direct * shoot * 300);
+            decelerateShoot = true;
+            deceleratePass = false;
         }
         else
         {
             GetComponent<Rigidbody2D>().AddForce(direct * pas * 500);
-            decelerateFlag = true;
+            deceleratePass = true;
+            decelerateShoot = false;
         }  
               
         isShooted = true;
@@ -131,27 +143,35 @@ public class  Ball : MonoBehaviour
             {
                 StopBall();
                 
-                decelerateFlag = false;
+                deceleratePass = false;
+                decelerateShoot = false;
                 motionlessFlag = true;
                 speed = 0;
                 isShooted = false;
+                player = null;
                                                             
             }
             else
             {
                 motionlessFlag = false;
-                decelerateFlag = true;
+                deceleratePass = true;
+                decelerateShoot = true;
                 isShooted = true;
             }
 
         }
     }
 
-    public void DecelerateVel() //M: Diminuisce la velocità della palla
+    public void DecelerateVelPass() //M: Diminuisce la velocità della palla
     {
         if (rb != null)
             rb.velocity = rb.velocity - (rb.velocity * 1.4f * Time.deltaTime);
-    }  
+    }
+    public void DecelerateVelShoot() //M: Diminuisce la velocità della palla
+    {
+        if (rb != null)
+            rb.velocity = rb.velocity - (rb.velocity * 1f * Time.deltaTime);
+    }
     public void SetPlayer(Player player) //M: assegna alla palla il giocatore in possesso
     {
         this.player = player;
@@ -160,14 +180,7 @@ public class  Ball : MonoBehaviour
         freeFlag = false;
     }
 
-    public void ResetBall() 
-    {      
-        player.ballFlag = false;
-        this.player = null; 
-        this.shootFlag = true;
-       
-    }
-    
+           
     public void CheckPositionPass() //M: in caso di passaggio controlla la posizione della palla
     {
         Vector2 pos = transform.position;

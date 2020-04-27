@@ -15,7 +15,7 @@ public class TouchManager : MonoBehaviour
     private bool restart;
     private float minShoot;
     private float maxShoot;
-    private LayerMask layerMaskPlayer = (1 << 9) ;
+    private int layerMaskPlayer;  
     private LayerMask layerMaskFight = 1 << 12;
 
     // Start is called before the first frame update
@@ -28,6 +28,7 @@ public class TouchManager : MonoBehaviour
         okShoot = true;       
         minShoot= GameObject.Find("ShootLimitDown").transform.position.y; //M: limite inferiore e superiore che contraddistingue
         maxShoot= GameObject.Find("ShootLimitUp").transform.position.y;//un passaggio da un tiro
+        layerMaskPlayer= 1 << LayerMask.NameToLayer("Player");
     }
     private void Start()
     {
@@ -51,11 +52,9 @@ public class TouchManager : MonoBehaviour
                     if (hitPlayer.collider)
                     {
                         GameObject obj = hitPlayer.collider.gameObject;
-                        GameObject.Find("Debug").GetComponent<Text>().text = hitPlayer.collider.gameObject.name;
-
-
                         if (obj.tag == "Player")
                         {
+
                             player = GameObject.Find(obj.name).GetComponent<Player>();
                             if (player.keep)
                             {
@@ -68,8 +67,7 @@ public class TouchManager : MonoBehaviour
                         if (obj.tag == "Battle")
                         {
                             obj.GetComponent<Battle>().numclick++;
-                            Debug.Log("Click battaglia");
-                        }
+                                                    }
                     }
                     if (hitFight.collider != null)
                     {

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2886404204251248141}
   - component: {fileID: 2886404204251248139}
   - component: {fileID: 1757995352016197712}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: SignalShoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,4 +114,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b892bb504707345ab632fa177e1fe1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shoot: 0
+  player: {fileID: 0}

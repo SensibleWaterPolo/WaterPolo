@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
         pushAtt = false;
         speedToPush = 3;
         beginPush = false;
+        marcaFlag = false;
         
     }
     public virtual void Start()
@@ -202,8 +203,9 @@ public class Player : MonoBehaviour
         }
         // DEF: Palla è stata tirata e viaggia lungo il mio settore
         
-        if (idBall == 1 && Ball.current.isShooted && Ball.current.player.name == opponent.name && arrivedFlagDef && !stun && !fightFlag)
+       if (idBall == 1 && CheckOpponentShoot() && arrivedFlagDef && !marcaFlag && !stun && !fightFlag)
         {
+            
             SetDef();
         }
         //SWIM: palla in possesso di un mio compagno
@@ -268,8 +270,9 @@ public class Player : MonoBehaviour
         
         }
         //DEF: palla in possesso del mio diretto avversario e sono arrivato nella posizione di difesa 
-        if (idBall == 3 && arrivedFlagDef && (opponent.keep || opponent.loadShoot) && !stun && !fightFlag && Vector3.Distance(transform.position, opponent.transform.position) < 20) 
+        if (idBall == 3 && arrivedFlagDef && Ball.current.player.name==opponent.name && !stun && !fightFlag && Vector3.Distance(transform.position, opponent.transform.position) < 25) 
         {
+            
             SetDef();
         }
 
@@ -395,7 +398,14 @@ public class Player : MonoBehaviour
             def = false;
             loadShoot = false;
             stun = false;
-            animator.SetInteger("IdAnim", 1);
+            if (_backSwim)
+            {
+                animator.SetInteger("IdAnim", 10);
+            }
+            else if(swim) 
+            {
+                animator.SetInteger("IdAnim", 1);
+            }
 
         }
     }
@@ -534,9 +544,6 @@ public class Player : MonoBehaviour
         return Vector2.Distance(transform.position,Ball.current.transform.position);
     }
       
-
-
-
     public void CheckArrivedToPos() 
     {
         arrivedFlagDef= transform.position==posDef;
@@ -571,42 +578,43 @@ public class Player : MonoBehaviour
    {
         if (def)
         {
-            if (arrivedFlagDef && def && CheckOpponentShoot())
+            if (arrivedFlagDef && CheckOpponentShoot())
             {
                 beginPush = true;
             }
-            else if (!def || !CheckOpponentShoot())
+            else if (!CheckOpponentShoot())
             {
                 beginPush = false;
                 pushAtt = false;
             }
-            if (beginPush && def && !marcaFlag)
-            {
-                LayerMask mask = 1 << 9; //strato player
-                Vector3 posSensor = transform.GetChild(6).transform.position;
-                Vector3 dir = (opponent.transform.position - posSensor).normalized;
-                float dist = 2;
-                RaycastHit2D hitAttPlayer = Physics2D.Raycast(posSensor, dir, dist, mask);
-                if (hitAttPlayer.collider != null)
-                {
+              if (beginPush && def && !marcaFlag)
+               {
+                 LayerMask mask = 1 << 9; //strato player
+                 Vector3 posSensor = transform.GetChild(6).transform.position;
+                 Vector3 dir = (opponent.transform.position - posSensor).normalized;
+                 float dist = 2;
+                 RaycastHit2D hitAttPlayer = Physics2D.Raycast(posSensor, dir, dist, mask);
+                 if (hitAttPlayer.collider != null)
+                 {
+                                        
                     if (hitAttPlayer.collider.name == opponent.name)
-                    {
+                       {
 
                         pushAtt = false;
-                    }
-                }
+                       }
+                 }
                 else
                 {
                     pushAtt = true;
 
                 }
-                Debug.Log(name + " mi sposto?" + pushAtt);
-                if (pushAtt)
-                {
+               
+              if (pushAtt)
+              {
                     Vector3 newPos = Vector3.MoveTowards(transform.position, opponent.transform.position, speedToPush * Time.deltaTime);
                     GetComponent<Rigidbody2D>().MovePosition(newPos);
 
-                }
+              }
                 Utility.RotateObjAtoB(this.gameObject, opponent.gameObject);
             }
         }
@@ -621,9 +629,14 @@ public class Player : MonoBehaviour
     public bool CheckOpponentShoot() //Ritorna true, se l'avversario è in possesso o sta caricando il tiro o ha tirato e la palla sta viaggiando
     
     {
-        if (opponent.keep || opponent.loadShoot)
+        if (Ball.current.player != null)
         {
-            return true;
+            if (opponent.keep || opponent.loadShoot || (Ball.current.isShooted && Ball.current.player.name == opponent.name))
+            {
+                return true;
+            }
+            else
+                return false;
         }
         else
             return false;
@@ -631,13 +644,16 @@ public class Player : MonoBehaviour
 
     public void CreateSignalShoot() 
     {
-       shootSignalPrefab = Instantiate(shootSignal,transform.position,Quaternion.identity);
+       shootSignalPrefab = Instantiate(shootSignal,transform.GetChild(1).transform.position,Quaternion.identity);
         shootSignalPrefab.player = this;
+        shootSignalPrefab.transform.parent = this.transform;
+
     
     }
 
     public void DestroySignalShoot() 
     {
+        shootSignalPrefab.transform.parent = null;
         Destroy(shootSignalPrefab.gameObject);
     }
  
