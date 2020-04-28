@@ -47,7 +47,10 @@ public class Battle : MonoBehaviour
         if (start)
         {
             CheckId();
-           UpdateAngle();
+            if (!att.keepBoa)
+            {
+             //   UpdateAngle();
+            }
         }
         
     }
@@ -56,7 +59,7 @@ public class Battle : MonoBehaviour
     {
         this.att = att;
         this.def = def;
-
+       
         Utility.RotateObjAtoB(att.gameObject, Ball.current.gameObject);
         Utility.RotateObjAtoB(def.gameObject, Ball.current.gameObject);
 
@@ -64,13 +67,12 @@ public class Battle : MonoBehaviour
         def.transform.parent = transform;
 
         start = true;
-        GetComponent<CircleCollider2D>().enabled = true;
-
+        
     }
 
     public void UpdateAngle()
     {
-        if (!Ball.current.isShooted && !Ball.current.freeFlag)
+        if (!Ball.current.isShooted && !Ball.current.freeFlag )
         {
             Vector3 direction = Ball.current.transform.position - transform.position;
             float speedRot = speed * Time.deltaTime;
@@ -89,18 +91,18 @@ public class Battle : MonoBehaviour
             whoWin = true;
             Invoke("WhoWin",3f);
         }
-        if (att.swim || att.keep || def.swim || def.keep || att.idBall==3 || def.idBall==2)
+        if (att.swim  || def.swim || def.keep || att.idBall==3 || def.idBall==2 || att.keep)
             StopBattle();
     }
 
     public void StopBattle() 
     {
         start = false;
-        GetComponent<CircleCollider2D>().enabled = start;
         att.transform.parent = null;
         def.transform.parent = null;
         att.marcaFlag = false;
         def.marcaFlag = false;
+
          Destroy(this.gameObject);
 
     }

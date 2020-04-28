@@ -21,5 +21,16 @@ public class PlayerR6 : Player
         armDx = true;
         cpuFlag = true;
     }
-  
+
+    public override void OnTriggerEnter2D(Collider2D collision)
+    {
+        GameObject obj = collision.gameObject;
+
+        if (obj.tag == "Ball" && !keep && !keepBoa && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && !marcaFlag)
+        {
+            SetKeep();
+            SetBall();
+        }
+    }
+
 }

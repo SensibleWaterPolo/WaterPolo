@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +35,24 @@ public class PlayerR3 : Player
             battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, Utility.GetAngleBetweenObjAB(opponent.gameObject, Ball.current.gameObject))));
             battlePrefab.CreateBattle(opponent, this);
         }
-    }
+        if (collision.gameObject.name == "Ball" && !keep && Ball.current.CheckBallIsPlayable() && !opponent.keepBoa)
+        {
+            Debug.Log(name + "4");
+            SetKeep();
+            SetBall();
+        }
 
-   
+
+    }
+ /*   public override void UpdateState()
+    {
+        base.UpdateState();
+
+        if (idBall == 1 && marcaFlag && distaceBall < opponent.distaceBall && Ball.current.CheckBallIsPlayable() && !opponent.keepBoa) 
+        {
+            
+            SetSwim(Ball.current.transform.position,false);
+        }
+    }*/
+
 }

@@ -37,7 +37,7 @@ public class PosPlayerMng : MonoBehaviour
         return name;
     }
 
-    public string GetPlayerForTeamNearBall(int idTeam) 
+    public string GetPlayerForTeamNearBall(int idTeam, bool boaFlag) 
     {
         float distance = 100;
         string name = "";
@@ -48,8 +48,11 @@ public class PosPlayerMng : MonoBehaviour
             {
                 if (allPlayer[i].distaceBall < distance)
                 {
-                    distance = allPlayer[i].distaceBall;
-                    name = allPlayer[i].name;
+                    if ((boaFlag && !allPlayer[i].marcaFlag) || !boaFlag)
+                    {
+                        distance = allPlayer[i].distaceBall;
+                        name = allPlayer[i].name;
+                    }
                 }
             }
         }
@@ -59,8 +62,12 @@ public class PosPlayerMng : MonoBehaviour
             {
                 if (allPlayer[i].distaceBall < distance)
                 {
-                    distance = allPlayer[i].distaceBall;
-                    name = allPlayer[i].name;
+                    if ((boaFlag && !allPlayer[i].marcaFlag || !boaFlag))
+                    {
+                        distance = allPlayer[i].distaceBall;
+                        name = allPlayer[i].name;
+                    }
+                    
                 }
             }
         }

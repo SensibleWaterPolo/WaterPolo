@@ -73,7 +73,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 44cc467ee90c19e448d2a70924fa7978, type: 2}
+  m_Motion: {fileID: 7400000, guid: 28f1a2f3ac42bee4899c95a3c414767d, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -186,7 +186,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: RovesciataY
+  m_Name: Rovesciata
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -200,7 +200,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: dc07cd8369ba26c4aaa9f0f519de5428, type: 2}
+  m_Motion: {fileID: 7400000, guid: f3869134c94152841ae59a14d306f830, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -255,7 +255,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 7b3d2065689a00a4e8a3737755788c21, type: 2}
+  m_Motion: {fileID: 7400000, guid: 78409928cf1fe03428169e91e01e55d7, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -337,7 +337,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 5a2d73d7bf944ca4085346abe07a6e86, type: 2}
+  m_Motion: {fileID: 7400000, guid: 715804128a2f2bb4b8357db45f37fc99, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -350,7 +350,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: sciarpaY
+  m_Name: sciarpa
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -364,7 +364,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 3ff963d311a842b42aae6c4247d36180, type: 2}
+  m_Motion: {fileID: 7400000, guid: 87304c4e07ebb874089177748a56daff, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -377,7 +377,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BoaYelloWBicy
+  m_Name: BoaREd
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -396,7 +396,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 68936813011edc141b51938b14ce839d, type: 2}
+  m_Motion: {fileID: 7400000, guid: b1b9e85024d28b844bd3c84a7a6a4d95, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -423,7 +423,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ff202415dcdf9644291b6d27bdcaeb5f, type: 2}
+  m_Motion: {fileID: 7400000, guid: 65efea8073f563f4d9ab796127856316, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -510,7 +510,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: YellowBoa
+  m_Name: RedBoa
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: IdAnim
@@ -553,7 +553,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e11f4fe372d10914a8e0ccee23b6e8a4, type: 2}
+  m_Motion: {fileID: 7400000, guid: 6d7d83acbd17d2f42968f444ec3d0379, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1024,7 +1024,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9275aabe5fa797148bac51a3b378aee6, type: 2}
+  m_Motion: {fileID: 7400000, guid: 894f083fdd6f34e4eb26e6c5c45aa470, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -1062,7 +1062,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BoaKeepY 1
+  m_Name: BoaKeep
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -1078,7 +1078,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 467edae4504212a4c993d5ab6cd7e617, type: 2}
+  m_Motion: {fileID: 7400000, guid: 960844f57b4467b4bb6bb78d0e52dcf9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

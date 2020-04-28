@@ -20,6 +20,7 @@ public class  Ball : MonoBehaviour
     public bool motionlessFlag; //M: true se la palla è ferma
     public bool shootFlag; //M: true se è un tiro, false se è un passaggio
     public bool isShooted; //M: True se la palla è in movimento dopo un tiro/passaggio
+    public bool respawn; //appena torna in gioco dopo un tiro non può entrare in possesso di un altro giocatore
 
     public float shoot; //M: forza del giocatore
     public float pas;//M: forza del giocatore passaggio
@@ -35,6 +36,8 @@ public class  Ball : MonoBehaviour
 
     private ParticleSystem particle;
 
+    public float distance=0; //distanza dal punto di arrivo
+    public float maxHightBall; //punto medio del lancio in cui la dimensione della palla in altezza è il massimo
     
     private void Awake() //M:inizializzazione variabili 
     {
@@ -46,6 +49,7 @@ public class  Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         shootFlag = true;
         isShooted = false;
+        respawn = false;
        
     }
 
@@ -76,7 +80,7 @@ public class  Ball : MonoBehaviour
             DecelerateVelShoot();
         
         }
-       
+    
         if (!shootFlag) 
             CheckPositionPass();
         
@@ -97,7 +101,10 @@ public class  Ball : MonoBehaviour
     {
         this.finalPos = finalPos;
         this.shootFlag = shootFlag;
+        
         EnableBall();
+        distance = Vector3.Distance(transform.position, finalPos);
+        maxHightBall = distance / 2f;
         Vector3 pos = GetComponent<Transform>().position;
         Vector3 direct = new Vector2(finalPos.x - pos.x,finalPos.y-pos.y).normalized;
         if (shootFlag)
@@ -115,8 +122,8 @@ public class  Ball : MonoBehaviour
               
         isShooted = true;
         player.ballFlag = false;
-         freeFlag = true;
-        
+        freeFlag = true;
+        Invoke("DisableRespawn",1f);
     }
 
     public void DisableBall() 
@@ -127,6 +134,8 @@ public class  Ball : MonoBehaviour
 
     public void EnableBall() 
     {
+        Debug.Log("palla attiva");
+        respawn = true;
         transform.parent = null;
         GetComponent<Renderer>().enabled = true;
         this.gameObject.AddComponent<Rigidbody2D>();
@@ -185,10 +194,26 @@ public class  Ball : MonoBehaviour
     {
         Vector2 pos = transform.position;
         Vector2 dest = finalPos;
-        if ((pos-dest).sqrMagnitude<=1)
-           if (rb != null)
-                rb.velocity = Vector2.zero;
-        
+        if (distance > 30) //regola la dimensione della palla a seconda della distanza
+        { if (Vector3.Distance(transform.position,finalPos) >= maxHightBall)
+            {
+                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(2.5f, 2.5f, 0), 1.2f*Time.deltaTime);
+            }
+            else
+            {
+                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1.3f, 1.3f, 0), 1.2f*Time.deltaTime);
+            }
+
+        }
+
+        if ((pos - dest).sqrMagnitude <= 1)
+        {
+            if (rb != null)
+            { 
+                rb.velocity = Vector2.zero; 
+            }
+            transform.localScale = new Vector3(1.3f, 1.3f, 0);
+        }
            
     }
 
@@ -271,5 +296,14 @@ public class  Ball : MonoBehaviour
         inGameFlag = true;
     }
 
+    private void DisableRespawn() 
+    {
+        respawn = false;
+    }
 
+    public bool CheckBallIsPlayable() //controlla se la palla è ferma, non in possesso e non è stata appena tirata
+    {
+        return freeFlag && !respawn && !isShooted && motionlessFlag;   
+    
+    }
 }
