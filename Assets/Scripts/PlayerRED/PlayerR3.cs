@@ -43,7 +43,7 @@ public class PlayerR3 : Player
         }
         GameObject obj = collision.gameObject;
 
-        if (obj.tag == "Ball" && !keep && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && marcaFlag)
+        if (obj.tag == "Ball" && !keep && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && marcaFlag && !Ball.current.isShooted)
         {
             Debug.Log("3");
             SetKeep();

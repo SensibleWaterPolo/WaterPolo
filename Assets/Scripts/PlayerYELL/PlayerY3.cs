@@ -34,12 +34,13 @@ public class PlayerY3 : Player
 
         if (collision.gameObject.name == "Ball" && !keep && Ball.current.CheckBallIsPlayable() && !opponent.keepBoa) 
         {
-             SetKeep();
+            Debug.Log("33");
+            SetKeep();
             SetBall();
         }
         GameObject obj = collision.gameObject;
 
-        if (obj.tag == "Ball" && !keep && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && marcaFlag)
+        if (obj.tag == "Ball" && !keep && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && !Ball.current.isShooted && marcaFlag)
         {
             Debug.Log("3");
             SetKeep();

@@ -18,6 +18,9 @@ TagManager:
   - Fight
   - SignalShoot
   - TapZone
+  - Rovesciata
+  - Sciarpa
+  - ShootLine
   layers:
   - Default
   - TransparentFX

@@ -83,7 +83,8 @@ public class Player : MonoBehaviour
     //VARIABILI PER LE BOE
     public bool marcaFlag; //M:Variabile utilizzata per far ruotare le boe
     public bool boaFlag;  //M: per le animazione delle boe
-    public float angleBoa; //M: angolodi rotazione della boa
+    public float angleBoaZ; //M: angolodi rotazione della boa
+    public float angleBoaW;
 
     public float distaceBall; //M:distanza dalla palla
     public float distanceAtt; //M:distanza dal punto di attacco
@@ -155,7 +156,7 @@ public class Player : MonoBehaviour
         if (def)
             transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Arm");
         else
-            transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Water");
+            transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Pool");
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO BICY
         
@@ -166,7 +167,7 @@ public class Player : MonoBehaviour
             SetBicy();
         }
         //BICY: palla in possesso avversario, sono in posizione di difesa ma la palla non ce l'ha il mio diretto opponent
-        if (idBall == 3 && arrivedFlagDef && !marcaFlag && !stun && !fightFlag)
+        if (idBall == 3 && arrivedFlagDef && !marcaFlag && !stun && !fightFlag && !opponent.ballFlag)
         {
             idDecisionMaking = 2;
             SetBicy();
@@ -304,7 +305,7 @@ public class Player : MonoBehaviour
             SetDef();
         }
         //DEF: palla in possesso del mio diretto avversario e sono arrivato nella posizione di difesa 
-        if (idBall == 3 && arrivedFlagDef && opponent.keep && !stun && !fightFlag && Vector3.Distance(transform.position, opponent.transform.position) < 25 && !opponent.keepBoa)
+        if (idBall == 3 && arrivedFlagDef && opponent.ballFlag && !stun && !fightFlag && Vector3.Distance(transform.position, opponent.transform.position) < 25 && !opponent.keepBoa)
         {
             idDecisionMaking = 16;
             SetDef();
@@ -353,14 +354,16 @@ public class Player : MonoBehaviour
             {
                 if (Ball.current.player.name != name)
                 {
+                    Debug.Log("1");
                     SetKeep();
                     SetBall();
                 }
             }
-            else
+            else if(Ball.current.CheckBallIsPlayable())
             {
+                Debug.Log("2");
                 SetKeep();
-                SetBall();
+               SetBall();
             }
         }
      
@@ -383,18 +386,21 @@ public class Player : MonoBehaviour
     }
     public virtual void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ball") && Ball.current.freeFlag && Ball.current.motionlessFlag && !Ball.current.respawn && !marcaFlag)
+        if (collision.CompareTag("Ball") && Ball.current.freeFlag && Ball.current.motionlessFlag  && !marcaFlag)
         {
             if (Ball.current.player != null)
             {
                 if (Ball.current.player.name != name)
                 {
+                    Debug.Log("4");
                     SetKeep();
                     SetBall();
                 }
             }
-            else
-            {   SetKeep();
+            else if(Ball.current.CheckBallIsPlayable())
+            {
+                Debug.Log("5");
+                SetKeep();
                 SetBall();
             }
         }

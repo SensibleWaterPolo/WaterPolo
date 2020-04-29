@@ -128,6 +128,7 @@ public class  Ball : MonoBehaviour
     public void DisableBall() 
     {
         GetComponent<Renderer>().enabled = false;
+      //  GetComponent<CircleCollider2D>().enabled = false;
         Destroy(GetComponent<Rigidbody2D>());
     }
 
@@ -138,6 +139,7 @@ public class  Ball : MonoBehaviour
         GetComponent<Renderer>().enabled = true;
         this.gameObject.AddComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
+       // GetComponent<CircleCollider2D>().enabled = true;
 
     }
 
@@ -195,25 +197,13 @@ public class  Ball : MonoBehaviour
     {
         Vector2 pos = transform.position;
         Vector2 dest = finalPos;
-        if (distance > 40 && !shootFlag) //regola la dimensione della palla a seconda della distanza
-        { if (Vector2.Distance(transform.position,finalPos) >= maxHightBall)
-            {
-                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(2.5f, 2.5f, 0), 1.3f*Time.deltaTime);
-            }
-            else if(Vector2.Distance(transform.position, finalPos)<maxHightBall)
-            {
-                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1.3f, 1.3f, 0), 1.3f*Time.deltaTime);
-            }
-
-        }
-
+       
         if ((pos - dest).sqrMagnitude <= 1)
         {
             if (rb != null)
             { 
                 rb.velocity = Vector2.zero; 
             }
-            transform.localScale = new Vector3(1.3f, 1.3f, 0);
         }
            
     }

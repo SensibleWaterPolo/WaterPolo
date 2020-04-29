@@ -45,6 +45,8 @@ public class TouchManager : MonoBehaviour
             for (int i = 0; i < numTouch; i++)
             {
                 touch = Input.GetTouch(i);
+                
+                ///////////// FASE BEGAN
                 if (touch.phase == TouchPhase.Began)
                 {
                     RaycastHit2D hitPlayer = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position), (Input.GetTouch(i).position), layerMaskPlayer);
@@ -53,9 +55,9 @@ public class TouchManager : MonoBehaviour
 
                     if (hitPlayer.collider)
                     {
-                        
+
                         GameObject obj = hitPlayer.collider.gameObject;
-                        Debug.Log("toccato oggetto: "+obj.name);
+
                         if (obj.tag == "Player")
                         {
 
@@ -71,7 +73,7 @@ public class TouchManager : MonoBehaviour
                         if (obj.tag == "Battle")
                         {
                             obj.GetComponent<Battle>().numclick++;
-                                                    }
+                        }
                     }
                     if (hitFight.collider != null)
                     {
@@ -84,11 +86,14 @@ public class TouchManager : MonoBehaviour
 
                     }
                 }
+
+                ////// FASE MOVED
                 if (touch.phase == TouchPhase.Moved && loadShoot && player != null)
                 {
-                    if (player.keep && !player.keepBoa) {
+                    if (player.keep && !player.keepBoa)
+                    {
 
-                        Utility.RotateObjToPoint(player.gameObject, Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position)); 
+                        Utility.RotateObjToPoint(player.gameObject, Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position));
                     }
 
                     if (Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position).x <= GameObject.Find("LimitLeft").transform.position.x || Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position).x >= GameObject.Find("LimitRight").transform.position.x)
@@ -103,81 +108,113 @@ public class TouchManager : MonoBehaviour
                     player.signalOK = okShoot;
 
                 }
-
+                //FASE ENDED
                 if (touch.phase == TouchPhase.Ended && loadShoot && player != null)
                 {
 
 
                     Vector3 destination = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
 
-                 
-                        if (minShoot < destination.y && destination.y < maxShoot)//decidiamo se è un passaggio o un tiro
-                        {
-                        shootFlag = false;    
-                        }
-                        else
-                        {
-                        shootFlag = true;
-                           
-                        }
 
-                    if (okShoot && !player.keepBoa) 
+                    if (minShoot < destination.y && destination.y < maxShoot)//decidiamo se è un passaggio o un tiro
+                    {
+                        shootFlag = false;
+                    }
+                    else
+                    {
+                        shootFlag = true;
+
+                    }
+
+                    if (okShoot && !player.keepBoa)
                     {
                         player.LoadShoot(destination, shootFlag, 0);
 
                     }
+                    else
 
-                    
+
 
                     //IL GIOCATORE è UNA BOA BISOGNA DECIDERE IL TIPO DI TIRO A SENCONDA DI DOVE INDIRIZZIAMO IL CURSORE
-                    if (okShoot && player.keepBoa && player.idTeam==0) //Boa yellow 
-                    {  
-                        
-                        if (destination.y <= player.transform.position.y) //colonnello
-                        {
-                            player.LoadShoot(destination, shootFlag, 3);
-                        }
-                        if (destination.y >= player.transform.position.y && destination.x <= player.transform.position.x) //Rovesciata
-                        {
-                            player.LoadShoot(destination, shootFlag, 1);
-
-                        }
-                        if (destination.y >= player.transform.position.y && destination.x > player.transform.position.x) //sciarpa
-                        {
-
-                            player.LoadShoot(destination, shootFlag, 2);
-                        }
-                    }
-                    if (okShoot && player.keepBoa && player.idTeam == 1) //Boa Red
+                    if (okShoot && player.keepBoa)
                     {
+                        LayerMask mask = 1 << 4; //strato player
+                        RaycastHit2D hitBoa = Physics2D.Raycast(player.transform.parent.transform.position, (Ball.current.transform.position - player.transform.parent.transform.position).normalized, 20, mask);
+                        Debug.DrawRay(player.transform.parent.transform.position, (Ball.current.transform.position - player.transform.parent.transform.position).normalized * 15, Color.black, 3);
 
-                        if (destination.y >= player.transform.position.y) //colonnello
+                        if (hitBoa.collider != null)
                         {
-                            
-                            player.LoadShoot(destination, shootFlag, 3);
-                        }
-                        if (destination.y <= player.transform.position.y && destination.x >= player.transform.position.x) //Rovesciata
-                        {
-                            
-                            player.LoadShoot(destination, shootFlag, 1);
 
+                            Debug.Log(player.name + " ->" + hitBoa.collider.name);
+
+                            if (hitBoa.collider.CompareTag("ShootLine")) //Tiro a colonnello per entrambi
+                            {
+                                if ((player.idAnim == 0 && destination.y > player.transform.position.y) || (player.idAnim == 1 && destination.y < player.transform.position.y)) // controllo se  davanti al portiere non può
+                                {
+                                    player.LoadShoot(destination, shootFlag, 3);  //fare un colonnello all'indietro
+                                }
+                            }
+
+                            else if (hitBoa.collider.CompareTag("Rovesciata"))
+
+                            {
+                                player.LoadShoot(destination, shootFlag, 1); //Rovesciata per entrambi
+                            }
+
+                            else if (hitBoa.collider.CompareTag("Sciarpa")) //Sciarpa per entrambi
+                            {
+                                player.LoadShoot(destination, shootFlag, 2);
+                            }
                         }
-                        if (destination.y <= player.transform.position.y && destination.x < player.transform.position.x) //sciarpa
+                        else if (player.idTeam == 0)
                         {
-                            
-                            player.LoadShoot(destination, shootFlag, 2);
+
+                            if (destination.y <= player.transform.position.y) //colonnello
+                            {
+                                player.LoadShoot(destination, shootFlag, 3);
+                            }
+                            else if (destination.y >= player.transform.position.y && destination.x <= player.transform.position.x) //Rovesciata
+                            {
+                                player.LoadShoot(destination, shootFlag, 1);
+
+                            }
+                            else if (destination.y >= player.transform.position.y && destination.x > player.transform.position.x) //sciarpa
+                            {
+
+                                player.LoadShoot(destination, shootFlag, 2);
+                            }
                         }
+                        else if (player.idTeam == 1) //Boa Red
+                        {
+                            if (destination.y >= player.transform.position.y) //colonnello
+                            {
+                                player.LoadShoot(destination, shootFlag, 3);
+                            }
+                            if (destination.y <= player.transform.position.y && destination.x >= player.transform.position.x) //Rovesciata
+                            {
+                                player.LoadShoot(destination, shootFlag, 1);
+                            }
+                            if (destination.y <= player.transform.position.y && destination.x < player.transform.position.x) //sciarpa
+                            {
+                                player.LoadShoot(destination, shootFlag, 2);
+                            }
+                        }
+                        
                     }
+
                     player.DestroySignalShoot();
                     loadShoot = false;
                     player = null;
                     restart = true;
 
                 }
-            }
 
+            }
         }
     }
+
+
+    
 
     public void Exit()
     {

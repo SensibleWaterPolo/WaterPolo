@@ -19,6 +19,7 @@ public class Battle : MonoBehaviour
     public int numclick;
     public int speed; //M: velocità rotazione
     public int idWin;
+    public float angle;
       
 
     private void Awake()
@@ -51,6 +52,7 @@ public class Battle : MonoBehaviour
             {
               UpdateAngle();
             }
+            
         }
         
     }
@@ -78,8 +80,11 @@ public class Battle : MonoBehaviour
             float speedRot = speed * Time.deltaTime;
             float angle = Utility.GetAngleBetweenObjAB(this.gameObject,Ball.current.gameObject);
             Quaternion wantedRotation = Quaternion.Euler(0, 0, angle+degree);
+            
             transform.rotation= Quaternion.RotateTowards(transform.rotation, wantedRotation,speedRot );
-            Debug.Log(transform.rotation.z);
+            att.angleBoaZ = transform.rotation.z;
+            att.angleBoaW = transform.rotation.w;
+            
                                  
         }
     }
@@ -145,6 +150,6 @@ public class Battle : MonoBehaviour
         
     }
 
-    
+   
 
 }
