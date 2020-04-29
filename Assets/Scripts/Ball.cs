@@ -49,8 +49,7 @@ public class  Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         shootFlag = true;
         isShooted = false;
-        respawn = false;
-       
+                 
     }
 
     // Start is called before the first frame update
@@ -80,9 +79,11 @@ public class  Ball : MonoBehaviour
             DecelerateVelShoot();
         
         }
-    
-        if (!shootFlag) 
-            CheckPositionPass();
+
+        if (!shootFlag)
+        { CheckPositionPass(); 
+        }
+        UpdateFreeFlag();
         
         UpdateStatePos();
         
@@ -103,7 +104,7 @@ public class  Ball : MonoBehaviour
         this.shootFlag = shootFlag;
         
         EnableBall();
-        distance = Vector3.Distance(transform.position, finalPos);
+        distance = Vector2.Distance(transform.position,finalPos);
         maxHightBall = distance / 2f;
         Vector3 pos = GetComponent<Transform>().position;
         Vector3 direct = new Vector2(finalPos.x - pos.x,finalPos.y-pos.y).normalized;
@@ -119,11 +120,9 @@ public class  Ball : MonoBehaviour
             deceleratePass = true;
             decelerateShoot = false;
         }  
-              
-        isShooted = true;
-        player.ballFlag = false;
-        freeFlag = true;
-        Invoke("DisableRespawn",1f);
+        
+        
+       // Invoke("DisableRespawn", 0.5f);
     }
 
     public void DisableBall() 
@@ -134,8 +133,7 @@ public class  Ball : MonoBehaviour
 
     public void EnableBall() 
     {
-        Debug.Log("palla attiva");
-        respawn = true;
+        
         transform.parent = null;
         GetComponent<Renderer>().enabled = true;
         this.gameObject.AddComponent<Rigidbody2D>();
@@ -148,7 +146,7 @@ public class  Ball : MonoBehaviour
         if (rb != null)
         {
             speed = rb.velocity.magnitude;
-            if (speed <= 3)
+            if (speed <= 3 && freeFlag)
             {
                 StopBall();
                 
@@ -158,6 +156,10 @@ public class  Ball : MonoBehaviour
                 speed = 0;
                 isShooted = false;
                 player = null;
+                if (player != null)
+                {
+                    player = null;
+                }
                                                             
             }
             else
@@ -165,7 +167,7 @@ public class  Ball : MonoBehaviour
                 motionlessFlag = false;
                 deceleratePass = true;
                 decelerateShoot = true;
-                isShooted = true;
+                
             }
 
         }
@@ -182,9 +184,8 @@ public class  Ball : MonoBehaviour
             rb.velocity = rb.velocity - (rb.velocity * 1f * Time.deltaTime);
     }
     public void SetPlayer(Player player) //M: assegna alla palla il giocatore in possesso
-    {
+    {   isShooted = false;
         this.player = player;
-        isShooted = false;
         idTeam = player.idTeam;
         freeFlag = false;
     }
@@ -194,14 +195,14 @@ public class  Ball : MonoBehaviour
     {
         Vector2 pos = transform.position;
         Vector2 dest = finalPos;
-        if (distance > 30) //regola la dimensione della palla a seconda della distanza
-        { if (Vector3.Distance(transform.position,finalPos) >= maxHightBall)
+        if (distance > 40 && !shootFlag) //regola la dimensione della palla a seconda della distanza
+        { if (Vector2.Distance(transform.position,finalPos) >= maxHightBall)
             {
-                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(2.5f, 2.5f, 0), 1.2f*Time.deltaTime);
+                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(2.5f, 2.5f, 0), 1.3f*Time.deltaTime);
             }
-            else
+            else if(Vector2.Distance(transform.position, finalPos)<maxHightBall)
             {
-                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1.3f, 1.3f, 0), 1.2f*Time.deltaTime);
+                transform.localScale = Vector3.Lerp(transform.localScale, new Vector3(1.3f, 1.3f, 0), 1.3f*Time.deltaTime);
             }
 
         }
@@ -222,6 +223,28 @@ public class  Ball : MonoBehaviour
         rb.velocity = Vector2.zero;
       //  rb.angularVelocity = 0;
         
+    }
+
+    private void UpdateFreeFlag() 
+    {
+        if (player != null && !isShooted && speed == 0)
+        { freeFlag = false;
+            player.ballFlag = true;
+        }
+        if (isShooted && speed > 0 ) 
+        {
+            freeFlag = true;
+            if (player != null)
+            {
+                player.ballFlag = false;
+            }
+        }
+        if (motionlessFlag && player == null)
+        {
+            freeFlag = true;
+                   
+        }
+    
     }
 
     public void UpdateStatePos()  //M: determina in quale settore di campo si trova  la palla
@@ -249,6 +272,7 @@ public class  Ball : MonoBehaviour
 
     {
         
+
        isShooted = false;
         if (collision.gameObject.CompareTag("Side"))
         {
@@ -296,14 +320,13 @@ public class  Ball : MonoBehaviour
         inGameFlag = true;
     }
 
-    private void DisableRespawn() 
-    {
-        respawn = false;
-    }
-
+    
     public bool CheckBallIsPlayable() //controlla se la palla è ferma, non in possesso e non è stata appena tirata
     {
-        return freeFlag && !respawn && !isShooted && motionlessFlag;   
+        if (freeFlag && !isShooted && motionlessFlag && inGameFlag)
+            return true;
+        else
+            return false;   
     
     }
 }

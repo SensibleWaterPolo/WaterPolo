@@ -23,12 +23,17 @@ public class SensorBoa : MonoBehaviour
         {
             this.gameObject.layer = LayerMask.NameToLayer("Side");
         }
+                
+        GetComponent<BoxCollider2D>().enabled = playerBoa.marcaFlag;
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Ball" && !Ball.current.isShooted && Ball.current.freeFlag && !playerBoa.stun && playerBoa.marcaFlag && !Ball.current.respawn) 
+        
+        if (collision.gameObject.name == "Ball" && Ball.current.freeFlag && Ball.current.speed < 5 && playerBoa.marcaFlag && !playerBoa.keepBoa && !Ball.current.isShooted && !Ball.current.respawn) 
         {
+            
             playerBoa.SetKeepBoa();
             playerBoa.SetBallBoa();
         }
@@ -36,7 +41,7 @@ public class SensorBoa : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
        
-        if (collision.gameObject.name == "Ball" && !Ball.current.isShooted && Ball.current.freeFlag && !playerBoa.stun && playerBoa.marcaFlag && !Ball.current.respawn)
+        if (collision.gameObject.name == "Ball" && Ball.current.freeFlag &&Ball.current.speed<5 && playerBoa.marcaFlag && !playerBoa.keepBoa && !Ball.current.isShooted && !Ball.current.respawn) 
         {
             
             playerBoa.SetKeepBoa();

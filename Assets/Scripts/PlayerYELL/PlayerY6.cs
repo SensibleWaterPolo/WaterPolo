@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerY6 : Player
-{
+{ 
     // Start is called before the first frame update
     public override void Awake()
     {
@@ -20,14 +20,45 @@ public class PlayerY6 : Player
         armDx = true;
     }
 
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        
+    }
+
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject obj = collision.gameObject;
+        base.OnTriggerEnter2D(collision);
 
-        if (obj.tag == "Ball" && !keep && !keepBoa && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && !marcaFlag)
+        if (Ball.current.CheckBallIsPlayable() && marcaFlag && !keepBoa)
         {
-            SetKeep();
-            SetBall();
+            SetKeepBoa();
+            SetBallBoa();
+
+        }
+        if (Ball.current.freeFlag && Ball.current.speed < 3 && marcaFlag && !keepBoa)
+        {
+            SetKeepBoa();
+            SetBallBoa();
+
+        }
+    }
+
+    public override void OnTriggerStay2D(Collider2D collision)
+    {
+        base.OnTriggerStay2D(collision);
+
+        if (Ball.current.CheckBallIsPlayable() && marcaFlag && !keepBoa)
+        {
+            SetKeepBoa();
+            SetBallBoa();
+
+        }
+        if (Ball.current.freeFlag && Ball.current.speed < 3 && marcaFlag && !keepBoa)
+        {
+            SetKeepBoa();
+            SetBallBoa();
+
         }
     }
 

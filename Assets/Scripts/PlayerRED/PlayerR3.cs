@@ -28,8 +28,8 @@ public class PlayerR3 : Player
     public override void OnTriggerStay2D(Collider2D collision)
     {
         base.OnTriggerStay2D(collision);
-        if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && idBall!=2)
-        {
+        if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && idBall==3)
+        {            
             marcaFlag = true;
             opponent.marcaFlag = true;
             battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, Utility.GetAngleBetweenObjAB(opponent.gameObject, Ball.current.gameObject))));
@@ -37,22 +37,20 @@ public class PlayerR3 : Player
         }
         if (collision.gameObject.name == "Ball" && !keep && Ball.current.CheckBallIsPlayable() && !opponent.keepBoa)
         {
-            Debug.Log(name + "4");
+            
+            SetKeep();
+            SetBall();
+        }
+        GameObject obj = collision.gameObject;
+
+        if (obj.tag == "Ball" && !keep && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && marcaFlag)
+        {
+            Debug.Log("3");
             SetKeep();
             SetBall();
         }
 
-
     }
- /*   public override void UpdateState()
-    {
-        base.UpdateState();
-
-        if (idBall == 1 && marcaFlag && distaceBall < opponent.distaceBall && Ball.current.CheckBallIsPlayable() && !opponent.keepBoa) 
-        {
-            
-            SetSwim(Ball.current.transform.position,false);
-        }
-    }*/
+ 
 
 }

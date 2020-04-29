@@ -28,7 +28,7 @@ public class Battle : MonoBehaviour
         numclick = 0;
         degree = 0;
         idWin = -1;
-        speed = 50;
+        speed = 30;
     }
     // Start is called before the first frame update
     void Start()
@@ -49,7 +49,7 @@ public class Battle : MonoBehaviour
             CheckId();
             if (!att.keepBoa)
             {
-             //   UpdateAngle();
+              UpdateAngle();
             }
         }
         
@@ -79,6 +79,7 @@ public class Battle : MonoBehaviour
             float angle = Utility.GetAngleBetweenObjAB(this.gameObject,Ball.current.gameObject);
             Quaternion wantedRotation = Quaternion.Euler(0, 0, angle+degree);
             transform.rotation= Quaternion.RotateTowards(transform.rotation, wantedRotation,speedRot );
+            Debug.Log(transform.rotation.z);
                                  
         }
     }
@@ -89,7 +90,7 @@ public class Battle : MonoBehaviour
         if (!whoWin) 
         {
             whoWin = true;
-            Invoke("WhoWin",3f);
+            Invoke("WhoWin",2f);
         }
         if (att.swim  || def.swim || def.keep || att.idBall==3 || def.idBall==2 || att.keep)
             StopBattle();

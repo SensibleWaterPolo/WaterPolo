@@ -24,7 +24,7 @@ public class PlayerY3 : Player
     public override void OnTriggerStay2D(Collider2D collision)
     {
         base.OnTriggerStay2D(collision);
-        if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep)
+        if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && idBall==3)
         {
             marcaFlag = true;
             opponent.marcaFlag = true;
@@ -34,7 +34,14 @@ public class PlayerY3 : Player
 
         if (collision.gameObject.name == "Ball" && !keep && Ball.current.CheckBallIsPlayable() && !opponent.keepBoa) 
         {
-            Debug.Log(name + "3");
+             SetKeep();
+            SetBall();
+        }
+        GameObject obj = collision.gameObject;
+
+        if (obj.tag == "Ball" && !keep && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && marcaFlag)
+        {
+            Debug.Log("3");
             SetKeep();
             SetBall();
         }

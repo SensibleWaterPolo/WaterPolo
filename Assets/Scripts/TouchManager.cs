@@ -55,6 +55,7 @@ public class TouchManager : MonoBehaviour
                     {
                         
                         GameObject obj = hitPlayer.collider.gameObject;
+                        Debug.Log("toccato oggetto: "+obj.name);
                         if (obj.tag == "Player")
                         {
 
@@ -152,19 +153,19 @@ public class TouchManager : MonoBehaviour
 
                         if (destination.y >= player.transform.position.y) //colonnello
                         {
-                            Debug.Log("colonnello red");
+                            
                             player.LoadShoot(destination, shootFlag, 3);
                         }
                         if (destination.y <= player.transform.position.y && destination.x >= player.transform.position.x) //Rovesciata
                         {
-                            Debug.Log("rovesciata red");
+                            
                             player.LoadShoot(destination, shootFlag, 1);
 
                         }
                         if (destination.y <= player.transform.position.y && destination.x < player.transform.position.x) //sciarpa
                         {
-                            Debug.Log("scirpa red");
-                            player.LoadShoot(destination, shootFlag, 3);
+                            
+                            player.LoadShoot(destination, shootFlag, 2);
                         }
                     }
                     player.DestroySignalShoot();

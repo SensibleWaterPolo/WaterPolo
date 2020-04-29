@@ -21,15 +21,50 @@ public class PlayerR6 : Player
         armDx = true;
         cpuFlag = true;
     }
+    public override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        
+    }
 
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-        GameObject obj = collision.gameObject;
-
-        if (obj.tag == "Ball" && !keep && !keepBoa && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && !marcaFlag)
+        base.OnTriggerEnter2D(collision);
+        if (collision.CompareTag("Ball"))
         {
-            SetKeep();
-            SetBall();
+            if (Ball.current.CheckBallIsPlayable() && marcaFlag && !keepBoa)
+            {
+                SetKeepBoa();
+                SetBallBoa();
+
+            }
+            if (Ball.current.freeFlag && Ball.current.speed < 3 && marcaFlag && !keepBoa)
+            {
+                SetKeepBoa();
+                SetBallBoa();
+
+            }
+        }
+    }
+
+    public override void OnTriggerStay2D(Collider2D collision)
+    {
+        base.OnTriggerStay2D(collision);
+
+        if (collision.CompareTag("Ball"))
+        {
+            if (Ball.current.CheckBallIsPlayable() && marcaFlag && !keepBoa)
+            {
+                SetKeepBoa();
+                SetBallBoa();
+
+            }
+            if (Ball.current.freeFlag && Ball.current.speed < 3 && marcaFlag && !keepBoa)
+            {
+                SetKeepBoa();
+                SetBallBoa();
+
+            }
         }
     }
 
