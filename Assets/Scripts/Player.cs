@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     public int stamina;//M: forza del giocatore per vincere lo scontro, se mosso da cpu ha un minimo X e un massimo Y
     public Vector2 clickCPU; //range di click della cpu, da un minimo X ad un massimo Y, utilizzati per decidere chi vince uno scontro 
     protected bool armDx; //M: true se è destro, false se è un mancino
+    public int idDecisionMaking;
 
     [Header("FLAG")]
     public bool cpuFlag; //M: true se muove la cpu
@@ -95,9 +96,9 @@ public class Player : MonoBehaviour
     public bool beginPush;//comincia ad avanzare verso l'attaccante
     public float speedToPush;//velocità di spostamento verso l'attaccante
 
-    public float waitAfterShoot = 3f; //Tempo di attesa dopo aver tirato
+    public float waitAfterShoot = 2f; //Tempo di attesa dopo aver tirato
 
-    public int idDecisionMaking;
+   
 
     public virtual void Awake()
     {
@@ -145,6 +146,7 @@ public class Player : MonoBehaviour
                  Swim();
             }
             MoveToAttPlayer();
+            RestorePlayer();
             
         }
     }
@@ -180,7 +182,7 @@ public class Player : MonoBehaviour
 
 
         //SWIM: Palla vicina al boa o al marca boa
-        if (idBall == 1 && marcaFlag && Ball.current.CheckBallIsPlayable() && distaceBall < opponent.distaceBall)
+        if (idBall == 1 && marcaFlag && Ball.current.CheckBallIsPlayable(0) && distaceBall < opponent.distaceBall)
         {
             idDecisionMaking = 3;
             SetSwim(Ball.current.transform.position,false);
@@ -188,14 +190,14 @@ public class Player : MonoBehaviour
         }
 
         //SWIM: la palla è libera NON nel mio settore ma io sono il player più vicino 
-        if (idBall == 0 && Ball.current.CheckBallIsPlayable() && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam,boaFlag) == name && distaceBall < 10 && !stun && !fightFlag )
+        if (idBall == 0 && Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam,boaFlag) == name && distaceBall < 10 && !stun && !fightFlag )
         {
             idDecisionMaking = 4;
             SetSwim(Ball.current.transform.position, false);
         }
 
         // SWIM: La palla è libera nel mio settore
-        if (idBall == 1 && Ball.current.CheckBallIsPlayable() && !loadShoot && !marcaFlag && (opponent.distaceBall > 3) && !stun && !fightFlag && !Ball.current.isShooted && !boaFlag) //M:palla nel mio settore e libera
+        if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && (opponent.distaceBall > 3) && !stun && !fightFlag && !Ball.current.isShooted && !boaFlag) //M:palla nel mio settore e libera
 
         {
             idDecisionMaking = 5;
@@ -205,7 +207,7 @@ public class Player : MonoBehaviour
 
         //SWIM: Palla libera nel mio settore e sono quello più vicino della mia squadra
 
-        if (idBall == 1 && Ball.current.CheckBallIsPlayable() && !loadShoot && !marcaFlag && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam,boaFlag) == name && !stun && !fightFlag)
+        if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam,boaFlag) == name && !stun && !fightFlag)
         {
                  idDecisionMaking = 6;
             SetSwim(Ball.current.transform.position, false);
@@ -276,10 +278,12 @@ public class Player : MonoBehaviour
             if (opponent.counterAttFlag)
 
             {
+                idDecisionMaking = 131; 
                 SetSwim(posDef, false);
             }
             else
             {
+                idDecisionMaking = 132;
                 SetSwim(posDef, true);
             }
                 
@@ -288,7 +292,7 @@ public class Player : MonoBehaviour
 
         // DEF: Palla è stata tirata e viaggia lungo il mio settore
 
-        if (idBall == 1 && CheckOpponentShoot() && arrivedFlagDef && !marcaFlag && !stun && !fightFlag)
+        if (idBall == 1 && Ball.current.isShooted && speed>5  && def  && !stun && !fightFlag)
         {
             idDecisionMaking = 14;
             if (Ball.current.player != null)
@@ -333,11 +337,11 @@ public class Player : MonoBehaviour
             if (Ball.current.idTeam != idTeam)
                 idBall = 3; //M: la palla è in possesso dell'avversario
         }//
-        else if (Ball.current.statePos == sectorAction && Ball.current.CheckBallIsPlayable()) //M:la palla è nel mio settore
+        else if (Ball.current.statePos == sectorAction && Ball.current.CheckBallIsPlayable(0)) //M:la palla è nel mio settore
         {
             idBall = 1;
         }
-        else if(Ball.current.statePos != sectorAction && Ball.current.CheckBallIsPlayable())
+        else if(Ball.current.statePos != sectorAction && Ball.current.CheckBallIsPlayable(0))
         {
             idBall = 0;
         }
@@ -348,26 +352,14 @@ public class Player : MonoBehaviour
     {
         GameObject obj = collision.gameObject;
 
-        if (obj.tag == "Ball" && !keep && Ball.current.freeFlag && Ball.current.speed < 5f && !Ball.current.respawn && !marcaFlag  )
+        if (obj.tag == "Ball" &&  Ball.current.CheckBallIsPlayable(5f)  && !keep && !marcaFlag && !stun && !loadShoot)
         {
-            if (Ball.current.player != null)
-            {
-                if (Ball.current.player.name != name)
-                {
-                    Debug.Log("1");
-                    SetKeep();
-                    SetBall();
-                }
-            }
-            else if(Ball.current.CheckBallIsPlayable())
-            {
-                Debug.Log("2");
-                SetKeep();
-               SetBall();
-            }
+            Debug.Log(name + " 1");
+            SetBall();
+            SetKeep();
+            
         }
-     
-
+    
     }
 
 
@@ -386,23 +378,12 @@ public class Player : MonoBehaviour
     }
     public virtual void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ball") && Ball.current.freeFlag && Ball.current.motionlessFlag  && !marcaFlag)
+        GameObject obj = collision.gameObject;
+        if (obj.tag == "Ball" && Ball.current.CheckBallIsPlayable(5f)  && !keep && !marcaFlag && !stun && !loadShoot)
         {
-            if (Ball.current.player != null)
-            {
-                if (Ball.current.player.name != name)
-                {
-                    Debug.Log("4");
-                    SetKeep();
-                    SetBall();
-                }
-            }
-            else if(Ball.current.CheckBallIsPlayable())
-            {
-                Debug.Log("5");
-                SetKeep();
-                SetBall();
-            }
+            Debug.Log(name + " 2");
+            SetKeep();
+            SetBall();
         }
     }
 
@@ -413,10 +394,9 @@ public class Player : MonoBehaviour
         
         
             Ball.current.SetPlayer(this);
-            Ball.current.DisableBall();
             Ball.current.transform.parent = transform;
             Ball.current.transform.position = transform.GetChild(0).position;
-        
+            Ball.current.freeFlag = false;
     }
 
     public void SetBallBoa()//M:la boa acquisisce il controllo del pallone
@@ -522,7 +502,7 @@ public class Player : MonoBehaviour
             loadShoot = false;
             ballFlag = true;
             stun = false;
-            animator.SetInteger("IdAnim", 2);
+             animator.SetInteger("IdAnim", 2);
             Utility.RotateObjToPoint(this.gameObject, posGoal);
         }
    }
@@ -627,7 +607,7 @@ public class Player : MonoBehaviour
         Ball.current.pas = pass;
         Ball.current.ShootBall(destShoot, flagShoot);
         
-        Invoke("UpdateLoadShoot", waitAfterShoot); 
+        Invoke("UpdateLoadShoot", waitAfterShoot); //tempo di attesa dopo aver tirato
     }
     public void UpdateLoadShoot() //M:fine tiro
     {
@@ -731,7 +711,7 @@ public class Player : MonoBehaviour
    {
         if (def)
         {
-            if (arrivedFlagDef && CheckOpponentShoot())
+            if (arrivedFlagDef && CheckOpponentShoot() && distaceBall <= 10)
             {
                 beginPush = true;
             }
@@ -746,8 +726,9 @@ public class Player : MonoBehaviour
                  LayerMask mask = 1 << 9; //strato player
                  Vector3 posSensor = transform.GetChild(6).transform.position;
                  Vector3 dir = (opponent.transform.position - posSensor).normalized;
-                 float dist = 2;
+                 float dist = 1;
                  RaycastHit2D hitAttPlayer = Physics2D.Raycast(posSensor, dir, dist, mask);
+                Debug.DrawRay(posSensor, dir * dist, Color.black, 5f);
                  if (hitAttPlayer.collider != null)
                  {
                    
@@ -810,6 +791,15 @@ public class Player : MonoBehaviour
     {
         shootSignalPrefab.transform.parent = null;
         Destroy(shootSignalPrefab.gameObject);
+    }
+
+    public void RestorePlayer() //funzione che tenta di resettare lo stato dei giocatori eliminando piccole imperfezioni
+    {
+        if (bicy) 
+        {
+            ballFlag = false;
+        }
+    
     }
  
 

@@ -25,7 +25,7 @@ public class PlayerY5 : Player
         
     }
 
-    public override void OnTriggerEnter2D(Collider2D collision)
+   /* public override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
 
@@ -37,7 +37,7 @@ public class PlayerY5 : Player
                 fightPrefab.CreateFight(this,opponent);
             }
         }
-    }
+    }*/
 
 
 

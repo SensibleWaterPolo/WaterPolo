@@ -68,6 +68,7 @@ public class  Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
+        CheckFreeBall();
         CheckVel(); //M: se la velocità è prossima allo zero ferma la palla
 
         if (deceleratePass)
@@ -83,8 +84,7 @@ public class  Ball : MonoBehaviour
         if (!shootFlag)
         { CheckPositionPass(); 
         }
-        UpdateFreeFlag();
-        
+                
         UpdateStatePos();
         
         UpdateSideBall();
@@ -110,7 +110,7 @@ public class  Ball : MonoBehaviour
         Vector3 direct = new Vector2(finalPos.x - pos.x,finalPos.y-pos.y).normalized;
         if (shootFlag)
         {
-            GetComponent<Rigidbody2D>().AddForce(direct * shoot * 300);
+            GetComponent<Rigidbody2D>().AddForce(direct * shoot * 400);
             decelerateShoot = true;
             deceleratePass = false;
         }
@@ -119,18 +119,17 @@ public class  Ball : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(direct * pas * 500);
             deceleratePass = true;
             decelerateShoot = false;
-        }  
+        }
+        if (player != null)
+        {
+            player.ballFlag = false;
+            player = null;
+        }
         
-        
-       // Invoke("DisableRespawn", 0.5f);
+       
     }
 
-    public void DisableBall() 
-    {
-        GetComponent<Renderer>().enabled = false;
-      //  GetComponent<CircleCollider2D>().enabled = false;
-        Destroy(GetComponent<Rigidbody2D>());
-    }
+  
 
     public void EnableBall() 
     {
@@ -139,7 +138,7 @@ public class  Ball : MonoBehaviour
         GetComponent<Renderer>().enabled = true;
         this.gameObject.AddComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
-       // GetComponent<CircleCollider2D>().enabled = true;
+       
 
     }
 
@@ -148,7 +147,7 @@ public class  Ball : MonoBehaviour
         if (rb != null)
         {
             speed = rb.velocity.magnitude;
-            if (speed <= 3 && freeFlag)
+            if ( speed <= 3 && freeFlag)
             {
                 StopBall();
                 
@@ -157,11 +156,10 @@ public class  Ball : MonoBehaviour
                 motionlessFlag = true;
                 speed = 0;
                 isShooted = false;
-                player = null;
-                if (player != null)
+              /*  if (player != null)
                 {
                     player = null;
-                }
+                }*/
                                                             
             }
             else
@@ -183,16 +181,25 @@ public class  Ball : MonoBehaviour
     public void DecelerateVelShoot() //M: Diminuisce la velocità della palla
     {
         if (rb != null)
-            rb.velocity = rb.velocity - (rb.velocity * 1f * Time.deltaTime);
+            rb.velocity = rb.velocity - (rb.velocity * 0.3f * Time.deltaTime);
     }
     public void SetPlayer(Player player) //M: assegna alla palla il giocatore in possesso
-    {   isShooted = false;
+    {
+        DisableBall();
+        isShooted = false;
         this.player = player;
         idTeam = player.idTeam;
-        freeFlag = false;
+        
+    }
+    public void DisableBall()
+    {
+        GetComponent<Renderer>().enabled = false;
+        Destroy(GetComponent<Rigidbody2D>());
+        speed = -1;
+        CheckFreeBall();
     }
 
-           
+
     public void CheckPositionPass() //M: in caso di passaggio controlla la posizione della palla
     {
         Vector2 pos = transform.position;
@@ -215,28 +222,7 @@ public class  Ball : MonoBehaviour
         
     }
 
-    private void UpdateFreeFlag() 
-    {
-        if (player != null && !isShooted && speed == 0)
-        { freeFlag = false;
-            player.ballFlag = true;
-        }
-        if (isShooted && speed > 0 ) 
-        {
-            freeFlag = true;
-            if (player != null)
-            {
-                player.ballFlag = false;
-            }
-        }
-        if (motionlessFlag && player == null)
-        {
-            freeFlag = true;
-                   
-        }
     
-    }
-
     public void UpdateStatePos()  //M: determina in quale settore di campo si trova  la palla
     {
         if (!freeFlag)
@@ -260,13 +246,16 @@ public class  Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
 
-    {
-        
-
+    {        
        isShooted = false;
         if (collision.gameObject.CompareTag("Side"))
         {
             rb.velocity = rb.velocity / 2;
+        }
+        if (collision.gameObject.tag == "Arm") 
+        {
+            Debug.Log("Palla sbatte sul braccio");
+        
         }
        
       
@@ -311,12 +300,28 @@ public class  Ball : MonoBehaviour
     }
 
     
-    public bool CheckBallIsPlayable() //controlla se la palla è ferma, non in possesso e non è stata appena tirata
+    public bool CheckBallIsPlayable(float limitVel) //controlla se la palla è giocabile sotto un limite di velocità
     {
-        if (freeFlag && !isShooted && motionlessFlag && inGameFlag)
-            return true;
+        if (freeFlag && inGameFlag)
+        {
+            if ((isShooted && speed <= limitVel) || !isShooted && motionlessFlag)
+            {
+                return true;
+            }
+            else
+                return false;
+        }
         else
-            return false;   
+            return false;
     
+    }
+
+    public void CheckFreeBall()
+    {
+        if (speed >= 0)
+        {
+            freeFlag = true;
+        }
+        else freeFlag = false;
     }
 }

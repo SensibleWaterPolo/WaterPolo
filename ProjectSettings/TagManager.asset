@@ -21,6 +21,7 @@ TagManager:
   - Rovesciata
   - Sciarpa
   - ShootLine
+  - Arm
   layers:
   - Default
   - TransparentFX

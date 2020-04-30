@@ -122,17 +122,18 @@ public class GoalKeeper : MonoBehaviour
     public bool CalcBlock() //M: Calcola se il portiere effettua o no la parata considenrando la velocità della palla, variabile block del portiere, casualità 1/4
     {
         bool save;
-
-        float coeffVelBall = Ball.current.speed /3;
-
-        float coeffGk = (block*10)-5; 
+        
+        float coeffVelBall = Ball.current.speed /4;
+        
+        float coeffGk = (block*10); 
 
         float coeff =coeffGk-coeffVelBall;
-
-        if (Random.Range(0,99) <=coeff)
+        float prob = Random.Range(0, 99);
+        
+        if (prob<=coeff)
             save = true;
         else save = false;
-        Debug.Log(coeff+" Save: "+save);       
+        Debug.Log("coeffBall " + coeffVelBall + " probabilità parare ->" + coeff + " valore estratto->" + prob + " save->"+save);
         return save;
 
     }
@@ -143,6 +144,7 @@ public class GoalKeeper : MonoBehaviour
         bool save;
         if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && Ball.current.isShooted)
         {
+            Debug.Log("PROVO A PARARE");
             flagJump = true;
             save = CalcBlock();
             

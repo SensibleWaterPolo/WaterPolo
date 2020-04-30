@@ -31,14 +31,9 @@ public class PlayerY6 : Player
         base.OnTriggerEnter2D(collision);
         if (collision.CompareTag("Ball"))
         {
-            if (Ball.current.CheckBallIsPlayable() && marcaFlag && !keepBoa)
+            if (Ball.current.CheckBallIsPlayable(3) && marcaFlag && !keepBoa && !loadShoot)
             {
-                SetKeepBoa();
-                SetBallBoa();
-
-            }
-            if (Ball.current.freeFlag && Ball.current.speed < 3 && marcaFlag && !keepBoa)
-            {
+                Debug.Log("5");
                 SetKeepBoa();
                 SetBallBoa();
 
@@ -52,19 +47,14 @@ public class PlayerY6 : Player
 
         if (collision.CompareTag("Ball"))
         {
-            if (Ball.current.CheckBallIsPlayable() && marcaFlag && !keepBoa)
+            if (Ball.current.CheckBallIsPlayable(3) && marcaFlag && !keepBoa && !loadShoot)
             {
+                Debug.Log("6");
                 SetKeepBoa();
                 SetBallBoa();
 
             }
-            if (Ball.current.freeFlag && Ball.current.speed < 3 && marcaFlag && !keepBoa)
-            {
-                SetKeepBoa();
-                SetBallBoa();
-
-            }
-
+           
         }
     }
 }

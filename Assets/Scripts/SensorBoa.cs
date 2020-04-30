@@ -18,13 +18,24 @@ public class SensorBoa : MonoBehaviour
         if (playerBoa.keepBoa)
         {
             this.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            
         }
         else 
         {
             this.gameObject.layer = LayerMask.NameToLayer("Side");
+              
         }
                 
         GetComponent<BoxCollider2D>().enabled = playerBoa.marcaFlag;
+        if (playerBoa.keepBoa || !playerBoa.marcaFlag)
+        {
+            playerBoa.GetComponent<CircleCollider2D>().enabled = true;
+        }
+        else if (playerBoa.marcaFlag && !playerBoa.keepBoa) 
+        {
+            playerBoa.GetComponent<CircleCollider2D>().enabled = true;
+        } 
+    
         
     }
 

@@ -18,7 +18,7 @@ public class PlayerY1 : Player
             opponent = GameObject.Find("PlayerR5").GetComponent<Player>();
         armDx = false;
     }
-    public override void OnTriggerEnter2D(Collider2D collision)
+   /* public override void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
 
@@ -35,6 +35,6 @@ public class PlayerY1 : Player
     public override void Start()
     {
         base.Start();
-    }
+    }*/
 
 }
