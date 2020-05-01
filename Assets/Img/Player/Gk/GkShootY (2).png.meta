@@ -1,0 +1,380 @@
+fileFormatVersion: 2
+guid: ea69b33cad1e37b47a3ac4f02a65823c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 3655789015422724227
+    second: GkShootY (2)_0
+  - first:
+      213: 2687647519097640080
+    second: GkShootY (2)_1
+  - first:
+      213: -7954547467341614707
+    second: GkShootY (2)_2
+  - first:
+      213: 828613078904336017
+    second: GkShootY (2)_3
+  - first:
+      213: 2357431191977706610
+    second: GkShootY (2)_4
+  - first:
+      213: 9158352911438117190
+    second: GkShootY (2)_5
+  - first:
+      213: -5306230182096529010
+    second: GkShootY (2)_6
+  - first:
+      213: 2059048249737695258
+    second: GkShootY (2)_7
+  - first:
+      213: 5348720326195647870
+    second: GkShootY (2)_8
+  - first:
+      213: -7036696036733476171
+    second: GkShootY (2)_9
+  - first:
+      213: -6891720912496537686
+    second: GkShootY (2)_10
+  - first:
+      213: -1930116574709626761
+    second: GkShootY (2)_11
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GkShootY (2)_0
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 8987
+        width: 600
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 388eb068db8fbb230800000000000000
+      internalID: 3655789015422724227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_1
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 8168
+        width: 578
+        height: 519
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0945649cd217c4520800000000000000
+      internalID: 2687647519097640080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_2
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 7350
+        width: 569
+        height: 501
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d81be143935cb9190800000000000000
+      internalID: -7954547467341614707
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_3
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 6556
+        width: 583
+        height: 523
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19ee5508433df7b00800000000000000
+      internalID: 828613078904336017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_4
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 5719
+        width: 569
+        height: 547
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 274c14ccd2747b020800000000000000
+      internalID: 2357431191977706610
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_5
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 4910
+        width: 588
+        height: 538
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 649feed2371091f70800000000000000
+      internalID: 9158352911438117190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_6
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 4074
+        width: 578
+        height: 514
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e891ea353cb7c56b0800000000000000
+      internalID: -5306230182096529010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_7
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 3270
+        width: 569
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a10510d4975339c10800000000000000
+      internalID: 2059048249737695258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_8
+      rect:
+        serializedVersion: 2
+        x: 119
+        y: 2424
+        width: 583
+        height: 504
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e759dc54cc87a3a40800000000000000
+      internalID: 5348720326195647870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1681
+        width: 802
+        height: 495
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b22a129c32a85e90800000000000000
+      internalID: -7036696036733476171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_10
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 872
+        width: 681
+        height: 477
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aaf438f0850bb50a0800000000000000
+      internalID: -6891720912496537686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GkShootY (2)_11
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 59
+        width: 681
+        height: 476
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 778c6559339d635e0800000000000000
+      internalID: -1930116574709626761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: ec209b21e0ff751478966453af82c1e7
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -12,7 +12,7 @@ public class GoalKeeper : MonoBehaviour
     public float agility; //M: salto verso la palla
     [Range(0f, 3f)]
     public float vel; //M: velocità di spostamento nella porta
-
+    public int throwin; //Rimessa in gioco
 
     [Header("FLAG")]
     public bool cpuFlag; //M: true se muove la cpu
@@ -32,6 +32,7 @@ public class GoalKeeper : MonoBehaviour
     protected Vector3 posMid;
     protected Vector3 posLeft;
     protected Vector3 posRight;
+    protected Vector3 posThrowIn;
     public Vector3 finalPos;
     public bool arrived;
 
@@ -49,22 +50,31 @@ public class GoalKeeper : MonoBehaviour
     protected float limitGKL; //M:limiti per i quali il portiere non interviene
     protected float limitGKR;
 
-    protected int idTeam;
+    public int idTeam;
+   
 
-
-    public virtual void Awake()
+    [Header("SHOOT")]
+    public bool loadShoot;
+    public Vector3 direction;
+    public bool keep;
+    
+       public virtual void Awake()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         flagJump = false;
         limitGKL = GameObject.Find("LimitGkL").transform.position.x;
         limitGKR = GameObject.Find("LimitGkR").transform.position.x;
+      
     }
 
     public void Start()
     {
         block = Random.Range(7,10);
         arrived = false;
+        throwin = Random.Range(4, 7);
+        keep = false;
+        bicy = true;
     }
 
     // Update is called once per frame
@@ -77,10 +87,14 @@ public class GoalKeeper : MonoBehaviour
     {
 
         if ( GameCore.current.isPlay)
-        { UpdateFinalPos();
-            if(!arrived && !flagJump)
+        {
+            CheckKeep();
+            UpdateFinalPos();
+          
+            if(!arrived && !flagJump && !keep)
+
             SwimGk();
-          //  Utility.RotateObjAtoB(this.gameObject, Ball.current.gameObject);
+         
         }
     }
 
@@ -142,7 +156,7 @@ public class GoalKeeper : MonoBehaviour
 
 
         bool save;
-        if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && Ball.current.isShooted)
+        if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR)
         {
             Debug.Log("PROVO A PARARE");
             flagJump = true;
@@ -150,14 +164,14 @@ public class GoalKeeper : MonoBehaviour
             
             float x = transform.position.x - Ball.current.transform.position.x;
 
-            if (x <= -4.5) //M:se la palla si trova alla destra 
+            if (x <= -2.5) //M:se la palla si trova alla destra 
             {                
                 if (idTeam == 1)
                     SaveLeft(save);
                 else
                     SaveRight(save);
             }
-            else if (x >= 4.5) //M:se la palla si trova alla sinistra
+            else if (x >= 2.5) //M:se la palla si trova alla sinistra
             {
                 
                 if (idTeam == 1)
@@ -224,4 +238,54 @@ public class GoalKeeper : MonoBehaviour
         flagJump = false;
     }
 
+    public void SetKeep() 
+    {
+        keep = true;
+        animator.SetInteger("IdAnim", 1);
+        SetBallGK();
+        Ball.current.SetGK(this);
+    }
+
+    public void SetShoot()
+    {
+        
+        }
+
+    public void SetBallGK()
+    { //M: sposta la palla nella posizione corretta all'interno del giocatore
+        transform.position = posThrowIn;
+        Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
+        Ball.current.transform.parent = transform;
+        Ball.current.transform.position = transform.GetChild(6).position;
+        Ball.current.freeFlag = false;
+           
+    }
+    public void Shoot()  //M: chiamata dall'animazione
+    {
+        Ball.current.throwIn = throwin;
+        Ball.current.ShootBall(direction, false,1); //IL GK effettua sempre un passaggio mai un tiro
+        Invoke("ResetGk",2f);        
+    }
+    
+
+    public void LoadShoot(Vector3 dir) 
+    {
+        direction = dir;
+        animator.SetInteger("IdAnim", 2);
+    }
+
+    public void ResetGk()
+    {
+        keep = false;
+        bicy = true;
+        Utility.RotateObjToPoint(this.gameObject,Vector3.zero);
+    }
+
+    public void CheckKeep() 
+    {
+        GetComponent<BoxCollider2D>().enabled = !keep;
+        GetComponent<CircleCollider2D>().enabled = keep;
+    }
+
+  
 }

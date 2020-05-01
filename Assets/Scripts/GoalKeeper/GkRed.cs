@@ -12,6 +12,7 @@ public class GkRed : GoalKeeper
         posMid = GameObject.Find("PosMidRed").transform.position;
         posLeft = GameObject.Find("PosLeftRed").transform.position;
         posRight = GameObject.Find("PosRightRed").transform.position;
+        posThrowIn = GameObject.Find("PosThrowInRed").transform.position;
         transform.position = posMid;
         DisableSave();
         idTeam = 1;

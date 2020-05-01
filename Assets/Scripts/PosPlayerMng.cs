@@ -5,6 +5,9 @@ using UnityEngine;
 public class PosPlayerMng : MonoBehaviour
 {
     public Player[] allPlayer = new Player[8];
+
+    public GoalKeeper gKRed;
+    public GoalKeeper gkYelloW;
     public static  PosPlayerMng curret;
    
     
@@ -74,7 +77,25 @@ public class PosPlayerMng : MonoBehaviour
         return name;
 
     }
-   
+
+    public void SetKickOff(int id) //0: palla a Yellow, 1: palla Red
+    {
+        for(int i=0; i < allPlayer.Length; i++)
+        {
+            allPlayer[i].transform.position = allPlayer[i].posMiddle;
+        }
+
+        if (id == 0)
+        { Ball.current.SetYellowSideBall(); }
+        else {
+            Ball.current.SetRedSideBall();
+        }
+
+        Ball.current.inGameFlag = true;
+    }
+
+
+
 
 
     // Update is called once per frame

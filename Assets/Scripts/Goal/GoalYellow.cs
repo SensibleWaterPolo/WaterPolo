@@ -28,21 +28,21 @@ public class GoalYellow : GoalManager
             goal = true;
             score = int.Parse(text.text);
             score++;
-      
-            GameCore.current.Pause();
+            Ball.current.inGameFlag = false;
+            Referee.current.SetArmLeft();
             Invoke("ResetScene", 2f);
 
-            Debug.Log("goalll" + score);
+            
         } 
     }
 
     public  void ResetScene()
     {
-     
 
-        //Riprendi il gioco.
-        Ball.current.transform.position = GameObject.Find("RedSideBall").gameObject.transform.position;
-        GameCore.current.Play();
+
+        PosPlayerMng.curret.SetKickOff(1);
+        Referee.current.SetMId();
+        Referee.current.SetArmFront();
         goal = false;
         
 

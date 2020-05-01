@@ -10,11 +10,13 @@ public class GkYellow : GoalKeeper
         public override void Awake()
         {
             base.Awake();
-            posMid = GameObject.Find("PosMidYellow").transform.position;
-            posLeft = GameObject.Find("PosLeftYellow").transform.position;
-            posRight = GameObject.Find("PosRightYellow").transform.position;
-            transform.position = posMid;
-           idTeam = 0;
+        posMid = GameObject.Find("PosMidYellow").transform.position;
+        posLeft = GameObject.Find("PosLeftYellow").transform.position;
+        posRight = GameObject.Find("PosRightYellow").transform.position;
+        posThrowIn = GameObject.Find("PosThrowInYellow").transform.position;
+        transform.position = posMid;
+        DisableSave();
+        idTeam = 0;
         }
       
         private void Update()

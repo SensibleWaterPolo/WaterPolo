@@ -29,7 +29,7 @@ public class Battle : MonoBehaviour
         numclick = 0;
         degree = 0;
         idWin = -1;
-        speed = 30;
+        speed = 40;
     }
     // Start is called before the first frame update
     void Start()
@@ -95,7 +95,7 @@ public class Battle : MonoBehaviour
         if (!whoWin) 
         {
             whoWin = true;
-            Invoke("WhoWin",2f);
+            Invoke("WhoWin",3f);
         }
         if (att.swim  || def.swim || def.keep || att.idBall==3 || def.idBall==2 || att.keep)
             StopBattle();
@@ -117,9 +117,10 @@ public class Battle : MonoBehaviour
     {
         
         int newId;
-        if (Random.value > 0.5)
-            newId = 0;
-        else newId = 1;
+        if (Random.Range(0, 100) < 60) 
+        {
+            newId = 0; }
+        else newId = 1; 
 
         if (newId != idWin)
         {

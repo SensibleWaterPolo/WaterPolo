@@ -13,7 +13,7 @@ public class PlayerY6 : Player
         posAtt = GameObject.Find("PosAttY6").transform.position;
         posDef = GameObject.Find("PosDefY6").transform.position;
         posGoal = GameObject.Find("GolLineRed").transform.position;
-
+        posMiddle = GameObject.Find("PosBattutaY6").transform.position;
         if (CheckOpponent("PlayerR3"))
             opponent = GameObject.Find("PlayerR3").GetComponent<Player>();
         boaFlag = true;

@@ -18,7 +18,7 @@ public class PlayerR3 : Player
         sectorAction = 2;
         posAtt = GameObject.Find("PosAttR3").transform.position;
         posDef = GameObject.Find("PosDefR3").transform.position;
-      //  posMiddle = GameObject.Find("PosBattutaR3").transform.position;
+        posMiddle = GameObject.Find("PosBattutaR3").transform.position;
        // posStart = GameObject.Find("PosStartR3").transform.position;
         posGoal = GameObject.Find("GolLineYellow").transform.position;
         opponent = GameObject.Find("PlayerY6").GetComponent<Player>();

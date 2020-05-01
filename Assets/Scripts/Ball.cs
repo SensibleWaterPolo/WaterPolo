@@ -1,9 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-//using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-
 public class  Ball : MonoBehaviour
 {
     public static Ball current; //M:la palla è un singolo oggetto per tutti quindi fa riferimento ad un Singleton 
@@ -24,9 +21,12 @@ public class  Ball : MonoBehaviour
 
     public float shoot; //M: forza del giocatore
     public float pas;//M: forza del giocatore passaggio
+
+    public float throwIn; //forza del rilancio del portiere
     private Rigidbody2D rb;
     public Player player; //M: Giocatore in possesso della palla
     public int idTeam; //M: 0:Yellow 1: Red
+    public GoalKeeper gk;
 
     private Vector3 finalPos; //M: posizione finale della palla dopo un tiro/pass
 
@@ -98,7 +98,7 @@ public class  Ball : MonoBehaviour
 
     }
 
-    public void ShootBall(Vector3 finalPos, bool shootFlag) //M: prepara la palla al tiro e ne calcola la forza
+    public void ShootBall(Vector3 finalPos, bool shootFlag, int id) //M: prepara la palla al tiro e ne calcola la forza, id=0 giocatore, id=1 portiere
     {
         this.finalPos = finalPos;
         this.shootFlag = shootFlag;
@@ -108,17 +108,31 @@ public class  Ball : MonoBehaviour
         maxHightBall = distance / 2f;
         Vector3 pos = GetComponent<Transform>().position;
         Vector3 direct = new Vector2(finalPos.x - pos.x,finalPos.y-pos.y).normalized;
-        if (shootFlag)
+        if (id == 0)
         {
-            GetComponent<Rigidbody2D>().AddForce(direct * shoot * 400);
-            decelerateShoot = true;
+            if (shootFlag)
+            {
+                GetComponent<Rigidbody2D>().AddForce(direct * shoot * 400);
+                decelerateShoot = true;
+                deceleratePass = false;
+            }
+            else
+            {
+                GetComponent<Rigidbody2D>().AddForce(direct * pas * 500);
+                deceleratePass = true;
+                decelerateShoot = false;
+            }
+        }
+        else if (id == 1) {
+            GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 700);
+            Debug.Log("Rilancio portiere");
+            decelerateShoot = false;
             deceleratePass = false;
         }
-        else
+
+        if (gk != null) 
         {
-            GetComponent<Rigidbody2D>().AddForce(direct * pas * 500);
-            deceleratePass = true;
-            decelerateShoot = false;
+            gk = null;
         }
         if (player != null)
         {
@@ -129,7 +143,11 @@ public class  Ball : MonoBehaviour
        
     }
 
-  
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        Debug.Log(collision.gameObject.name);
+    }
+
 
     public void EnableBall() 
     {
@@ -191,6 +209,15 @@ public class  Ball : MonoBehaviour
         idTeam = player.idTeam;
         
     }
+    public void SetGK(GoalKeeper _gk)
+    {
+        DisableBall();
+        isShooted = false;
+        this.gk = _gk;
+        idTeam = _gk.idTeam;
+
+
+    }
     public void DisableBall()
     {
         GetComponent<Renderer>().enabled = false;
@@ -246,7 +273,8 @@ public class  Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
 
-    {        
+    {
+        Debug.Log("Palla collide con+"+collision.gameObject.name);
        isShooted = false;
         if (collision.gameObject.CompareTag("Side"))
         {

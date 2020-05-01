@@ -25,23 +25,22 @@ public class GolRed : GoalManager
             goal = true;
             score = int.Parse(text.text);
             score++;
-
-            GameCore.current.Pause();
+            Ball.current.inGameFlag = false;
+            Referee.current.SetArmRight();
             Invoke("ResetScene", 2f);
 
-            Debug.Log("goalll" + score);
+
         }
     }
 
-
-    public  void ResetScene()
+    public void ResetScene()
     {
+
+
+        PosPlayerMng.curret.SetKickOff(0);
         goal = false;
-   
-        //Riprendi il gioco.
-        Ball.current.transform.position = GameObject.Find("YellowSideBall").gameObject.transform.position;
-        GameCore.current.Play();
-        goal = false;
+        Referee.current.SetMId();
+        Referee.current.SetArmFront();
 
     }
 }

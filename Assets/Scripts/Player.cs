@@ -50,8 +50,8 @@ public class Player : MonoBehaviour
     [Header("POSITION")] //M: variabili delle posizioni 
     public Vector3 posAtt;
     public Vector3 posDef;
-    protected Vector3 posStart;
-    protected Vector3 posMiddle;
+    public Vector3 posStart;
+    public Vector3 posMiddle;
     public Vector3 posFinal;
     public Vector3 nextPosFinal;
     public Vector3 posToWatch; //Posizione da guardare
@@ -70,10 +70,6 @@ public class Player : MonoBehaviour
 
     private bool pause; //M: per la pausa del gioco
 
-    //PREFAB SHOOT
-    public SignalShoot shootSignalPrefab;
-    public SignalShoot shootSignal;
-    public bool signalOK;
 
     //PREFAB FIGHT
 
@@ -196,13 +192,19 @@ public class Player : MonoBehaviour
             SetSwim(Ball.current.transform.position, false);
         }
 
-        // SWIM: La palla è libera nel mio settore
-        if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && (opponent.distaceBall > 3) && !stun && !fightFlag && !Ball.current.isShooted && !boaFlag) //M:palla nel mio settore e libera
+        // SWIM: La palla è libera nel mio settore, sono in marcatura ma la palla è talmente vicina che provo a prenderla
+        if (idBall == 1 && Ball.current.CheckBallIsPlayable(0)  && marcaFlag && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name &&  distaceBall<6) 
 
         {
             idDecisionMaking = 5;
             SetSwim(Ball.current.transform.position, false);
 
+        }
+        //La palla è nel mio settore e sono un laterale
+        if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && sectorAction!=2 && !stun && !fightFlag)
+        {
+            idDecisionMaking = 55;
+            SetSwim(Ball.current.transform.position, false);
         }
 
         //SWIM: Palla libera nel mio settore e sono quello più vicino della mia squadra
@@ -226,7 +228,10 @@ public class Player : MonoBehaviour
                 idDecisionMaking = 8;
                 SetSwim(posAtt, true);
             }
-            //SetSwim(posAtt, true) se sono in controfuga o il mio portiere è in possesso
+            if (Ball.current.gk != null)
+            {
+                SetSwim(posAtt, true);
+            }
 
         }
                
@@ -605,7 +610,7 @@ public class Player : MonoBehaviour
     {
         Ball.current.shoot = shoot;
         Ball.current.pas = pass;
-        Ball.current.ShootBall(destShoot, flagShoot);
+        Ball.current.ShootBall(destShoot, flagShoot,0);
         
         Invoke("UpdateLoadShoot", waitAfterShoot); //tempo di attesa dopo aver tirato
     }
@@ -778,7 +783,7 @@ public class Player : MonoBehaviour
             return false;
     }
 
-    public void CreateSignalShoot() 
+ /*   public void CreateSignalShoot() 
     {
        shootSignalPrefab = Instantiate(shootSignal,transform.GetChild(1).transform.position,Quaternion.identity);
         shootSignalPrefab.player = this;
@@ -791,7 +796,7 @@ public class Player : MonoBehaviour
     {
         shootSignalPrefab.transform.parent = null;
         Destroy(shootSignalPrefab.gameObject);
-    }
+    }*/
 
     public void RestorePlayer() //funzione che tenta di resettare lo stato dei giocatori eliminando piccole imperfezioni
     {
