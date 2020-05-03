@@ -17,6 +17,7 @@ public class GkYellow : GoalKeeper
         transform.position = posMid;
         DisableSave();
         idTeam = 0;
+        cpuFlag = false;
         }
       
         private void Update()

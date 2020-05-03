@@ -20,6 +20,7 @@ public class PlayerY3 : Player
         if (CheckOpponent("PlayerR6"))
             opponent = GameObject.Find("PlayerR6").GetComponent<Player>();
          armDx = true;
+        cpuFlag = false;
     }
 
     public override void OnTriggerStay2D(Collider2D collision)

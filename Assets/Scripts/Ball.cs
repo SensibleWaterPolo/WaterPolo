@@ -145,8 +145,9 @@ public class  Ball : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.name);
+       // Debug.Log(collision.gameObject.name);
     }
+  
 
 
     public void EnableBall() 
@@ -274,7 +275,6 @@ public class  Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
 
     {
-        Debug.Log("Palla collide con+"+collision.gameObject.name);
        isShooted = false;
         if (collision.gameObject.CompareTag("Side"))
         {
@@ -291,6 +291,7 @@ public class  Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.CompareTag("EndRed") && inGameFlag)
         {
             inGameFlag = false;

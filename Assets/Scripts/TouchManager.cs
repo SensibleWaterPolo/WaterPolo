@@ -85,13 +85,14 @@ public class TouchManager : MonoBehaviour
                         if (obj.tag == "Player")
                         {
 
-                            player = GameObject.Find(obj.name).GetComponent<Player>();
-                            if (player.keep || player.keepBoa)
+                            if (!GameObject.Find(obj.name).GetComponent<Player>().cpuFlag)
                             {
-                                loadShoot = true;
-                              /*  player.CreateSignalShoot();
-                                player.signalOK = okShoot;*/
-                                SpawnSignal(player.transform.position);
+                                player = GameObject.Find(obj.name).GetComponent<Player>();
+                                if (player.keep || player.keepBoa )
+                                {
+                                    loadShoot = true;
+                                    SpawnSignal(player.transform.position);
+                                }
                             }
 
                         }
@@ -206,7 +207,7 @@ public class TouchManager : MonoBehaviour
                         else                //IL GIOCATORE è UNA BOA BISOGNA DECIDERE IL TIPO DI TIRO A SENCONDA DI DOVE INDIRIZZIAMO IL CURSORE
                         if (okShoot && player.keepBoa)
                         {
-                            LayerMask mask = 1 << 4; //strato player
+                            LayerMask mask = 1 << 4; //strato water
                             RaycastHit2D hitBoa = Physics2D.Raycast(player.transform.parent.transform.position, (Ball.current.transform.position - player.transform.position).normalized, 20, mask);
                             Debug.DrawRay(player.transform.parent.transform.position, (Ball.current.transform.position - player.transform.position).normalized * 15, Color.black, 3);
 

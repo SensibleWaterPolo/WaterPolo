@@ -1,0 +1,752 @@
+fileFormatVersion: 2
+guid: de092536c3ceb464f853bb18b0967ab8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3249202944190437157
+    second: NuotoY (1)_0
+  - first:
+      213: 6437507152949941580
+    second: NuotoY (1)_1
+  - first:
+      213: 3267867367494701706
+    second: NuotoY (1)_2
+  - first:
+      213: -7417818076873760567
+    second: NuotoY (1)_3
+  - first:
+      213: -1915439788838859552
+    second: NuotoY (1)_4
+  - first:
+      213: 7257272663281150659
+    second: NuotoY (1)_5
+  - first:
+      213: 7501166559819394007
+    second: NuotoY (1)_6
+  - first:
+      213: -5176759460264527781
+    second: NuotoY (1)_7
+  - first:
+      213: 1347016507552593214
+    second: NuotoY (1)_8
+  - first:
+      213: -8645460225108577396
+    second: NuotoY (1)_9
+  - first:
+      213: 8603534480044510190
+    second: NuotoY (1)_10
+  - first:
+      213: 2370418058177064311
+    second: NuotoY (1)_11
+  - first:
+      213: 1625783849737485252
+    second: NuotoY (1)_12
+  - first:
+      213: 4342326865465600027
+    second: NuotoY (1)_13
+  - first:
+      213: -8556179509820025241
+    second: NuotoY (1)_14
+  - first:
+      213: 8155940925986213483
+    second: NuotoY (1)_15
+  - first:
+      213: -1685756303993990158
+    second: NuotoY (1)_16
+  - first:
+      213: 376875880482464553
+    second: NuotoY (1)_17
+  - first:
+      213: 9050084053598210561
+    second: NuotoY (1)_18
+  - first:
+      213: -4658504953716397829
+    second: NuotoY (1)_19
+  - first:
+      213: -8789415147464577137
+    second: NuotoY (1)_20
+  - first:
+      213: 7246003747221562821
+    second: NuotoY (1)_21
+  - first:
+      213: 2629281949550453185
+    second: NuotoY (1)_22
+  - first:
+      213: -3564986667275599545
+    second: NuotoY (1)_23
+  - first:
+      213: -3223064926727014359
+    second: NuotoY (1)_24
+  - first:
+      213: -5520327579283143234
+    second: NuotoY (1)_25
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NuotoY (1)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7544
+        width: 802
+        height: 324
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd82064232388e2d0800000000000000
+      internalID: -3249202944190437157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_1
+      rect:
+        serializedVersion: 2
+        x: 10
+        y: 6988
+        width: 27
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c451e92f5ae965950800000000000000
+      internalID: 6437507152949941580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_2
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 6731
+        width: 746
+        height: 338
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a82dc9c8e0cc95d20800000000000000
+      internalID: 3267867367494701706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5985
+        width: 29
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c0e777a2cd9e0990800000000000000
+      internalID: -7417818076873760567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_4
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 5911
+        width: 790
+        height: 356
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ec4c9519adfa65e0800000000000000
+      internalID: -1915439788838859552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5353
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3caa60d590307b460800000000000000
+      internalID: 7257272663281150659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 5106
+        width: 799
+        height: 346
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7dbe2174e3f791860800000000000000
+      internalID: 7501166559819394007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5335
+        width: 25
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b583a43d2b47828b0800000000000000
+      internalID: -5176759460264527781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 4349
+        width: 31
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e357247706091b210800000000000000
+      internalID: 1347016507552593214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_9
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 4282
+        width: 749
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c8372aa1bb7250880800000000000000
+      internalID: -8645460225108577396
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3698
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eebc0efa605e56770800000000000000
+      internalID: 8603534480044510190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_11
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 3712
+        width: 23
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77da0d63aaa65e020800000000000000
+      internalID: 2370418058177064311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_12
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 3487
+        width: 791
+        height: 325
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4cb7b2d2cc1ff8610800000000000000
+      internalID: 1625783849737485252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3526
+        width: 25
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1866ba074b034c30800000000000000
+      internalID: 4342326865465600027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_14
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 2708
+        width: 30
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76693b28118524980800000000000000
+      internalID: -8556179509820025241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_15
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 2641
+        width: 753
+        height: 340
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6e8a766f09bf2170800000000000000
+      internalID: 8155940925986213483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2072
+        width: 9
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f31092b29dfa98e0800000000000000
+      internalID: -1685756303993990158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_17
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 2070
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 923e194dd9eea3500800000000000000
+      internalID: 376875880482464553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_18
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 1800
+        width: 794
+        height: 359
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10a06225f7b589d70800000000000000
+      internalID: 9050084053598210561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2054
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bf826592d6aa95fb0800000000000000
+      internalID: -4658504953716397829
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1882
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f8fafefdd79b50680800000000000000
+      internalID: -8789415147464577137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_21
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 981
+        width: 669
+        height: 344
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c56a42640afe8460800000000000000
+      internalID: 7246003747221562821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 370
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c12d49a0061d7420800000000000000
+      internalID: 2629281949550453185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_23
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 116
+        width: 791
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 741c804a38f968ec0800000000000000
+      internalID: -3564986667275599545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 355
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9287a62968f5543d0800000000000000
+      internalID: -3223064926727014359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoY (1)_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 190
+        width: 25
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eb54909805bd363b0800000000000000
+      internalID: -5520327579283143234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 136cd17a3c1e8df42b7340835386b937
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

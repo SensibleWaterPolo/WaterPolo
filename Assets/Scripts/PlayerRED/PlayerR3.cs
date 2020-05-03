@@ -43,6 +43,316 @@ public class PlayerR3 : Player
         }
         
     }
- 
+    public override bool PlayerCpu()
+    {
+        bool hasChoose = false;
+        Vector3 destBall = Vector3.zero;
+        int idZone = IA.current.ZoneBall(this);
+        Player pR5 = GameObject.Find("PlayerR5").GetComponent<Player>();
+        Player pr1 = GameObject.Find("PlayerR1").GetComponent<Player>();
+        Player pR6 = GameObject.Find("PlayerR6").GetComponent<Player>();
+        bool shoot = IA.current.DecisionShoot(this);
+        Debug.Log(name + " tiro-> " + shoot);
+
+        if (shoot) //Tiro in porta
+        {
+          
+
+            if (GameCore.current.levelCPUHard)
+            {
+                destBall = IA.current.ShootHardR3();
+            }
+            else
+            {
+                destBall = IA.current.ShootNormalR3();
+            }
+            Utility.RotateObjToPoint(this.gameObject, destBall);
+            this.LoadShoot(destBall, shoot, 0);
+            idDecisionCPU = 0;
+            return true;
+        }
+        /*********PASSAGGIO********************/
+        else
+        {
+            
+            switch (idZone)
+            {
+                case 0:
+
+                    if (pR6.counterAttFlag && !pR6.marcaFlag)
+                    {
+                        destBall = GameObject.Find("PosCounterAttR6").transform.position;
+                        Utility.RotateObjToPoint(this.gameObject, destBall);
+                        this.LoadShoot(destBall, false, 0);
+                        idDecisionCPU = 1;
+                        return true;
+                    }
+                    else if (pr1.counterAttFlag && pR5.counterAttFlag )
+                    {
+                        if (Random.value > 0.5)
+                        {
+                            destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 2;
+                            return true;
+                        }
+                        else 
+                        {
+                            destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 3;
+                            return true;
+                        }
+                    }
+
+                    else if (pR5.counterAttFlag)
+                    {
+                        destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                        Utility.RotateObjToPoint(this.gameObject, destBall);
+                        this.LoadShoot(destBall, false, 0);
+                        idDecisionCPU = 4;
+                        return true;
+                    }
+                    else if (pr1.counterAttFlag)
+                    {
+                        destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                        Utility.RotateObjToPoint(this.gameObject, destBall);
+                        this.LoadShoot(destBall, false, 0);
+                        idDecisionCPU = 5;
+                        return true;
+                    }
+
+                    else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+                    {
+                        if (Random.value > 0.5)
+                        {
+                            destBall = pR5.transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 6;
+                            return true;
+
+                        }
+                        else
+                        {
+                            destBall = pr1.transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 7;
+                            return true;
+                        }
+                    }
+                    else if (pR5.arrivedFlagAtt)
+                    {
+                        destBall = pR5.transform.position;
+                        Utility.RotateObjToPoint(this.gameObject, destBall);
+                        this.LoadShoot(destBall, false, 0);
+                        idDecisionCPU = 8;
+                        return true;
+                    }
+                    else if (pr1.arrivedFlagAtt)
+                    {
+                        destBall = pr1.transform.position;
+                        Utility.RotateObjToPoint(this.gameObject, destBall);
+                        this.LoadShoot(destBall, false, 0);
+                        idDecisionCPU = 9;
+                        return true;
+                    }
+                    break;
+                case 1:
+                    {
+                        if (pR6.counterAttFlag && !pR6.marcaFlag)
+                        {
+                            destBall = GameObject.Find("PosCounterAttR6").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 10;
+                            return true;
+                        }
+                        else if (pr1.counterAttFlag && pR5.counterAttFlag)
+                        {
+                            if (Random.value > 0.5)
+                            {
+                                destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                                Utility.RotateObjToPoint(this.gameObject, destBall);
+                                this.LoadShoot(destBall, false, 0);
+                                idDecisionCPU = 11;
+                                return true;
+                            }
+                            else
+                            {
+                                destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                                Utility.RotateObjToPoint(this.gameObject, destBall);
+                                this.LoadShoot(destBall, false, 0);
+                                idDecisionCPU = 12;
+                                return true;
+                            }
+                        }
+
+                        else if (pR5.counterAttFlag)
+                        {
+                            destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 13;
+                            return true;
+                        }
+                        else if (pr1.counterAttFlag)
+                        {
+                            destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 14;
+                            return true;
+                        }
+                        
+                        else if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name) && !opponent.def)
+                        {
+                            destBall = GameObject.Find("SensorBoaR6").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 15;
+                            return true;
+                        }
+                        else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+                        {
+                            if (Random.value > 0.5)
+                            {
+                                destBall = pR5.transform.position;
+                                Utility.RotateObjToPoint(this.gameObject, destBall);
+                                this.LoadShoot(destBall, false, 0);
+                                idDecisionCPU = 16;
+                                return true;
+
+                            }
+                            else
+                            {
+                                destBall = pr1.transform.position;
+                                Utility.RotateObjToPoint(this.gameObject, destBall);
+                                this.LoadShoot(destBall, false, 0);
+                                idDecisionCPU = 17;
+                                return true;
+                            }
+                        }
+                        else if (pR5.arrivedFlagAtt)
+                        {
+                            destBall = pR5.transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 18;
+                            return true;
+                        }
+                        else if (pr1.arrivedFlagAtt)
+                        {
+                            destBall = pr1.transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 19;
+                            return true;
+                        }
+                    }
+                    break;
+
+                case 2:
+                    {
+                        if (pR6.counterAttFlag && !pR6.marcaFlag)
+                        {
+                            destBall = GameObject.Find("PosCounterAttR6").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 20;
+                            return true;
+                        }
+
+                        else if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name) && IA.current.PingBoaIsFree("PlayerR3") && !opponent.def)
+                        {   
+                            destBall = GameObject.Find("SensorBoaR6").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 21;
+                            return true;
+                        }
+                        else if (pr1.counterAttFlag && pR5.counterAttFlag)
+                        {
+                            if (Random.value > 0.5)
+                            {
+                                destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                                Utility.RotateObjToPoint(this.gameObject, destBall);
+                                this.LoadShoot(destBall, false, 0);
+                                idDecisionCPU = 22;
+                                return true;
+                            }
+                            else
+                            {
+                                destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                                Utility.RotateObjToPoint(this.gameObject, destBall);
+                                this.LoadShoot(destBall, false, 0);
+                                idDecisionCPU = 23;
+                                return true;
+                            }
+                        }
+
+                        else if (pR5.counterAttFlag)
+                        {
+                            destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 24;
+                            return true;
+                        }
+                        else if (pr1.counterAttFlag)
+                        {
+                            destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 25;
+                            return true;
+                        }
+                        else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+                        {
+                            if (Random.value > 0.5)
+                            {
+                                destBall = pR5.transform.position;
+                                Utility.RotateObjToPoint(this.gameObject, destBall);
+                                this.LoadShoot(destBall, false, 0);
+                                idDecisionCPU = 26;
+                                    return true;
+
+                            }
+                            else
+                            {
+                                destBall = pr1.transform.position;
+                                Utility.RotateObjToPoint(this.gameObject, destBall);
+                                this.LoadShoot(destBall, false, 0);
+                                idDecisionCPU = 27;
+                                return true;
+                            }
+                        }
+                        else if (pR5.arrivedFlagAtt)
+                        {
+                            destBall = pR5.transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 28;
+                            return true;
+                        }
+                        else if (pr1.arrivedFlagAtt)
+                        {
+                            destBall = pr1.transform.position;
+                            Utility.RotateObjToPoint(this.gameObject, destBall);
+                            this.LoadShoot(destBall, false, 0);
+                            idDecisionCPU = 29;
+                            return true;
+                        }
+                    }
+                    break;
+
+            }
+        }
+        
+        return hasChoose;
+    }
 
 }

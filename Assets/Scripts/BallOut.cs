@@ -18,9 +18,10 @@ public class BallOut : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ball")) 
+        if (collision.CompareTag("Ball") && Ball.current.inGameFlag) 
         {
             Ball.current.inGameFlag = false;
+            PosPlayerMng.curret.SetAllBicy();
             if (Ball.current.fieldYellow)
             {
                 Referee.current.SetArmRight();
@@ -31,8 +32,23 @@ public class BallOut : MonoBehaviour
             Invoke("KeepToGk", 1);
         
         }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Ball") && Ball.current.inGameFlag)
+        {
+            Ball.current.inGameFlag = false;
+            PosPlayerMng.curret.SetAllBicy();
+            if (Ball.current.fieldYellow)
+            {
+                Referee.current.SetArmRight();
+            }
+            else
+                Referee.current.SetArmLeft();
 
-        
+            Invoke("KeepToGk", 1);
+
+        }
     }
 
     public void KeepToGk() 

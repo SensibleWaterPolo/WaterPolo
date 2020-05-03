@@ -82,6 +82,7 @@ public class PosPlayerMng : MonoBehaviour
     {
         for(int i=0; i < allPlayer.Length; i++)
         {
+            allPlayer[i].SetBicy();
             allPlayer[i].transform.position = allPlayer[i].posMiddle;
         }
 
@@ -94,7 +95,15 @@ public class PosPlayerMng : MonoBehaviour
         Ball.current.inGameFlag = true;
     }
 
+    public void SetAllBicy() 
+    {
 
+        for (int i = 0; i < allPlayer.Length; i++)
+        {
+            allPlayer[i].SetBicy();
+            
+        }
+    }
 
 
 

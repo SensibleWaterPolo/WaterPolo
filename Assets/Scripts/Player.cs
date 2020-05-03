@@ -20,9 +20,11 @@ public class Player : MonoBehaviour
     [Range(0f, 10f)]
     public float shoot;
     public int stamina;//M: forza del giocatore per vincere lo scontro, se mosso da cpu ha un minimo X e un massimo Y
+    public int brain; //velocità della cpu nell'eseguire un'azione di passaggio o di tiro
     public Vector2 clickCPU; //range di click della cpu, da un minimo X ad un massimo Y, utilizzati per decidere chi vince uno scontro 
     protected bool armDx; //M: true se è destro, false se è un mancino
-    public int idDecisionMaking;
+    public int idDecisionMaking; //Indentifica la scelta presa dal giocatore per passare da uno stato all'altro
+    public int idDecisionCPU;
 
     [Header("FLAG")]
     public bool cpuFlag; //M: true se muove la cpu
@@ -91,8 +93,11 @@ public class Player : MonoBehaviour
     public bool pushAtt; //se in fase di difesa devo avanzare verso il difensore
     public bool beginPush;//comincia ad avanzare verso l'attaccante
     public float speedToPush;//velocità di spostamento verso l'attaccante
+    public bool coverOpponent; //true se sto coprendo quasi tutto lo specchio della porta
 
-    public float waitAfterShoot = 2f; //Tempo di attesa dopo aver tirato
+    public float waitAfterShoot; //Tempo di attesa dopo aver tirato
+
+    protected Coroutine brainCpuCoroutine;
 
    
 
@@ -118,6 +123,8 @@ public class Player : MonoBehaviour
         speedToPush = 3;
         beginPush = false;
         marcaFlag = false;
+        coverOpponent = false;
+       
         
 
     }
@@ -127,6 +134,8 @@ public class Player : MonoBehaviour
         speed = Random.Range(7, 10);
         stamina = Random.Range(6, 10);
         clickCPU = new Vector2(2, 10);
+        brain = Random.Range(1, 2);
+        waitAfterShoot = 1.5f;
      }
 
     public virtual void FixedUpdate()
@@ -139,193 +148,210 @@ public class Player : MonoBehaviour
             CheckArrivedToPos();
             if (swim || backSwim)
             {
-                 Swim();
+                Swim();
             }
             MoveToAttPlayer();
             RestorePlayer();
-            
+            if (boaFlag)
+            {
+                if (marcaFlag && !keepBoa && !keep)
+                {
+                    GetComponent<CircleCollider2D>().enabled = false;
+                }
+                else
+                { GetComponent<CircleCollider2D>().enabled = true; 
+                }
+            }
         }
     }
 
 
     public virtual void UpdateState()
 
-    {  // Attiva o disattiva il braccio in caso di posizione di difesa
-        if (def)
-            transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Arm");
-        else
-            transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Pool");
-
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO BICY
-        
-        // BICY :Bicicletta se la palla è libera non nel mio settore e attendo l'evoluzione del gioco
-        if (idBall == 0 && Ball.current.inGameFlag && !keep && !loadShoot)
+    {
+        if (Ball.current.inGameFlag && !Ball.current.isShooted)
         {
-            idDecisionMaking = 1;
-            SetBicy();
-        }
-        //BICY: palla in possesso avversario, sono in posizione di difesa ma la palla non ce l'ha il mio diretto opponent
-        if (idBall == 3 && arrivedFlagDef && !marcaFlag && !stun && !fightFlag && !opponent.ballFlag)
-        {
-            idDecisionMaking = 2;
-            SetBicy();
-
-        }
-
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO SWIM
-        // SWIM : La palla è libera NON nel mio settore ma sono quello più vicino della mia squadra
-
-
-        //SWIM: Palla vicina al boa o al marca boa
-        if (idBall == 1 && marcaFlag && Ball.current.CheckBallIsPlayable(0) && distaceBall < opponent.distaceBall)
-        {
-            idDecisionMaking = 3;
-            SetSwim(Ball.current.transform.position,false);
-        
-        }
-
-        //SWIM: la palla è libera NON nel mio settore ma io sono il player più vicino 
-        if (idBall == 0 && Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam,boaFlag) == name && distaceBall < 10 && !stun && !fightFlag )
-        {
-            idDecisionMaking = 4;
-            SetSwim(Ball.current.transform.position, false);
-        }
-
-        // SWIM: La palla è libera nel mio settore, sono in marcatura ma la palla è talmente vicina che provo a prenderla
-        if (idBall == 1 && Ball.current.CheckBallIsPlayable(0)  && marcaFlag && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name &&  distaceBall<6) 
-
-        {
-            idDecisionMaking = 5;
-            SetSwim(Ball.current.transform.position, false);
-
-        }
-        //La palla è nel mio settore e sono un laterale
-        if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && sectorAction!=2 && !stun && !fightFlag)
-        {
-            idDecisionMaking = 55;
-            SetSwim(Ball.current.transform.position, false);
-        }
-
-        //SWIM: Palla libera nel mio settore e sono quello più vicino della mia squadra
-
-        if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam,boaFlag) == name && !stun && !fightFlag)
-        {
-                 idDecisionMaking = 6;
-            SetSwim(Ball.current.transform.position, false);
-        }
-
-        //SWIM: palla in possesso di un mio compagno
-        if (idBall == 2 && !arrivedFlagAtt && !stun && !fightFlag)
-        {
-            if (!counterAttFlag)
-            {
-                idDecisionMaking = 7;
-                SetSwim(posAtt, false);
-            }
+            // Attiva o disattiva il braccio in caso di posizione di difesa
+            if (def)
+                transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Arm");
             else
-            {
-                idDecisionMaking = 8;
-                SetSwim(posAtt, true);
-            }
-            if (Ball.current.gk != null)
-            {
-                SetSwim(posAtt, true);
-            }
+                transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Pool");
 
-        }
-               
-        //SWIM: palla in possesso avversario
-        if (idBall == 3 && !arrivedFlagDef && !marcaFlag && !stun && !fightFlag && !pushAtt && !beginPush)
-        {
-            if (opponent.counterAttFlag)
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO BICY
+
+            // BICY :Bicicletta se la palla è libera non nel mio settore e attendo l'evoluzione del gioco
+            if (idBall == 0 && Ball.current.inGameFlag && !keep && !loadShoot)
             {
-                idDecisionMaking = 9;
-                SetSwim(posDef, false);
+                idDecisionMaking = 1;
+                SetBicy();
+            }
+            //BICY: palla in possesso avversario, sono in posizione di difesa ma la palla non ce l'ha il mio diretto opponent
+            if (idBall == 3 && arrivedFlagDef && !marcaFlag && !stun && !fightFlag && !opponent.ballFlag)
+            {
+                idDecisionMaking = 2;
+                SetBicy();
 
             }
-            else
+
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO SWIM
+            // SWIM : La palla è libera NON nel mio settore ma sono quello più vicino della mia squadra
+
+
+            //SWIM: Palla vicina al boa o al marca boa
+            if (idBall == 1 && marcaFlag && Ball.current.CheckBallIsPlayable(0) && distaceBall < opponent.distaceBall)
             {
-                if (idTeam == 0)//M: Yellow
+                idDecisionMaking = 3;
+                SetSwim(Ball.current.transform.position, false);
+
+            }
+
+            //SWIM: la palla è libera NON nel mio settore ma io sono il player più vicino 
+            if (idBall == 0 && Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name && distaceBall < 10 && !stun && !fightFlag)
+            {
+                idDecisionMaking = 4;
+                SetSwim(Ball.current.transform.position, false);
+            }
+
+            // SWIM: La palla è libera nel mio settore, sono in marcatura ma la palla è talmente vicina che provo a prenderla
+            if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && marcaFlag && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name && distaceBall < 6)
+
+            {
+                idDecisionMaking = 5;
+                SetSwim(Ball.current.transform.position, false);
+
+            }
+            //La palla è nel mio settore e sono un laterale
+            if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && sectorAction != 2 && !stun && !fightFlag)
+            {
+                idDecisionMaking = 55;
+                SetSwim(Ball.current.transform.position, false);
+            }
+
+            //SWIM: Palla libera nel mio settore e sono quello più vicino della mia squadra
+
+            if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name && !stun && !fightFlag)
+            {
+                idDecisionMaking = 6;
+                SetSwim(Ball.current.transform.position, false);
+            }
+
+            //SWIM: palla in possesso di un mio compagno
+            if (idBall == 2 && !arrivedFlagAtt && !stun && !fightFlag)
+            {
+                if (!counterAttFlag)
                 {
-                    if (transform.position.y > posDef.y)
-                    {
-                        idDecisionMaking = 10;
-                        SetSwim(posDef, true);
-                    }
-                    else
-                    {
-                        idDecisionMaking = 11;
-                        SetSwim(posDef, false);
-                    }
+                    idDecisionMaking = 7;
+                    SetSwim(posAtt, false);
                 }
                 else
                 {
-                    if (transform.position.y < posDef.y)
+                    idDecisionMaking = 8;
+                    SetSwim(posAtt, true);
+                }
+                if (Ball.current.gk != null)
+                {
+                    SetSwim(posAtt, true);
+                }
+
+            }
+
+            //SWIM: palla in possesso avversario
+            if (idBall == 3 && !arrivedFlagDef && !marcaFlag && !stun && !fightFlag && !pushAtt && !beginPush)
+            {
+                if (opponent.counterAttFlag)
+                {
+                    idDecisionMaking = 9;
+                    SetSwim(posDef, false);
+
+                }
+                else
+                {
+                    if (idTeam == 0)//M: Yellow
                     {
-                        idDecisionMaking = 12;
-                        SetSwim(posDef, true);
+                        if (transform.position.y > posDef.y)
+                        {
+                            idDecisionMaking = 10;
+                            SetSwim(posDef, true);
+                        }
+                        else
+                        {
+                            idDecisionMaking = 11;
+                            SetSwim(posDef, false);
+                        }
                     }
                     else
                     {
-                        idDecisionMaking = 13;
-                        SetSwim(posDef, false);
+                        if (transform.position.y < posDef.y)
+                        {
+                            idDecisionMaking = 12;
+                            SetSwim(posDef, true);
+                        }
+                        else
+                        {
+                            idDecisionMaking = 13;
+                            SetSwim(posDef, false);
+                        }
+                    }
+                }
+
+            }
+
+            //Se la palla è in possesso avversario ma non del mio diretto mi riposiziono in difesa
+
+            if (idBall == 3 && !arrivedFlagDef && !opponent.ballFlag)
+            {
+                if (opponent.counterAttFlag)
+
+                {
+                    idDecisionMaking = 131;
+                    SetSwim(posDef, false);
+                }
+                else
+                {
+                    idDecisionMaking = 132;
+                    if (idTeam == 0 && transform.position.y > posDef.y || idTeam == 1 && transform.position.y < posDef.y)
+                    { SetSwim(posDef, true); }
+                    else { SetSwim(posDef, false); }
+                }
+
+            }
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO DEF
+
+            // DEF: Palla è stata tirata e viaggia lungo il mio settore
+
+            if (idBall == 1 && Ball.current.isShooted && speed > 5 && def && !stun && !fightFlag)
+            {
+                idDecisionMaking = 14;
+                if (Ball.current.player != null)
+                {
+                    if (Ball.current.player.name == opponent.name)
+                    {
+                        SetDef();
                     }
                 }
             }
 
-        }
-
-        //Se la palla è in possesso avversario ma non del mio diretto mi riposiziono in difesa
-
-        if (idBall == 3 && !arrivedFlagDef && !opponent.ballFlag) 
-        {
-            if (opponent.counterAttFlag)
-
+            //DEF: se sono il marcaboa e la palla è in possesso
+            if (idBall == 3 && marcaFlag)
             {
-                idDecisionMaking = 131; 
-                SetSwim(posDef, false);
+                idDecisionMaking = 15;
+                SetDef();
             }
-            else
+            //DEF: palla in possesso del mio diretto avversario e sono arrivato nella posizione di difesa 
+            if (idBall == 3 && arrivedFlagDef && opponent.ballFlag && !stun && !fightFlag && Vector3.Distance(transform.position, opponent.transform.position) < 25 && !opponent.keepBoa)
             {
-                idDecisionMaking = 132;
-                SetSwim(posDef, true);
+                idDecisionMaking = 16;
+                SetDef();
             }
-                
-        }
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO DEF
 
-        // DEF: Palla è stata tirata e viaggia lungo il mio settore
-
-        if (idBall == 1 && Ball.current.isShooted && speed>5  && def  && !stun && !fightFlag)
-        {
-            idDecisionMaking = 14;
-            if (Ball.current.player != null)
-            {  if (Ball.current.player.name == opponent.name)
-                { SetDef(); 
-                }
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            if (idBall == 4)
+            {
             }
-        }
-        
-        //DEF: se sono il marcaboa e la palla è in possesso
-        if (idBall == 3 && marcaFlag)
-        {
-            idDecisionMaking = 15;
-            SetDef();
-        }
-        //DEF: palla in possesso del mio diretto avversario e sono arrivato nella posizione di difesa 
-        if (idBall == 3 && arrivedFlagDef && opponent.ballFlag && !stun && !fightFlag && Vector3.Distance(transform.position, opponent.transform.position) < 25 && !opponent.keepBoa)
-        {
-            idDecisionMaking = 16;
-            SetDef();
-        }
-
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        if (idBall == 4)
-        {
-        }
 
 
+        }
     }
     public void UpdateIdBall()
     {
@@ -359,7 +385,7 @@ public class Player : MonoBehaviour
 
         if (obj.tag == "Ball" &&  Ball.current.CheckBallIsPlayable(5f)  && !keep && !marcaFlag && !stun && !loadShoot)
         {
-            Debug.Log(name + " 1");
+           // Debug.Log(name + " 1");
             SetBall();
             SetKeep();
             
@@ -386,7 +412,7 @@ public class Player : MonoBehaviour
         GameObject obj = collision.gameObject;
         if (obj.tag == "Ball" && Ball.current.CheckBallIsPlayable(5f)  && !keep && !marcaFlag && !stun && !loadShoot)
         {
-            Debug.Log(name + " 2");
+          //  Debug.Log(name + " 2");
             SetKeep();
             SetBall();
         }
@@ -509,6 +535,10 @@ public class Player : MonoBehaviour
             stun = false;
              animator.SetInteger("IdAnim", 2);
             Utility.RotateObjToPoint(this.gameObject, posGoal);
+            if (cpuFlag)
+            {
+                Invoke("BrainCpu", brain);
+            }
         }
    }
     public void SetKeepBoa() 
@@ -524,7 +554,11 @@ public class Player : MonoBehaviour
             ballFlag = true;
             stun = false;
             animator.SetInteger("IdAnim", 20);
+            if (cpuFlag)
+            {
+                Invoke("BrainCpu", brain);
             }
+        }
     }
 
     public void SetShoot()
@@ -742,11 +776,13 @@ public class Player : MonoBehaviour
                        {
 
                         pushAtt = false;
+                        coverOpponent = true;
                        }
                  }
                 else
                 {
                     pushAtt = true;
+                    coverOpponent = false;
 
                 }
                
@@ -763,6 +799,7 @@ public class Player : MonoBehaviour
         {
             pushAtt = false;
             beginPush = false;
+            coverOpponent = false;
         }
         
     }
@@ -783,20 +820,7 @@ public class Player : MonoBehaviour
             return false;
     }
 
- /*   public void CreateSignalShoot() 
-    {
-       shootSignalPrefab = Instantiate(shootSignal,transform.GetChild(1).transform.position,Quaternion.identity);
-        shootSignalPrefab.player = this;
-        shootSignalPrefab.transform.parent = this.transform;
 
-    
-    }
-
-    public void DestroySignalShoot() 
-    {
-        shootSignalPrefab.transform.parent = null;
-        Destroy(shootSignalPrefab.gameObject);
-    }*/
 
     public void RestorePlayer() //funzione che tenta di resettare lo stato dei giocatori eliminando piccole imperfezioni
     {
@@ -806,8 +830,36 @@ public class Player : MonoBehaviour
         }
     
     }
- 
 
+    public virtual bool PlayerCpu()
+    {
+        return false;
+    }
+    
+    public IEnumerator StartDecisioMaking() 
+    {
+        while (true)
+        {
+            bool stop = this.PlayerCpu();
+            if (stop) 
+            {
+                yield break;         
+            }
+
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    public void BrainCpu() 
+    {
+      //  Debug.Log(name+ "inizio a ragionare");
+        if (brainCpuCoroutine != null) 
+        {
+            StopCoroutine(StartDecisioMaking());
+        }
+        brainCpuCoroutine = StartCoroutine(StartDecisioMaking());
+    
+    }
 }
 
     

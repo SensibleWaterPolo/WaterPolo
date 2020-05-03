@@ -7,11 +7,13 @@ public class GameCore : MonoBehaviour
     public  static GameCore current;
 
     public  bool isPlay = false;
-    // Start is called before the first frame update
+  
+    public bool levelCPUHard; //true se livello CPU hard, false se normal
 
     private void Awake()
     {
         current = this;
+        levelCPUHard = true;
     }
     void Start()
     {

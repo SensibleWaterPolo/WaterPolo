@@ -18,6 +18,7 @@ public class PlayerY5 : Player
         if (CheckOpponent("PlayerR1"))
             opponent = GameObject.Find("PlayerR1").GetComponent<Player>();
         armDx = true;
+        cpuFlag = false;
     }
 
     public override void Start()
@@ -26,20 +27,6 @@ public class PlayerY5 : Player
         
     }
 
-   /* public override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
-
-        if (collision.name == opponent.name && opponent.swim && swim )  //Il fight avviene solo se i due giocatori stanno nuotando
-        {
-            if (fightPrefab != null) 
-            {
-                fightPrefab = Instantiate(fight, new Vector3((transform.position.x + opponent.transform.position.x) / 2, (transform.position.y + opponent.transform.position.y) / 2, 0), Quaternion.identity);
-                fightPrefab.CreateFight(this,opponent);
-            }
-        }
-    }*/
-
-
+  
 
 }

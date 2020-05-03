@@ -35,6 +35,7 @@ public class GoalKeeper : MonoBehaviour
     protected Vector3 posThrowIn;
     public Vector3 finalPos;
     public bool arrived;
+    public bool readyToBlock;
 
     public float distanceBall;
     public float posXBall;
@@ -52,6 +53,8 @@ public class GoalKeeper : MonoBehaviour
 
     public int idTeam;
    
+    protected Coroutine brainCpuCoroutine;
+
 
     [Header("SHOOT")]
     public bool loadShoot;
@@ -88,7 +91,7 @@ public class GoalKeeper : MonoBehaviour
 
         if ( GameCore.current.isPlay)
         {
-            CheckKeep();
+            readyToBlock = GetComponent<BoxCollider2D>().enabled;
             UpdateFinalPos();
           
             if(!arrived && !flagJump && !keep)
@@ -156,9 +159,9 @@ public class GoalKeeper : MonoBehaviour
 
 
         bool save;
-        if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR)
+        if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && readyToBlock)
         {
-            Debug.Log("PROVO A PARARE");
+         //   Debug.Log("PROVO A PARARE");
             flagJump = true;
             save = CalcBlock();
             
@@ -244,6 +247,10 @@ public class GoalKeeper : MonoBehaviour
         animator.SetInteger("IdAnim", 1);
         SetBallGK();
         Ball.current.SetGK(this);
+        if (cpuFlag)
+        {
+            Invoke("BrainCpu", 2);
+        }
     }
 
     public void SetShoot()
@@ -253,11 +260,14 @@ public class GoalKeeper : MonoBehaviour
 
     public void SetBallGK()
     { //M: sposta la palla nella posizione corretta all'interno del giocatore
+        GetComponent<BoxCollider2D>().enabled = false;
+        GetComponent<CircleCollider2D>().enabled = true;
         transform.position = posThrowIn;
         Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
         Ball.current.transform.parent = transform;
         Ball.current.transform.position = transform.GetChild(6).position;
         Ball.current.freeFlag = false;
+        
            
     }
     public void Shoot()  //M: chiamata dall'animazione
@@ -276,16 +286,40 @@ public class GoalKeeper : MonoBehaviour
 
     public void ResetGk()
     {
+        GetComponent<BoxCollider2D>().enabled = true;
+        GetComponent<CircleCollider2D>().enabled = false;
         keep = false;
         bicy = true;
         Utility.RotateObjToPoint(this.gameObject,Vector3.zero);
     }
 
-    public void CheckKeep() 
+    public IEnumerator StartDecisioMaking()
     {
-        GetComponent<BoxCollider2D>().enabled = !keep;
-        GetComponent<CircleCollider2D>().enabled = keep;
+        while (true)
+        {
+            bool stop = this.GkCpu();
+            if (stop)
+            {
+                yield break;
+            }
+
+            yield return new WaitForSeconds(1);
+        }
     }
 
-  
+    public void BrainCpu()
+    {
+      //  Debug.Log(name + "inizio a ragionare");
+        if (brainCpuCoroutine != null)
+        {
+            StopCoroutine(StartDecisioMaking());
+        }
+        brainCpuCoroutine = StartCoroutine(StartDecisioMaking());
+
+    }
+
+    public virtual bool GkCpu()
+    {
+        return false;
+    }
 }
