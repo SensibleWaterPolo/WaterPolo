@@ -7,6 +7,7 @@ public class AudioController : MonoBehaviour
 {
     public static AudioController current;
     public AudioClip fischio;
+    public AudioClip esultanza;
     private void Awake()
     {
         current = this;
@@ -16,6 +17,10 @@ public class AudioController : MonoBehaviour
         AudioSource.PlayClipAtPoint(fischio, Vector3.zero, 10f);
     }
 
+    public void DoEsultanza()
+    {
+        AudioSource.PlayClipAtPoint(esultanza, Vector3.zero, 10f);
+    }
 
 
 

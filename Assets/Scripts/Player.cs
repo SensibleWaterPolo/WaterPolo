@@ -205,6 +205,12 @@ public class Player : MonoBehaviour
                 SetSwim(Ball.current.transform.position, false);
 
             }
+            //SWIM: iL PIù VICINO PRENDE LA PALLA
+            if (Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam,boaFlag) == name)
+            {
+                idDecisionMaking = 33;
+                SetSwim(Ball.current.transform.position, false);
+            }
 
             //SWIM: la palla è libera NON nel mio settore ma io sono il player più vicino 
             if (idBall == 0 && Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name && distaceBall < 10 && !stun && !fightFlag)
