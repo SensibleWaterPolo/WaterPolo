@@ -108,14 +108,21 @@ public class GoalKeeper : MonoBehaviour
         float distanzaMancante = (this.transform.position - finalPos).sqrMagnitude;
         if (distanzaMancante > 0)
 
-        {    
+        {
             arrived = false;
             Vector3 nuova_Pos = Vector3.MoveTowards(transform.position, finalPos, vel * Time.deltaTime);
             rb.MovePosition(nuova_Pos);
-            
-           }
+
+        }
         else
-            arrived = true;
+        { arrived = true;
+            if (finalPos == posMid) 
+            {
+                Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
+            }
+        
+        }
+
 
 
     }

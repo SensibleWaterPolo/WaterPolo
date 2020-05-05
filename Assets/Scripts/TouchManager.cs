@@ -24,6 +24,8 @@ public class TouchManager : MonoBehaviour
     //Segnale di tiro
     public SignalShoot shootSignalPrefab;
     public SignalShoot shootSignal;
+    public Vector3 startPos;
+    public Vector3 finalPos;
 
     // Start is called before the first frame update
 
@@ -56,7 +58,7 @@ public class TouchManager : MonoBehaviour
                 
                 ///////////// FASE BEGAN
                 if (touch.phase == TouchPhase.Began)
-                {
+                {  startPos= Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position); 
                     Vector3 posTouch = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
                     RaycastHit2D hitPlayer = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskPlayer);
                     RaycastHit2D hitFight = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskFight);
@@ -69,6 +71,7 @@ public class TouchManager : MonoBehaviour
                          gk = GameObject.Find(hitGk.collider.gameObject.name).GetComponent<GoalKeeper>();
                             if (gk.keep)
                             {
+                                startPos = gk.transform.position;
                                 loadShoot = true;
                                 /* gk.CreateSignalShoot();
                                  gk.signalOK = okShoot;*/
@@ -115,7 +118,8 @@ public class TouchManager : MonoBehaviour
                 ////// FASE MOVED
                 if (touch.phase == TouchPhase.Moved && loadShoot)
                 {
-                   
+                    endPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
+
                     if (player != null)
                     {
 
@@ -135,7 +139,7 @@ public class TouchManager : MonoBehaviour
                         }
                         else
                         {
-                            if (Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position), player.transform.position) < 9)
+                            if (Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position), player.transform.position) < 9  && Vector3.Distance(startPos,endPos) <9)
                             {
                                 okShoot = false;
                                 
@@ -178,16 +182,20 @@ public class TouchManager : MonoBehaviour
                         shootSignalPrefab.SetSignal(okShoot);
                     }
                 }
+
+               
                 //FASE ENDED
                 if (touch.phase == TouchPhase.Ended && loadShoot)
                 {
 
-
+                   
                     Vector3 destination = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
+                    finalPos= Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
+                    Debug.Log(Vector3.Distance(startPos, finalPos));
 
                     if (player != null)
                     {
-                        if (minShoot < destination.y && destination.y < maxShoot)//decidiamo se è un passaggio o un tiro
+                        if (minShoot < destination.y && destination.y < maxShoot || Vector3.Distance(startPos, finalPos)<10)//decidiamo se è un passaggio o un tiro
                         {
 
                             shootFlag = false;
@@ -332,7 +340,7 @@ public class TouchManager : MonoBehaviour
                     }
 
                 }
-                
+                else { }
                 
                
             }
