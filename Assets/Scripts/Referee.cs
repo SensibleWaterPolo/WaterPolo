@@ -9,7 +9,10 @@ public class Referee : MonoBehaviour
 
     public Animator anim;
 
-    public static Referee current;
+    public static Referee current; 
+
+
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -84,5 +87,6 @@ public class Referee : MonoBehaviour
         }
     }
     
+  
 }
 

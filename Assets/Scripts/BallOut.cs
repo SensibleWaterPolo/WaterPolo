@@ -20,6 +20,7 @@ public class BallOut : MonoBehaviour
     {
         if (collision.CompareTag("Ball") && Ball.current.inGameFlag) 
         {
+            AudioController.current.DoFischio();
             Ball.current.inGameFlag = false;
             PosPlayerMng.curret.SetAllBicy();
             if (Ball.current.fieldYellow)
