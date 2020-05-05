@@ -293,7 +293,7 @@ public class IA : MonoBehaviour
             }
            
 
-            if (prob < 30)
+            if (prob < 10)
             {
                 return true;
             }
