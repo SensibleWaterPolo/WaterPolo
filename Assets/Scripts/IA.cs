@@ -282,7 +282,7 @@ public class IA : MonoBehaviour
             if (player.name== "PlayerR3") 
             {
                
-                if (prob < 50)
+                if (prob < 40)
                 {
                     return true;
                 }
