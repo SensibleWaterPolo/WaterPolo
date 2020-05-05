@@ -13,7 +13,8 @@ public class PlayerR5 : Player
         posAtt = GameObject.Find("PosAttR5").transform.position;
         posDef = GameObject.Find("PosDefR5").transform.position;
         posMiddle = GameObject.Find("PosBattutaR5").transform.position;
-       // posStart = GameObject.Find("PosStartR5").transform.position;
+        posStart = GameObject.Find("PosStartR5").transform.position;
+        
         posGoal = GameObject.Find("GolLineYellow").transform.position;
         opponent = GameObject.Find("PlayerY1").GetComponent<Player>();
         armDx = true;

@@ -25,11 +25,15 @@ public class GoalYellow : GoalManager
     {
         if (collision.CompareTag("Ball") && !goal)
         {
+            AudioController.current.DoFischio();
+            AudioController.current.DoEsultanza();
             goal = true;
             score = int.Parse(text.text);
             score++;
             Ball.current.inGameFlag = false;
             Referee.current.SetArmLeft();
+            AudioController.current.DoFischio();
+            AudioController.current.DoEsultanza();
             Invoke("ResetScene", 2f);
 
             

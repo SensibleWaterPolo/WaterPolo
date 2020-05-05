@@ -124,6 +124,7 @@ public class Player : MonoBehaviour
         beginPush = false;
         marcaFlag = false;
         coverOpponent = false;
+     
        
         
 
@@ -136,6 +137,7 @@ public class Player : MonoBehaviour
         clickCPU = new Vector2(2, 10);
         brain = Random.Range(1, 2);
         waitAfterShoot = 1.5f;
+        transform.position = posStart;
      }
 
     public virtual void FixedUpdate()
