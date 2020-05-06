@@ -124,6 +124,7 @@ public class Player : MonoBehaviour
         beginPush = false;
         marcaFlag = false;
         coverOpponent = false;
+     
        
         
 
@@ -136,6 +137,7 @@ public class Player : MonoBehaviour
         clickCPU = new Vector2(2, 10);
         brain = Random.Range(1, 2);
         waitAfterShoot = 1.5f;
+        transform.position = posStart;
      }
 
     public virtual void FixedUpdate()
@@ -204,6 +206,12 @@ public class Player : MonoBehaviour
                 idDecisionMaking = 3;
                 SetSwim(Ball.current.transform.position, false);
 
+            }
+            //SWIM: iL PIù VICINO PRENDE LA PALLA
+            if (Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam,boaFlag) == name)
+            {
+                idDecisionMaking = 33;
+                SetSwim(Ball.current.transform.position, false);
             }
 
             //SWIM: la palla è libera NON nel mio settore ma io sono il player più vicino 

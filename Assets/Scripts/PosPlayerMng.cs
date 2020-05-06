@@ -92,7 +92,8 @@ public class PosPlayerMng : MonoBehaviour
             Ball.current.SetRedSideBall();
         }
 
-        Ball.current.inGameFlag = true;
+        Invoke("Batti",1.5f);
+        
     }
 
     public void SetAllBicy() 
@@ -104,7 +105,12 @@ public class PosPlayerMng : MonoBehaviour
             
         }
     }
-
+    public void Batti()
+    {
+        AudioController.current.DoFischio();
+        Referee.current.SetArmFront();
+        Ball.current.inGameFlag = true;
+    }
 
 
     // Update is called once per frame

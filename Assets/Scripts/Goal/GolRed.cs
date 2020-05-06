@@ -27,7 +27,10 @@ public class GolRed : GoalManager
             score++;
             Ball.current.inGameFlag = false;
             Referee.current.SetArmRight();
+            AudioController.current.DoFischio();
+            AudioController.current.DoEsultanza();
             Invoke("ResetScene", 2f);
+
 
 
         }
