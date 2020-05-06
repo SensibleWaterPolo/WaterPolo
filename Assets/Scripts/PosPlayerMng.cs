@@ -101,7 +101,10 @@ public class PosPlayerMng : MonoBehaviour
 
         for (int i = 0; i < allPlayer.Length; i++)
         {
-            allPlayer[i].SetBicy();
+            if (!allPlayer[i].keep && !allPlayer[i].keepBoa)
+            {
+                allPlayer[i].SetBicy();
+            }
             
         }
     }
