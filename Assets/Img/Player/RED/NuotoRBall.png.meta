@@ -1,0 +1,596 @@
+fileFormatVersion: 2
+guid: 0ee0e7627f6e88c4081ef1d9657d6750
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1427413718031870916
+    second: NuotoRBall_0
+  - first:
+      213: -3903560059354767000
+    second: NuotoRBall_1
+  - first:
+      213: -9085866236269155927
+    second: NuotoRBall_2
+  - first:
+      213: 4923957879089900439
+    second: NuotoRBall_3
+  - first:
+      213: -4148793772560331796
+    second: NuotoRBall_4
+  - first:
+      213: 2264119461602704817
+    second: NuotoRBall_5
+  - first:
+      213: 5344681300740150879
+    second: NuotoRBall_6
+  - first:
+      213: 1314701125610518507
+    second: NuotoRBall_7
+  - first:
+      213: 6108045343116074249
+    second: NuotoRBall_8
+  - first:
+      213: 5603305320858365385
+    second: NuotoRBall_9
+  - first:
+      213: -6438305980262087121
+    second: NuotoRBall_10
+  - first:
+      213: -6753734562725243615
+    second: NuotoRBall_11
+  - first:
+      213: 9088286445085136334
+    second: NuotoRBall_12
+  - first:
+      213: -4687011181732035178
+    second: NuotoRBall_13
+  - first:
+      213: 8639768651409865631
+    second: NuotoRBall_14
+  - first:
+      213: 5138891458416142713
+    second: NuotoRBall_15
+  - first:
+      213: 3825926007107180224
+    second: NuotoRBall_16
+  - first:
+      213: 9050543129666507128
+    second: NuotoRBall_17
+  - first:
+      213: -199628349719676437
+    second: NuotoRBall_18
+  - first:
+      213: 6776939946022283633
+    second: NuotoRBall_19
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: NuotoRBall_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7544
+        width: 802
+        height: 324
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c34d03549cec03ce0800000000000000
+      internalID: -1427413718031870916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_1
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 7661
+        width: 133
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 861a1c6dec4c3d9c0800000000000000
+      internalID: -3903560059354767000
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_2
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 6731
+        width: 796
+        height: 338
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a9267e0cc488e180800000000000000
+      internalID: -9085866236269155927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_3
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 6835
+        width: 133
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79ba3205a99655440800000000000000
+      internalID: 4923957879089900439
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5886
+        width: 802
+        height: 381
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ceb403c8b068c66c0800000000000000
+      internalID: -4148793772560331796
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_5
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 5981
+        width: 139
+        height: 156
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bdb0ed87a4cb6f10800000000000000
+      internalID: 2264119461602704817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5106
+        width: 802
+        height: 346
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f561a40635f1c2a40800000000000000
+      internalID: 5344681300740150879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_7
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 5187
+        width: 139
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be732d945b1ce3210800000000000000
+      internalID: 1314701125610518507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_8
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 4282
+        width: 800
+        height: 336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90d9964b0e224c450800000000000000
+      internalID: 6108045343116074249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_9
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 4372
+        width: 133
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9cda1d17080f2cd40800000000000000
+      internalID: 5603305320858365385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3487
+        width: 802
+        height: 325
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f26843392da86a6a0800000000000000
+      internalID: -6438305980262087121
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_11
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 3546
+        width: 133
+        height: 129
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 125db71b23ae542a0800000000000000
+      internalID: -6753734562725243615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2641
+        width: 802
+        height: 340
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec51c48be54102e70800000000000000
+      internalID: 9088286445085136334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_13
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 2708
+        width: 139
+        height: 140
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 695049eb92464feb0800000000000000
+      internalID: -4687011181732035178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_14
+      rect:
+        serializedVersion: 2
+        x: 9
+        y: 1800
+        width: 793
+        height: 359
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9b37d020df96e770800000000000000
+      internalID: 8639768651409865631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_15
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 1879
+        width: 139
+        height: 195
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 979ee2eed82015740800000000000000
+      internalID: 5138891458416142713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_16
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 981
+        width: 800
+        height: 344
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c65d8ece6b681530800000000000000
+      internalID: 3825926007107180224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_17
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 1110
+        width: 133
+        height: 133
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 871df1c460df99d70800000000000000
+      internalID: 9050543129666507128
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 116
+        width: 802
+        height: 336
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be97cd7d217ca3df0800000000000000
+      internalID: -199628349719676437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: NuotoRBall_19
+      rect:
+        serializedVersion: 2
+        x: 663
+        y: 188
+        width: 139
+        height: 201
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17920d2a9f68c0e50800000000000000
+      internalID: 6776939946022283633
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 16bc931808e1be64f9b13a771969feca
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

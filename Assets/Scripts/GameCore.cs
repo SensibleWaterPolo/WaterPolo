@@ -13,7 +13,7 @@ public class GameCore : MonoBehaviour
     public float timeStart;
     public float secAction;
     public float timeCurrentMatch;
-
+    public float second;
     public GameObject finalMenu;
     public bool levelCPUHard; //true se livello CPU hard, false se normal
 
@@ -45,7 +45,13 @@ public class GameCore : MonoBehaviour
                 time = Time.time - timeStart;
 
                 timeCurrentMatch = timeMatch - time;
-                
+
+                Debug.Log("secAction upade = " + secAction);
+                if (secAction>0)
+                {
+                    UpdateSecond();
+                }
+
                 UpdateTimeGame();
             }
             else
@@ -72,7 +78,8 @@ public class GameCore : MonoBehaviour
         timeStart = Time.time;
         Referee.current.SetArmFront();
         AudioController.current.DoFischio();
-        
+        StartSecond();
+
     }
     public void Stop()
     {
@@ -97,7 +104,8 @@ public class GameCore : MonoBehaviour
     public void RestartTimeAction() 
     {
         secAction = 15f;
-        
+        StartSecond();
+        Debug.Log("secAction restart = " + secAction);
     }
 
     public void UpdateTimeGame() 
@@ -136,7 +144,20 @@ public class GameCore : MonoBehaviour
 
             
     }
+    public void UpdateSecond()
+    {
+        Debug.Log("StartSec = " + second);
+        Debug.Log("Time.time = " + Time.time);
+        Debug.Log("secActionupadesec = " + secAction);
+        secAction = secAction - Time.time - second;
+        Debug.Log("secAction = " + secAction);
+    }
 
+    public void StartSecond()
+    {
+        second = Time.time;
+        Debug.Log("StartSec = " + second);
+    }
 
 
 

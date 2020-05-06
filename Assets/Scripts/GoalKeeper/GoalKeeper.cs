@@ -78,6 +78,7 @@ public class GoalKeeper : MonoBehaviour
         throwin = Random.Range(4, 7);
         keep = false;
         bicy = true;
+        agility = Random.Range(1,3);
     }
 
     // Update is called once per frame
@@ -166,12 +167,13 @@ public class GoalKeeper : MonoBehaviour
 
 
         bool save;
-        if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && readyToBlock)
+
+        if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && readyToBlock && Ball.current.freeFlag)
         {
          //   Debug.Log("PROVO A PARARE");
             flagJump = true;
             save = CalcBlock();
-            
+            agility = Random.Range(2, 5);
             float x = transform.position.x - Ball.current.transform.position.x;
 
             if (x <= -2.5) //M:se la palla si trova alla destra 
