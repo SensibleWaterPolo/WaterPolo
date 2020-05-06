@@ -74,8 +74,9 @@ public class GoalKeeper : MonoBehaviour
     public void Start()
     {
         block = Random.Range(7,10);
+        agility = Random.Range(1,3);
         arrived = false;
-        throwin = Random.Range(4, 7);
+        throwin = Random.Range(5, 7);
         keep = false;
         bicy = true;
     }
@@ -166,7 +167,7 @@ public class GoalKeeper : MonoBehaviour
 
 
         bool save;
-        if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && readyToBlock)
+        if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && readyToBlock && Ball.current.freeFlag)
         {
          //   Debug.Log("PROVO A PARARE");
             flagJump = true;

@@ -207,7 +207,11 @@ public class  Ball : MonoBehaviour
         DisableBall();
         isShooted = false;
         this.player = player;
-        idTeam = player.idTeam;
+        if (player.idTeam != idTeam)
+        {
+            GameCore.current.RestartTimeAction();
+            idTeam = player.idTeam;
+        }
         
     }
     public void SetGK(GoalKeeper _gk)
@@ -282,7 +286,7 @@ public class  Ball : MonoBehaviour
         }
         if (collision.gameObject.tag == "Arm") 
         {
-            Debug.Log("Palla sbatte sul braccio");
+            GameCore.current.RestartTimeAction();
         
         }
        
