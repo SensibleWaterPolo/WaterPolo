@@ -63,7 +63,7 @@ public class TouchManager : MonoBehaviour
                     RaycastHit2D hitPlayer = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskPlayer);
                     RaycastHit2D hitFight = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskFight);
                     RaycastHit2D hitGk = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskGk);
-
+                    okShoot = false;
                     if (hitGk.collider)
                     {
                         if (hitGk.collider.CompareTag("GK")) 
@@ -73,8 +73,7 @@ public class TouchManager : MonoBehaviour
                             {
                                 startPos = gk.transform.position;
                                 loadShoot = true;
-                                /* gk.CreateSignalShoot();
-                                 gk.signalOK = okShoot;*/
+                                
                                 SpawnSignal(gk.transform.position);                                
                             }
                         }
@@ -107,7 +106,7 @@ public class TouchManager : MonoBehaviour
                         if (obj != null)
                         {
                             obj.P1AddClickLocal();
-                            Debug.Log(obj.numClickP1);
+                            
                         }
 
                     }
