@@ -124,9 +124,9 @@ public class Player : MonoBehaviour
         beginPush = false;
         marcaFlag = false;
         coverOpponent = false;
-     
-       
-        
+        transform.GetChild(3).gameObject.SetActive(false);
+
+
 
     }
     public virtual void Start()
@@ -138,7 +138,8 @@ public class Player : MonoBehaviour
         brain = Random.Range(1, 2);
         waitAfterShoot = 1.5f;
         transform.position = posStart;
-     }
+        
+    }
 
     public virtual void FixedUpdate()
     {
@@ -150,7 +151,12 @@ public class Player : MonoBehaviour
             CheckArrivedToPos();
             if (swim || backSwim)
             {
+                transform.GetChild(3).gameObject.SetActive(true);
                 Swim();
+            }
+            else 
+            {
+                transform.GetChild(3).gameObject.SetActive(false);
             }
             MoveToAttPlayer();
             RestorePlayer();

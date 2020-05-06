@@ -31,6 +31,7 @@ public class GameCore : MonoBehaviour
         timeCurrentMatch = timeMatch;
         UpdateTimeGame();
         finalMenu.SetActive(false);
+        Time.timeScale = 1;
         Invoke("Play", 1f);
     }
 
@@ -51,8 +52,8 @@ public class GameCore : MonoBehaviour
             {
 
                 //Partita finita
-                Pause();
-                
+                Stop();
+                Time.timeScale = 0;
 
             }
         } else if (!isPlay && timeCurrentMatch <= 1) 
@@ -73,7 +74,7 @@ public class GameCore : MonoBehaviour
         AudioController.current.DoFischio();
         
     }
-    public void Pause()
+    public void Stop()
     {
         isPlay = false;
         Referee.current.SetArmFront();
@@ -101,8 +102,12 @@ public class GameCore : MonoBehaviour
 
     public void UpdateTimeGame() 
     {
-        GameObject.Find("Time").GetComponent<Text>().text= GetMin(timeCurrentMatch) + " : "+GetSec(timeCurrentMatch);
-        GameObject.Find("Seconds").GetComponent<Text>().text = secAction+" '' ";
+        int min = GetMin(timeCurrentMatch);
+        int sec = GetSec(timeCurrentMatch);
+        if (sec == 0)
+        { sec = 00; }
+       GameObject.Find("Time").GetComponent<Text>().text = min + " : " + sec;
+       GameObject.Find("Seconds").GetComponent<Text>().text = secAction+" '' ";
         
     }
 
