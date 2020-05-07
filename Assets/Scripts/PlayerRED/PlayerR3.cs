@@ -20,9 +20,11 @@ public class PlayerR3 : Player
         posDef = GameObject.Find("PosDefR3").transform.position;
         posMiddle = GameObject.Find("PosBattutaR3").transform.position;
          posStart = GameObject.Find("PosStartR3").transform.position;
+        posBallEndAction = GameObject.Find("DownSx").transform.position;
         posGoal = GameObject.Find("GolLineYellow").transform.position;
         opponent = GameObject.Find("PlayerY6").GetComponent<Player>();
-         armDx = true;
+        posCounter = Vector3.zero ;
+        armDx = true;
         cpuFlag = true;
     }
     public override void OnTriggerStay2D(Collider2D collision)
@@ -52,7 +54,7 @@ public class PlayerR3 : Player
         Player pr1 = GameObject.Find("PlayerR1").GetComponent<Player>();
         Player pR6 = GameObject.Find("PlayerR6").GetComponent<Player>();
         bool shoot = IA.current.DecisionShoot(this);
-        Debug.Log(name + " tiro-> " + shoot);
+        
 
         if (shoot) //Tiro in porta
         {
@@ -79,7 +81,7 @@ public class PlayerR3 : Player
             {
                 case 0:
 
-                    if (pR6.counterAttFlag && !pR6.marcaFlag)
+                   /* if (pR6.counterAttFlag && !pR6.marcaFlag)
                     {
                         destBall = GameObject.Find("PosCounterAttR6").transform.position;
                         Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -124,7 +126,7 @@ public class PlayerR3 : Player
                         return true;
                     }
 
-                    else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+                    else*/ if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
                     {
                         if (Random.value > 0.5)
                         {
@@ -163,7 +165,7 @@ public class PlayerR3 : Player
                     break;
                 case 1:
                     {
-                        if (pR6.counterAttFlag && !pR6.marcaFlag)
+                      /*  if (pR6.counterAttFlag && !pR6.marcaFlag)
                         {
                             destBall = GameObject.Find("PosCounterAttR6").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -208,7 +210,7 @@ public class PlayerR3 : Player
                             return true;
                         }
                         
-                        else if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name) && !opponent.def)
+                        else */if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name) && !opponent.def)
                         {
                             destBall = GameObject.Find("SensorBoaR6").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -257,7 +259,7 @@ public class PlayerR3 : Player
 
                 case 2:
                     {
-                        if (pR6.counterAttFlag && !pR6.marcaFlag)
+                        /*if (pR6.counterAttFlag && !pR6.marcaFlag)
                         {
                             destBall = GameObject.Find("PosCounterAttR6").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -266,7 +268,7 @@ public class PlayerR3 : Player
                             return true;
                         }
 
-                        else if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name) && IA.current.PingBoaIsFree("PlayerR3") && !opponent.def)
+                        else */if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name) && IA.current.PingBoaIsFree("PlayerR3") && !opponent.def)
                         {   
                             destBall = GameObject.Find("SensorBoaR6").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -274,7 +276,7 @@ public class PlayerR3 : Player
                             idDecisionCPU = 21;
                             return true;
                         }
-                        else if (pr1.counterAttFlag && pR5.counterAttFlag)
+                       /* else if (pr1.counterAttFlag && pR5.counterAttFlag)
                         {
                             if (Random.value > 0.5)
                             {
@@ -309,7 +311,7 @@ public class PlayerR3 : Player
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 25;
                             return true;
-                        }
+                        }*/
                         else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
                         {
                             if (Random.value > 0.5)

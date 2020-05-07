@@ -95,7 +95,7 @@ public class Battle : MonoBehaviour
         if (!whoWin) 
         {
             whoWin = true;
-            Invoke("WhoWin",3f);
+            Invoke("WhoWin",1f);
         }
         if (att.swim  || def.swim || def.keep || att.idBall==3 || def.idBall==2 || att.keep)
             StopBattle();

@@ -420,6 +420,7 @@ MonoBehaviour:
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
   arrivedFlagDef: 0
+  arrivedFlagCounterAtt: 0
   bicy: 0
   swim: 0
   keep: 0
@@ -427,6 +428,7 @@ MonoBehaviour:
   backSwim: 0
   stun: 0
   keepBoa: 0
+  swimKeep: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -437,9 +439,12 @@ MonoBehaviour:
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
   posGoal: {x: 0, y: 0, z: 0}
+  posCounter: {x: 0, y: 0, z: 0}
+  posBallEndAction: {x: 0, y: 0, z: 0}
   opponent: {fileID: 0}
   animator: {fileID: 0}
   limitVelBall: 0
+  selected: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -808,6 +813,7 @@ MonoBehaviour:
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
   arrivedFlagDef: 0
+  arrivedFlagCounterAtt: 0
   bicy: 0
   swim: 0
   keep: 0
@@ -815,6 +821,7 @@ MonoBehaviour:
   backSwim: 0
   stun: 0
   keepBoa: 0
+  swimKeep: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -825,9 +832,12 @@ MonoBehaviour:
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
   posGoal: {x: 0, y: 0, z: 0}
+  posCounter: {x: 0, y: 0, z: 0}
+  posBallEndAction: {x: 0, y: 0, z: 0}
   opponent: {fileID: 0}
   animator: {fileID: 0}
   limitVelBall: 0
+  selected: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -12259,6 +12269,7 @@ MonoBehaviour:
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
   arrivedFlagDef: 0
+  arrivedFlagCounterAtt: 0
   bicy: 0
   swim: 0
   keep: 0
@@ -12266,6 +12277,7 @@ MonoBehaviour:
   backSwim: 0
   stun: 0
   keepBoa: 0
+  swimKeep: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -12276,9 +12288,12 @@ MonoBehaviour:
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
   posGoal: {x: 0, y: 0, z: 0}
+  posCounter: {x: 0, y: 0, z: 0}
+  posBallEndAction: {x: 0, y: 0, z: 0}
   opponent: {fileID: 0}
   animator: {fileID: 0}
   limitVelBall: 0
+  selected: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -19753,6 +19768,7 @@ MonoBehaviour:
   secStart: 0
   finalMenu: {fileID: 0}
   levelCPUHard: 0
+  startSec: 0
 --- !u!114 &519420034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20065,6 +20081,7 @@ MonoBehaviour:
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
   arrivedFlagDef: 0
+  arrivedFlagCounterAtt: 0
   bicy: 0
   swim: 0
   keep: 0
@@ -20072,6 +20089,7 @@ MonoBehaviour:
   backSwim: 0
   stun: 0
   keepBoa: 0
+  swimKeep: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -20082,9 +20100,12 @@ MonoBehaviour:
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
   posGoal: {x: 0, y: 0, z: 0}
+  posCounter: {x: 0, y: 0, z: 0}
+  posBallEndAction: {x: 0, y: 0, z: 0}
   opponent: {fileID: 0}
   animator: {fileID: 0}
   limitVelBall: 0
+  selected: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -25612,6 +25633,36 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &673034370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 673034371}
+  m_Layer: 0
+  m_Name: PosCounterAttY6
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &673034371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 673034370}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1061900262}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &677331193
 GameObject:
   m_ObjectHideFlags: 0
@@ -42098,7 +42149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950950723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -23, y: -32, z: 0}
+  m_LocalPosition: {x: -17, y: -40.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2062114453}
@@ -42230,7 +42281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957755645}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.7, y: 34.5, z: 0}
+  m_LocalPosition: {x: -17.8, y: 46.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2062114453}
@@ -42554,6 +42605,7 @@ MonoBehaviour:
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
   arrivedFlagDef: 0
+  arrivedFlagCounterAtt: 0
   bicy: 0
   swim: 0
   keep: 0
@@ -42561,6 +42613,7 @@ MonoBehaviour:
   backSwim: 0
   stun: 0
   keepBoa: 0
+  swimKeep: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -42571,9 +42624,12 @@ MonoBehaviour:
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
   posGoal: {x: 0, y: 0, z: 0}
+  posCounter: {x: 0, y: 0, z: 0}
+  posBallEndAction: {x: 0, y: 0, z: 0}
   opponent: {fileID: 0}
   animator: {fileID: 0}
   limitVelBall: 0
+  selected: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -42836,6 +42892,69 @@ Transform:
   m_Children: []
   m_Father: {fileID: 521265665}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1052537531
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1052537532}
+  m_Layer: 0
+  m_Name: PosCounterAttY1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1052537532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1052537531}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 10, y: 34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1061900262}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1061900261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1061900262}
+  m_Layer: 0
+  m_Name: PosBallCounterAttY
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1061900262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061900261}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1052537532}
+  - {fileID: 2106722172}
+  - {fileID: 673034371}
+  m_Father: {fileID: 1486638311}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1064042061
 GameObject:
@@ -44271,6 +44390,7 @@ MonoBehaviour:
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
   arrivedFlagDef: 0
+  arrivedFlagCounterAtt: 0
   bicy: 0
   swim: 0
   keep: 0
@@ -44278,6 +44398,7 @@ MonoBehaviour:
   backSwim: 0
   stun: 0
   keepBoa: 0
+  swimKeep: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -44288,9 +44409,12 @@ MonoBehaviour:
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
   posGoal: {x: 0, y: 0, z: 0}
+  posCounter: {x: 0, y: 0, z: 0}
+  posBallEndAction: {x: 0, y: 0, z: 0}
   opponent: {fileID: 0}
   animator: {fileID: 0}
   limitVelBall: 0
+  selected: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -50353,6 +50477,7 @@ Transform:
   - {fileID: 343064259}
   - {fileID: 2062114453}
   - {fileID: 521265665}
+  - {fileID: 1061900262}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60406,6 +60531,7 @@ MonoBehaviour:
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
   arrivedFlagDef: 0
+  arrivedFlagCounterAtt: 0
   bicy: 0
   swim: 0
   keep: 0
@@ -60413,6 +60539,7 @@ MonoBehaviour:
   backSwim: 0
   stun: 0
   keepBoa: 0
+  swimKeep: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -60423,9 +60550,12 @@ MonoBehaviour:
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
   posGoal: {x: 0, y: 0, z: 0}
+  posCounter: {x: 0, y: 0, z: 0}
+  posBallEndAction: {x: 0, y: 0, z: 0}
   opponent: {fileID: 0}
   animator: {fileID: 0}
   limitVelBall: 0
+  selected: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -60572,7 +60702,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1567109496}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.4, y: -32, z: 0}
+  m_LocalPosition: {x: 16.8, y: -41.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2062114453}
@@ -71499,7 +71629,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1816341827}
   m_Layer: 0
-  m_Name: 'UpDx '
+  m_Name: UppDx
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71513,7 +71643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1816341826}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 22.4, y: 35.6, z: 0}
+  m_LocalPosition: {x: 21.9, y: 45.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2062114453}
@@ -81340,7 +81470,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872280686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 20.9, y: -5.4, z: 0}
+  m_LocalPosition: {x: 21.7, y: -5.6, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -82324,6 +82454,7 @@ MonoBehaviour:
   arrivedFlagAtt: 0
   arrivedFlagBall: 0
   arrivedFlagDef: 0
+  arrivedFlagCounterAtt: 0
   bicy: 0
   swim: 0
   keep: 0
@@ -82331,6 +82462,7 @@ MonoBehaviour:
   backSwim: 0
   stun: 0
   keepBoa: 0
+  swimKeep: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -82341,9 +82473,12 @@ MonoBehaviour:
   nextPosFinal: {x: 0, y: 0, z: 0}
   posToWatch: {x: 0, y: 0, z: 0}
   posGoal: {x: 0, y: 0, z: 0}
+  posCounter: {x: 0, y: 0, z: 0}
+  posBallEndAction: {x: 0, y: 0, z: 0}
   opponent: {fileID: 0}
   animator: {fileID: 0}
   limitVelBall: 0
+  selected: 0
   idTeam: 0
   idBall: 0
   idAnim: 0
@@ -82820,6 +82955,36 @@ Transform:
   m_Children: []
   m_Father: {fileID: 94486027}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2106722171
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2106722172}
+  m_Layer: 0
+  m_Name: PosCounterAttY5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2106722172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2106722171}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -10, y: 34, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1061900262}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2120718012
 GameObject:

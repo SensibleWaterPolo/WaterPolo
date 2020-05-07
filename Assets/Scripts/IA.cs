@@ -69,7 +69,7 @@ public class IA : MonoBehaviour
 
     public Vector3 ShootNormalR3() 
     {
-        float zoneId= Random.Range(0, 100);
+        float zoneId= GetRandom();
         Vector3 posShoot= Vector3.zero;
         if (0 <= zoneId && zoneId < 15) 
         {
@@ -101,7 +101,7 @@ public class IA : MonoBehaviour
 
     public Vector3 ShootHardR3()
     {
-        float zoneId = Random.Range(0, 100);
+        float zoneId = GetRandom();
         Vector3 posShoot = Vector3.zero;
         if (0 <= zoneId && zoneId < 15)
         {
@@ -132,7 +132,7 @@ public class IA : MonoBehaviour
     }
     public Vector3 ShootNormalR1()
     {
-        float zoneId = Random.Range(0, 100);
+        float zoneId = GetRandom();
         Vector3 posShoot = Vector3.zero;
         if (0 <= zoneId && zoneId < 10)
         {
@@ -164,7 +164,7 @@ public class IA : MonoBehaviour
     }
     public Vector3 ShootHardR1()
     {
-        float zoneId = Random.Range(0, 100);
+        float zoneId = GetRandom();
         Vector3 posShoot = Vector3.zero;
         if (0 <= zoneId && zoneId < 5)
         {
@@ -196,7 +196,7 @@ public class IA : MonoBehaviour
 
     public Vector3 ShootNormalR5()
     {
-        float zoneId = Random.Range(0, 100);
+        float zoneId = GetRandom();
         Vector3 posShoot = Vector3.zero;
         if (0 <= zoneId && zoneId < 20)
         {
@@ -228,7 +228,7 @@ public class IA : MonoBehaviour
 
     public Vector3 ShootHardR5()
     {
-        float zoneId = Random.Range(0, 100);
+        float zoneId = GetRandom();
         Vector3 posShoot = Vector3.zero;
         if (0 <= zoneId && zoneId < 5)
         {
@@ -262,9 +262,17 @@ public class IA : MonoBehaviour
   //Decisione di passare o tirare
     public bool DecisionShoot(Player player) // prende la decisione di tirare o passare
     {
-        float prob = Random.Range(0, 100);
+        float prob = Random.Range(0,100);
          bool shoot = false;
         float posY = Ball.current.transform.position.y;
+        if (GameCore.current.secCurrent < 4) 
+        {
+            if (Random.value > 0.5)
+            {
+                return true;
+            }
+        }
+        
         if (posY > 17.5) //Palla nella zona di difesa 
         {
             if (prob < 0)
@@ -282,7 +290,7 @@ public class IA : MonoBehaviour
             if (player.name== "PlayerR3") 
             {
                
-                if (prob < 40)
+                if (prob < 30)
                 {
                     return true;
                 }
@@ -460,8 +468,41 @@ public class IA : MonoBehaviour
         }
 
         return id;
-    
-    
-    
+      
     }
+    public bool BoaWatchGk(int idTeam)
+    {
+        LayerMask mask = 1 << 4;
+        RaycastHit2D hitBoa;
+        if (idTeam == 1)
+        {
+            hitBoa = Physics2D.Raycast(GameObject.Find("PlayerR6").transform.parent.transform.position, (Ball.current.transform.position - GameObject.Find("PlayerR6").transform.position).normalized, 20, mask);
+        }
+        else 
+        {
+            hitBoa = Physics2D.Raycast(GameObject.Find("PlayerY6").transform.parent.transform.position, (Ball.current.transform.position - GameObject.Find("PlayerY6").transform.position).normalized, 20, mask);
+        }
+
+        if (hitBoa.collider != null)
+        {
+            if (hitBoa.collider.CompareTag("ShootLine"))
+            {
+                return true;
+            }
+            else { return false; }
+        }
+        else {
+            return false;
+        }
+    }
+
+
+
+    public int GetRandom() 
+    {
+        int prob= Random.Range(0, 100);
+        Debug.Log("Valore estratto -> "+prob);
+        return prob;
+    }
+    
 }

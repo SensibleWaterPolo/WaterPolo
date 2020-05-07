@@ -17,6 +17,7 @@ public class GameCore : MonoBehaviour
     public float secStart;
     public GameObject finalMenu;
     public bool levelCPUHard; //true se livello CPU hard, false se normal
+    public bool startSec;
 
     private void Awake()
     {
@@ -34,6 +35,7 @@ public class GameCore : MonoBehaviour
         UpdateTimeGame();
         finalMenu.SetActive(false);
         Time.timeScale = 1;
+        startSec = false;
         Invoke("Play", 1f);
     }
 
@@ -48,9 +50,17 @@ public class GameCore : MonoBehaviour
 
                 timeCurrentMatch = timeMatch - time;
 
-               if (secCurrent > 1)
+                if (secCurrent > 1 && startSec)
                 {
                     UpdateSecond();
+                }
+                else 
+                {
+                    if (Ball.current.player != null ) 
+                    {
+                        ShootPlayer();
+                    }
+                    startSec = false;
                 }
 
                 UpdateTimeGame();
@@ -113,9 +123,9 @@ public class GameCore : MonoBehaviour
     {
         int min = GetMin(timeCurrentMatch);
         int sec = GetSec(timeCurrentMatch);
-        if (sec == 0)
+        if (sec <10 )
         {
-            GameObject.Find("Time").GetComponent<Text>().text = min + " : 00"; 
+            GameObject.Find("Time").GetComponent<Text>().text = min + " : 0"+sec; 
         }
         else
         {
@@ -163,6 +173,28 @@ public class GameCore : MonoBehaviour
        
     }
 
+    public void ShootPlayer()
+    {
+        Player player = Ball.current.player;
+        if (player.keep)
+        {
+            player.LoadShoot(player.posBallEndAction, false, 0);
 
+        }
+        else if (player.keepBoa) 
+        {
+            if (IA.current.BoaWatchGk(player.idTeam))
+
+            {
+                player.LoadShoot(player.posBallEndAction, false, 3);
+            }
+            else 
+            {
+                player.LoadShoot(player.posBallEndAction, false, 1);
+
+            }
+               
+        }
+    }
 
 }

@@ -260,6 +260,8 @@ public class GoalKeeper : MonoBehaviour
         {
             Invoke("BrainCpu", 2);
         }
+        GameCore.current.RestartTimeAction();
+        GameCore.current.startSec = true;
     }
 
     public void SetShoot()

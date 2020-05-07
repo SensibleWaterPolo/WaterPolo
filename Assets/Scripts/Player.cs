@@ -35,7 +35,8 @@ public class Player : MonoBehaviour
     public bool arrivedFlagAtt;//M: true se è arrivato a destinazione
     public bool arrivedFlagBall;//M: true se è arrivato a destinazione
     public bool arrivedFlagDef;//M: true se è arrivato a destinazione
-    
+    public bool arrivedFlagCounterAtt; 
+
     [Header("STATE")]
     public bool bicy; //M: bicicletta
     public bool swim; //M: nuota
@@ -59,6 +60,8 @@ public class Player : MonoBehaviour
     public Vector3 nextPosFinal;
     public Vector3 posToWatch; //Posizione da guardare
     public Vector3 posGoal;
+    public Vector3 posCounter;
+    public Vector3 posBallEndAction;
 
     [Header("OPPONENT")]//M:fa riferimento al diretto avversario
     public Player opponent;
@@ -72,6 +75,8 @@ public class Player : MonoBehaviour
     protected int ballExit = 0; //M: risolve un bug per il quale la palla esce due volte dalla collisione
 
     private bool pause; //M: per la pausa del gioco
+
+    public bool selected; //true se il giocatore è selezionato per tirare o passare
 
 
     //PREFAB FIGHT
@@ -127,6 +132,7 @@ public class Player : MonoBehaviour
         coverOpponent = false;
         swimKeep = false;
         transform.GetChild(3).gameObject.SetActive(false);
+        selected = false;
 
 
 
@@ -151,7 +157,7 @@ public class Player : MonoBehaviour
             UpdateState();
             UpdateFlagCounterAtt();
             CheckArrivedToPos();
-            if (swim || backSwim)
+            if (swim || backSwim || swimKeep)
             {
                 transform.GetChild(3).gameObject.SetActive(true);
                 Swim();
@@ -207,6 +213,12 @@ public class Player : MonoBehaviour
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO SWIM
             // SWIM : La palla è libera NON nel mio settore ma sono quello più vicino della mia squadra
 
+            //Scatto iniziale
+            if ( idBall==0 &&  Ball.current.CheckBallIsPlayable(0) && Ball.current.idTeam == -1 ) 
+            {
+                idDecisionMaking = 22;
+                SetSwim(posAtt,false);
+            }
 
             //SWIM: Palla vicina al boa o al marca boa
             if (idBall == 1 && marcaFlag && Ball.current.CheckBallIsPlayable(0) && distaceBall < opponent.distaceBall)
@@ -253,7 +265,7 @@ public class Player : MonoBehaviour
             }
 
             //SWIM: palla in possesso di un mio compagno
-            if (idBall == 2 && !arrivedFlagAtt && !stun && !fightFlag)
+            if (idBall == 2 && !arrivedFlagAtt && !stun && !fightFlag && !swimKeep)
             {
                 if (!counterAttFlag)
                 {
@@ -531,9 +543,15 @@ public class Player : MonoBehaviour
            
         }
         else
-        {       
-          
-            SetBicy();
+        {
+            if (swimKeep)
+            {
+                SetKeep();
+            }
+            else
+            {
+                SetBicy();
+            }
         }
     }
 
@@ -554,14 +572,18 @@ public class Player : MonoBehaviour
             swimKeep = false;
             animator.SetInteger("IdAnim", 2);
             Utility.RotateObjToPoint(this.gameObject, posGoal);
+            
             if (cpuFlag)
             {
                 Invoke("BrainCpu", brain);
             }
+            if (!arrivedFlagAtt && !selected) {
+                Invoke("SetSwimKeep", 2);
+                    }
         }
    }
     public void SetKeepBoa() 
-    { if(!keep && !keepBoa)
+    { if(!keep && !keepBoa && !selected)
             {
             keepBoa = true;
             keep = false;
@@ -661,13 +683,14 @@ public class Player : MonoBehaviour
         }
         destShoot = directions;
         flagShoot = flag;
-
+        Debug.Log(name + " TIRO->"+flag+"  dir->" + directions);
     }
 
     public void Shoot()  //M: chiamata dall'animazione
     {
         Ball.current.shoot = shoot;
         Ball.current.pas = pass;
+        Utility.RotateObjToPoint(this.gameObject,destShoot);
         Ball.current.ShootBall(destShoot, flagShoot,0);
         
         Invoke("UpdateLoadShoot", waitAfterShoot); //tempo di attesa dopo aver tirato
@@ -721,8 +744,11 @@ public class Player : MonoBehaviour
 
         if (keep && !swimKeep) 
         {
+            
+            posFinal = posAtt;
             swimKeep = true;
             keepBoa = false;
+            swim = false;
             stun = false;
             bicy = false;
             keep = false;
@@ -811,7 +837,7 @@ public class Player : MonoBehaviour
                  LayerMask mask = 1 << 9; //strato player
                  Vector3 posSensor = transform.GetChild(6).transform.position;
                  Vector3 dir = (opponent.transform.position - posSensor).normalized;
-                 float dist = 1;
+                 float dist = 4;
                  RaycastHit2D hitAttPlayer = Physics2D.Raycast(posSensor, dir, dist, mask);
                 Debug.DrawRay(posSensor, dir * dist, Color.black, 5f);
                  if (hitAttPlayer.collider != null)

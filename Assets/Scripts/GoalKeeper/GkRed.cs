@@ -49,7 +49,7 @@ public class GkRed : GoalKeeper
         UpdateDist_PosBall();
         if (transform.position != finalPos)
             arrived = false;
-        if (!Ball.current.fieldYellow)
+        if (!Ball.current.fieldYellow && Ball.current.idTeam!=idTeam && Ball.current.idTeam > -1)
         {
             if (-8 <= posXBall && posXBall <= 8)
                 finalPos = posMid;
@@ -69,9 +69,9 @@ public class GkRed : GoalKeeper
         Player pr1 = GameObject.Find("PlayerR1").GetComponent<Player>();
         Player pR3 = GameObject.Find("PlayerR3").GetComponent<Player>();
        
-        if (pr1.counterAttFlag && pR5.counterAttFlag)
-               {
-                        if (Random.value > 0.5)
+          /*   if (pr1.counterAttFlag && pR5.counterAttFlag)
+             {
+                       if (Random.value > 0.5)
                         {
                             destBall = GameObject.Find("PosCounterAttR5").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -85,7 +85,7 @@ public class GkRed : GoalKeeper
                             this.LoadShoot(destBall);
                             return true;
                         }
-                    }
+             }
 
                     else if (pR5.counterAttFlag)
                     {
@@ -101,7 +101,7 @@ public class GkRed : GoalKeeper
                         this.LoadShoot(destBall);
                         return true;
                     }
-                        else if (pR3.arrivedFlagAtt)
+                        else*/ if (pR3.arrivedFlagAtt)
                         {
                         destBall = pR3.transform.position;
                         Utility.RotateObjToPoint(this.gameObject, destBall);

@@ -49,6 +49,7 @@ public class  Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         shootFlag = true;
         isShooted = false;
+        idTeam = -1;
                  
     }
 
@@ -208,8 +209,9 @@ public class  Ball : MonoBehaviour
         isShooted = false;
         this.player = player;
         if (player.idTeam != idTeam)
-        {
+        {   
             GameCore.current.RestartTimeAction();
+            GameCore.current.startSec = true;
             idTeam = player.idTeam;
         }
         

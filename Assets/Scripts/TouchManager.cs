@@ -90,9 +90,15 @@ public class TouchManager : MonoBehaviour
                             if (!GameObject.Find(obj.name).GetComponent<Player>().cpuFlag)
                             {
                                 player = GameObject.Find(obj.name).GetComponent<Player>();
-                                if (player.keep || player.keepBoa )
+                                if (player.keep || player.keepBoa || player.swimKeep )
                                 {
                                     loadShoot = true;
+                                    if (player.swimKeep) 
+                                    {
+                                        player.selected = true;
+                                        player.SetKeep();
+                                    
+                                    }
                                     SpawnSignal(player.transform.position);
                                 }
                             }
@@ -121,7 +127,7 @@ public class TouchManager : MonoBehaviour
 
                     if (player != null)
                     {
-
+                        player.selected = true;
                         
                         // Debug.Log(Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position), player.transform.position) + " : distanza del passaggio o tiro");
                         if (player.keep && !player.keepBoa)
@@ -209,6 +215,7 @@ public class TouchManager : MonoBehaviour
                         if (okShoot && !player.keepBoa)
                         {
                             player.LoadShoot(destination, shootFlag, 0);  //se non è una boa in possesso di palla
+                            player.selected = false;
 
                         }
                         else                //IL GIOCATORE è UNA BOA BISOGNA DECIDERE IL TIPO DI TIRO A SENCONDA DI DOVE INDIRIZZIAMO IL CURSORE

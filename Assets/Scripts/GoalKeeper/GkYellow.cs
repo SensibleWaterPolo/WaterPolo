@@ -52,7 +52,7 @@ public class GkYellow : GoalKeeper
            UpdateDist_PosBall();
         if (transform.position != finalPos)
             arrived = false;
-        if (Ball.current.fieldYellow)
+        if (Ball.current.fieldYellow && Ball.current.idTeam!=idTeam && Ball.current.idTeam>-1)
             {
                 if (-8 <= posXBall && posXBall <= 8)
                     finalPos = posMid;

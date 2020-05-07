@@ -15,7 +15,8 @@ public class PlayerR6 : Player
         posDef = GameObject.Find("PosDefR6").transform.position;
         posMiddle = GameObject.Find("PosBattutaR6").transform.position;
         posStart = GameObject.Find("PosStartR6").transform.position;
-        
+        posCounter = GameObject.Find("PosCounterAttR6").transform.position;
+        posBallEndAction = GameObject.Find("DownDx").transform.position;
         posGoal = GameObject.Find("GolLineYellow").transform.position;
         opponent = GameObject.Find("PlayerY3").GetComponent<Player>();
         boaFlag = true;
@@ -152,7 +153,7 @@ public class PlayerR6 : Player
             {
                 case 0:
 
-                  if (pr1.counterAttFlag && pR5.counterAttFlag)
+               /*   if (pr1.counterAttFlag && pR5.counterAttFlag)
                     {
                         if (Random.value > 0.5)
                         {
@@ -189,7 +190,7 @@ public class PlayerR6 : Player
                         return true;
                     }
 
-                    else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+                    else*/ if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
                     {
                         if (Random.value > 0.5)
                         {
@@ -228,7 +229,7 @@ public class PlayerR6 : Player
                     break;
                 case 1:
                     {
-                     if (pr1.counterAttFlag && pR5.counterAttFlag)
+                     /*if (pr1.counterAttFlag && pR5.counterAttFlag)
                         {
                             if (Random.value > 0.5)
                             {
@@ -265,7 +266,7 @@ public class PlayerR6 : Player
                             return true;
                         }
 
-                        else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+                        else*/ if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
                         {
                             if (Random.value > 0.5)
                             {
@@ -306,7 +307,7 @@ public class PlayerR6 : Player
 
                 case 2:
                     {
-                     if (pr1.counterAttFlag && pR5.counterAttFlag)
+                    /*if (pr1.counterAttFlag && pR5.counterAttFlag)
                         {
                             if (Random.value > 0.5)
                             {
@@ -343,7 +344,7 @@ public class PlayerR6 : Player
                             idDecisionCPU = 22;
                             return true;
                         }
-                        else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+                        else */if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
                         {
                             if (Random.value > 0.5)
                             {
