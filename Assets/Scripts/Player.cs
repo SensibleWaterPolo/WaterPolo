@@ -44,6 +44,7 @@ public class Player : MonoBehaviour
     public bool backSwim;//M:nuota sul dorso
     public bool stun; //M:affogato
     public bool keepBoa; //M: quando la boa è in possesso di palla ed è spalle alla porta
+    public bool swimKeep; //nuota con la palla
 
     [Header("SHOOT")]
     public bool loadShoot;
@@ -124,6 +125,7 @@ public class Player : MonoBehaviour
         beginPush = false;
         marcaFlag = false;
         coverOpponent = false;
+        swimKeep = false;
         transform.GetChild(3).gameObject.SetActive(false);
 
 
@@ -468,6 +470,7 @@ public class Player : MonoBehaviour
             loadShoot = false;
             ballFlag = false;
             stun = false;
+            swimKeep = false;
             animator.SetInteger("IdAnim", 0);
 
             if (arrivedFlagAtt)
@@ -502,6 +505,7 @@ public class Player : MonoBehaviour
             bicy = false;
             def = false;
             loadShoot = false;
+            swimKeep = false;
             stun = false;
             if (_backSwim)
             {
@@ -547,7 +551,8 @@ public class Player : MonoBehaviour
             loadShoot = false;
             ballFlag = true;
             stun = false;
-             animator.SetInteger("IdAnim", 2);
+            swimKeep = false;
+            animator.SetInteger("IdAnim", 2);
             Utility.RotateObjToPoint(this.gameObject, posGoal);
             if (cpuFlag)
             {
@@ -567,6 +572,7 @@ public class Player : MonoBehaviour
             loadShoot = false;
             ballFlag = true;
             stun = false;
+            swimKeep = false;
             animator.SetInteger("IdAnim", 20);
             if (cpuFlag)
             {
@@ -584,6 +590,7 @@ public class Player : MonoBehaviour
         def = false;
         loadShoot = true;
         stun = false;
+        swimKeep = false;
         keepBoa = false;
         animator.SetInteger("IdAnim", 3);
     }
@@ -596,6 +603,7 @@ public class Player : MonoBehaviour
         bicy = false;
         def = false;
         loadShoot = true;
+        swimKeep = false;
         stun = false;
         keepBoa = false;
         Ball.current.transform.position = transform.GetChild(9).position;
@@ -610,6 +618,7 @@ public class Player : MonoBehaviour
         def = false;
         loadShoot = true;
         stun = false;
+        swimKeep = false;
         keepBoa = false;
         Ball.current.transform.position = transform.GetChild(8).position;
         animator.SetInteger("IdAnim", 22);
@@ -624,6 +633,7 @@ public class Player : MonoBehaviour
         loadShoot = true;
         stun = false;
         keepBoa = false;
+        swimKeep = false;
         animator.SetInteger("IdAnim", 23);
     }
     public void LoadShoot(Vector3 directions, bool flag, int idShoot) //idShoot= 0: classico, 1 rovesciata, 2 sciarpa, 3 colonnello
@@ -677,6 +687,7 @@ public class Player : MonoBehaviour
             bicy = false;
             def = true;
             ballFlag = false;
+            swimKeep = false;
             stun = false;
             keepBoa = false;
             animator.SetInteger("IdAnim", 4);
@@ -698,11 +709,32 @@ public class Player : MonoBehaviour
             bicy = false;
             def = false;
             ballFlag = false;
+            swimKeep = false;
             animator.SetInteger("IdAnim", 5);
             Utility.RotateObjToPoint(this.gameObject, posFinal);
             
         }
         
+    }
+    public void SetSwimKeep() 
+    {
+
+        if (keep && !swimKeep) 
+        {
+            swimKeep = true;
+            keepBoa = false;
+            stun = false;
+            bicy = false;
+            keep = false;
+            backSwim = false;
+            bicy = false;
+            def = false;
+            ballFlag = false;
+            animator.SetInteger("IdAnim", 12);
+            Utility.RotateObjToPoint(this.gameObject, posFinal);
+         }
+    
+    
     }
     
        

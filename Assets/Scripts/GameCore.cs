@@ -12,8 +12,9 @@ public class GameCore : MonoBehaviour
     public float time = 0;
     public float timeStart;
     public float secAction;
+    public float secCurrent;
     public float timeCurrentMatch;
-    public float second;
+    public float secStart;
     public GameObject finalMenu;
     public bool levelCPUHard; //true se livello CPU hard, false se normal
 
@@ -29,6 +30,7 @@ public class GameCore : MonoBehaviour
     {
         Application.targetFrameRate = 60;
         timeCurrentMatch = timeMatch;
+        secCurrent = secAction;
         UpdateTimeGame();
         finalMenu.SetActive(false);
         Time.timeScale = 1;
@@ -46,8 +48,7 @@ public class GameCore : MonoBehaviour
 
                 timeCurrentMatch = timeMatch - time;
 
-                Debug.Log("secAction upade = " + secAction);
-                if (secAction>0)
+               if (secCurrent > 1)
                 {
                     UpdateSecond();
                 }
@@ -103,9 +104,9 @@ public class GameCore : MonoBehaviour
 
     public void RestartTimeAction() 
     {
-        secAction = 15f;
+        secCurrent = secAction;
         StartSecond();
-        Debug.Log("secAction restart = " + secAction);
+       
     }
 
     public void UpdateTimeGame() 
@@ -113,9 +114,14 @@ public class GameCore : MonoBehaviour
         int min = GetMin(timeCurrentMatch);
         int sec = GetSec(timeCurrentMatch);
         if (sec == 0)
-        { sec = 00; }
-       GameObject.Find("Time").GetComponent<Text>().text = min + " : " + sec;
-       GameObject.Find("Seconds").GetComponent<Text>().text = secAction+" '' ";
+        {
+            GameObject.Find("Time").GetComponent<Text>().text = min + " : 00"; 
+        }
+        else
+        {
+            GameObject.Find("Time").GetComponent<Text>().text = min + " : " + sec;
+        }
+        GameObject.Find("Seconds").GetComponent<Text>().text = Mathf.FloorToInt(secCurrent) +" '' ";
         
     }
 
@@ -146,17 +152,15 @@ public class GameCore : MonoBehaviour
     }
     public void UpdateSecond()
     {
-        Debug.Log("StartSec = " + second);
-        Debug.Log("Time.time = " + Time.time);
-        Debug.Log("secActionupadesec = " + secAction);
-        secAction = secAction - Time.time - second;
-        Debug.Log("secAction = " + secAction);
+       
+        secCurrent = secAction - (Time.time - secStart);
+        
     }
 
     public void StartSecond()
     {
-        second = Time.time;
-        Debug.Log("StartSec = " + second);
+        secStart= Time.time;
+       
     }
 
 
