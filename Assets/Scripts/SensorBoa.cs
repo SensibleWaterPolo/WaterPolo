@@ -33,7 +33,7 @@ public class SensorBoa : MonoBehaviour
         }
         else if (playerBoa.marcaFlag && !playerBoa.keepBoa) 
         {
-            playerBoa.GetComponent<CircleCollider2D>().enabled = true;
+            playerBoa.GetComponent<CircleCollider2D>().enabled = false;
         } 
     
         
@@ -41,22 +41,25 @@ public class SensorBoa : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-        if (collision.gameObject.name == "Ball" && Ball.current.freeFlag && Ball.current.speed < 5 && playerBoa.marcaFlag && !playerBoa.keepBoa && !Ball.current.isShooted && !Ball.current.respawn) 
-        {
-            
-            playerBoa.SetKeepBoa();
-            playerBoa.SetBallBoa();
-        }
+
+
+      
+            if (collision.CompareTag("Ball") && !playerBoa.keep && !playerBoa.keepBoa && !playerBoa.swimKeep && !playerBoa.loadShoot && Ball.current.CheckBallIsPlayable(4) && playerBoa. marcaFlag)
+            {
+                Debug.Log(name + "prendo possesso" + Time.time);
+                playerBoa.SetKeepBoa();
+            }
+       
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
+
        
-        if (collision.gameObject.name == "Ball" && Ball.current.freeFlag &&Ball.current.speed<5 && playerBoa.marcaFlag && !playerBoa.keepBoa && !Ball.current.isShooted && !Ball.current.respawn) 
-        {
-            
-            playerBoa.SetKeepBoa();
-            playerBoa.SetBallBoa();
-        }
-    }
-}
+            if (collision.CompareTag("Ball") && !playerBoa.keep && !playerBoa.keepBoa && !playerBoa.swimKeep && !playerBoa.loadShoot && Ball.current.CheckBallIsPlayable(4) && playerBoa.marcaFlag)
+            {
+                Debug.Log(name + "prendo possesso" + Time.time);
+                playerBoa.SetKeepBoa();
+            }
+
+         
+    }}

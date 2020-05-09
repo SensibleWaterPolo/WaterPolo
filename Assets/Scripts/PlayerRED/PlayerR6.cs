@@ -26,51 +26,50 @@ public class PlayerR6 : Player
     public override void FixedUpdate()
     {
         base.FixedUpdate();
-        
+        if (marcaFlag) {
+            if (keepBoa) { GetComponent<CircleCollider2D>().enabled = true; }
+            else {
+                GetComponent<CircleCollider2D>().enabled = true;
+            }
+        }
     }
 
     public override void OnTriggerEnter2D(Collider2D collision)
     {
-       // base.OnTriggerEnter2D(collision);
+        base.OnTriggerEnter2D(collision);
         if (collision.CompareTag("Ball"))
         {
-            if (Ball.current.CheckBallIsPlayable(3) && marcaFlag && !keepBoa)
+            if (collision.CompareTag("Ball") && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && marcaFlag)
             {
+                Debug.Log(name+"prendo possesso"+Time.time);
                 SetKeepBoa();
-                SetBallBoa();
+                // SetBallBoa();
 
             }
-            else if (Ball.current.CheckBallIsPlayable(3) && !marcaFlag && !keep)
-                
-            {
-                SetKeep();
-                SetBall();
-            }
-
-
         }
+
     }
 
     public override void OnTriggerStay2D(Collider2D collision)
     {
       //  base.OnTriggerStay2D(collision);
 
-        if (collision.CompareTag("Ball"))
+      /*  if (collision.CompareTag("Ball"))
         {
-            if (Ball.current.CheckBallIsPlayable(3) && marcaFlag && !keepBoa && !loadShoot)
+            if (Ball.current.CheckBallIsPlayable(3) && marcaFlag && !animator.GetCurrentAnimatorStateInfo(0).IsName("Keep") && !animator.GetCurrentAnimatorStateInfo(0).IsName("KeepBoa"))
             {
                 SetKeepBoa();
-                SetBallBoa();
+             //   SetBallBoa();
 
             }
-            else if (Ball.current.CheckBallIsPlayable(3) && !marcaFlag && !keep)
+          /*  else if (Ball.current.CheckBallIsPlayable(3) && !marcaFlag && !keep)
 
             {
                 SetKeep();
-                SetBall();
+              //  SetBall();
             }
-
-        }
+            
+        }*/
     }
 
     public override bool PlayerCpu()

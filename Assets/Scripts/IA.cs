@@ -275,7 +275,7 @@ public class IA : MonoBehaviour
         {
             if (Random.value > 0.5)
             {
-                Debug.Log(player.name+"Tiro per lo scadere");
+               
                 return true;
             }
         }

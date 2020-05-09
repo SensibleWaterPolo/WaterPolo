@@ -37,7 +37,15 @@ public class PlayerY3 : Player
             battlePrefab.CreateBattle(opponent, this);
         }
 
-      
-            
+        GameObject obj = collision.gameObject;
+
+        if (obj.tag == "Ball" && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(20) && !marcaFlag)
+        {
+
+            Ball.current.freeFlag = false;
+            SetKeep();
+
+        }
+
     }
 }

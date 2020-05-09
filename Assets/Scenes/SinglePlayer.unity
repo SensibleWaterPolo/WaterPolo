@@ -404,14 +404,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectorAction: 0
+  idDecisionMaking: 0
+  idDecisionCPU: 0
+  idBall: 0
+  idAnim: 0
   speed: 5
   pass: 0
   shoot: 10
   stamina: 0
   brain: 0
   clickCPU: {x: 0, y: 0}
-  idDecisionMaking: 0
-  idDecisionCPU: 0
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
@@ -446,8 +448,6 @@ MonoBehaviour:
   limitVelBall: 0
   selected: 0
   idTeam: 0
-  idBall: 0
-  idAnim: 0
   marcaFlag: 0
   boaFlag: 0
   angleBoaZ: 0
@@ -798,14 +798,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectorAction: 0
+  idDecisionMaking: 0
+  idDecisionCPU: 0
+  idBall: 0
+  idAnim: 0
   speed: 20
   pass: 0
   shoot: 10
   stamina: 0
   brain: 0
   clickCPU: {x: 0, y: 0}
-  idDecisionMaking: 0
-  idDecisionCPU: 0
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
@@ -840,8 +842,6 @@ MonoBehaviour:
   limitVelBall: 0
   selected: 0
   idTeam: 0
-  idBall: 0
-  idAnim: 0
   marcaFlag: 0
   boaFlag: 0
   angleBoaZ: 0
@@ -6459,7 +6459,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 174542286}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.38, y: -38.2, z: 0}
+  m_LocalPosition: {x: -0.38, y: -38.5, z: 0}
   m_LocalScale: {x: 15.800275, y: 13.910789, z: 13.9107895}
   m_Children: []
   m_Father: {fileID: 776994317}
@@ -12255,14 +12255,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectorAction: 0
+  idDecisionMaking: 0
+  idDecisionCPU: 0
+  idBall: 0
+  idAnim: 0
   speed: 20
   pass: 0
   shoot: 10
   stamina: 0
   brain: 0
   clickCPU: {x: 0, y: 0}
-  idDecisionMaking: 0
-  idDecisionCPU: 0
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
@@ -12297,8 +12299,6 @@ MonoBehaviour:
   limitVelBall: 0
   selected: 0
   idTeam: 0
-  idBall: 0
-  idAnim: 0
   marcaFlag: 0
   boaFlag: 0
   angleBoaZ: 0
@@ -20468,14 +20468,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectorAction: 0
+  idDecisionMaking: 0
+  idDecisionCPU: 0
+  idBall: 0
+  idAnim: 0
   speed: 24.4
   pass: 0
   shoot: 10
   stamina: 0
   brain: 0
   clickCPU: {x: 0, y: 0}
-  idDecisionMaking: 0
-  idDecisionCPU: 0
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
@@ -20510,8 +20512,6 @@ MonoBehaviour:
   limitVelBall: 0
   selected: 0
   idTeam: 0
-  idBall: 0
-  idAnim: 0
   marcaFlag: 0
   boaFlag: 0
   angleBoaZ: 0
@@ -26170,11 +26170,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 677331193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2, y: -37.5, z: 0}
+  m_LocalPosition: {x: -0.2, y: -36.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924167163}
-  m_RootOrder: 7
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &677331195
 BoxCollider2D:
@@ -42041,12 +42041,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 871371811}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8, y: 38.2, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8, y: 38.199997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924167163}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &871371813
 BoxCollider2D:
@@ -42538,12 +42538,12 @@ Transform:
   m_Children:
   - {fileID: 352625189}
   - {fileID: 1228704646}
-  - {fileID: 1597286745}
   - {fileID: 1759176731}
+  - {fileID: 1597286745}
+  - {fileID: 677331194}
   - {fileID: 1311543774}
   - {fileID: 871371812}
   - {fileID: 2081041702}
-  - {fileID: 677331194}
   m_Father: {fileID: 344568393}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -43233,14 +43233,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectorAction: 0
+  idDecisionMaking: 0
+  idDecisionCPU: 0
+  idBall: 0
+  idAnim: 0
   speed: 20
   pass: 0
   shoot: 10
   stamina: 0
   brain: 0
   clickCPU: {x: 0, y: 0}
-  idDecisionMaking: 0
-  idDecisionCPU: 0
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
@@ -43275,8 +43277,6 @@ MonoBehaviour:
   limitVelBall: 0
   selected: 0
   idTeam: 0
-  idBall: 0
-  idAnim: 0
   marcaFlag: 0
   boaFlag: 0
   angleBoaZ: 0
@@ -44776,7 +44776,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1268521495}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.3044633, y: 44.2, z: 0}
+  m_LocalPosition: {x: -0.3044633, y: 44.5, z: 0}
   m_LocalScale: {x: 15.800275, y: 13.910789, z: 13.9107895}
   m_Children: []
   m_Father: {fileID: 776994317}
@@ -44999,14 +44999,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectorAction: 0
+  idDecisionMaking: 0
+  idDecisionCPU: 0
+  idBall: 0
+  idAnim: 0
   speed: 20
   pass: 0
   shoot: 10
   stamina: 0
   brain: 0
   clickCPU: {x: 0, y: 0}
-  idDecisionMaking: 0
-  idDecisionCPU: 0
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
@@ -45041,8 +45043,6 @@ MonoBehaviour:
   limitVelBall: 0
   selected: 0
   idTeam: 0
-  idBall: 0
-  idAnim: 0
   marcaFlag: 0
   boaFlag: 0
   angleBoaZ: 0
@@ -45330,7 +45330,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924167163}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1311543775
 BoxCollider2D:
@@ -61351,14 +61351,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectorAction: 0
+  idDecisionMaking: 0
+  idDecisionCPU: 0
+  idBall: 0
+  idAnim: 0
   speed: 20
   pass: 0
   shoot: 10
   stamina: 0
   brain: 0
   clickCPU: {x: 0, y: 0}
-  idDecisionMaking: 0
-  idDecisionCPU: 0
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
@@ -61393,8 +61395,6 @@ MonoBehaviour:
   limitVelBall: 0
   selected: 0
   idTeam: 0
-  idBall: 0
-  idAnim: 0
   marcaFlag: 0
   boaFlag: 0
   angleBoaZ: 0
@@ -66562,11 +66562,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1597286744}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.5, y: -33.2, z: 0}
+  m_LocalPosition: {x: 7.85, y: -32.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924167163}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1597286746
 BoxCollider2D:
@@ -72275,11 +72275,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759176730}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.1, y: -33, z: 0}
+  m_LocalPosition: {x: -8.45, y: -32.23, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924167163}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1759176732
 BoxCollider2D:
@@ -82697,7 +82697,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872280686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.7, y: 20.1, z: 0}
+  m_LocalPosition: {x: 18.2, y: 19.7, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83811,14 +83811,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sectorAction: 0
+  idDecisionMaking: 0
+  idDecisionCPU: 0
+  idBall: 0
+  idAnim: 0
   speed: 20
   pass: 0
   shoot: 10
   stamina: 0
   brain: 0
   clickCPU: {x: 0, y: 0}
-  idDecisionMaking: 0
-  idDecisionCPU: 0
   cpuFlag: 0
   ballFlag: 0
   counterAttFlag: 0
@@ -83853,8 +83855,6 @@ MonoBehaviour:
   limitVelBall: 0
   selected: 0
   idTeam: 0
-  idBall: 0
-  idAnim: 0
   marcaFlag: 0
   boaFlag: 0
   angleBoaZ: 0
@@ -84248,11 +84248,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081041701}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.2, y: 43.2, z: 0}
+  m_LocalPosition: {x: -0.2, y: 40.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 924167163}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2081041703
 BoxCollider2D:

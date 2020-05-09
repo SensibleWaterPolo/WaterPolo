@@ -184,7 +184,7 @@ public class GoalKeeper : MonoBehaviour
 
         if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && readyToBlock && Ball.current.freeFlag)
         {
-           Debug.Log("PROVO A PARARE");
+          
             flagJump = true;
             save = CalcBlock();
             agility = Random.Range(2, 5);
@@ -255,11 +255,11 @@ public class GoalKeeper : MonoBehaviour
     }
     public void DisableSave()
     {
-        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Water");
-        transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("Water");
-        transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Water");
-        transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("Water");
-        transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("Water");
+        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
+        transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
+        transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
+        transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
+        transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
 
         flagJump = false;
     }
@@ -268,14 +268,14 @@ public class GoalKeeper : MonoBehaviour
     {
         keep = true;
         animator.SetInteger("IdAnim", 1);
-        SetBallGK();
+       // SetBallGK();
         Ball.current.SetGK(this);
         if (cpuFlag)
         {
             Invoke("BrainCpu", 2);
         }
-        GameCore.current.RestartTimeAction();
-        GameCore.current.startSec = true;
+   /*     GameCore.current.RestartTimeAction();
+        GameCore.current.startSec = true;*/
     }
 
     public void SetShoot()

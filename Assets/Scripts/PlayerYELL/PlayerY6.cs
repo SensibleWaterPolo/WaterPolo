@@ -35,17 +35,17 @@ public class PlayerY6 : Player
         base.OnTriggerEnter2D(collision);
         if (collision.CompareTag("Ball"))
         {
-            if (Ball.current.CheckBallIsPlayable(3) && marcaFlag && !keepBoa && !loadShoot)
+            if (collision.CompareTag("Ball") && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && marcaFlag)
             {
-                Debug.Log("5");
+                Debug.Log(name+"prendo possesso"+Time.time);
                 SetKeepBoa();
-                SetBallBoa();
+                // SetBallBoa();
 
             }
         }
     }
 
-    public override void OnTriggerStay2D(Collider2D collision)
+   /* public override void OnTriggerStay2D(Collider2D collision)
     {
         base.OnTriggerStay2D(collision);
 
@@ -60,5 +60,5 @@ public class PlayerY6 : Player
             }
            
         }
-    }
+    }*/
 }

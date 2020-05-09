@@ -13,11 +13,11 @@ public class TouchManager : MonoBehaviour
     private bool okShoot;
     private Player player;
     private GoalKeeper gk;
-    private bool restart;
+
     private float minShoot;
     private float maxShoot;
     private int layerMaskPlayer;  
-    private int layerMaskFight = 1 << 12;
+   // private int layerMaskFight = 1 << 12;
     private int layerMaskGk;
     private bool shootFlag;
 
@@ -58,12 +58,18 @@ public class TouchManager : MonoBehaviour
                 
                 ///////////// FASE BEGAN
                 if (touch.phase == TouchPhase.Began)
-                {  startPos= Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position); 
+                {   startPos= Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position); 
                     Vector3 posTouch = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
+                    
+                    
                     RaycastHit2D hitPlayer = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskPlayer);
-                    RaycastHit2D hitFight = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskFight);
+                    
+                    //RaycastHit2D hitFight = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskFight);
+                    
                     RaycastHit2D hitGk = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskGk);
+                   
                     okShoot = false;
+                    
                     if (hitGk.collider)
                     {
                         if (hitGk.collider.CompareTag("GK")) 
@@ -74,7 +80,7 @@ public class TouchManager : MonoBehaviour
                                 startPos = gk.transform.position;
                                 loadShoot = true;
                                 
-                                SpawnSignal(gk.transform.position,gk.gameObject);                                
+                                SpawnSignal(gk.gameObject);                                
                             }
                         }
                     }
@@ -86,27 +92,31 @@ public class TouchManager : MonoBehaviour
 
                         if (obj.tag == "Player")
                         {
+                            player = GameObject.Find(obj.name).GetComponent<Player>();
 
-                            if (!GameObject.Find(obj.name).GetComponent<Player>().cpuFlag)
+                            if (!player.cpuFlag)
                             {
-                                player = GameObject.Find(obj.name).GetComponent<Player>();
+                               
                                 if (player.keep || player.keepBoa || player.swimKeep )
                                 {
                                     loadShoot = true;
-                                    if (player.swimKeep) 
+                                 
+                                  
+                                  if (player.swimKeep) 
                                     {
                                         player.selected = true;
                                         player.SetKeep();
                                     
-                                    }
-                                    SpawnSignal(player.transform.position,player.gameObject);
+                                  }
+
+                                    SpawnSignal(player.gameObject);
                                 }
                             }
 
                         }
                        
                     }
-                    if (hitFight.collider != null)
+                  /*  if (hitFight.collider != null)
                     {
                         FightManager obj = GameObject.Find(hitFight.collider.name).GetComponent<FightManager>();
                         if (obj != null)
@@ -115,22 +125,22 @@ public class TouchManager : MonoBehaviour
                             
                         }
 
-                    }
+                    }*/
                     
                 
                 }
 
                 ////// FASE MOVED
-                if (touch.phase == TouchPhase.Moved && loadShoot)
+                if (touch.phase == TouchPhase.Moved && loadShoot )
                 {
                     endPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
 
                     if (player != null)
                     {
-                        player.selected = true;
+                        //player.selected = true;
                         
                         // Debug.Log(Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position), player.transform.position) + " : distanza del passaggio o tiro");
-                        if (player.keep && !player.keepBoa)
+                        if (player.keep)
                         {
 
                             Utility.RotateObjToPoint(player.gameObject, Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position));
@@ -144,7 +154,7 @@ public class TouchManager : MonoBehaviour
                         }
                         else
                         {
-                            if (Vector2.Distance(Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position), player.transform.position) < 9  && Vector3.Distance(startPos,endPos) <9)
+                            if (Vector3.Distance(startPos,endPos) <9)
                             {
                                 okShoot = false;
                                 
@@ -156,7 +166,7 @@ public class TouchManager : MonoBehaviour
                             }
                         }
                         
-                        shootSignalPrefab.SetSignal(okShoot);
+                        shootSignalPrefab.SetSignal(okShoot); //Aggiorna colore segnale
                     }
                     if (gk != null)
                     {
@@ -190,19 +200,14 @@ public class TouchManager : MonoBehaviour
 
 
                 //FASE ENDED
-                if (touch.phase == TouchPhase.Ended && loadShoot)
+                if (touch.phase == TouchPhase.Ended && loadShoot )
                 {
 
 
-                    Vector3 destination = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
-                    finalPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
-                    Debug.Log(Vector3.Distance(startPos, finalPos));
-
-
-
-                    if (player != null )
+                    endPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
+                   if (player != null && loadShoot)
                     {
-                        if (minShoot < destination.y && destination.y < maxShoot || Vector3.Distance(startPos, finalPos) < 10)//decidiamo se è un passaggio o un tiro
+                        if (minShoot < endPos.y && endPos.y < maxShoot)//decidiamo se è un passaggio o un tiro
                         {
 
                             shootFlag = false;
@@ -216,13 +221,14 @@ public class TouchManager : MonoBehaviour
 
                         if (okShoot && !player.keepBoa)
                         {
-                            player.LoadShoot(destination, shootFlag, 0);  //se non è una boa in possesso di palla
-                            player.selected = false;
+                            player.LoadShoot(endPos, shootFlag, 0);  //se non è una boa in possesso di palla
+                            //player.selected = false;
 
                         }
                         else                //IL GIOCATORE è UNA BOA BISOGNA DECIDERE IL TIPO DI TIRO A SENCONDA DI DOVE INDIRIZZIAMO IL CURSORE
                         if (okShoot && player.keepBoa)
                         {
+                            
                             LayerMask mask = 1 << 4; //strato water
                             RaycastHit2D hitBoa = Physics2D.Raycast(player.transform.parent.transform.position, (Ball.current.transform.position - player.transform.position).normalized, 20, mask);
                             Debug.DrawRay(player.transform.parent.transform.position, (Ball.current.transform.position - player.transform.position).normalized * 15, Color.black, 3);
@@ -230,88 +236,88 @@ public class TouchManager : MonoBehaviour
                             if (hitBoa.collider != null)
                             {
 
-                                //  Debug.Log(player.name + " ->" + hitBoa.collider.name);
+                                 Debug.Log(player.name + " sono girato verso->" + hitBoa.collider.tag);
 
                                 if (hitBoa.collider.CompareTag("ShootLine")) //Tiro a colonnello per entrambi
                                 {
-                                    if ((player.idAnim == 0 && destination.y > player.transform.position.y) || (player.idAnim == 1 && destination.y < player.transform.position.y))
+                                    if ((player.idTeam == 0 && endPos.y > player.transform.position.y) || (player.idTeam == 1 && endPos.y < player.transform.position.y))
                                     {
-                                        player.LoadShoot(destination, shootFlag, 3);  // controllo se  davanti al portiere non può fare un colonnello all'indietro
+                                        player.LoadShoot(endPos, shootFlag, 3);  // controllo se  davanti al portiere non può fare un colonnello all'indietro
                                     }
                                 }
 
                                 else if (hitBoa.collider.CompareTag("Rovesciata"))
 
                                 {
-                                    if (player.idAnim == 0 && destination.x <= player.transform.position.x && destination.y <= player.transform.position.y)
+                                    if (player.idTeam == 0 && endPos.x <= player.transform.position.x && endPos.y <= player.transform.position.y)
                                     {   //il giocatore Y effettua un colonnello
-                                        //   Debug.Log(name + "--->colonnello");
-                                        player.LoadShoot(destination, shootFlag, 3);
+                                          Debug.Log(name + "--->rovesciata");
+                                        player.LoadShoot(endPos, shootFlag, 3);
 
                                     }
-                                    else if (player.idAnim == 1 && destination.x >= player.transform.position.x && destination.y >= player.transform.position.y)
+                                    else if (player.idTeam== 1 && endPos.x >= player.transform.position.x && endPos.y >= player.transform.position.y)
                                     {
-                                        //    Debug.Log(name + "--->colonnello");
-                                        player.LoadShoot(destination, shootFlag, 3);
+                                            Debug.Log(name + "--->rovesciata");
+                                        player.LoadShoot(endPos, shootFlag, 3);
                                     }
-                                    else if (player.idTeam == 0 && destination.y > player.transform.position.y || player.idTeam == 1 && destination.y < transform.position.y)
+                                    else if (player.idTeam == 0 && endPos.y > player.transform.position.y || player.idTeam == 1 && endPos.y < transform.position.y)
                                     {
-                                        player.LoadShoot(destination, shootFlag, 1); //Rovesciata per entrambi
+                                        player.LoadShoot(endPos, shootFlag, 1); //Rovesciata per entrambi
                                     }
                                 }
 
                                 else if (hitBoa.collider.CompareTag("Sciarpa")) //sciarpa per entrambi a meno che la palla non è indirizzata in porta
                                 {
 
-                                    if (player.idAnim == 0 && destination.x >= player.transform.position.x && destination.y <= player.transform.position.y)
+                                    if (player.idTeam == 0 && endPos.x >= player.transform.position.x && endPos.y <= player.transform.position.y)
                                     {   //il giocatore Y effettua un colonnello
-                                        //  Debug.Log(name + "--->colonnello");
-                                        player.LoadShoot(destination, shootFlag, 3);
+                                         Debug.Log(name + "--->sciarpa");
+                                        player.LoadShoot(endPos, shootFlag, 3);
 
                                     }   //il giocatore R effettua un colonnello
-                                    else if (player.idAnim == 1 && destination.x <= player.transform.position.x && destination.y >= player.transform.position.y)
+                                    else if (player.idTeam == 1 && endPos.x <= player.transform.position.x && endPos.y >= player.transform.position.y)
                                     {
-                                        //   Debug.Log(name + "--->colonnello");
-                                        player.LoadShoot(destination, shootFlag, 3);
+                                         Debug.Log(name + "--->sciarpa");
+                                        player.LoadShoot(endPos, shootFlag, 3);
                                     }
-                                    else if (player.idTeam == 0 && destination.y > player.transform.position.y || player.idTeam == 1 && destination.y < transform.position.y)
+                                    else if (player.idTeam == 0 && endPos.y > player.transform.position.y || player.idTeam == 1 && endPos.y < transform.position.y)
                                     {
 
-                                        player.LoadShoot(destination, shootFlag, 2);
+                                        player.LoadShoot(endPos, shootFlag, 2);
                                     }
                                 }
                             }
                             else if (hitBoa.collider == null && player.idTeam == 0)
                             {
 
-                                if (destination.y <= player.transform.position.y) //colonnello
+                                if (endPos.y <= player.transform.position.y) //colonnello
                                 {
-                                    player.LoadShoot(destination, shootFlag, 3);
+                                    player.LoadShoot(endPos, shootFlag, 3);
                                 }
-                                else if (destination.y >= player.transform.position.y && destination.x <= player.transform.position.x) //Rovesciata
+                                else if (endPos.y >= player.transform.position.y && endPos.x <= player.transform.position.x) //Rovesciata
                                 {
-                                    player.LoadShoot(destination, shootFlag, 1);
+                                    player.LoadShoot(endPos, shootFlag, 1);
 
                                 }
-                                else if (destination.y >= player.transform.position.y && destination.x > player.transform.position.x) //sciarpa
+                                else if (endPos.y >= player.transform.position.y && endPos.x > player.transform.position.x) //sciarpa
                                 {
 
-                                    player.LoadShoot(destination, shootFlag, 2);
+                                    player.LoadShoot(endPos, shootFlag, 2);
                                 }
                             }
                             else if (hitBoa.collider == null && player.idTeam == 1) //Boa Red
                             {
-                                if (destination.y >= player.transform.position.y) //colonnello
+                                if (endPos.y >= player.transform.position.y) //colonnello
                                 {
-                                    player.LoadShoot(destination, shootFlag, 3);
+                                    player.LoadShoot(endPos, shootFlag, 3);
                                 }
-                                if (destination.y <= player.transform.position.y && destination.x >= player.transform.position.x) //Rovesciata
+                                if (endPos.y <= player.transform.position.y && endPos.x >= player.transform.position.x) //Rovesciata
                                 {
-                                    player.LoadShoot(destination, shootFlag, 1);
+                                    player.LoadShoot(endPos, shootFlag, 1);
                                 }
-                                if (destination.y <= player.transform.position.y && destination.x < player.transform.position.x) //sciarpa
+                                if (endPos.y <= player.transform.position.y && endPos.x < player.transform.position.x) //sciarpa
                                 {
-                                    player.LoadShoot(destination, shootFlag, 2);
+                                    player.LoadShoot(endPos, shootFlag, 2);
                                 }
                             }
 
@@ -319,22 +325,23 @@ public class TouchManager : MonoBehaviour
                         }
 
 
-                        //Debug.Log(player.name + " ANNULLO IL TIRO");
-                        // player.DestroySignalShoot();
+                        
                         if (shootSignalPrefab != null)
                         {
                             DestroySignal();
                         }
                         loadShoot = false;
+                        player.selected = false;
                         player = null;
-                        restart = true;
+
+                        
                     }
 
                     if (gk != null)
                     {
                         if (okShoot && gk.keep)
                         {
-                            gk.LoadShoot(destination);
+                            gk.LoadShoot(endPos);
 
                         }
                         // gk.DestroySignalShoot();
@@ -344,7 +351,7 @@ public class TouchManager : MonoBehaviour
                         }
                         loadShoot = false;
                         gk = null;
-                        restart = true;
+                        
 
                     }
 
@@ -356,7 +363,7 @@ public class TouchManager : MonoBehaviour
         }
     }
 
-    public void SpawnSignal(Vector2 pos, GameObject obj) 
+    public void SpawnSignal(GameObject obj) 
     {
         shootSignalPrefab = Instantiate(shootSignal, obj.transform.position, Quaternion.identity);
         shootSignalPrefab.transform.parent = obj.transform;

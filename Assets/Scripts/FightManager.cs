@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FightManager : MonoBehaviour
 {
-    private float lenghtFight;
+   /* private float lenghtFight;
     private float startFight;
     private bool start;
     private Player playerY, playerR;
@@ -150,7 +150,7 @@ public class FightManager : MonoBehaviour
         }
 
     }
-        
+        */
 
 
 }

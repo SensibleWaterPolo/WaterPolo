@@ -50,6 +50,7 @@ public class  Ball : MonoBehaviour
         shootFlag = true;
         isShooted = false;
         idTeam = -1;
+        respawn = false;
                  
     }
 
@@ -69,7 +70,7 @@ public class  Ball : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckFreeBall();
+        //CheckFreeBall();
         CheckVel(); //M: se la velocità è prossima allo zero ferma la palla
 
         if (deceleratePass)
@@ -90,11 +91,7 @@ public class  Ball : MonoBehaviour
         
         UpdateSideBall();
 
-        if (player == null && speed == -1) 
-        {
-            Debug.Log("PERICOLO");
-        }
-        //  CheckBall();
+       
 
              
       //  Debug.Log("SPEED "+speed+ " /shootflag " +shootFlag+ " /player "+player+ " /libera :"+freeFlag+" /ferma "+motionlessFlag+ " /shooted "+isShooted);
@@ -145,7 +142,8 @@ public class  Ball : MonoBehaviour
             player.ballFlag = false;
             player = null;
         }
-        
+        isShooted = true;
+      
        
     }
 
@@ -158,11 +156,12 @@ public class  Ball : MonoBehaviour
 
     public void EnableBall() 
     {
-        isShooted = true;
+        freeFlag = true;
         transform.parent = null;
         GetComponent<Renderer>().enabled = true;
         this.gameObject.AddComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
+        respawn = true;
        
 
     }
@@ -170,10 +169,18 @@ public class  Ball : MonoBehaviour
     public void CheckVel()  //M: se la velocità è quasi zero(3) blocca la palla
     {
         if (rb != null)
-        {
+        {   
+           
+
             speed = rb.velocity.magnitude;
-            if ( speed <= 3 && freeFlag)
+            if (speed > 0 && respawn) 
             {
+                respawn = false;
+            }
+            
+            if ( speed <= 3 && !respawn && freeFlag)
+            {
+               
                 StopBall();
                 
                 deceleratePass = false;
@@ -211,12 +218,11 @@ public class  Ball : MonoBehaviour
     public void SetPlayer(Player player) //M: assegna alla palla il giocatore in possesso
     {
         DisableBall();
-        isShooted = false;
         this.player = player;
         if (player.idTeam != idTeam)
         {   
-            GameCore.current.RestartTimeAction();
-            GameCore.current.startSec = true;
+           /* GameCore.current.RestartTimeAction();
+            GameCore.current.startSec = true;*/
             idTeam = player.idTeam;
         }
         
@@ -235,7 +241,7 @@ public class  Ball : MonoBehaviour
         GetComponent<Renderer>().enabled = false;
         Destroy(GetComponent<Rigidbody2D>());
         speed = -1;
-        CheckFreeBall();
+        //CheckFreeBall();
     }
 
 
@@ -292,23 +298,13 @@ public class  Ball : MonoBehaviour
         {
             rb.velocity = rb.velocity / 2;
         }
-        if (collision.gameObject.CompareTag("Player")) 
-        {
-            if (collision.gameObject.GetComponent<Player>().idTeam != idTeam) 
-            {
-                GameCore.current.RestartTimeAction();
-            
-            }
-        
-        }
-        Debug.Log(collision.gameObject.name+" COLLIDOOOOOO");
-      
+         
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
 
+       
         if (collision.CompareTag("EndRed") && inGameFlag)
         {
             inGameFlag = false;
@@ -348,9 +344,9 @@ public class  Ball : MonoBehaviour
     
     public bool CheckBallIsPlayable(float limitVel) //controlla se la palla è giocabile sotto un limite di velocità
     {
-        if (freeFlag && inGameFlag)
+        if (inGameFlag)
         {
-            if ((isShooted && speed <= limitVel) || !isShooted && motionlessFlag)
+            if ((isShooted && speed <= limitVel && speed>= 0 && freeFlag && !respawn) || !isShooted && speed==0 && freeFlag && !respawn)
             {
                 return true;
             }
@@ -362,24 +358,8 @@ public class  Ball : MonoBehaviour
     
     }
 
-    public void CheckFreeBall()
-    {
-        if (speed >= 0)
-        {
-            freeFlag = true;
-        }
-        else freeFlag = false;
-    }
+   
 
-    private void CheckBall() 
-    {
-        if (player == null && speed == -1 && isShooted && !player.selected) 
-        {
-            EnableBall();
-            speed = 0;
-
-        
-        }
-    
-    }
+   
+   
 }

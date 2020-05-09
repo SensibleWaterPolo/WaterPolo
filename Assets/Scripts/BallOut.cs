@@ -36,7 +36,7 @@ public class BallOut : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ball") && Ball.current.inGameFlag)
+      /*  if (collision.CompareTag("Ball") && Ball.current.inGameFlag)
         {
             Ball.current.inGameFlag = false;
             PosPlayerMng.curret.SetAllBicy();
@@ -49,7 +49,7 @@ public class BallOut : MonoBehaviour
 
             Invoke("KeepToGk", 1);
 
-        }
+        }*/
     }
 
     public void KeepToGk() 
