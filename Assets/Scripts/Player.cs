@@ -419,7 +419,11 @@ public class Player : MonoBehaviour
 
         if (obj.tag == "Ball" && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && !marcaFlag)
         {
-
+            if (Ball.current.idTeam != idTeam) 
+            {
+                
+                GameCore.current.RestartTimeAction();
+            }
             Ball.current.freeFlag = false;
             SetKeep();
 
@@ -438,7 +442,10 @@ public class Player : MonoBehaviour
 
         if (obj.tag == "Ball" && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && !marcaFlag)
         {
-
+            if (Ball.current.idTeam != idTeam)
+            {
+                GameCore.current.RestartTimeAction();
+            }
             Ball.current.freeFlag = false;
             SetKeep();
 
@@ -470,10 +477,10 @@ public class Player : MonoBehaviour
 
     public void SetBicy()
     {
-        if (swim || def || backSwim || stun || loadShoot)
+        if (swim || def || backSwim || stun || loadShoot || keep || keepBoa)
         {
             // UnityEngine.Debug.Log(name + " ->biciciletta" + Time.time);
-
+            
             bicy = true;
             keep = false;
             swim = false;
@@ -540,7 +547,7 @@ public class Player : MonoBehaviour
 
         if (distanzaMancante > 0)
         {
-            Vector3 nuova_Pos = Vector3.MoveTowards(transform.position, posFinal, speed * Time.deltaTime);
+            Vector3 nuova_Pos = Vector3.MoveTowards(transform.position, posFinal, (speed+2) * Time.deltaTime);
             GetComponent<Rigidbody2D>().MovePosition(nuova_Pos);
             Utility.RotateObjToPoint(this.gameObject, posFinal);
 
@@ -582,7 +589,7 @@ public class Player : MonoBehaviour
             if (cpuFlag)
             {
                  brain = Random.Range(1, 3);
-                 Invoke("BrainCpu", brain);
+                 Invoke("BrainCpu", 1.5f);
             }
             if (!arrivedFlagAtt && !selected && distanceAtt >10)
             {
@@ -616,7 +623,7 @@ public class Player : MonoBehaviour
             if (cpuFlag)
             {
                  brain = Random.Range(1, 3);
-                  Invoke("BrainCpu", brain);
+                  Invoke("BrainCpu", 0.8f);
             }
         }
     }

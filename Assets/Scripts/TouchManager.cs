@@ -75,7 +75,7 @@ public class TouchManager : MonoBehaviour
                         if (hitGk.collider.CompareTag("GK")) 
                         {
                          gk = GameObject.Find(hitGk.collider.gameObject.name).GetComponent<GoalKeeper>();
-                            if (gk.keep)
+                            if (gk.keep && !gk.cpuFlag)
                             {
                                 startPos = gk.transform.position;
                                 loadShoot = true;

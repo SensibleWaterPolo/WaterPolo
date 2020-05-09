@@ -622,7 +622,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Demo Test v.8.05\n\n\n  \n"
+  m_Text: "Demo Test v.9.05\n\n  \n"
 --- !u!222 &1084622755
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -700,12 +700,13 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "- 15 secondi dell'azione\n\n-cambiamento di stato tra nuoto con la palla
-    e palla in mano\n\n-eventuali comportamenti anomali della palla(rimbalzo su muri
-    \ninvisibili, cambio repentino di velocita', esce fuori dall schermo)\n\n-difficolta'
-    di gioco contro la cpu e percentuale tiri/gol\n  \n-eventiali situazioni in cui
-    il giocatore rimane bloccato o non riusciamo a tirare\n\nNb: ignorate pubblico,
-    arbitro, suoni e grafica. focus sul gameplay \n"
+  m_Text: "-Blocco dei giocatori che non permettono di tirare e passare\n\n-cambiamento
+    di stato tra nuoto con la palla e palla in mano\n\n-eventuali comportamenti anomali
+    della palla(rimbalzo su muri \ninvisibili, cambio repentino di velocita', esce
+    fuori dall schermo)\n\n-difficolta' di gioco contro la cpu e percentuale tiri/gol\n 
+    \n-eventiali situazioni in cui il giocatore rimane bloccato o non riusciamo a
+    tirare\n\nNb: ignorate pubblico, arbitro, suoni e grafica. focus sul gameplay
+    \n"
 --- !u!222 &1359558397
 CanvasRenderer:
   m_ObjectHideFlags: 0

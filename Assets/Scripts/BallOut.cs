@@ -20,17 +20,18 @@ public class BallOut : MonoBehaviour
     {
         if (collision.CompareTag("Ball") && Ball.current.inGameFlag) 
         {
-            AudioController.current.DoFischio();
-            Ball.current.inGameFlag = false;
-            PosPlayerMng.curret.SetAllBicy();
-            if (Ball.current.fieldYellow)
-            {
-                Referee.current.SetArmRight();
-            }
-            else
-                Referee.current.SetArmLeft();
-        
-            Invoke("KeepToGk", 1);
+            /* AudioController.current.DoFischio();
+             Ball.current.inGameFlag = false;
+             PosPlayerMng.curret.SetAllBicy();
+             if (Ball.current.fieldYellow)
+             {
+                 Referee.current.SetArmRight();
+             }
+             else
+                 Referee.current.SetArmLeft();
+
+             Invoke("KeepToGk", 1);*/
+            Fischia();
         
         }
     }
@@ -57,12 +58,30 @@ public class BallOut : MonoBehaviour
         if (Ball.current.fieldYellow)
         {
             GameObject.Find("YellowGK").GetComponent<GoalKeeper>().SetKeep();
+
         }
         else
         {
             GameObject.Find("RedGK").GetComponent<GoalKeeper>().SetKeep();
         }
         Ball.current.inGameFlag = true;
-        
+      
+    }
+
+    public void Fischia() {
+        AudioController.current.DoFischio();
+        Ball.current.inGameFlag = false;
+        PosPlayerMng.curret.SetAllBicy();
+        if (Ball.current.fieldYellow)
+        {
+            Referee.current.SetArmRight();
+        }
+        else
+            Referee.current.SetArmLeft();
+
+        Invoke("KeepToGk", 1);
+
     }
 }
+
+

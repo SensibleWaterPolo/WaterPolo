@@ -50,23 +50,25 @@ public class GameCore : MonoBehaviour
 
                 timeCurrentMatch = timeMatch - time;
 
-               /* if (secCurrent > 1 && startSec)
+                if (secCurrent > 1 && startSec)
                 {
-                    UpdateSecond();
+                   // UpdateSecond();
                 }
-                else 
+                else if(startSec && secCurrent<1) 
                 {
-                    if (Ball.current.player != null) 
-                    {
-                        ShootPlayer();
+                     if (Ball.current.player != null) 
+                     {
+                      //   ShootPlayer();
 
-                    }
-                    if (Ball.current.gk != null)
-                    {
-                        ShootGk();
-                    }
+                     }
+                     if (Ball.current.gk != null)
+                     {
+                      //   ShootGk();
+                     }
+                   
+                    startSec = false;
                     
-                }*/
+                }
 
                 UpdateTimeGame();
             }
@@ -94,7 +96,7 @@ public class GameCore : MonoBehaviour
         timeStart = Time.time;
         Referee.current.SetArmFront();
         AudioController.current.DoFischio();
-        StartSecond();
+        
 
     }
     public void Stop()
@@ -167,6 +169,7 @@ public class GameCore : MonoBehaviour
     }
     public void UpdateSecond()
     {
+        
        
         secCurrent = secAction - (Time.time - secStart);
         
@@ -175,6 +178,7 @@ public class GameCore : MonoBehaviour
     public void StartSecond()
     {
         secStart= Time.time;
+        startSec = true;
        
     }
 
@@ -184,11 +188,13 @@ public class GameCore : MonoBehaviour
       
         if (player.keep)
         {
+            Debug.Log(player.name+" tiro a lato");
             player.LoadShoot(player.posBallEndAction, false, 0);
 
         }
         else if (player.keepBoa) 
         {
+            Debug.Log(player.name + " tiro a lato");
             if (IA.current.BoaWatchGk(player.idTeam))
 
             {
@@ -216,4 +222,5 @@ public class GameCore : MonoBehaviour
         startSec = false;
     }
 
+    
 }

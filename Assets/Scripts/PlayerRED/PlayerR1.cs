@@ -224,7 +224,8 @@ public class PlayerR1 : Player
 
             }
         }
-      //  Debug.Log(name + " Non ho preso nessuna decisione");
+        //  Debug.Log(name + " Non ho preso nessuna decisione");
+        selected = false;
         return hasChoose;
     }
 }

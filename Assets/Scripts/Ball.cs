@@ -116,7 +116,7 @@ public class  Ball : MonoBehaviour
         {
             if (shootFlag)
             {
-                GetComponent<Rigidbody2D>().AddForce(direct * shoot * 400);
+                GetComponent<Rigidbody2D>().AddForce(direct * shoot * 450);
                 decelerateShoot = true;
                 deceleratePass = false;
             }
@@ -298,7 +298,11 @@ public class  Ball : MonoBehaviour
         {
             rb.velocity = rb.velocity / 2;
         }
-         
+
+        if (collision.gameObject.CompareTag("Arm")) 
+        {
+            GameCore.current.RestartTimeAction();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

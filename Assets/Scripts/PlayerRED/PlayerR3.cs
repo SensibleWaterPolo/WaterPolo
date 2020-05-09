@@ -356,7 +356,7 @@ public class PlayerR3 : Player
 
             }
         }
-        
+        selected = false;
         return hasChoose;
     }
 

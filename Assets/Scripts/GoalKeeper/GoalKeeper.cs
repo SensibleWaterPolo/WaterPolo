@@ -268,14 +268,14 @@ public class GoalKeeper : MonoBehaviour
     {
         keep = true;
         animator.SetInteger("IdAnim", 1);
-       // SetBallGK();
+        SetBallGK();
         Ball.current.SetGK(this);
         if (cpuFlag)
         {
             Invoke("BrainCpu", 2);
         }
-   /*     GameCore.current.RestartTimeAction();
-        GameCore.current.startSec = true;*/
+       GameCore.current.RestartTimeAction();
+       
     }
 
     public void SetShoot()
