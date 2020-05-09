@@ -36,6 +36,7 @@ public class GoalKeeper : MonoBehaviour
     public Vector3 finalPos;
     public bool arrived;
     public bool readyToBlock;
+    public Vector3 posBallEndAction;
 
     public float distanceBall;
     public float posXBall;
@@ -73,12 +74,12 @@ public class GoalKeeper : MonoBehaviour
 
     public void Start()
     {
-        block = Random.Range(7,10);
+        block = Random.Range(6,10);
         arrived = false;
-        throwin = Random.Range(4, 7);
+        throwin = Random.Range(7, 10);
         keep = false;
         bicy = true;
-        agility = Random.Range(1,3);
+       
     }
 
     // Update is called once per frame
@@ -99,6 +100,19 @@ public class GoalKeeper : MonoBehaviour
 
             SwimGk();
          
+        }
+
+        if (!keep) 
+        {
+            GetComponent<CircleCollider2D>().enabled = false;
+
+        }
+        else { GetComponent<CircleCollider2D>().enabled = true; }
+
+        if (transform.position == posMid) 
+        {
+            Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
+        
         }
     }
 
@@ -158,7 +172,7 @@ public class GoalKeeper : MonoBehaviour
         if (prob<=coeff)
             save = true;
         else save = false;
-        Debug.Log("coeffBall " + coeffVelBall + " probabilità parare ->" + coeff + " valore estratto->" + prob + " save->"+save);
+      // Debug.Log("coeffBall " + coeffVelBall + " probabilità parare ->" + coeff + " valore estratto->" + prob + " save->"+save);
         return save;
 
     }
@@ -170,7 +184,7 @@ public class GoalKeeper : MonoBehaviour
 
         if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && readyToBlock && Ball.current.freeFlag)
         {
-         //   Debug.Log("PROVO A PARARE");
+           Debug.Log("PROVO A PARARE");
             flagJump = true;
             save = CalcBlock();
             agility = Random.Range(2, 5);

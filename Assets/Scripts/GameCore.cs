@@ -50,18 +50,23 @@ public class GameCore : MonoBehaviour
 
                 timeCurrentMatch = timeMatch - time;
 
-                if (secCurrent > 1 && startSec)
+               /* if (secCurrent > 1 && startSec)
                 {
                     UpdateSecond();
                 }
                 else 
                 {
-                    if (Ball.current.player != null ) 
+                    if (Ball.current.player != null) 
                     {
                         ShootPlayer();
+
                     }
-                    startSec = false;
-                }
+                    if (Ball.current.gk != null)
+                    {
+                        ShootGk();
+                    }
+                    
+                }*/
 
                 UpdateTimeGame();
             }
@@ -125,13 +130,13 @@ public class GameCore : MonoBehaviour
         int sec = GetSec(timeCurrentMatch);
         if (sec <10 )
         {
-            GameObject.Find("Time").GetComponent<Text>().text = min + " : 0"+sec; 
+            GameObject.Find("Time").GetComponent<Text>().text = min + ":0"+sec; 
         }
         else
         {
-            GameObject.Find("Time").GetComponent<Text>().text = min + " : " + sec;
+            GameObject.Find("Time").GetComponent<Text>().text = min + ":" + sec;
         }
-        GameObject.Find("Seconds").GetComponent<Text>().text = Mathf.FloorToInt(secCurrent) +" '' ";
+        GameObject.Find("Seconds").GetComponent<Text>().text = Mathf.FloorToInt(secCurrent) +"' ";
         
     }
 
@@ -176,6 +181,7 @@ public class GameCore : MonoBehaviour
     public void ShootPlayer()
     {
         Player player = Ball.current.player;
+      
         if (player.keep)
         {
             player.LoadShoot(player.posBallEndAction, false, 0);
@@ -195,6 +201,19 @@ public class GameCore : MonoBehaviour
             }
                
         }
+        startSec = false;
+    }
+    public void ShootGk() 
+    {
+        GoalKeeper gk = Ball.current.gk;
+
+        if (gk.keep)
+        {
+            gk.LoadShoot(gk.posBallEndAction);
+            
+
+        }
+        startSec = false;
     }
 
 }

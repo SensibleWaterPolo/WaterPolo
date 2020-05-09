@@ -14,6 +14,7 @@ public class GkYellow : GoalKeeper
         posLeft = GameObject.Find("PosLeftYellow").transform.position;
         posRight = GameObject.Find("PosRightYellow").transform.position;
         posThrowIn = GameObject.Find("PosThrowInYellow").transform.position;
+        posBallEndAction = GameObject.Find("UppDx").transform.position;
         transform.position = posMid;
         DisableSave();
         idTeam = 0;

@@ -90,6 +90,12 @@ public class  Ball : MonoBehaviour
         
         UpdateSideBall();
 
+        if (player == null && speed == -1) 
+        {
+            Debug.Log("PERICOLO");
+        }
+        //  CheckBall();
+
              
       //  Debug.Log("SPEED "+speed+ " /shootflag " +shootFlag+ " /player "+player+ " /libera :"+freeFlag+" /ferma "+motionlessFlag+ " /shooted "+isShooted);
        
@@ -125,8 +131,7 @@ public class  Ball : MonoBehaviour
             }
         }
         else if (id == 1) {
-            GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 700);
-            Debug.Log("Rilancio portiere");
+            GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 800);
             decelerateShoot = false;
             deceleratePass = false;
         }
@@ -153,7 +158,7 @@ public class  Ball : MonoBehaviour
 
     public void EnableBall() 
     {
-        
+        isShooted = true;
         transform.parent = null;
         GetComponent<Renderer>().enabled = true;
         this.gameObject.AddComponent<Rigidbody2D>();
@@ -281,23 +286,29 @@ public class  Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
 
     {
+       
        isShooted = false;
         if (collision.gameObject.CompareTag("Side"))
         {
             rb.velocity = rb.velocity / 2;
         }
-        if (collision.gameObject.tag == "Arm") 
+        if (collision.gameObject.CompareTag("Player")) 
         {
-            GameCore.current.RestartTimeAction();
+            if (collision.gameObject.GetComponent<Player>().idTeam != idTeam) 
+            {
+                GameCore.current.RestartTimeAction();
+            
+            }
         
         }
-       
+        Debug.Log(collision.gameObject.name+" COLLIDOOOOOO");
       
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         
+
         if (collision.CompareTag("EndRed") && inGameFlag)
         {
             inGameFlag = false;
@@ -358,5 +369,17 @@ public class  Ball : MonoBehaviour
             freeFlag = true;
         }
         else freeFlag = false;
+    }
+
+    private void CheckBall() 
+    {
+        if (player == null && speed == -1 && isShooted && !player.selected) 
+        {
+            EnableBall();
+            speed = 0;
+
+        
+        }
+    
     }
 }

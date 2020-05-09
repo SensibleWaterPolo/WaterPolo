@@ -34,7 +34,7 @@ public class Battle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
+        WhoWin();
     }
 
     // Update is called once per frame
@@ -95,7 +95,7 @@ public class Battle : MonoBehaviour
         if (!whoWin) 
         {
             whoWin = true;
-            Invoke("WhoWin",1f);
+            Invoke("WhoWin",3f);
         }
         if (att.swim  || def.swim || def.keep || att.idBall==3 || def.idBall==2 || att.keep)
             StopBattle();
@@ -117,7 +117,7 @@ public class Battle : MonoBehaviour
     {
         
         int newId;
-        if (Random.Range(0, 100) < 60) 
+        if (Random.Range(0, 100) < 40) 
         {
             newId = 0; }
         else newId = 1; 

@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class IA : MonoBehaviour
 {
-    private float limitSx, poleSx, perfectSx, perfectDx, poleDx, limitDx;
+    public float limitSx, poleSx, perfectSx, perfectDx, poleDx, limitDx;
 
-    private float y = -38f;
+    public float y;
 
     public static  IA current;
 
@@ -24,7 +24,7 @@ public class IA : MonoBehaviour
         perfectDx =  GameObject.Find("LimitPerfectDx").transform.position.x;
         poleDx = GameObject.Find("LimitPoleDx").transform.position.x;
         limitDx = GameObject.Find("LimitDx").transform.position.x;
-
+        y = limitDx = GameObject.Find("LimitDx").transform.position.y;
 
     }
 
@@ -47,23 +47,28 @@ public class IA : MonoBehaviour
 
     private Vector3 GetBtwLimitSxPole() 
     {
+       // Debug.Log("Tiro limite sx palo");
         return new Vector3(Random.Range(limitSx, poleSx), y, 0);
     }
 
     private Vector3 GetBtwPoleSxPerfect() 
-    { 
-       return new Vector3(Random.Range(poleSx,perfectSx), y, 0);
+    {
+      //  Debug.Log("tiro quadrella sx");
+        return new Vector3(Random.Range(poleSx,perfectSx), y, 0);
     }
     private Vector3 GetBtwCenter()
     {
+      //  Debug.Log("tiro centrale");
         return new Vector3(Random.Range(perfectSx, perfectDx), y, 0);
     }
     private Vector3 GetBtwLimitPerfectDxPole()
     {
+      //  Debug.Log("tiro quadrella destra");
         return new Vector3(Random.Range(perfectDx, poleDx), y, 0);
     }
     private Vector3 GetBtwLimitPoleDxLimit()
     {
+      //  Debug.Log("tiro limite destro");
         return new Vector3(Random.Range(poleDx, limitDx), y, 0);
     }
 
@@ -103,21 +108,21 @@ public class IA : MonoBehaviour
     {
         float zoneId = GetRandom();
         Vector3 posShoot = Vector3.zero;
-        if (0 <= zoneId && zoneId < 15)
+        if (0 <= zoneId && zoneId < 5)
         {
             posShoot = GetBtwLimitSxPole();
         }
-        else if (5 <= zoneId && zoneId < 35)
+        else if (5 <= zoneId && zoneId < 25)
         {
 
             posShoot = GetBtwPoleSxPerfect();
         }
-        else if (35 <= zoneId && zoneId < 65)
+        else if (25 <= zoneId && zoneId < 75)
         {
 
             posShoot = GetBtwCenter();
         }
-        else if (65 <= zoneId && zoneId < 95)
+        else if (75 <= zoneId && zoneId < 95)
         {
 
             posShoot = GetBtwLimitPerfectDxPole();
@@ -170,17 +175,17 @@ public class IA : MonoBehaviour
         {
             posShoot = GetBtwLimitSxPole();
         }
-        else if (5 <= zoneId && zoneId < 25)
+        else if (5 <= zoneId && zoneId < 20)
         {
 
             posShoot = GetBtwPoleSxPerfect();
         }
-        else if (25 <= zoneId && zoneId < 65)
+        else if (20 <= zoneId && zoneId < 60)
         {
 
             posShoot = GetBtwCenter();
         }
-        else if (65 <= zoneId && zoneId < 95)
+        else if (60 <= zoneId && zoneId < 95)
         {
 
             posShoot = GetBtwLimitPerfectDxPole();
@@ -234,17 +239,17 @@ public class IA : MonoBehaviour
         {
             posShoot = GetBtwLimitSxPole();
         }
-        else if (5 <= zoneId && zoneId < 35)
+        else if (5 <= zoneId && zoneId < 30)
         {
 
             posShoot = GetBtwPoleSxPerfect();
         }
-        else if (35 <= zoneId && zoneId < 75)
+        else if (30 <= zoneId && zoneId < 80)
         {
 
             posShoot = GetBtwCenter();
         }
-        else if (75 <= zoneId && zoneId < 95)
+        else if (80 <= zoneId && zoneId < 95)
         {
 
             posShoot = GetBtwLimitPerfectDxPole();
@@ -262,19 +267,23 @@ public class IA : MonoBehaviour
   //Decisione di passare o tirare
     public bool DecisionShoot(Player player) // prende la decisione di tirare o passare
     {
+        
         float prob = Random.Range(0,100);
          bool shoot = false;
-        float posY = Ball.current.transform.position.y;
-        if (GameCore.current.secCurrent < 4) 
+        float posY = player.transform.position.y;
+        if (GameCore.current.secCurrent < 3) 
         {
             if (Random.value > 0.5)
             {
+                Debug.Log(player.name+"Tiro per lo scadere");
                 return true;
             }
         }
         
         if (posY > 17.5) //Palla nella zona di difesa 
         {
+          //  Debug.Log(player.name+" Sono nella zona di difesa->"+prob);
+           
             if (prob < 0)
             {
                 return true;
@@ -287,22 +296,19 @@ public class IA : MonoBehaviour
         }
         else if (17.5 >= posY && posY >= -12.5)
         {
-            if (player.name== "PlayerR3") 
+          //  Debug.Log(player.name + " Sono nella zona di Centrocampo->" + prob);
+            if (GameCore.current.secCurrent < 3)
             {
-               
-                if (prob < 30)
+                if (Random.value > 0.5)
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
             }
-           
+                    
 
-            if (prob < 10)
+            if (prob < 10 && player.transform.position.y<-10)
             {
+                
                 return true;
             }
             else
@@ -310,11 +316,19 @@ public class IA : MonoBehaviour
                 return false;
             }
         }
-        else if (posY < -12.5) 
+        else if (posY < -12.5)
         {
+         //  Debug.Log(player.name + " Sono nella zona di attacco->" + prob);
+            if (GameCore.current.secCurrent < 3)
+            {
+                if (Random.value > 0.5)
+                {
+                    return true;
+                }
+            }
             if (!player.boaFlag && !player.marcaFlag)
             {
-                if (prob < 60)
+                if (prob < 50)
                 {
                     return true;
                 }
@@ -501,7 +515,7 @@ public class IA : MonoBehaviour
     public int GetRandom() 
     {
         int prob= Random.Range(0, 100);
-        Debug.Log("Valore estratto -> "+prob);
+       // Debug.Log("Valore estratto -> "+prob);
         return prob;
     }
     

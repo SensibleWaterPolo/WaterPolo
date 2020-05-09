@@ -74,7 +74,7 @@ public class TouchManager : MonoBehaviour
                                 startPos = gk.transform.position;
                                 loadShoot = true;
                                 
-                                SpawnSignal(gk.transform.position);                                
+                                SpawnSignal(gk.transform.position,gk.gameObject);                                
                             }
                         }
                     }
@@ -99,7 +99,7 @@ public class TouchManager : MonoBehaviour
                                         player.SetKeep();
                                     
                                     }
-                                    SpawnSignal(player.transform.position);
+                                    SpawnSignal(player.transform.position,player.gameObject);
                                 }
                             }
 
@@ -188,19 +188,21 @@ public class TouchManager : MonoBehaviour
                     }
                 }
 
-               
+
                 //FASE ENDED
                 if (touch.phase == TouchPhase.Ended && loadShoot)
                 {
 
-                   
+
                     Vector3 destination = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
-                    finalPos= Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
+                    finalPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
                     Debug.Log(Vector3.Distance(startPos, finalPos));
 
-                    if (player != null)
+
+
+                    if (player != null )
                     {
-                        if (minShoot < destination.y && destination.y < maxShoot || Vector3.Distance(startPos, finalPos)<10)//decidiamo se è un passaggio o un tiro
+                        if (minShoot < destination.y && destination.y < maxShoot || Vector3.Distance(startPos, finalPos) < 10)//decidiamo se è un passaggio o un tiro
                         {
 
                             shootFlag = false;
@@ -319,7 +321,7 @@ public class TouchManager : MonoBehaviour
 
                         //Debug.Log(player.name + " ANNULLO IL TIRO");
                         // player.DestroySignalShoot();
-                        if (shootSignalPrefab != null) 
+                        if (shootSignalPrefab != null)
                         {
                             DestroySignal();
                         }
@@ -327,7 +329,8 @@ public class TouchManager : MonoBehaviour
                         player = null;
                         restart = true;
                     }
-                    if (gk != null) 
+
+                    if (gk != null)
                     {
                         if (okShoot && gk.keep)
                         {
@@ -353,10 +356,10 @@ public class TouchManager : MonoBehaviour
         }
     }
 
-    public void SpawnSignal(Vector2 pos) 
+    public void SpawnSignal(Vector2 pos, GameObject obj) 
     {
-        shootSignalPrefab = Instantiate(shootSignal, new Vector3(pos.x,pos.y,0), Quaternion.identity);
-    
+        shootSignalPrefab = Instantiate(shootSignal, obj.transform.position, Quaternion.identity);
+        shootSignalPrefab.transform.parent = obj.transform;
     }
 
     public void DestroySignal() 

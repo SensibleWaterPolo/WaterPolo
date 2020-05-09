@@ -37,12 +37,7 @@ public class PlayerR3 : Player
             battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, Utility.GetAngleBetweenObjAB(opponent.gameObject, Ball.current.gameObject))));
             battlePrefab.CreateBattle(opponent, this);
         }
-        if (collision.gameObject.name == "Ball" && !keep && Ball.current.CheckBallIsPlayable(5) && !opponent.keepBoa && !loadShoot)
-        {
-            
-            SetKeep();
-            SetBall();
-        }
+    
         
     }
     public override bool PlayerCpu()

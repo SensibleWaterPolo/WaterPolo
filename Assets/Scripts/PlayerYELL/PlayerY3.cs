@@ -37,12 +37,7 @@ public class PlayerY3 : Player
             battlePrefab.CreateBattle(opponent, this);
         }
 
-        if (collision.gameObject.name == "Ball" && !keep && Ball.current.CheckBallIsPlayable(5) && !opponent.keepBoa && !loadShoot) 
-        {
-            Debug.Log("33");
-            SetKeep();
-            SetBall();
-        }
+      
             
     }
 }
