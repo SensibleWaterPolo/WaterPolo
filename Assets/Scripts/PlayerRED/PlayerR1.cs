@@ -224,7 +224,10 @@ public class PlayerR1 : Player
 
             }
         }
-        //  Debug.Log(name + " Non ho preso nessuna decisione");
+        if (!swimKeep && !arrivedFlagAtt)
+        {
+            SetSwimKeep();
+        }
         selected = false;
         return hasChoose;
     }

@@ -277,7 +277,7 @@ public class IA : MonoBehaviour
         
         if (posY > 17.5) //Palla nella zona di difesa 
         {
-            Debug.Log(player.name+" Sono nella zona di difesa->"+prob);
+          //  Debug.Log(player.name+" Sono nella zona di difesa->"+prob);
            
             if (prob < 0)
             {
@@ -291,7 +291,7 @@ public class IA : MonoBehaviour
         }
         else if (17.5 >= posY && posY >= -12.5)
         {
-            Debug.Log(player.name + " Sono nella zona di Centrocampo->" + prob);
+           // Debug.Log(player.name + " Sono nella zona di Centrocampo->" + prob);
             if (GameCore.current.secCurrent < 3)
             {
                 if (Random.value > 0.5)
@@ -313,7 +313,7 @@ public class IA : MonoBehaviour
         }
         else if (posY < -12.5)
         {
-           Debug.Log(player.name + " Sono nella zona di attacco->" + prob);
+        //   Debug.Log(player.name + " Sono nella zona di attacco->" + prob);
             if (GameCore.current.secCurrent < 3)
             {
                 if (Random.value > 0.5)

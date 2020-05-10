@@ -128,7 +128,7 @@ public class  Ball : MonoBehaviour
             }
         }
         else if (id == 1) {
-            GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 800);
+            GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 600);
             decelerateShoot = false;
             deceleratePass = false;
         }

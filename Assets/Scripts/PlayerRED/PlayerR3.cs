@@ -357,6 +357,10 @@ public class PlayerR3 : Player
             }
         }
         selected = false;
+        if (!swimKeep && !arrivedFlagAtt)
+        {
+            SetSwimKeep();
+        }
         return hasChoose;
     }
 

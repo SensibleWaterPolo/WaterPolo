@@ -431,6 +431,10 @@ MonoBehaviour:
   stun: 0
   keepBoa: 0
   swimKeep: 0
+  uploadShoot: 0
+  colonnello: 0
+  sciarpa: 0
+  rovesciata: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -510,7 +514,7 @@ Animator:
   m_GameObject: {fileID: 31590397}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3aa8bdb63642b61478ca34d507a1f287, type: 2}
+  m_Controller: {fileID: 9100000, guid: cb50d1a72ef1a0346a9153e058e42e4d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -825,6 +829,10 @@ MonoBehaviour:
   stun: 0
   keepBoa: 0
   swimKeep: 0
+  uploadShoot: 0
+  colonnello: 0
+  sciarpa: 0
+  rovesciata: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -865,7 +873,7 @@ Animator:
   m_GameObject: {fileID: 73869354}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 80fccc0050572914db0aaa8bf6ceb9f9, type: 2}
+  m_Controller: {fileID: 9100000, guid: b2676ddd7add2524b8003714622a7874, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -12282,6 +12290,10 @@ MonoBehaviour:
   stun: 0
   keepBoa: 0
   swimKeep: 0
+  uploadShoot: 0
+  colonnello: 0
+  sciarpa: 0
+  rovesciata: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -12324,7 +12336,7 @@ Animator:
   m_GameObject: {fileID: 267972305}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a6b603abafd214b46b30151b5938247b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0ff5935cedb1e734f9eb40c61ab203c0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -12860,7 +12872,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39, y: -93.999985}
+  m_AnchoredPosition: {x: 39, y: -94}
   m_SizeDelta: {x: 392.61633, y: 47.62242}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &330695744
@@ -13653,7 +13665,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39, y: -49.999985}
+  m_AnchoredPosition: {x: 39, y: -50}
   m_SizeDelta: {x: 392.61633, y: 47.62242}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &386695789
@@ -19975,6 +19987,7 @@ GameObject:
   - component: {fileID: 519420030}
   - component: {fileID: 519420033}
   - component: {fileID: 519420034}
+  - component: {fileID: 519420035}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -20106,6 +20119,18 @@ MonoBehaviour:
   poleDx: 0
   limitDx: 0
   y: 0
+--- !u!114 &519420035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519420028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe1c2302950ec29469f90fc44fb86a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &520006797
 GameObject:
   m_ObjectHideFlags: 0
@@ -20495,6 +20520,10 @@ MonoBehaviour:
   stun: 0
   keepBoa: 0
   swimKeep: 0
+  uploadShoot: 0
+  colonnello: 0
+  sciarpa: 0
+  rovesciata: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -20574,7 +20603,7 @@ Animator:
   m_GameObject: {fileID: 563600095}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b073da09cb3400a40b08684f2ddcae7c, type: 2}
+  m_Controller: {fileID: 9100000, guid: fa401e1e871c1db40a1dbd5db622869f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -31195,7 +31224,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 720, y: 1280}
+  m_ReferenceResolution: {x: 690, y: 1280}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -43052,7 +43081,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 51, y: -233.99998}
+  m_AnchoredPosition: {x: 51, y: -234}
   m_SizeDelta: {x: 392.61633, y: 47.62242}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &965792375
@@ -43260,6 +43289,10 @@ MonoBehaviour:
   stun: 0
   keepBoa: 0
   swimKeep: 0
+  uploadShoot: 0
+  colonnello: 0
+  sciarpa: 0
+  rovesciata: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -43321,7 +43354,7 @@ Animator:
   m_GameObject: {fileID: 1013301994}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: e01b5add948229940b48aa88d1eb8345, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1f7bcd3b18b3d354496c0ea019d9328b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -45026,6 +45059,10 @@ MonoBehaviour:
   stun: 0
   keepBoa: 0
   swimKeep: 0
+  uploadShoot: 0
+  colonnello: 0
+  sciarpa: 0
+  rovesciata: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -45066,7 +45103,7 @@ Animator:
   m_GameObject: {fileID: 1290246200}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b411d63219fa57e4eab0ecc3831ba2c5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 341e466f7d9850b45a2398ce200b2709, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -61378,6 +61415,10 @@ MonoBehaviour:
   stun: 0
   keepBoa: 0
   swimKeep: 0
+  uploadShoot: 0
+  colonnello: 0
+  sciarpa: 0
+  rovesciata: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -61418,7 +61459,7 @@ Animator:
   m_GameObject: {fileID: 1559964685}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a6b603abafd214b46b30151b5938247b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 0ff5935cedb1e734f9eb40c61ab203c0, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -72676,7 +72717,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 39, y: -186.99998}
+  m_AnchoredPosition: {x: 39, y: -187}
   m_SizeDelta: {x: 392.61633, y: 47.62242}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1822160465
@@ -82697,7 +82738,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872280686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.5, y: -5.6, z: 0}
+  m_LocalPosition: {x: 19.9, y: -30.6, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -83838,6 +83879,10 @@ MonoBehaviour:
   stun: 0
   keepBoa: 0
   swimKeep: 0
+  uploadShoot: 0
+  colonnello: 0
+  sciarpa: 0
+  rovesciata: 0
   loadShoot: 0
   destShoot: {x: 0, y: 0, z: 0}
   posAtt: {x: 0, y: 0, z: 0}
@@ -83917,7 +83962,7 @@ Animator:
   m_GameObject: {fileID: 2050683471}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b073da09cb3400a40b08684f2ddcae7c, type: 2}
+  m_Controller: {fileID: 9100000, guid: fa401e1e871c1db40a1dbd5db622869f, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

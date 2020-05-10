@@ -187,7 +187,7 @@ public class GoalKeeper : MonoBehaviour
           
             flagJump = true;
             save = CalcBlock();
-            agility = Random.Range(2, 5);
+            agility = Random.Range(3, 6);
             float x = transform.position.x - Ball.current.transform.position.x;
 
             if (x <= -2.5) //M:se la palla si trova alla destra 

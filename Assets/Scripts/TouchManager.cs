@@ -332,6 +332,8 @@ public class TouchManager : MonoBehaviour
                         }
                         loadShoot = false;
                         player.selected = false;
+                        if (!player.arrivedFlagAtt)
+                        { player.SetSwimKeep(); }
                         player = null;
 
                         
