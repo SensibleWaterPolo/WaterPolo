@@ -35,20 +35,21 @@ public class GoalYellow : GoalManager
             AudioController.current.DoFischio();
             AudioController.current.DoEsultanza();
             Invoke("ResetScene", 2f);
+            GameCore.current.ShowGoalAnimation();
 
-            
         } 
     }
 
     public  void ResetScene()
     {
-
-
+       
+ 
         PosPlayerMng.curret.SetKickOff(1);
         Referee.current.SetMId();
         Referee.current.SetArmFront();
         goal = false;
-        
+        GameCore.current.DeleteGoalAnimation();
+
 
     }
 }

@@ -30,7 +30,7 @@ public class GolRed : GoalManager
             AudioController.current.DoFischio();
             AudioController.current.DoEsultanza();
             Invoke("ResetScene", 2f);
-
+            GameCore.current.ShowGoalAnimation();
 
 
         }
@@ -39,11 +39,10 @@ public class GolRed : GoalManager
     public void ResetScene()
     {
 
-
         PosPlayerMng.curret.SetKickOff(0);
         goal = false;
         Referee.current.SetMId();
         Referee.current.SetArmFront();
-
+        GameCore.current.DeleteGoalAnimation();
     }
 }

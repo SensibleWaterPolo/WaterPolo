@@ -16,6 +16,7 @@ public class GameCore : MonoBehaviour
     public float timeCurrentMatch;
     public float secStart;
     public GameObject finalMenu;
+    public GameObject goalAnimation;
     public bool levelCPUHard; //true se livello CPU hard, false se normal
     public bool startSec;
 
@@ -25,6 +26,7 @@ public class GameCore : MonoBehaviour
         levelCPUHard = true;
         secAction = 15;
         finalMenu = GameObject.Find("FinalMatchPanel");
+        goalAnimation = GameObject.Find("GoalPanel");
         timeMatch = 180;
     }
     void Start()
@@ -34,6 +36,7 @@ public class GameCore : MonoBehaviour
         secCurrent = secAction;
         UpdateTimeGame();
         finalMenu.SetActive(false);
+        goalAnimation.SetActive(false);
         Time.timeScale = 1;
         startSec = false;
         Invoke("Play", 1f);
@@ -166,6 +169,16 @@ public class GameCore : MonoBehaviour
         }
 
             
+    }
+    public void ShowGoalAnimation()
+    {
+        goalAnimation.SetActive(true);
+ 
+    }
+    public void DeleteGoalAnimation()
+    {
+        goalAnimation.SetActive(false);
+
     }
     public void UpdateSecond()
     {
