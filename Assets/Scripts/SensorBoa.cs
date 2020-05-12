@@ -57,7 +57,7 @@ public class SensorBoa : MonoBehaviour
        
             if (collision.CompareTag("Ball") && !playerBoa.keep && !playerBoa.keepBoa && !playerBoa.swimKeep && !playerBoa.loadShoot && Ball.current.CheckBallIsPlayable(4) && playerBoa.marcaFlag)
             {
-                Debug.Log(name + "prendo possesso" + Time.time);
+               
                 playerBoa.SetKeepBoa();
             }
 

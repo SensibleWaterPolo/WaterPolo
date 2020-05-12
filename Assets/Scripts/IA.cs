@@ -355,7 +355,7 @@ public class IA : MonoBehaviour
            
             if (hitBoa.collider.CompareTag("ShootLine"))
             {
-                Debug.Log("Boa non libera");
+                
                 return false;
             }
 
@@ -364,17 +364,17 @@ public class IA : MonoBehaviour
             {
                 if (name == "PlayerR1")
                 {
-                    Debug.Log("posizione rovesciata");
+                    
                     return false;
                 }
                 else if (name == "PlayerR3")
                 {
-                    Debug.Log("posizione rovesciata");
+                    
                     return false;
                 }
                 else if (name == "PlayerR5")
                 {
-                    Debug.Log("posizione rovesciata");
+                   
                     return true;
                 }
 
@@ -384,17 +384,17 @@ public class IA : MonoBehaviour
             {
                 if (name == "PlayerR1")
                 {
-                    Debug.Log("posizione sciarpa");
+                    
                     return true;
                 }
                 else if (name == "PlayerR3")
                 {
-                    Debug.Log("posizione sciarpa");
+                   
                     return false;
                 }
                 else if (name == "PlayerR5")
                 {
-                    Debug.Log("posizione sciarpa");
+                    
                     return false;
                 }
 
@@ -405,18 +405,18 @@ public class IA : MonoBehaviour
             
             if (name == "PlayerR1")
             {
-                Debug.Log("posizione di spalle");
+               
                 return true;
             }
             else if (name == "PlayerR3")
             {
-                Debug.Log("posizione di spalle");
+                
 
                 return true;
             }
             else if (name == "PlayerR5")
             {
-                Debug.Log("posizione di spalle");
+                
 
                 return true;
             }

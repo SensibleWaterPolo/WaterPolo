@@ -41,7 +41,7 @@ public class PlayerR6 : Player
         {
             if (collision.CompareTag("Ball") && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && marcaFlag)
             {
-                Debug.Log(name+"prendo possesso"+Time.time);
+                
                 SetKeepBoa();
                 // SetBallBoa();
 
@@ -52,24 +52,7 @@ public class PlayerR6 : Player
 
     public override void OnTriggerStay2D(Collider2D collision)
     {
-      //  base.OnTriggerStay2D(collision);
-
-      /*  if (collision.CompareTag("Ball"))
-        {
-            if (Ball.current.CheckBallIsPlayable(3) && marcaFlag && !animator.GetCurrentAnimatorStateInfo(0).IsName("Keep") && !animator.GetCurrentAnimatorStateInfo(0).IsName("KeepBoa"))
-            {
-                SetKeepBoa();
-             //   SetBallBoa();
-
-            }
-          /*  else if (Ball.current.CheckBallIsPlayable(3) && !marcaFlag && !keep)
-
-            {
-                SetKeep();
-              //  SetBall();
-            }
-            
-        }*/
+        base.OnTriggerStay2D(collision);
     }
 
     public override bool PlayerCpu()

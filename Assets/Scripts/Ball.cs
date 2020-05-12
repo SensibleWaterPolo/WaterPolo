@@ -128,9 +128,9 @@ public class  Ball : MonoBehaviour
             }
         }
         else if (id == 1) {
-            GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 600);
+            GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 500);
             decelerateShoot = false;
-            deceleratePass = false;
+            deceleratePass = true;
         }
 
         if (gk != null) 
@@ -213,7 +213,7 @@ public class  Ball : MonoBehaviour
     public void DecelerateVelShoot() //M: Diminuisce la velocità della palla
     {
         if (rb != null)
-            rb.velocity = rb.velocity - (rb.velocity * 0.3f * Time.deltaTime);
+            rb.velocity = rb.velocity - (rb.velocity * 0.4f * Time.deltaTime);
     }
     public void SetPlayer(Player player) //M: assegna alla palla il giocatore in possesso
     {
@@ -224,6 +224,7 @@ public class  Ball : MonoBehaviour
            /* GameCore.current.RestartTimeAction();
             GameCore.current.startSec = true;*/
             idTeam = player.idTeam;
+            isShooted = false;
         }
         
     }

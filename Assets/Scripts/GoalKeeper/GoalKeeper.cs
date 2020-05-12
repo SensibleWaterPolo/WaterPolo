@@ -162,7 +162,7 @@ public class GoalKeeper : MonoBehaviour
     {
         bool save;
         
-        float coeffVelBall = Ball.current.speed /4;
+        float coeffVelBall = Ball.current.speed /5;
         
         float coeffGk = (block*10); 
 
@@ -187,7 +187,7 @@ public class GoalKeeper : MonoBehaviour
           
             flagJump = true;
             save = CalcBlock();
-            agility = Random.Range(3, 6);
+            agility = Random.Range(4,7);
             float x = transform.position.x - Ball.current.transform.position.x;
 
             if (x <= -2.5) //M:se la palla si trova alla destra 

@@ -32,8 +32,7 @@ public class PlayerR3 : Player
         base.OnTriggerStay2D(collision);
         if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && idBall==3)
         {            
-            marcaFlag = true;
-            opponent.marcaFlag = true;
+            
             battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, Utility.GetAngleBetweenObjAB(opponent.gameObject, Ball.current.gameObject))));
             battlePrefab.CreateBattle(opponent, this);
         }

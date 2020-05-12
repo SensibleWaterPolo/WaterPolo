@@ -61,7 +61,8 @@ public class Battle : MonoBehaviour
     {
         this.att = att;
         this.def = def;
-       
+        att.marcaFlag = true;
+        def.marcaFlag = true;
         Utility.RotateObjAtoB(att.gameObject, Ball.current.gameObject);
         Utility.RotateObjAtoB(def.gameObject, Ball.current.gameObject);
 
@@ -69,6 +70,7 @@ public class Battle : MonoBehaviour
         def.transform.parent = transform;
 
         start = true;
+        Debug.Log("Start Battle");
         
     }
 
@@ -97,7 +99,8 @@ public class Battle : MonoBehaviour
             whoWin = true;
             Invoke("WhoWin",3f);
         }
-        if (att.swim  || def.swim || def.keep || att.idBall==3 || def.idBall==2 || att.keep)
+        
+        if (att.idBall==3 || def.idBall==2 || att.swim || def.swim)
             StopBattle();
     }
 
@@ -108,7 +111,7 @@ public class Battle : MonoBehaviour
         def.transform.parent = null;
         att.marcaFlag = false;
         def.marcaFlag = false;
-
+        Debug.Log("STOP BATTLE");
          Destroy(this.gameObject);
 
     }

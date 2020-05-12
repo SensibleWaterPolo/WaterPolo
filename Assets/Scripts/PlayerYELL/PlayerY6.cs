@@ -45,20 +45,8 @@ public class PlayerY6 : Player
         }
     }
 
-   /* public override void OnTriggerStay2D(Collider2D collision)
+    public override void OnTriggerStay2D(Collider2D collision)
     {
         base.OnTriggerStay2D(collision);
-
-        if (collision.CompareTag("Ball"))
-        {
-            if (Ball.current.CheckBallIsPlayable(3) && marcaFlag && !keepBoa && !loadShoot)
-            {
-                Debug.Log("6");
-                SetKeepBoa();
-                SetBallBoa();
-
-            }
-           
-        }
-    }*/
+    }
 }

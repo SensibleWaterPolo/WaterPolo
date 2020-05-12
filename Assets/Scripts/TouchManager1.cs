@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class TouchManager : MonoBehaviour
+public class TouchManagerNew : MonoBehaviour
 {
     private Touch touch;
     private int numTouch;
@@ -62,22 +62,21 @@ public class TouchManager : MonoBehaviour
                 if (touch.phase == TouchPhase.Began)
                 {   startPos= Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position); 
                     Vector3 posTouch = Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
-
-
-                    //RaycastHit2D hitPlayer = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskPlayer);
-
+                    
+                    
+                    RaycastHit2D hitPlayer = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskPlayer);
+                    
                     //RaycastHit2D hitFight = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskFight);
-
-                    //RaycastHit2D hitGk = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskGk);
-
-                    RaycastHit2D hit = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskGk);
+                    
+                    RaycastHit2D hitGk = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskGk);
+                   
                     okShoot = false;
                     
-                    if (hit.collider)
+                    if (hitGk.collider)
                     {
-                        if (hit.collider.CompareTag("GK")) 
+                        if (hitGk.collider.CompareTag("GK")) 
                         {
-                         gk = GameObject.Find(hit.collider.gameObject.name).GetComponent<GoalKeeper>();
+                         gk = GameObject.Find(hitGk.collider.gameObject.name).GetComponent<GoalKeeper>();
                             if (gk.keep && !gk.cpuFlag)
                             {
                                 startPos = gk.transform.position;
@@ -87,11 +86,11 @@ public class TouchManager : MonoBehaviour
                             }
                         }
                     }
-                    hit = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskPlayer);
-                    if (hit.collider)
+                    
+                    if (hitPlayer.collider)
                     {
 
-                        GameObject obj = hit.collider.gameObject;
+                        GameObject obj = hitPlayer.collider.gameObject;
 
                         if (obj.tag == "Player")
                         {
@@ -119,7 +118,17 @@ public class TouchManager : MonoBehaviour
                         }
                        
                     }
-                                     
+                  /*  if (hitFight.collider != null)
+                    {
+                        FightManager obj = GameObject.Find(hitFight.collider.name).GetComponent<FightManager>();
+                        if (obj != null)
+                        {
+                            obj.P1AddClickLocal();
+                            
+                        }
+
+                    }*/
+                    
                 
                 }
 
@@ -345,7 +354,8 @@ public class TouchManager : MonoBehaviour
                         }
                         loadShoot = false;
                         player.selected = false;
-                      
+                      /*  if (!player.arrivedFlagAtt)
+                        { player.SetSwimKeep(); }*/
                         player = null;
 
                         
@@ -358,7 +368,7 @@ public class TouchManager : MonoBehaviour
                             gk.LoadShoot(endPos);
 
                         }
-                        
+                        // gk.DestroySignalShoot();
                         if (shootSignalPrefab != null)
                         {
                             DestroySignal();

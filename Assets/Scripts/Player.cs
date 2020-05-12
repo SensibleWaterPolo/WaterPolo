@@ -168,32 +168,35 @@ public class Player : MonoBehaviour
             if (def)
             {
                 transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Arm");
-
+                
             }
             else
             {
                 transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Pool");
-
+                
             }
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO BICY
 
             // BICY :Bicicletta se la palla è libera non nel mio settore e attendo l'evoluzione del gioco
-            if (idBall == 0 && Ball.current.inGameFlag && !keep && !loadShoot && (arrivedFlagAtt || arrivedFlagDef) && idDecisionMaking!=1 )
+            if (idBall == 0 && Ball.current.inGameFlag && !keep && !loadShoot && (arrivedFlagAtt || arrivedFlagDef) && idDecisionMaking != 1)
             {
                 idDecisionMaking = 1;
                 SetBicy();
+                return;
 
-            }
+            } else
             //BICY: palla in possesso avversario, sono in posizione di difesa ma la palla non ce l'ha il mio diretto opponent
-            if (idBall == 3 &&  arrivedFlagDef && !def && !marcaFlag && !stun && !fightFlag && !opponent.ballFlag && idDecisionMaking !=2)
+            if (idBall == 3 && arrivedFlagDef && def && Ball.current.statePos!=sectorAction  && !marcaFlag && !stun && !fightFlag && !opponent.ballFlag && idDecisionMaking != 2)
             {
                 idDecisionMaking = 2;
                 SetBicy();
-
+                return;
             }
+         
+             
 
-
+            else
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO SWIM
             // SWIM : La palla è libera NON nel mio settore ma sono quello più vicino della mia squadra
 
@@ -202,49 +205,49 @@ public class Player : MonoBehaviour
             {
                 idDecisionMaking = 22;
                 SetSwim(posAtt, false);
-
+                return;
             }
-
+            else
             //SWIM: Palla vicina al boa o al marca boa
             if (idBall == 1 && marcaFlag && Ball.current.CheckBallIsPlayable(0) && distaceBall < opponent.distaceBall && idDecisionMaking !=3)
             {
                 idDecisionMaking = 3;
                 SetSwim(Ball.current.transform.position, false);
+                return;
 
-
-            }
+            }else
             //SWIM: iL PIù VICINO PRENDE LA PALLA
             if (Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name && idDecisionMaking !=33)
             {
                 idDecisionMaking = 33;
                 SetSwim(Ball.current.transform.position, false);
-
+                return;
             }
-
+            else
             //SWIM: la palla è libera NON nel mio settore ma io sono il player più vicino 
             if (idBall == 0 && Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name && distaceBall < 10 && !stun && !fightFlag && idDecisionMaking !=4)
             {
                 idDecisionMaking = 4;
                 SetSwim(Ball.current.transform.position, false);
-
+                return;
             }
-
+            else
             // SWIM: La palla è libera nel mio settore, sono in marcatura ma la palla è talmente vicina che provo a prenderla
             if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && marcaFlag && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name && distaceBall < 6 && idDecisionMaking !=5)
 
             {
                 idDecisionMaking = 5;
                 SetSwim(Ball.current.transform.position, false);
+                return;
 
-
-            }
+            }else
             //La palla è nel mio settore e sono un laterale
             if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && sectorAction != 2 && !stun && !fightFlag && idDecisionMaking !=55)
             {
                 idDecisionMaking = 55;
                 SetSwim(Ball.current.transform.position, false);
-
-            }
+                return;
+            }else
 
             //SWIM: Palla libera nel mio settore e sono quello più vicino della mia squadra ma la palla è anche un pò distante dall'avversario
 
@@ -252,9 +255,9 @@ public class Player : MonoBehaviour
             {
                 idDecisionMaking = 6;
                 SetSwim(Ball.current.transform.position, false);
-
+                return;
             }
-
+            else
             //SWIM: palla in possesso di un mio compagno
             if (idBall == 2 && !arrivedFlagAtt && !stun && !fightFlag && !swimKeep )
             {
@@ -264,6 +267,7 @@ public class Player : MonoBehaviour
                     {
                         idDecisionMaking = 7;
                         SetSwim(posAtt, false);
+                        return;
                     }
 
                 }
@@ -273,21 +277,22 @@ public class Player : MonoBehaviour
                     {
                         idDecisionMaking = 8;
                         SetSwim(posAtt, true);
+                        return;
                     }
 
                 }
             }
-            if (idBall == 2 && Ball.current.gk != null  && idDecisionMaking != 88)
+            if (idBall == 2 && Ball.current.gk != null && idDecisionMaking != 88)
             {
                 idDecisionMaking = 88;
                 SetSwim(posAtt, true);
-
+                return;
 
 
             }
-
+            else
             //SWIM: palla in possesso avversario
-            if (idBall == 3 && !arrivedFlagDef && !marcaFlag && !stun && !fightFlag && !pushAtt && !beginPush )
+            if (idBall == 3 && !arrivedFlagDef && !marcaFlag && !stun && !fightFlag && !pushAtt && !def)
             {
                 if (opponent.counterAttFlag)
                 {
@@ -295,6 +300,7 @@ public class Player : MonoBehaviour
                     {
                         idDecisionMaking = 9;
                         SetSwim(posDef, false);
+                        return;
                     }
 
 
@@ -309,6 +315,7 @@ public class Player : MonoBehaviour
                             {
                                 idDecisionMaking = 10;
                                 SetSwim(posDef, true);
+                                return;
                             }
                         }
                         else
@@ -317,6 +324,7 @@ public class Player : MonoBehaviour
                             {
                                 idDecisionMaking = 11;
                                 SetSwim(posDef, false);
+                                return;
                             }
                         }
                     }
@@ -328,6 +336,7 @@ public class Player : MonoBehaviour
                             {
                                 idDecisionMaking = 12;
                                 SetSwim(posDef, true);
+                                return;
                             }
                         }
                         else
@@ -336,6 +345,7 @@ public class Player : MonoBehaviour
                             {
                                 idDecisionMaking = 13;
                                 SetSwim(posDef, false);
+                                return;
                             }
                         }
                     }
@@ -343,10 +353,10 @@ public class Player : MonoBehaviour
                 }
 
             }
-
+            else
             //Se la palla è in possesso avversario ma non del mio diretto mi riposiziono in difesa
 
-            if (idBall == 3 && !arrivedFlagDef && !opponent.ballFlag)
+            if (idBall == 3 && !arrivedFlagDef && !opponent.ballFlag && !marcaFlag  && Ball.current.speed < 3)
             {
                 if (opponent.counterAttFlag)
 
@@ -355,6 +365,7 @@ public class Player : MonoBehaviour
                     {
                         idDecisionMaking = 131;
                         SetSwim(posDef, false);
+                        return;
                     }
 
                 }
@@ -363,25 +374,29 @@ public class Player : MonoBehaviour
                     if (idDecisionMaking != 132)
                     {
                         idDecisionMaking = 132;
-                        if (idTeam == 0 && transform.position.y > posDef.y || idTeam == 1 && transform.position.y < posDef.y)
+                        if (idTeam == 0 && transform.position.y > posDef.y  || idTeam == 1 && transform.position.y < posDef.y )
                         {
+                            
                             SetSwim(posDef, true);
+                            return;
 
                         }
-                        else
+                        else 
                         {
                             SetSwim(posDef, false);
+                            return;
 
                         }
                     }
                 }
 
             }
+            else
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO DEF
 
             // DEF: Palla è stata tirata e viaggia lungo il mio settore
 
-            if (idBall == 1 && Ball.current.isShooted && speed > 5 && def && !stun && !fightFlag && idDecisionMaking!=14)
+            if (idBall == 1 && Ball.current.isShooted && speed > 5 && def && !stun && !fightFlag && idDecisionMaking != 14)
             {
                 idDecisionMaking = 14;
                 if (Ball.current.player != null)
@@ -389,30 +404,38 @@ public class Player : MonoBehaviour
                     if (Ball.current.player.name == opponent.name)
                     {
                         SetDef();
+                        return;
 
                     }
                 }
 
             }
+            else
 
             //DEF: se sono il marcaboa e la palla è in possesso
-            if (idBall == 3 && marcaFlag && idDecisionMaking!=15)
+            if (idBall == 3 && marcaFlag && idDecisionMaking != 15)
             {
                 idDecisionMaking = 15;
                 SetDef();
+                return;
 
             }
+            else
             //DEF: palla in possesso del mio diretto avversario e sono arrivato nella posizione di difesa 
-            if (idBall == 3 && arrivedFlagDef && opponent.ballFlag && !stun && !fightFlag && Vector3.Distance(transform.position, opponent.transform.position) < 25 && !opponent.keepBoa && idDecisionMaking !=16)
+            if (idBall == 3 && arrivedFlagDef && opponent.ballFlag && !stun && !fightFlag && Vector3.Distance(transform.position, opponent.transform.position) < 25 && !opponent.keepBoa && idDecisionMaking != 16)
             {
                 idDecisionMaking = 16;
                 SetDef();
+                return;
 
             }
-
+            else
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             if (idBall == 4)
             {
+            }
+            else {
+              
             }
 
 
@@ -641,8 +664,12 @@ public class Player : MonoBehaviour
             {
                  brain = Random.Range(1, 3);
                  Invoke("BrainCpu", brain);
+                if (idTeam == 1 && transform.position.y > posAtt.y)
+                {
+                    Invoke("SetSwimKeep", 1);
+                }
             }
-            if (!arrivedFlagAtt && !selected && distanceAtt >10)
+         /*   if (!arrivedFlagAtt && !selected && distanceAtt >10)
             {
                 if (idTeam == 0 && transform.position.y < posAtt.y)
                 {
@@ -652,7 +679,7 @@ public class Player : MonoBehaviour
                 {
                     Invoke("SetSwimKeep", 1);
                 }
-            }
+            }*/
         }
     }
     public void SetKeepBoa()
@@ -891,7 +918,7 @@ public class Player : MonoBehaviour
     public void SetSwimKeep()
     {
 
-        if (keep && !swimKeep && !selected)
+        if (keep && !swimKeep && !selected && !arrivedFlagAtt)
         {
 
             posFinal = posAtt;
