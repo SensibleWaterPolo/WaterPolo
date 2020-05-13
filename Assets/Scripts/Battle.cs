@@ -70,7 +70,7 @@ public class Battle : MonoBehaviour
         def.transform.parent = transform;
 
         start = true;
-        Debug.Log("Start Battle");
+        
         
     }
 
@@ -100,7 +100,7 @@ public class Battle : MonoBehaviour
             Invoke("WhoWin",3f);
         }
         
-        if (att.idBall==3 || def.idBall==2 || att.swim || def.swim)
+        if (att.idBall==3 || def.idBall==2 || att.swim || def.swim || att.keep || def.keep)
             StopBattle();
     }
 
@@ -111,7 +111,7 @@ public class Battle : MonoBehaviour
         def.transform.parent = null;
         att.marcaFlag = false;
         def.marcaFlag = false;
-        Debug.Log("STOP BATTLE");
+       
          Destroy(this.gameObject);
 
     }

@@ -172,7 +172,7 @@ public class GoalKeeper : MonoBehaviour
         if (prob<=coeff)
             save = true;
         else save = false;
-      // Debug.Log("coeffBall " + coeffVelBall + " probabilità parare ->" + coeff + " valore estratto->" + prob + " save->"+save);
+       Debug.Log("coeffBall " + coeffVelBall + " probabilità parare ->" + coeff + " valore estratto->" + prob + " save->"+save);
         return save;
 
     }
@@ -224,7 +224,10 @@ public class GoalKeeper : MonoBehaviour
     {
         animator.SetTrigger("Up");
         if (save)
+        {
             transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Side");
+            EnableSave();
+        }
         Invoke("DisableSave", 1f);
 
     }
@@ -233,14 +236,20 @@ public class GoalKeeper : MonoBehaviour
     {
         animator.SetTrigger("Left");
         if (save)
+        {
             transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("Side");
+            EnableSave();
+        }
         
     }
     public virtual void SaveRight(bool save)
     {
         animator.SetTrigger("Right");
         if (save)
+        {
             transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Side");
+            EnableSave();
+        }
            }
 
     public virtual void SaveMid(bool save)
@@ -249,6 +258,7 @@ public class GoalKeeper : MonoBehaviour
         if (save)
         {
             transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("Side");
+            EnableSave();
             transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("Side");
         }
         Invoke("DisableSave", 1f);
@@ -262,6 +272,15 @@ public class GoalKeeper : MonoBehaviour
         transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
 
         flagJump = false;
+    }
+
+    public void EnableSave()
+    {
+        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Side");
+        transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("Side");
+        transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Side");
+        transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("Side");
+        transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("Side");
     }
 
     public void SetKeep() 
