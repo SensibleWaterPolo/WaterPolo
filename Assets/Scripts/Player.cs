@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
     public int brain; //velocità della cpu nell'eseguire un'azione di passaggio o di tiro
     public Vector2 clickCPU; //range di click della cpu, da un minimo X ad un massimo Y, utilizzati per decidere chi vince uno scontro 
     protected bool armDx; //M: true se è destro, false se è un mancino
+    public bool isInContact; //True se sono in contatto con un altro giocatore
 
 
     [Header("FLAG")]
@@ -482,13 +483,22 @@ public class Player : MonoBehaviour
             SetKeep();
 
         }
+        if (collision.CompareTag("Player")) 
+        {
+            isInContact = true;
+        
+        }
 
     }
 
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-
+        if (collision.CompareTag("Player")) 
+        {
+            isInContact = false;
+        
+        }
     }
     public virtual void OnTriggerStay2D(Collider2D collision)
     {
@@ -504,6 +514,11 @@ public class Player : MonoBehaviour
             SetKeep();
 
         }
+        if (collision.CompareTag("Player"))
+            {
+            isInContact = true;
+          
+            }
     }
 
 
@@ -559,10 +574,10 @@ public class Player : MonoBehaviour
                 {
                     Utility.RotateObjToPoint(this.gameObject, posGoal);
                 }
-                else
+               /* else
                 {
                     Utility.RotateObjToPoint(this.gameObject, Ball.current.transform.position);
-                }
+                }*/
 
             }
             else if (arrivedFlagDef)
