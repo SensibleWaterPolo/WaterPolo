@@ -19,6 +19,7 @@ public class GameCore : MonoBehaviour
     public GameObject goalAnimation;
     public bool levelCPUHard; //true se livello CPU hard, false se normal
     public bool startSec;
+    public bool secExpired;
 
     private void Awake()
     {
@@ -55,19 +56,20 @@ public class GameCore : MonoBehaviour
 
                 if (secCurrent > 1 && startSec)
                 {
-                   // UpdateSecond();
+                    UpdateSecond();
                 }
                 else if(startSec && secCurrent<1) 
                 {
-                     if (Ball.current.player != null) 
-                     {
-                      //   ShootPlayer();
+                    /*  if (Ball.current.player != null) 
+                      {
+                       //   ShootPlayer();
 
-                     }
-                     if (Ball.current.gk != null)
-                     {
-                      //   ShootGk();
-                     }
+                      }
+                      if (Ball.current.gk != null)
+                      {
+                       //   ShootGk();
+                      }*/
+                    secExpired = true;
                    
                     startSec = false;
                     
@@ -192,6 +194,7 @@ public class GameCore : MonoBehaviour
     {
         secStart= Time.time;
         startSec = true;
+        secExpired = false;
        
     }
 
@@ -201,13 +204,13 @@ public class GameCore : MonoBehaviour
       
         if (player.keep)
         {
-            Debug.Log(player.name+" tiro a lato");
+            
             player.LoadShoot(player.posBallEndAction, false, 0);
 
         }
         else if (player.keepBoa) 
         {
-            Debug.Log(player.name + " tiro a lato");
+            
             if (IA.current.BoaWatchGk(player.idTeam))
 
             {

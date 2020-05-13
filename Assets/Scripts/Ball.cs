@@ -38,6 +38,10 @@ public class  Ball : MonoBehaviour
 
     public float distance=0; //distanza dal punto di arrivo
     public float maxHightBall; //punto medio del lancio in cui la dimensione della palla in altezza è il massimo
+
+    public string redNear;
+    public string yellowNear;
+    public string moreNear;
     
     private void Awake() //M:inizializzazione variabili 
     {
@@ -91,14 +95,17 @@ public class  Ball : MonoBehaviour
         
         UpdateSideBall();
 
-       
+        CheckSecExpired();
 
-             
-      //  Debug.Log("SPEED "+speed+ " /shootflag " +shootFlag+ " /player "+player+ " /libera :"+freeFlag+" /ferma "+motionlessFlag+ " /shooted "+isShooted);
-       
+        redNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(1, false);
+        yellowNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(0, false);
+        moreNear = PosPlayerMng.curret.GetPlayerNameNearBall();
+
+        //  Debug.Log("SPEED "+speed+ " /shootflag " +shootFlag+ " /player "+player+ " /libera :"+freeFlag+" /ferma "+motionlessFlag+ " /shooted "+isShooted);
 
 
-        
+
+
 
     }
 
@@ -116,7 +123,13 @@ public class  Ball : MonoBehaviour
         {
             if (shootFlag)
             {
-                GetComponent<Rigidbody2D>().AddForce(direct * shoot * 450);
+                if (!GameCore.current.secExpired)
+                {
+                    GetComponent<Rigidbody2D>().AddForce(direct * shoot * 450);
+                }
+                else {
+                    GetComponent<Rigidbody2D>().AddForce(direct * shoot * 600);
+                }
                 decelerateShoot = true;
                 deceleratePass = false;
             }
@@ -127,8 +140,13 @@ public class  Ball : MonoBehaviour
                 decelerateShoot = false;
             }
         }
-        else if (id == 1) {
-            GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 500);
+        else if (id == 1)
+        {
+            if (!GameCore.current.secExpired)
+            {
+                GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 500);
+            }
+            else { GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 800); }
             decelerateShoot = false;
             deceleratePass = true;
         }
@@ -297,11 +315,12 @@ public class  Ball : MonoBehaviour
        isShooted = false;
         if (collision.gameObject.CompareTag("Side"))
         {
-            rb.velocity = rb.velocity / 2;
+            rb.velocity = rb.velocity / 3;
         }
 
-        if (collision.gameObject.CompareTag("Arm")) 
+        if (collision.gameObject.CompareTag("Arm"))
         {
+            rb.velocity = rb.velocity / 2;
             GameCore.current.RestartTimeAction();
         }
     }
@@ -363,7 +382,26 @@ public class  Ball : MonoBehaviour
     
     }
 
-   
+    public void CheckSecExpired() 
+    {
+        if (GameCore.current.secExpired) 
+        {
+            if (player != null)
+            {
+                GameCore.current.ShootPlayer();
+                return;
+
+            }
+            else if (gk != null) 
+            {
+                GameCore.current.ShootGk();
+                return;
+            }
+        
+        
+        }
+    
+    }
 
    
    

@@ -30,7 +30,7 @@ public class PlayerR3 : Player
     public override void OnTriggerStay2D(Collider2D collision)
     {
         base.OnTriggerStay2D(collision);
-        if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && idBall==3)
+        if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && !opponent.swimKeep && idBall==3)
         {            
             
             battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, Utility.GetAngleBetweenObjAB(opponent.gameObject, Ball.current.gameObject))));
@@ -46,6 +46,24 @@ public class PlayerR3 : Player
 
         }
 
+      
+    }
+
+    public override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+
+        if(collision.CompareTag("Ball") && !keep && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(60)&& !Ball.current.shootFlag && marcaFlag)
+            {
+                if (Ball.current.idTeam != idTeam)
+                {
+
+                    GameCore.current.RestartTimeAction();
+                }
+                Ball.current.freeFlag = false;
+                SetKeep();
+
+            }
     }
     public override bool PlayerCpu()
     {
