@@ -20,51 +20,36 @@ public class BallOut : MonoBehaviour
     {
         if (collision.CompareTag("Ball") && Ball.current.inGameFlag) 
         {
-            /* AudioController.current.DoFischio();
-             Ball.current.inGameFlag = false;
-             PosPlayerMng.curret.SetAllBicy();
-             if (Ball.current.fieldYellow)
-             {
-                 Referee.current.SetArmRight();
-             }
-             else
-                 Referee.current.SetArmLeft();
-
-             Invoke("KeepToGk", 1);*/
+           
             Fischia();
         
         }
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-      /*  if (collision.CompareTag("Ball") && Ball.current.inGameFlag)
-        {
-            Ball.current.inGameFlag = false;
-            PosPlayerMng.curret.SetAllBicy();
-            if (Ball.current.fieldYellow)
-            {
-                Referee.current.SetArmRight();
-            }
-            else
-                Referee.current.SetArmLeft();
-
-            Invoke("KeepToGk", 1);
-
-        }*/
+     
     }
 
     public void KeepToGk() 
     {
-        if (Ball.current.fieldYellow)
+        if (Ball.current.fieldYellow && Ball.current.idTeam == 1)
         {
             GameObject.Find("YellowGK").GetComponent<GoalKeeper>().SetKeep();
 
         }
-        else
+        else if (Ball.current.fieldYellow && Ball.current.idTeam == 0)
         {
             GameObject.Find("RedGK").GetComponent<GoalKeeper>().SetKeep();
         }
-        Ball.current.inGameFlag = true;
+        else if (!Ball.current.fieldYellow && Ball.current.idTeam == 0)
+        {
+            GameObject.Find("RedGK").GetComponent<GoalKeeper>().SetKeep();
+        }
+        else if (Ball.current.fieldYellow && Ball.current.idTeam == 1) 
+        {
+            GameObject.Find("YellowGK").GetComponent<GoalKeeper>().SetKeep();
+        }
+            Ball.current.inGameFlag = true;
       
     }
 
