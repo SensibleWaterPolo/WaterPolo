@@ -20,15 +20,16 @@ public class GameCore : MonoBehaviour
     public bool levelCPUHard; //true se livello CPU hard, false se normal
     public bool startSec;
     public bool secExpired;
-
+    public bool stopShoot;
     private void Awake()
     {
         current = this;
         levelCPUHard = true;
-        secAction = 15;
+        secAction = 5;
         finalMenu = GameObject.Find("FinalMatchPanel");
         goalAnimation = GameObject.Find("GoalPanel");
         timeMatch = 180;
+        stopShoot = false;
     }
     void Start()
     {
@@ -54,25 +55,31 @@ public class GameCore : MonoBehaviour
 
                 timeCurrentMatch = timeMatch - time;
 
-                if (secCurrent > 1 && startSec)
+
+                if (secCurrent < 1.5)
+                {
+                    stopShoot = true;
+
+                }
+                else 
+                {
+                    stopShoot = false;
+                }
+                if (secCurrent > 0.5 && startSec)
                 {
                     UpdateSecond();
                 }
-                else if(startSec && secCurrent<1) 
+                else if (startSec && secCurrent < 0.5)
                 {
-                    /*  if (Ball.current.player != null) 
-                      {
-                       //   ShootPlayer();
 
-                      }
-                      if (Ball.current.gk != null)
-                      {
-                       //   ShootGk();
-                      }*/
                     secExpired = true;
-                   
+
                     startSec = false;
-                    
+                  /*  if (!Ball.current.isShooted)
+                    {
+                        Fischia();
+                    }*/
+
                 }
 
                 UpdateTimeGame();
@@ -201,42 +208,82 @@ public class GameCore : MonoBehaviour
     public void ShootPlayer()
     {
         Player player = Ball.current.player;
-      
-        if (player.keep)
+        if (player != null)
         {
-            
-            player.LoadShoot(player.posBallEndAction, false, 0);
-
-        }
-        else if (player.keepBoa) 
-        {
-            
-            if (IA.current.BoaWatchGk(player.idTeam))
-
+            if (player.keep && !player.loadShoot)
             {
-                player.LoadShoot(player.posBallEndAction, false, 3);
-            }
-            else 
-            {
-                player.LoadShoot(player.posBallEndAction, false, 1);
+
+                player.LoadShoot(player.posBallEndAction, false, 0);
 
             }
-               
+            else if (player.keepBoa && !player.loadShoot)
+            {
+
+                if (IA.current.BoaWatchGk(player.idTeam))
+
+                {
+                    player.LoadShoot(player.posBallEndAction, false, 3);
+                }
+                else
+                {
+                    player.LoadShoot(player.posBallEndAction, false, 1);
+
+                }
+
+            }
         }
         startSec = false;
     }
     public void ShootGk() 
     {
-        GoalKeeper gk = Ball.current.gk;
-
-        if (gk.keep)
+        if (Ball.current.gk != null)
         {
-            gk.LoadShoot(gk.posBallEndAction);
-            
+            GoalKeeper gk = Ball.current.gk;
 
+            if (gk.keep)
+            {
+                gk.LoadShoot(gk.posBallEndAction);
+
+
+            }
         }
-        startSec = false;
+            startSec = false;
+        
+
+    }
+    public void Fischia()
+    {
+        AudioController.current.DoFischio();
+      
+        PosPlayerMng.curret.SetAllBicy();
+         Ball.current.inGameFlag = false;
+        if (Ball.current.idTeam == 1)
+        {
+            Referee.current.SetArmRight();
+        }
+        else
+        {
+            Referee.current.SetArmLeft();
+        }
+
+        Invoke("KeepToGk", 1);
+
     }
 
+    public void KeepToGk() 
+    {
+        if (Ball.current.idTeam == 1)
+        {
+            GameObject.Find("YellowGK").GetComponent<GoalKeeper>().SetKeep();
+
+
+        }
+        else {
+
+            GameObject.Find("RedGK").GetComponent<GoalKeeper>().SetKeep();
+        }
+        Ball.current.inGameFlag = true;
     
+    }
+
 }

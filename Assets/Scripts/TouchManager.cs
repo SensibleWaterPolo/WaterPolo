@@ -225,14 +225,14 @@ public class TouchManager : MonoBehaviour
 
                         }
 
-                        if (okShoot && !player.keepBoa)
+                        if (okShoot && !player.keepBoa && !GameCore.current.stopShoot)
                         {
                             player.LoadShoot(endPos, shootFlag, 0);  //se non è una boa in possesso di palla
                             //player.selected = false;
 
                         }
                         else                //IL GIOCATORE è UNA BOA BISOGNA DECIDERE IL TIPO DI TIRO A SENCONDA DI DOVE INDIRIZZIAMO IL CURSORE
-                        if (okShoot && player.keepBoa)
+                        if (okShoot && player.keepBoa && !GameCore.current.stopShoot)
                         {
                             
                             LayerMask mask = 1 << 4; //strato water
@@ -353,7 +353,7 @@ public class TouchManager : MonoBehaviour
 
                     if (gk != null)
                     {
-                        if (okShoot && gk.keep)
+                        if (okShoot && gk.keep && !GameCore.current.stopShoot)
                         {
                             gk.LoadShoot(endPos);
 

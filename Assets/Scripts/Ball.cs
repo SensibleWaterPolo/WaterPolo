@@ -18,6 +18,7 @@ public class  Ball : MonoBehaviour
     public bool shootFlag; //M: true se è un tiro, false se è un passaggio
     public bool isShooted; //M: True se la palla è in movimento dopo un tiro/passaggio
     public bool respawn; //appena torna in gioco dopo un tiro non può entrare in possesso di un altro giocatore
+    public bool isEnable;
 
     public float shoot; //M: forza del giocatore
     public float pas;//M: forza del giocatore passaggio
@@ -55,6 +56,7 @@ public class  Ball : MonoBehaviour
         isShooted = false;
         idTeam = -1;
         respawn = false;
+        isEnable = true;
                  
     }
 
@@ -95,7 +97,7 @@ public class  Ball : MonoBehaviour
         
         UpdateSideBall();
 
-        CheckSecExpired();
+       
 
         redNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(1, false);
         yellowNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(0, false);
@@ -180,7 +182,7 @@ public class  Ball : MonoBehaviour
         this.gameObject.AddComponent<Rigidbody2D>();
         rb = GetComponent<Rigidbody2D>();
         respawn = true;
-       
+        isEnable = true;
 
     }
 
@@ -258,8 +260,12 @@ public class  Ball : MonoBehaviour
     public void DisableBall()
     {
         GetComponent<Renderer>().enabled = false;
-        Destroy(GetComponent<Rigidbody2D>());
+        if (GetComponent<Rigidbody2D>()!=null)
+        {
+            Destroy(GetComponent<Rigidbody2D>());
+        }
         speed = -1;
+        isEnable = false;
         //CheckFreeBall();
     }
 
@@ -382,26 +388,7 @@ public class  Ball : MonoBehaviour
     
     }
 
-    public void CheckSecExpired() 
-    {
-        if (GameCore.current.secExpired) 
-        {
-            if (player != null)
-            {
-                GameCore.current.ShootPlayer();
-                return;
-
-            }
-            else if (gk != null) 
-            {
-                GameCore.current.ShootGk();
-                return;
-            }
-        
-        
-        }
-    
-    }
+   
 
    
    

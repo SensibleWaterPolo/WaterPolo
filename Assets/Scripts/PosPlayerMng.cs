@@ -9,10 +9,13 @@ public class PosPlayerMng : MonoBehaviour
 
     public GameObject panelStat;
     private int counterCLick;
+    private int nClickRep;
 
     public GoalKeeper gKRed;
     public GoalKeeper gkYelloW;
     public static  PosPlayerMng curret;
+    private bool showStat;
+    private bool showRep;
    
     
     // Start is called before the first frame update
@@ -123,8 +126,9 @@ public class PosPlayerMng : MonoBehaviour
     public void ShowStatPanel() 
     {
         counterCLick++;
-        if (counterCLick % 2 == 1)
+        if (counterCLick % 2 == 1 && !showRep)
         {
+            showStat = true;
             panelStat.SetActive(true);
             Time.timeScale = 0;
             GameObject.Find("StatY1").GetComponent<Text>().text = " VEL: " + allPlayer[0].speed + " FOR: " + allPlayer[0].stamina + " TIR: " + allPlayer[0].shoot + "  PASS: " + allPlayer[0].pass;
@@ -143,7 +147,9 @@ public class PosPlayerMng : MonoBehaviour
         }
         else { 
             
-            HideStatPanel(); 
+            HideStatPanel();
+            showStat = false;
+            showRep = false;
             Time.timeScale=1;
         }
       
@@ -155,4 +161,38 @@ public class PosPlayerMng : MonoBehaviour
         panelStat.SetActive(false);
     }
 
+    public void ShowReportPanel()
+    {
+        nClickRep++;
+        if (nClickRep % 2 == 1 && !showStat)
+        {
+            showRep = true;
+            panelStat.SetActive(true);
+            Time.timeScale = 0;
+            GameObject.Find("StatY1").GetComponent<Text>().text = "idDec:"+allPlayer[0].idDecisionMaking + "/idBall:" + allPlayer[0].idBall + "/Ball:" + allPlayer[0].ballFlag;
+            GameObject.Find("StatY3").GetComponent<Text>().text = "idDec:" + allPlayer[1].idDecisionMaking + "/idBall:" + allPlayer[1].idBall + "/Ball:" + allPlayer[1].ballFlag;
+            GameObject.Find("StatY5").GetComponent<Text>().text = "idDec:" + allPlayer[2].idDecisionMaking + "/idBall:" + allPlayer[2].idBall + "/Ball:" + allPlayer[2].ballFlag;
+            GameObject.Find("StatY6").GetComponent<Text>().text = "idDec:" + allPlayer[3].idDecisionMaking + "/idBall:" + allPlayer[3].idBall + "/Ball:" + allPlayer[3].ballFlag;
+            GameObject.Find("StatR1").GetComponent<Text>().text = "idDec:" + allPlayer[4].idDecisionMaking+"/idCPU" + allPlayer[4].idDecisionCPU+"/idBall:" + allPlayer[4].idBall + "/Ball:" + allPlayer[4].ballFlag;
+            GameObject.Find("StatR3").GetComponent<Text>().text = "idDec:" + allPlayer[5].idDecisionMaking + "/idCPU" + allPlayer[5].idDecisionCPU + "/idBall:" + allPlayer[5].idBall + "/Ball:" + allPlayer[5].ballFlag;
+            GameObject.Find("StatR5").GetComponent<Text>().text = "idDec:" + allPlayer[6].idDecisionMaking + "/idCPU" + allPlayer[6].idDecisionCPU + "/idBall:" + allPlayer[6].idBall + "/Ball:" + allPlayer[6].ballFlag;
+            GameObject.Find("StatR6").GetComponent<Text>().text = "idDec:" + allPlayer[7].idDecisionMaking + "/idCPU" + allPlayer[7].idDecisionCPU + "/idBall:" + allPlayer[7].idBall + "/Ball:" + allPlayer[7].ballFlag;
+            GameObject.Find("StatGKR").GetComponent<Text>().text = " ";
+            GameObject.Find("StatGKY").GetComponent<Text>().text = " ";
+            GameObject.Find("StatBall").GetComponent<Text>().text = "vel:" + Ball.current.speed + "/inGame:" + Ball.current.inGameFlag + "/shoot:" + Ball.current.isShooted + "/free:" + Ball.current.freeFlag + "/near:" + Ball.current.moreNear;
+
+        }
+        else
+        {
+            showRep = false;
+            showStat = false;
+            HideReportPanel();
+            Time.timeScale = 1;
+        }
+
+    }
+    public void HideReportPanel()
+    {
+        panelStat.SetActive(false);
+    }
 }

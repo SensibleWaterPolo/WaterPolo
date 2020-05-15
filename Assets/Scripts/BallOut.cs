@@ -55,8 +55,9 @@ public class BallOut : MonoBehaviour
 
     public void Fischia() {
         AudioController.current.DoFischio();
-        Ball.current.inGameFlag = false;
+        
         PosPlayerMng.curret.SetAllBicy();
+        Ball.current.inGameFlag = false;
         if (Ball.current.fieldYellow)
         {
             Referee.current.SetArmRight();

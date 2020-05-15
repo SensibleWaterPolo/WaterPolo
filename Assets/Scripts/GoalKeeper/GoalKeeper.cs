@@ -91,32 +91,45 @@ public class GoalKeeper : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if ( GameCore.current.isPlay)
+        if (GameCore.current.isPlay)
         {
             readyToBlock = GetComponent<BoxCollider2D>().enabled;
             UpdateFinalPos();
-          
-            if(!arrived && !flagJump && !keep)
 
-            SwimGk();
-         
-        }
+            if (!arrived && !flagJump && !keep)
+            {
+                SwimGk();
+            }
 
-        if (!keep) 
-        {
-            GetComponent<CircleCollider2D>().enabled = false;
 
-        }
-        else { GetComponent<CircleCollider2D>().enabled = true; }
+            if (!keep)
+            {
+                GetComponent<CircleCollider2D>().enabled = false;
 
-        if (transform.position == posMid) 
-        {
-            Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
-        
+            }
+            else
+            {
+                GetComponent<CircleCollider2D>().enabled = true;
+            }
+
+            if (GameCore.current.isPlay && Ball.current.inGameFlag)
+            {
+                if (GameCore.current.secExpired && keep && !loadShoot)
+                {
+
+                    GameCore.current.ShootGk();
+                }
+
+                if (transform.position == posMid)
+                {
+                    Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
+
+                }
+            }
+
+
         }
     }
-
-
 
     public void SwimGk()
     {
