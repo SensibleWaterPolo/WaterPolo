@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,11 +22,12 @@ public class GameCore : MonoBehaviour
     public bool startSec;
     public bool secExpired;
     public bool stopShoot;
+    public List<Player> stunPlayer;
     private void Awake()
     {
         current = this;
         levelCPUHard = true;
-        secAction = 5;
+        secAction = 15;
         finalMenu = GameObject.Find("FinalMatchPanel");
         goalAnimation = GameObject.Find("GoalPanel");
         timeMatch = 180;
@@ -75,11 +77,7 @@ public class GameCore : MonoBehaviour
                     secExpired = true;
 
                     startSec = false;
-                  /*  if (!Ball.current.isShooted)
-                    {
-                        Fischia();
-                    }*/
-
+                 
                 }
 
                 UpdateTimeGame();
@@ -135,6 +133,7 @@ public class GameCore : MonoBehaviour
     {
         secCurrent = secAction;
         StartSecond();
+        Invoke("WakeUpPlayer", 0.5f);
        
     }
 
@@ -218,6 +217,7 @@ public class GameCore : MonoBehaviour
             }
             else if (player.keepBoa && !player.loadShoot)
             {
+                Debug.Log("Sono una boa e devo provare a tirare  fuori");
 
                 if (IA.current.BoaWatchGk(player.idTeam))
 
@@ -284,6 +284,22 @@ public class GameCore : MonoBehaviour
         }
         Ball.current.inGameFlag = true;
     
+    }
+
+    public void AddPlayerStun(Player player) 
+    {
+        this.stunPlayer.Add(player);
+    
+    }
+
+    public void WakeUpPlayer() 
+    {
+        for (int i = 0; i < stunPlayer.Count; i++) 
+        {  
+            stunPlayer[i].SetBicy();
+           
+        }
+        stunPlayer.Clear();
     }
 
 }

@@ -177,7 +177,7 @@ public class GoalKeeper : MonoBehaviour
         
         float coeffVelBall = Ball.current.speed /5;
         
-        float coeffGk = (block*10); 
+        float coeffGk = (block*10)+5; 
 
         float coeff =coeffGk-coeffVelBall;
         float prob = Random.Range(0, 99);
@@ -185,7 +185,7 @@ public class GoalKeeper : MonoBehaviour
         if (prob<=coeff)
             save = true;
         else save = false;
-       Debug.Log("coeffBall " + coeffVelBall + " probabilità parare ->" + coeff + " valore estratto->" + prob + " save->"+save);
+     //  Debug.Log("coeffBall " + coeffVelBall + " probabilità parare ->" + coeff + " valore estratto->" + prob + " save->"+save);
         return save;
 
     }

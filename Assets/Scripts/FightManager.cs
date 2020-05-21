@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FightManager : MonoBehaviour
 {
-   /* private float lenghtFight;
+    private float lenghtFight;
     private float startFight;
     private bool start;
     private Player playerY, playerR;
@@ -15,7 +15,7 @@ public class FightManager : MonoBehaviour
 
     private void Awake()
     {
-        lenghtFight = 4f;
+        lenghtFight = 3f;
         start = false;
     }
 
@@ -26,12 +26,18 @@ public class FightManager : MonoBehaviour
         
         numClickP1 = 0;
         numClickP2 = 0;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (start) 
+        {
+            playerY.SetBicy();
+            playerR.SetBicy();
         
+        }
     }
 
     public int WhoWinVSCPU()
@@ -40,19 +46,22 @@ public class FightManager : MonoBehaviour
 
         if (numClickP1 + playerY.stamina> playerR.stamina + numClickCpu)
         {
+            Debug.Log("Click cpu:"+numClickCpu+ "p1: "+( numClickP1 + playerY.stamina) +" p2: "+( playerR.stamina + numClickCpu));
             return 0;
 
         }
         else
          if (numClickP1 +playerY.stamina < playerR.stamina + numClickCpu)
         {
+            Debug.Log("Click cpu:" + numClickCpu + "p1: " + (numClickP1 + playerY.stamina) + " p2: " +( playerR.stamina + numClickCpu));
             return 1;
 
         }
         else
         if (numClickP1 == playerR.stamina)
         {
-            int id = Random.Range(0, 1);
+            int id = Random.Range(0, 2);
+            Debug.Log("Click cpu:" + numClickCpu + "p1: " + (numClickP1 + playerY.stamina) + " p2: " + (playerR.stamina + numClickCpu));
             return id;
         }
         return -1;
@@ -83,21 +92,23 @@ public class FightManager : MonoBehaviour
     public void SolveFightVsCPU() 
     {
         solve = true;
+        start = false;
         int id = WhoWinVSCPU();
 
         if (id == 0)
         {
             playerR.SetStun();
-            playerY.SetFightFlag(false);
-            playerR.SetFightFlag(false);
-
+            Debug.Log(playerY.name+" ->WIN "+playerR+"->LOSE");
         }
         else 
         {
+            Debug.Log(playerR.name + " ->WIN " + playerY + "->LOSE");
             playerY.SetStun();
-            playerY.SetFightFlag(false);
-            playerR.SetFightFlag(false);
         }
+        playerY.SetFightFlag(false);
+        playerR.SetFightFlag(false);
+        playerY.ShowPlayer();
+        playerR.ShowPlayer();
         Destroy(this.gameObject);    
     }
     public void SolveFightVsP2()
@@ -108,15 +119,14 @@ public class FightManager : MonoBehaviour
         if (id == 0)
         {
             playerR.SetStun();
-            playerY.SetFightFlag(false);
-            playerR.SetFightFlag(false);
+        
         }
         else
         {
             playerY.SetStun();
-            playerY.SetFightFlag(false);
-            playerR.SetFightFlag(false);
+            
         }
+       
         Destroy(this.gameObject);
     }
 
@@ -133,10 +143,15 @@ public class FightManager : MonoBehaviour
     public void CreateFight(Player pY, Player pR)
     {   playerY=pY;
         playerR = pR;
+        pY.HidePlayer();
+        pR.HidePlayer();
+        
         playerY.SetFightFlag(true);
         playerR.SetFightFlag(true);
         playerR.SetBicy();
         playerY.SetBicy();
+      
+        
         playerR.transform.position = transform.position;
         playerY.transform.position = transform.position;
         start = true;
@@ -150,7 +165,9 @@ public class FightManager : MonoBehaviour
         }
 
     }
-        */
+
+    
+        
 
 
 }

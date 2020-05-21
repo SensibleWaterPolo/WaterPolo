@@ -32,6 +32,7 @@ public class PlayerR6 : Player
                 GetComponent<CircleCollider2D>().enabled = true;
             }
         }
+       
     }
 
     public override void OnTriggerEnter2D(Collider2D collision)
@@ -43,8 +44,7 @@ public class PlayerR6 : Player
             {
                 
                 SetKeepBoa();
-                // SetBallBoa();
-
+              
             }
         }
 
@@ -78,7 +78,7 @@ public class PlayerR6 : Player
                 }
                 else
                 {
-                    destBall = IA.current.ShootNormalR3();
+                   // destBall = IA.current.ShootNormalR3();
                 }
                 Utility.RotateObjToPoint(this.gameObject, destBall);
                 this.LoadShoot(destBall, shoot, idShoot);
@@ -93,7 +93,7 @@ public class PlayerR6 : Player
                 }
                 else
                 {
-                    destBall = IA.current.ShootNormalR3();
+                  //  destBall = IA.current.ShootNormalR3();
                 }
                 int idPosBoa = IA.current.IdPosBoa();
                 switch (idPosBoa) 
@@ -135,7 +135,7 @@ public class PlayerR6 : Player
             {
                 case 0:
 
-               /*   if (pr1.counterAttFlag && pR5.counterAttFlag)
+                 if (pr1.arrivedFlagCounterAtt && pR5.arrivedFlagCounterAtt)
                     {
                         if (Random.value > 0.5)
                         {
@@ -155,7 +155,7 @@ public class PlayerR6 : Player
                         }
                   }
 
-                    else if (pR5.counterAttFlag)
+                    else if (pR5.arrivedFlagCounterAtt)
                     {
                         destBall = GameObject.Find("PosCounterAttR5").transform.position;
                         Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -163,7 +163,7 @@ public class PlayerR6 : Player
                         idDecisionCPU = 4;
                         return true;
                     }
-                    else if (pr1.counterAttFlag)
+                    else if (pr1.arrivedFlagCounterAtt)
                     {
                         destBall = GameObject.Find("PosCounterAttR1").transform.position;
                         Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -172,7 +172,7 @@ public class PlayerR6 : Player
                         return true;
                     }
 
-                    else*/ if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+                    else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
                     {
                         if (Random.value > 0.5)
                         {

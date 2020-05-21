@@ -18,7 +18,7 @@ public class TouchManager : MonoBehaviour
     private float minShoot;
     private float maxShoot;
     private int layerMaskPlayer;  
-   // private int layerMaskFight = 1 << 12;
+    private int layerMaskFight = 1 << 12;
     private int layerMaskGk;
     private bool shootFlag;
 
@@ -119,8 +119,18 @@ public class TouchManager : MonoBehaviour
                         }
                        
                     }
-                                     
-                
+                    hit = Physics2D.Raycast(posTouch, (Input.GetTouch(i).position), layerMaskPlayer);
+                    if (hit.collider) 
+                    {
+                        if (hit.collider.CompareTag("Fight")) 
+                        {
+                            hit.collider.GetComponent<FightManager>().P1AddClickLocal();
+                        
+                        }
+                    
+                    }
+
+
                 }
 
                 ////// FASE MOVED
@@ -332,7 +342,7 @@ public class TouchManager : MonoBehaviour
 
                         if (!okShoot && swimKeep)
                         {
-                            if (player.keep) 
+                            if (player.keep && !player.isInContact) 
                             {
                                 player.SetSwimKeep();
                             }

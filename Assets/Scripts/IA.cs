@@ -66,7 +66,7 @@ public class IA : MonoBehaviour
         return new Vector3(Random.Range(poleDx, limitDx), y, 0);
     }
 
-    public Vector3 ShootNormalR3() 
+   /* public Vector3 ShootNormalR3() 
     {
         float zoneId= GetRandom();
         Vector3 posShoot= Vector3.zero;
@@ -96,7 +96,7 @@ public class IA : MonoBehaviour
         }
 
         return posShoot;
-    }
+    }*/
 
     public Vector3 ShootHardR3()
     {
@@ -129,7 +129,7 @@ public class IA : MonoBehaviour
 
         return posShoot;
     }
-    public Vector3 ShootNormalR1()
+   /* public Vector3 ShootNormalR1()
     {
         float zoneId = GetRandom();
         Vector3 posShoot = Vector3.zero;
@@ -160,7 +160,7 @@ public class IA : MonoBehaviour
 
         return posShoot;
 
-    }
+    }*/
     public Vector3 ShootHardR1()
     {
         float zoneId = GetRandom();
@@ -193,7 +193,7 @@ public class IA : MonoBehaviour
         return posShoot;
     }
 
-    public Vector3 ShootNormalR5()
+  /*  public Vector3 ShootNormalR5()
     {
         float zoneId = GetRandom();
         Vector3 posShoot = Vector3.zero;
@@ -223,7 +223,7 @@ public class IA : MonoBehaviour
         }
 
         return posShoot;
-    }
+    }*/
 
     public Vector3 ShootHardR5()
     {
@@ -265,15 +265,21 @@ public class IA : MonoBehaviour
         float prob = Random.Range(0,100);
          bool shoot = false;
         float posY = player.transform.position.y;
-        if (GameCore.current.secCurrent < 3) 
+        if (GameCore.current.secCurrent < 3)
         {
             Debug.Log("Tiro che è finito il tempo");
             if (Random.value > 0.5)
             {
-               
+
                 return true;
             }
         }
+        else if (player.arrivedFlagCounterAtt) 
+        {
+
+
+            return true;
+        }else
         
         if (posY > 17.5) //Palla nella zona di difesa 
         {
@@ -430,11 +436,11 @@ public class IA : MonoBehaviour
     {
         int id = -1;
         float posY = player.transform.position.y;
-        if (posY > 17.5) //Palla nella zona di difesa 
+        if (posY > 0) //Palla nella zona di difesa 
         {
             return 0;
         }
-        else if (17.5 >= posY && posY >= -12.5)
+        else if (0 >= posY && posY >= -12.5)
         {
             return 1;
         }

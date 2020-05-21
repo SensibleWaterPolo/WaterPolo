@@ -22,7 +22,7 @@ public class PlayerY3 : Player
         posBallEndAction = GameObject.Find("UppDx").transform.position;
         if (CheckOpponent("PlayerR6"))
             opponent = GameObject.Find("PlayerR6").GetComponent<Player>();
-         armDx = true;
+         armDx = false;
         cpuFlag = false;
     }
 
@@ -62,5 +62,6 @@ public class PlayerY3 : Player
             SetKeep();
 
         }
+        
     }
 }

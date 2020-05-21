@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class PlayerY1 : Player
 {
-    public FightManager fight;
-    public FightManager fightPrefab;
+
     public override void Awake()
     {
         base.Awake();
@@ -23,6 +22,28 @@ public class PlayerY1 : Player
         armDx = false;
         cpuFlag = false;
     }
- 
 
+    public override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+     
+        
+        if (collision.CompareTag("Player"))
+        {
+            Player player = collision.GetComponent<Player>();
+            
+            if (player.idTeam == 1)
+            {
+                bool canFight = CanFight(player.name);
+                bool enemyCanFight = player.CanFight(name);
+               
+                if (prefabFight == null && canFight && enemyCanFight)
+                {
+                    prefabFight = Instantiate(fightManager, new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0), Quaternion.identity);
+                    prefabFight.CreateFight(this, player);
+                }
+            }
+
+        }
+    }
 }

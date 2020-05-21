@@ -43,6 +43,8 @@ public class PlayerY6 : Player
 
             }
         }
+
+       
     }
 
     public override void OnTriggerStay2D(Collider2D collision)

@@ -43,7 +43,7 @@ public class PlayerR5 : Player
             }
             else
             {
-                destBall = IA.current.ShootNormalR5();
+              //  destBall = IA.current.ShootNormalR5();
             }
             Utility.RotateObjToPoint(this.gameObject, destBall);
             this.LoadShoot(destBall, shoot, 0);
@@ -59,7 +59,7 @@ public class PlayerR5 : Player
             {
                 case 0:
 
-                /*     if (pR1.counterAttFlag)
+                    if (pR1.arrivedFlagCounterAtt)
                     {
                         destBall = GameObject.Find("PosCounterAttR1").transform.position;
                         Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -67,7 +67,7 @@ public class PlayerR5 : Player
                         idDecisionCPU = 1;
                         return true;
                     }
-                    else*/ if (pR1.arrivedFlagAtt && pR3.arrivedFlagAtt)
+                    else if (pR1.arrivedFlagAtt && pR3.arrivedFlagAtt)
                     {
                         if (Random.value > 0.5)
                         {
@@ -106,15 +106,7 @@ public class PlayerR5 : Player
                     break;
                 case 1:
                     {
-                       /* if (pR6.counterAttFlag && !pR6.marcaFlag)
-                        {
-                            destBall = GameObject.Find("PosCounterAttR6").transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 6;
-                            return true;
-                        }
-                        else */if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name))
+                     if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name))
                         {
                             destBall = GameObject.Find("SensorBoaR6").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -143,16 +135,16 @@ public class PlayerR5 : Player
 
                 case 2:
                     {
-                      /*  if (pR6.counterAttFlag && !pR6.marcaFlag)
+                        if (pR1.arrivedFlagCounterAtt)
                         {
-                            destBall = GameObject.Find("PosCounterAttR6").transform.position;
+                            destBall = GameObject.Find("PosCounterAttR1").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
                             this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 10;
+                            idDecisionCPU = 12;
                             return true;
                         }
-
-                        else */if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name))
+                        else
+                        if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name))
                         {
                             destBall = GameObject.Find("SensorBoaR6").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -161,14 +153,6 @@ public class PlayerR5 : Player
                             return true;
                         }
 
-                        else if (pR1.counterAttFlag)
-                        {
-                            destBall = GameObject.Find("PosCounterAttR1").transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 12;
-                            return true;
-                        }
                         else if (pR1.arrivedFlagAtt && pR3.arrivedFlagAtt)
                         {
                             if (Random.value > 0.5)
