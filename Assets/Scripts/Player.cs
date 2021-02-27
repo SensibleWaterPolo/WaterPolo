@@ -111,6 +111,8 @@ public class Player : MonoBehaviour
     public FightManager fightManager;
     public FightManager prefabFight;
 
+    
+
 
     protected Coroutine brainCpuCoroutine;
 
