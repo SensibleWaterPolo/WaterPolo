@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerR1 : Player
-{   
-    
-    
+{
+
+
     // Start is called before the first frame update
     public override void Awake()
     {
@@ -33,23 +33,23 @@ public class PlayerR1 : Player
         Player pR3 = GameObject.Find("PlayerR3").GetComponent<Player>();
         Player pR6 = GameObject.Find("PlayerR6").GetComponent<Player>();
         bool shoot = IA.current.DecisionShoot(this);
-      //  Debug.Log(name + " decisione Tiro?: " + shoot);
+        //  Debug.Log(name + " decisione Tiro?: " + shoot);
 
         if (shoot) //Tiro in porta
         {
-            
-            
+
+
             if (GameCore.current.levelCPUHard)
-            {  
+            {
                 destBall = IA.current.ShootHardR1();
             }
             else
             {
-               // destBall = IA.current.ShootNormalR1();
+                // destBall = IA.current.ShootNormalR1();
             }
             idDecisionCPU = 0;
             Utility.RotateObjToPoint(this.gameObject, destBall);
-           
+
             this.LoadShoot(destBall, shoot, 0);
 
             return true;
@@ -57,12 +57,12 @@ public class PlayerR1 : Player
         /*********PASSAGGIO********************/
         else
         {
-            
+
             switch (idZone)
             {
                 case 0:
-                     
-                   if ((pR5.arrivedFlagCounterAtt || pR5.counterAttFlag) && !pR5.stun)
+
+                    if ((pR5.arrivedFlagCounterAtt || pR5.counterAttFlag) && !pR5.stun)
                     {
                         destBall = GameObject.Find("PosCounterAttR5").transform.position;
                         Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -76,7 +76,7 @@ public class PlayerR1 : Player
                         {
                             destBall = pR5.transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
-                           
+
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 2;
                             return true;
@@ -86,7 +86,7 @@ public class PlayerR1 : Player
                         {
                             destBall = pR3.transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
-                            
+
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 3;
                             return true;
@@ -96,7 +96,7 @@ public class PlayerR1 : Player
                     {
                         destBall = pR5.transform.position;
                         Utility.RotateObjToPoint(this.gameObject, destBall);
-                       
+
                         this.LoadShoot(destBall, false, 0);
                         idDecisionCPU = 4;
                         return true;
@@ -105,7 +105,7 @@ public class PlayerR1 : Player
                     {
                         destBall = pR3.transform.position;
                         Utility.RotateObjToPoint(this.gameObject, destBall);
-                       
+
                         this.LoadShoot(destBall, false, 0);
                         idDecisionCPU = 5;
                         return true;
@@ -117,7 +117,7 @@ public class PlayerR1 : Player
                         {
                             destBall = GameObject.Find("SensorBoaR6").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
-                            
+
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 7;
                             return true;
@@ -126,7 +126,7 @@ public class PlayerR1 : Player
                         {
                             destBall = pR5.transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
-                           
+
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 8;
                             return true;
@@ -135,7 +135,7 @@ public class PlayerR1 : Player
                         {
                             destBall = pR3.transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
-                            
+
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 9;
                             return true;
@@ -157,20 +157,20 @@ public class PlayerR1 : Player
                         {
                             destBall = GameObject.Find("SensorBoaR6").transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
-                           
+
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 11;
                             return true;
                         }
-                       
-                       
+
+
                         else if (pR5.arrivedFlagAtt && pR3.arrivedFlagAtt)
                         {
                             if (Random.value > 0.5)
                             {
                                 destBall = pR5.transform.position;
                                 Utility.RotateObjToPoint(this.gameObject, destBall);
-                               
+
                                 this.LoadShoot(destBall, false, 0);
                                 idDecisionCPU = 13;
                                 return true;
@@ -180,7 +180,7 @@ public class PlayerR1 : Player
                             {
                                 destBall = pR3.transform.position;
                                 Utility.RotateObjToPoint(this.gameObject, destBall);
-                               
+
                                 this.LoadShoot(destBall, false, 0);
                                 idDecisionCPU = 14;
                                 return true;
@@ -190,7 +190,7 @@ public class PlayerR1 : Player
                         {
                             destBall = pR5.transform.position;
                             Utility.RotateObjToPoint(this.gameObject, destBall);
-                            
+
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 15;
                             return true;

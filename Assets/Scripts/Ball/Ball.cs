@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 public class Ball : MonoBehaviour
 {
     public static Ball current; //M:la palla è un singolo oggetto per tutti quindi fa riferimento ad un Singleton 
@@ -31,7 +29,7 @@ public class Ball : MonoBehaviour
 
     private Vector3 finalPos; //M: posizione finale della palla dopo un tiro/pass
 
-    public int statePos; //M: stato della posizione, 0: palla in possesso, 1: palla nel settore sx, 2: palla nel settore centrale, 3: palla nel settore dx, -1:indefinito
+    private EStatoPalla _statoPalla; //M: stato della posizione, 0: palla in possesso, 1: palla nel settore sx, 2: palla nel settore centrale, 3: palla nel settore dx, -1:indefinito
 
     public bool fieldYellow; //M; true se la palla è nella merà campo gialla
 
@@ -43,6 +41,8 @@ public class Ball : MonoBehaviour
     public string redNear;
     public string yellowNear;
     public string moreNear;
+
+
 
     private void Awake() //M:inizializzazione variabili 
     {
@@ -60,19 +60,7 @@ public class Ball : MonoBehaviour
 
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
 
-            //mod
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-
-    }
 
     private void FixedUpdate()
     {
@@ -388,6 +376,17 @@ public class Ball : MonoBehaviour
         }
         else
             return false;
+
+    }
+
+
+    public enum EStatoPalla
+    {
+        LiberaSx,
+        LiberaDx,
+        LiberaCentro,
+        InPossesso,
+        Fuori
 
     }
 

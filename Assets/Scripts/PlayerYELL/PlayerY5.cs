@@ -1,19 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerY5 : Player
 {
-  
+
     public override void Awake()
     {
         base.Awake();
         this.idTeam = 0;
         sectorAction = 1;
         posAtt = GameObject.Find("PosAttY5").transform.position;
-        posDef= GameObject.Find("PosDefY5").transform.position;
+        posDef = GameObject.Find("PosDefY5").transform.position;
         posGoal = GameObject.Find("GolLineRed").transform.position;
-       posStart = GameObject.Find("PosStartY5").transform.position;
+        posStart = GameObject.Find("PosStartY5").transform.position;
         posMiddle = GameObject.Find("PosBattutaY5").transform.position;
         posCounter = GameObject.Find("PosCounterAttY5").transform.position;
         posBallEndAction = GameObject.Find("UpSx").transform.position;
@@ -26,7 +24,7 @@ public class PlayerY5 : Player
     public override void Start()
     {
         base.Start();
-        
+
     }
 
     public override void OnTriggerEnter2D(Collider2D collision)
