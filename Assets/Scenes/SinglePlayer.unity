@@ -30675,6 +30675,7 @@ GameObject:
   - component: {fileID: 750678745}
   - component: {fileID: 750678748}
   - component: {fileID: 750678749}
+  - component: {fileID: 750678744}
   m_Layer: 0
   m_Name: Referee
   m_TagString: Untagged
@@ -30682,6 +30683,25 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!95 &750678744
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 750678743}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &750678745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30870,6 +30890,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _watch: {fileID: 7400000, guid: 4ac3fa1a4e32e614b9b93cc3a20bb6ab, type: 2}
+  _walkUp: {fileID: 7400000, guid: ed51a83ddcac9194a950086f5616bc24, type: 2}
+  _walkDown: {fileID: 7400000, guid: 6241208a06c252447af58e6972cc4c0f, type: 2}
+  _upLeftArm: {fileID: 7400000, guid: 4c2e57ec2c099ab41ab4884e494ccd50, type: 2}
+  _upRightArm: {fileID: 7400000, guid: 9196dfa688fcdfd4e89933f5b427a1a6, type: 2}
+  _upFrontArms: {fileID: 7400000, guid: 62137a903c532454db9667cdbe05efbf, type: 2}
 --- !u!1 &757938241
 GameObject:
   m_ObjectHideFlags: 0
