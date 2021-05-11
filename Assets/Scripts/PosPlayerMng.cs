@@ -114,7 +114,7 @@ public class PosPlayerMng : MonoBehaviour
     public void Batti()
     {
         AudioController.current.DoFischio();
-        Referee.current.SetArmFront();
+        // Referee.current.SetArmFront();
         Ball.current.inGameFlag = true;
     }
 

@@ -1,5 +1,4 @@
-﻿using DG.Tweening;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -115,7 +114,6 @@ public class Player : MonoBehaviour
     public virtual void Awake()
     {
 
-        gameObject.transform.DOMove(new Vector2(0, 0), 2f);
 
         /* animator = GetComponent<Animator>();
           swim = false;

@@ -51,12 +51,12 @@ public class BallOut : MonoBehaviour
 
         PosPlayerMng.curret.SetAllBicy();
         Ball.current.inGameFlag = false;
-        if (Ball.current.fieldYellow)
-        {
-            Referee.current.SetArmRight();
-        }
-        else
-            Referee.current.SetArmLeft();
+        /*  if (Ball.current.fieldYellow)
+          {
+             // Referee.current.SetArmRight();
+          }
+          else
+              Referee.current.SetArmLeft();*/
 
         Invoke("KeepToGk", 1);
     }

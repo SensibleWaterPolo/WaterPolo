@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameCore : MonoBehaviour
 {
@@ -94,14 +93,14 @@ public class GameCore : MonoBehaviour
     {
         isPlay = true;
         timeStart = Time.time;
-        Referee.current.SetArmFront();
+        // Referee.current.SetArmFront();
         AudioController.current.DoFischio();
     }
 
     public void Stop()
     {
         isPlay = false;
-        Referee.current.SetArmFront();
+        //  Referee.current.SetArmFront();
         AudioController.current.DoFischio();
         PosPlayerMng.curret.SetAllBicy();
     }
@@ -129,33 +128,33 @@ public class GameCore : MonoBehaviour
         int sec = GetSec(timeCurrentMatch);
         if (sec < 10)
         {
-            GameObject.Find("Time").GetComponent<Text>().text = min + ":0" + sec;
+            //       GameObject.Find("Time").GetComponent<Text>().text = min + ":0" + sec;
         }
         else
         {
-            GameObject.Find("Time").GetComponent<Text>().text = min + ":" + sec;
+            //    GameObject.Find("Time").GetComponent<Text>().text = min + ":" + sec;
         }
-        GameObject.Find("Seconds").GetComponent<Text>().text = Mathf.FloorToInt(secCurrent) + "' ";
+        //  GameObject.Find("Seconds").GetComponent<Text>().text = Mathf.FloorToInt(secCurrent) + "' ";
     }
 
     public void ShowFinalPanel()
     {
         finalMenu.SetActive(true);
-        int golY = int.Parse(GameObject.Find("HomeScore").GetComponent<Text>().text);
-        int golR = int.Parse(GameObject.Find("AwayScore").GetComponent<Text>().text);
+        //  int golY = int.Parse(GameObject.Find("HomeScore").GetComponent<Text>().text);
+        // int golR = int.Parse(GameObject.Find("AwayScore").GetComponent<Text>().text);
 
-        if (golY > golR)
-        {
-            GameObject.Find("TestoFinale").GetComponent<Text>().text = " Easy win vs under 15 ";
-        }
-        else if (golY < golR)
-        {
-            GameObject.Find("TestoFinale").GetComponent<Text>().text = " You Suck!!! ";
-        }
-        else
-        {
-            GameObject.Find("TestoFinale").GetComponent<Text>().text = " Bored Match ";
-        }
+        /*  if (golY > golR)
+          {
+              //      GameObject.Find("TestoFinale").GetComponent<Text>().text = " Easy win vs under 15 ";
+          }
+          else if (golY < golR)
+          {
+              //    GameObject.Find("TestoFinale").GetComponent<Text>().text = " You Suck!!! ";
+          }
+          else
+          {
+              //     GameObject.Find("TestoFinale").GetComponent<Text>().text = " Bored Match ";
+          }*/
     }
 
     public void ShowGoalAnimation()
@@ -227,14 +226,14 @@ public class GameCore : MonoBehaviour
 
         PosPlayerMng.curret.SetAllBicy();
         Ball.current.inGameFlag = false;
-        if (Ball.current.idTeam == 1)
-        {
-            Referee.current.SetArmRight();
-        }
-        else
-        {
-            Referee.current.SetArmLeft();
-        }
+        /*   if (Ball.current.idTeam == 1)
+           {
+               Referee.current.SetArmRight();
+           }
+           else
+           {
+               Referee.current.SetArmLeft();
+           }*/
 
         Invoke("KeepToGk", 1);
     }

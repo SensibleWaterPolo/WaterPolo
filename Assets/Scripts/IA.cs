@@ -13,13 +13,13 @@ public class IA : MonoBehaviour
     private void Awake()
     {
         current = this;
-        limitSx = GameObject.Find("LimitSx").transform.position.x;
-        poleSx = GameObject.Find("LimitPoleSx").transform.position.x;
-        perfectSx = GameObject.Find("LimitPerfectSx").transform.position.x;
-        perfectDx = GameObject.Find("LimitPerfectDx").transform.position.x;
-        poleDx = GameObject.Find("LimitPoleDx").transform.position.x;
-        limitDx = GameObject.Find("LimitDx").transform.position.x;
-        y = limitDx = GameObject.Find("LimitDx").transform.position.y;
+        /* limitSx = GameObject.Find("LimitSx").transform.position.x;
+         poleSx = GameObject.Find("LimitPoleSx").transform.position.x;
+         perfectSx = GameObject.Find("LimitPerfectSx").transform.position.x;
+         perfectDx = GameObject.Find("LimitPerfectDx").transform.position.x;
+         poleDx = GameObject.Find("LimitPoleDx").transform.position.x;
+         limitDx = GameObject.Find("LimitDx").transform.position.x;
+         y = limitDx = GameObject.Find("LimitDx").transform.position.y;*/
     }
 
     private void Start()

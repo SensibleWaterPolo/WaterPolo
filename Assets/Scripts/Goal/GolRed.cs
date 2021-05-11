@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 public class GolRed : GoalManager
 {
@@ -7,7 +6,7 @@ public class GolRed : GoalManager
     private void Start()
     {
         score = 0;
-        text = GameObject.Find("AwayScore").GetComponent<Text>();
+        //   text = GameObject.Find("AwayScore").GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -24,7 +23,7 @@ public class GolRed : GoalManager
             score = int.Parse(text.text);
             score++;
             Ball.current.inGameFlag = false;
-            Referee.current.SetArmRight();
+            // Referee.current.SetArmRight();
             AudioController.current.DoFischio();
             AudioController.current.DoEsultanza();
             Invoke("ResetScene", 2f);
@@ -36,8 +35,8 @@ public class GolRed : GoalManager
     {
         PosPlayerMng.curret.SetKickOff(0);
         goal = false;
-        Referee.current.SetMId();
-        Referee.current.SetArmFront();
+        //  Referee.current.SetMId();
+        //  Referee.current.SetArmFront();
         GameCore.current.DeleteGoalAnimation();
     }
 }
