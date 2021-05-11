@@ -15,9 +15,8 @@ public class PosPlayerMng : MonoBehaviour
     private bool showStat;
     private bool showRep;
 
-
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         HideStatPanel();
         curret = this;
@@ -29,7 +28,6 @@ public class PosPlayerMng : MonoBehaviour
         allPlayer[5] = GameObject.Find("PlayerR3").GetComponent<Player>();
         allPlayer[6] = GameObject.Find("PlayerR5").GetComponent<Player>();
         allPlayer[7] = GameObject.Find("PlayerR6").GetComponent<Player>();
-
     }
 
     public string GetPlayerNameNearBall()
@@ -78,12 +76,10 @@ public class PosPlayerMng : MonoBehaviour
                         distance = allPlayer[i].distaceBall;
                         name = allPlayer[i].name;
                     }
-
                 }
             }
         }
         return name;
-
     }
 
     public void SetKickOff(int id) //0: palla a Yellow, 1: palla Red
@@ -102,21 +98,19 @@ public class PosPlayerMng : MonoBehaviour
         }
 
         Invoke("Batti", 1.5f);
-
     }
 
     public void SetAllBicy()
     {
-
         /* for (int i = 0; i < allPlayer.Length; i++)
          {
              if (!allPlayer[i].keep && !allPlayer[i].keepBoa)
              {
                  allPlayer[i].SetBicy();
              }
-
          }*/
     }
+
     public void Batti()
     {
         AudioController.current.DoFischio();
@@ -148,15 +142,12 @@ public class PosPlayerMng : MonoBehaviour
         }
         else
         {
-
             HideStatPanel();
             showStat = false;
             showRep = false;
             Time.timeScale = 1;
         }
-
     }
-
 
     public void HideStatPanel()
     {
@@ -182,7 +173,6 @@ public class PosPlayerMng : MonoBehaviour
               GameObject.Find("StatGKR").GetComponent<Text>().text = " ";
               GameObject.Find("StatGKY").GetComponent<Text>().text = " ";
               GameObject.Find("StatBall").GetComponent<Text>().text = "vel:" + Ball.current.speed + "/inGame:" + Ball.current.inGameFlag + "/shoot:" + Ball.current.isShooted + "/free:" + Ball.current.freeFlag + "/near:" + Ball.current.moreNear;*/
-
         }
         else
         {
@@ -191,8 +181,8 @@ public class PosPlayerMng : MonoBehaviour
             HideReportPanel();
             Time.timeScale = 1;
         }
-
     }
+
     public void HideReportPanel()
     {
         panelStat.SetActive(false);

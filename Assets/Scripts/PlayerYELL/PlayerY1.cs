@@ -2,7 +2,6 @@
 
 public class PlayerY1 : Player
 {
-
     public override void Awake()
     {
         base.Awake();
@@ -26,13 +25,9 @@ public class PlayerY1 : Player
         return true;
     }
 
-
-
-
     /*  public override void OnTriggerEnter2D(Collider2D collision)
       {
           base(collision);
-
 
           if (collision.CompareTag("Player"))
           {
@@ -49,7 +44,6 @@ public class PlayerY1 : Player
                       prefabFight.CreateFight(this, player);
                   }
               }
-
           }
       }*/
 }

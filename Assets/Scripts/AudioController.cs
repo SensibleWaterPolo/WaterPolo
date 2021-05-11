@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class AudioController : MonoBehaviour
 {
@@ -9,10 +6,12 @@ public class AudioController : MonoBehaviour
     public AudioClip fischio;
     public AudioClip esultanza;
     public AudioClip piscina;
+
     private void Awake()
     {
         current = this;
     }
+
     public void DoFischio()
     {
         AudioSource.PlayClipAtPoint(fischio, Vector3.zero, 1f);
@@ -24,8 +23,4 @@ public class AudioController : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(esultanza, Vector3.zero, 1f);
     }
-
-
-
-
 }

@@ -20,6 +20,7 @@ public class GameCore : MonoBehaviour
     public bool secExpired;
     public bool stopShoot;
     public List<Player> stunPlayer;
+
     private void Awake()
     {
         current = this;
@@ -30,7 +31,8 @@ public class GameCore : MonoBehaviour
         timeMatch = 180;
         stopShoot = false;
     }
-    void Start()
+
+    private void Start()
     {
         Application.targetFrameRate = 60;
         timeCurrentMatch = timeMatch;
@@ -44,7 +46,7 @@ public class GameCore : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (isPlay)
         {
@@ -54,11 +56,9 @@ public class GameCore : MonoBehaviour
 
                 timeCurrentMatch = timeMatch - time;
 
-
                 if (secCurrent < 1.5)
                 {
                     stopShoot = true;
-
                 }
                 else
                 {
@@ -70,32 +70,24 @@ public class GameCore : MonoBehaviour
                 }
                 else if (startSec && secCurrent < 0.5)
                 {
-
                     secExpired = true;
 
                     startSec = false;
-
                 }
 
                 UpdateTimeGame();
             }
             else
             {
-
                 //Partita finita
                 Stop();
                 Time.timeScale = 0;
-
             }
         }
         else if (!isPlay && timeCurrentMatch <= 1)
         {
-
             ShowFinalPanel();
-
         }
-
-
     }
 
     public void Play()
@@ -104,9 +96,8 @@ public class GameCore : MonoBehaviour
         timeStart = Time.time;
         Referee.current.SetArmFront();
         AudioController.current.DoFischio();
-
-
     }
+
     public void Stop()
     {
         isPlay = false;
@@ -118,13 +109,11 @@ public class GameCore : MonoBehaviour
     public int GetMin(float time)
     {
         return Mathf.FloorToInt(time / 60);
-
     }
+
     public int GetSec(float time)
     {
-
         return Mathf.FloorToInt(time % 60);
-
     }
 
     public void RestartTimeAction()
@@ -132,7 +121,6 @@ public class GameCore : MonoBehaviour
         secCurrent = secAction;
         StartSecond();
         Invoke("WakeUpPlayer", 0.5f);
-
     }
 
     public void UpdateTimeGame()
@@ -148,7 +136,6 @@ public class GameCore : MonoBehaviour
             GameObject.Find("Time").GetComponent<Text>().text = min + ":" + sec;
         }
         GameObject.Find("Seconds").GetComponent<Text>().text = Mathf.FloorToInt(secCurrent) + "' ";
-
     }
 
     public void ShowFinalPanel()
@@ -159,39 +146,31 @@ public class GameCore : MonoBehaviour
 
         if (golY > golR)
         {
-
             GameObject.Find("TestoFinale").GetComponent<Text>().text = " Easy win vs under 15 ";
-
         }
         else if (golY < golR)
         {
-
             GameObject.Find("TestoFinale").GetComponent<Text>().text = " You Suck!!! ";
-
         }
         else
         {
             GameObject.Find("TestoFinale").GetComponent<Text>().text = " Bored Match ";
         }
-
-
     }
+
     public void ShowGoalAnimation()
     {
         goalAnimation.SetActive(true);
-
     }
+
     public void DeleteGoalAnimation()
     {
         goalAnimation.SetActive(false);
-
     }
+
     public void UpdateSecond()
     {
-
-
         secCurrent = secAction - (Time.time - secStart);
-
     }
 
     public void StartSecond()
@@ -199,7 +178,6 @@ public class GameCore : MonoBehaviour
         secStart = Time.time;
         startSec = true;
         secExpired = false;
-
     }
 
     public void ShootPlayer()
@@ -209,9 +187,7 @@ public class GameCore : MonoBehaviour
            {
                if (player.keep && !player.loadShoot)
                {
-
                    player.LoadShoot(player.posBallEndAction, false, 0);
-
                }
                else if (player.keepBoa && !player.loadShoot)
                {
@@ -225,13 +201,12 @@ public class GameCore : MonoBehaviour
                    else
                    {
                        player.LoadShoot(player.posBallEndAction, false, 1);
-
                    }
-
                }
            }
            startSec = false;*/
     }
+
     public void ShootGk()
     {
         if (Ball.current.gk != null)
@@ -241,14 +216,11 @@ public class GameCore : MonoBehaviour
             if (gk.keep)
             {
                 gk.LoadShoot(gk.posBallEndAction);
-
-
             }
         }
         startSec = false;
-
-
     }
+
     public void Fischia()
     {
         AudioController.current.DoFischio();
@@ -265,7 +237,6 @@ public class GameCore : MonoBehaviour
         }
 
         Invoke("KeepToGk", 1);
-
     }
 
     public void KeepToGk()
@@ -273,22 +244,17 @@ public class GameCore : MonoBehaviour
         if (Ball.current.idTeam == 1)
         {
             GameObject.Find("YellowGK").GetComponent<GoalKeeper>().SetKeep();
-
-
         }
         else
         {
-
             GameObject.Find("RedGK").GetComponent<GoalKeeper>().SetKeep();
         }
         Ball.current.inGameFlag = true;
-
     }
 
     public void AddPlayerStun(Player player)
     {
         this.stunPlayer.Add(player);
-
     }
 
     public void WakeUpPlayer()
@@ -296,9 +262,7 @@ public class GameCore : MonoBehaviour
         for (int i = 0; i < stunPlayer.Count; i++)
         {
             stunPlayer[i].SetBicy();
-
         }
         stunPlayer.Clear();
     }
-
 }

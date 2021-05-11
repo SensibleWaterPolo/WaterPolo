@@ -25,7 +25,6 @@ public class PlayerY6 : Player
     /* public override void FixedUpdate()
      {
          base.FixedUpdate();
-
      }*/
 
     /*  public override void OnTriggerEnter2D(Collider2D collision)
@@ -38,11 +37,8 @@ public class PlayerY6 : Player
                   Debug.Log(name+"prendo possesso"+Time.time);
                   SetKeepBoa();
                   // SetBallBoa();
-
               }
           }
-
-
       }*/
 
     /*   public override void OnTriggerStay2D(Collider2D collision)

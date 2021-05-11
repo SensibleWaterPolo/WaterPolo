@@ -2,7 +2,6 @@
 
 public class PlayerY5 : Player
 {
-
     public override void Awake()
     {
         base.Awake();
@@ -29,7 +28,6 @@ public class PlayerY5 : Player
     public override void Start()
     {
         base.Start();
-
     }
 
     /* public override void OnTriggerEnter2D(Collider2D collision)
@@ -47,10 +45,6 @@ public class PlayerY5 : Player
                      prefabFight.CreateFight(this, player);
                  }
              }
-
          }
 }*/
-
-
-
 }

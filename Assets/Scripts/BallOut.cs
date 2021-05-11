@@ -1,41 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class BallOut : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Ball") && Ball.current.inGameFlag) 
+        if (collision.CompareTag("Ball") && Ball.current.inGameFlag)
         {
-           
             Fischia();
-        
         }
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
-     
     }
 
-    public void KeepToGk() 
+    public void KeepToGk()
     {
         if (Ball.current.fieldYellow && Ball.current.idTeam == 1)
         {
             GameObject.Find("YellowGK").GetComponent<GoalKeeper>().SetKeep();
-
         }
         else if (Ball.current.fieldYellow && Ball.current.idTeam == 0)
         {
@@ -45,17 +38,17 @@ public class BallOut : MonoBehaviour
         {
             GameObject.Find("RedGK").GetComponent<GoalKeeper>().SetKeep();
         }
-        else if (Ball.current.fieldYellow && Ball.current.idTeam == 1) 
+        else if (Ball.current.fieldYellow && Ball.current.idTeam == 1)
         {
             GameObject.Find("YellowGK").GetComponent<GoalKeeper>().SetKeep();
         }
-            Ball.current.inGameFlag = true;
-      
+        Ball.current.inGameFlag = true;
     }
 
-    public void Fischia() {
+    public void Fischia()
+    {
         AudioController.current.DoFischio();
-        
+
         PosPlayerMng.curret.SetAllBicy();
         Ball.current.inGameFlag = false;
         if (Ball.current.fieldYellow)
@@ -66,8 +59,5 @@ public class BallOut : MonoBehaviour
             Referee.current.SetArmLeft();
 
         Invoke("KeepToGk", 1);
-
     }
 }
-
-

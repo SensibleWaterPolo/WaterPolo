@@ -6,9 +6,9 @@ public class Player : MonoBehaviour
 {
     [Header("SECTOR")]
     public int sectorAction; //M: settore di azione del giocatore 1: Sx, 2: Mid, 3: Dx
+
     public int idDecisionMaking; //Indentifica la scelta presa dal giocatore per passare da uno stato all'altro
     public int idDecisionCPU;
-
 
     private EPosizionePalla _ePosizionePalla;
 
@@ -16,18 +16,20 @@ public class Player : MonoBehaviour
 
     private EPosizione _ePosizioneGiocatore;
 
-
     public int idAnim; //m: ID ANIMAZIONE
 
     [Header("STAT Var")] //M: statistiche giocatore
     [Range(0, 50)]
     public float speed;
+
     public float pass;
+
     [Range(0f, 10f)]
     public float shoot;
+
     public int stamina;//M: forza del giocatore per vincere lo scontro, se mosso da cpu ha un minimo X e un massimo Y
     public int brain; //velocità della cpu nell'eseguire un'azione di passaggio o di tiro
-    public Vector2 clickCPU; //range di click della cpu, da un minimo X ad un massimo Y, utilizzati per decidere chi vince uno scontro 
+    public Vector2 clickCPU; //range di click della cpu, da un minimo X ad un massimo Y, utilizzati per decidere chi vince uno scontro
 
     internal void OnTriggerEnter2D(Collider2D collision)
     {
@@ -37,21 +39,22 @@ public class Player : MonoBehaviour
     protected bool armDx; //M: true se è destro, false se è un mancino
     public bool isInContact; //True se sono in contatto con un altro giocatore
 
-
     [Header("FLAG")]
     public bool cpuFlag; //M: true se muove la cpu
+
     public bool ballFlag; //M: true se è in possesso della palla
     public bool counterAttFlag; //M: true se è in controfuga
     public bool fightFlag; //M:il giocatore ha perso lo scontro
     public bool flagShoot; //M: true se si sta preparando ad un tiro, false se è un passaggio
 
-
     [Header("SHOOT")]
     public bool loadShoot;
+
     public Vector3 destShoot;
 
-    [Header("POSITION")] //M: variabili delle posizioni 
+    [Header("POSITION")] //M: variabili delle posizioni
     public Vector3 posAtt;
+
     public Vector3 posDef;
     public Vector3 posStart;
     public Vector3 posMiddle;
@@ -67,6 +70,7 @@ public class Player : MonoBehaviour
 
     [Header("ANIMATION")]
     private Animator _animator;
+
     protected RuntimeAnimatorController ctrlAnim;
 
     public float limitVelBall; //M: limite per il quale intercetto il passaggio
@@ -75,23 +79,24 @@ public class Player : MonoBehaviour
 
     public bool selected; //true se il giocatore è selezionato per tirare o passare
 
-
     public int idTeam; //M: 0:YELLOW 1:RED
-
 
     //VARIABILI PER LE BOE
     public bool marcaFlag; //M:Variabile utilizzata per far ruotare le boe
+
     public bool boaFlag;  //M: per le animazione delle boe
     public float angleBoaZ; //M: angolodi rotazione della boa
     public float angleBoaW;
 
     //STATISTICHE RISPETTO LA POSIZIONE
     public float distaceBall; //M:distanza dalla palla
+
     public float distanceAtt; //M:distanza dal punto di attacco
     public float distanceDef; //M:distanza dal punto di difesa
 
     //VARIABILI PER LA DIFESA
     public bool pushAtt; //se in fase di difesa devo avanzare verso il difensore
+
     public bool beginPush;//comincia ad avanzare verso l'attaccante
     public float speedToPush;//velocità di spostamento verso l'attaccante
     public bool coverOpponent; //true se sto coprendo quasi tutto lo specchio della porta
@@ -100,8 +105,8 @@ public class Player : MonoBehaviour
 
     //VARIABILI COMBATTIMENTO
     public FightManager fightManager;
-    public FightManager prefabFight;
 
+    public FightManager prefabFight;
 
     public Head head;
     internal bool arrivedFlagCounterAtt;
@@ -134,11 +139,10 @@ public class Player : MonoBehaviour
           selected = false;
           distOpponentToDef = 0;
           waitAfterShoot = 1.5f;*/
-
     }
+
     public virtual void Start()
     {
-
         shoot = Random.Range(6, 10);
         pass = Random.Range(6, 10);
         speed = Random.Range(6, 10);
@@ -147,8 +151,6 @@ public class Player : MonoBehaviour
         transform.position = posStart;
         head = transform.GetChild(4).GetComponent<Head>();
         _animator = GetComponent<Animator>();
-
-
     }
 
     /* public virtual void FixedUpdate()
@@ -157,9 +159,7 @@ public class Player : MonoBehaviour
          {
              if (GameCore.current.secExpired && (keep || swimKeep || keepBoa) && !loadShoot)
              {
-
                  GameCore.current.ShootPlayer();
-
              }
              if (boaFlag)
              {
@@ -175,19 +175,16 @@ public class Player : MonoBehaviour
                  }
              }
 
-
              if (!keep && !keepBoa && !stun && !Ball.current.isShooted && !fightFlag)
              {
                  UpdateIdBall();
                  UpdateState();
              }
 
-
              CheckBallSwim();
 
              if ((swim || backSwim || swimKeep))
              {
-
                  transform.GetChild(3).gameObject.SetActive(true);
                  Swim();
                  // SwimDodge();
@@ -199,25 +196,20 @@ public class Player : MonoBehaviour
 
              if (!uploadShoot)
              {
-                 //    AnimTrigger(); 
+                 //    AnimTrigger();
                  CheckUpdateAnim();
              }
 
              UpdateFlagCounterAtt();
              CheckArrivedToPos();
              MoveToAttPlayer();
-
-
          }
          else if (!Ball.current.inGameFlag)
          {
-
              //  AnimTrigger();
              CheckUpdateAnim();
-
          }
      }
-
 
      public void UpdateState()
 
@@ -228,12 +220,10 @@ public class Player : MonoBehaviour
              if (def)
              {
                  transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Arm");
-
              }
              else
              {
                  transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Pool");
-
              }
 
              //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO BICY
@@ -243,19 +233,13 @@ public class Player : MonoBehaviour
              {
                  idDecisionMaking = 1;
                  SetBicy();
-
-
              }
              //BICY: palla in possesso avversario, sono in posizione di difesa ma la palla non ce l'ha il mio diretto opponent
              if (idBall == 3 && arrivedFlagDef && def && Ball.current.statePos != sectorAction && !marcaFlag && !stun && !fightFlag && !opponent.ballFlag)
              {
                  idDecisionMaking = 2;
                  SetBicy();
-
              }
-
-
-
 
              ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO SWIM
              // SWIM : La palla è libera NON nel mio settore ma sono quello più vicino della mia squadra
@@ -265,7 +249,6 @@ public class Player : MonoBehaviour
              {
                  idDecisionMaking = 22;
                  SetSwim(posAtt, false);
-
              }
 
              //SWIM: Palla vicina al boa o al marca boa
@@ -273,23 +256,19 @@ public class Player : MonoBehaviour
              {
                  idDecisionMaking = 3;
                  SetSwim(Ball.current.transform.position, false);
-
-
              }
              //SWIM: iL PIù VICINO PRENDE LA PALLA
              if (Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name)
              {
                  idDecisionMaking = 33;
                  SetSwim(Ball.current.transform.position, false);
-
              }
 
-             //SWIM: la palla è libera NON nel mio settore ma io sono il player più vicino 
+             //SWIM: la palla è libera NON nel mio settore ma io sono il player più vicino
              if (idBall == 0 && Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerForTeamNearBall(idTeam, boaFlag) == name && distaceBall < 10 && !stun && !fightFlag)
              {
                  idDecisionMaking = 4;
                  SetSwim(Ball.current.transform.position, false);
-
              }
 
              // SWIM: La palla è libera nel mio settore, sono in marcatura ma la palla è talmente vicina che provo a prenderla
@@ -298,15 +277,12 @@ public class Player : MonoBehaviour
              {
                  idDecisionMaking = 5;
                  SetSwim(Ball.current.transform.position, false);
-
-
              }
              //La palla è nel mio settore e sono un laterale
              if (idBall == 1 && Ball.current.CheckBallIsPlayable(0) && !loadShoot && !marcaFlag && sectorAction != 2 && !stun && !fightFlag)
              {
                  idDecisionMaking = 55;
                  SetSwim(Ball.current.transform.position, false);
-
              }
 
              //SWIM: Palla libera nel mio settore e sono quello più vicino della mia squadra ma la palla è anche un pò distante dall'avversario
@@ -315,7 +291,6 @@ public class Player : MonoBehaviour
              {
                  idDecisionMaking = 6;
                  SetSwim(Ball.current.transform.position, false);
-
              }
 
              //SWIM: palla in possesso di un mio compagno
@@ -323,31 +298,21 @@ public class Player : MonoBehaviour
              {
                  if (!counterAttFlag)
                  {
-
                      idDecisionMaking = 7;
                      SetSwim(posAtt, false);
-
-
-
                  }
                  else if (counterAttFlag && !arrivedFlagCounterAtt && !opponent.arrivedFlagDef && !marcaFlag)
                  {
-
-
                      idDecisionMaking = 8;
 
                      SetSwim(posCounter, true);
-
-
                  }
                  //Il difensore mi ha recuperato in difesa
                  else if (counterAttFlag && arrivedFlagCounterAtt && opponent.arrivedFlagDef && !marcaFlag)
                  {
-
                      idDecisionMaking = 888;
 
                      SetSwim(posAtt, true);
-
                  }
              }
              else
@@ -361,9 +326,6 @@ public class Player : MonoBehaviour
                  }
                  else if (counterAttFlag && !arrivedFlagCounterAtt)
                  { SetSwim(posCounter, true); }
-
-
-
              }
 
              //SWIM: palla in possesso avversario
@@ -371,13 +333,8 @@ public class Player : MonoBehaviour
              {
                  if (opponent.counterAttFlag)
                  {
-
                      idDecisionMaking = 9;
                      SetSwim(posDef, false);
-
-
-
-
                  }
                  else
                  {
@@ -385,47 +342,29 @@ public class Player : MonoBehaviour
                      {
                          if (transform.position.y > posDef.y)
                          {
-
-
                              idDecisionMaking = 10;
                              SetSwim(posDef, true);
-
-
                          }
                          else
                          {
-
-
                              idDecisionMaking = 11;
                              SetSwim(posDef, false);
-
-
                          }
                      }
                      else
                      {
                          if (transform.position.y < posDef.y)
                          {
-
-
                              idDecisionMaking = 12;
                              SetSwim(posDef, true);
-
-
                          }
                          else
                          {
-
-
                              idDecisionMaking = 13;
                              SetSwim(posDef, false);
-
-
                          }
                      }
-
                  }
-
              }
 
              //Se la palla è in possesso avversario ma non del mio diretto mi riposiziono in difesa
@@ -435,43 +374,27 @@ public class Player : MonoBehaviour
                  if (opponent.counterAttFlag)
 
                  {
-
-
                      idDecisionMaking = 131;
                      SetSwim(posDef, false);
-
-
-
                  }
                  else
                  {
-
-
                      idDecisionMaking = 132;
                      if (idTeam == 0 && transform.position.y > posDef.y || idTeam == 1 && transform.position.y < posDef.y)
                      {
-
                          SetSwim(posDef, true);
-
-
                      }
                      else
                      {
                          SetSwim(posDef, false);
-
-
                      }
-
                  }
-
              }
              //La palla non è nel mio settore ma sono la persona più vicina
              if (idBall == 0 && Ball.current.CheckBallIsPlayable(0) && PosPlayerMng.curret.GetPlayerNameNearBall() == name && !stun && !fightFlag)
              {
                  idDecisionMaking = 133;
                  SetSwim(Ball.current.transform.position, false);
-
-
              }
              ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// STATO DEF
 
@@ -485,30 +408,22 @@ public class Player : MonoBehaviour
                      if (Ball.current.player.name == opponent.name)
                      {
                          SetDef();
-
-
                      }
                  }
-
              }
-
 
              //DEF: se sono il marcaboa e la palla è in possesso
              if (idBall == 3 && marcaFlag && !boaFlag)
              {
                  idDecisionMaking = 15;
                  SetDef();
-
-
              }
 
-             //DEF: palla in possesso del mio diretto avversario e sono arrivato nella posizione di difesa 
+             //DEF: palla in possesso del mio diretto avversario e sono arrivato nella posizione di difesa
              if (idBall == 3 && arrivedFlagDef && opponent.ballFlag && !stun && !fightFlag && Vector3.Distance(transform.position, opponent.transform.position) < 25 && !opponent.keepBoa)
              {
                  idDecisionMaking = 16;
                  SetDef();
-
-
              }
 
              ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -517,10 +432,7 @@ public class Player : MonoBehaviour
              }
              else
              {
-
              }
-
-
          }
          ChangeLvlSprite();
      }
@@ -547,7 +459,6 @@ public class Player : MonoBehaviour
          {
              idBall = 0;
          }
-
      }  //M: aggiorna lo stato della palla rispetto al giocatore;
 
      public virtual void OnTriggerEnter2D(Collider2D collision)
@@ -558,12 +469,10 @@ public class Player : MonoBehaviour
          {
              if (Ball.current.idTeam != idTeam)
              {
-
                  GameCore.current.RestartTimeAction();
              }
              Ball.current.freeFlag = false;
              SetKeep();
-
          }
          if (collision.CompareTag("Player"))
          {
@@ -574,22 +483,15 @@ public class Player : MonoBehaviour
              }
              else
              {
-
-
-
              }
-
          }
-
      }
-
 
      private void OnTriggerExit2D(Collider2D collision)
      {
          if (collision.CompareTag("Player"))
          {
              isInContact = false;
-
          }
      }
      public virtual void OnTriggerStay2D(Collider2D collision)
@@ -604,23 +506,19 @@ public class Player : MonoBehaviour
              }
              Ball.current.freeFlag = false;
              SetKeep();
-
          }
          if (collision.CompareTag("Player"))
          {
              isInContact = true;
              if (swimKeep)
              {
-
                  SetKeep();
              }
-
          }
      }*/
+
     public void SetBall()
     { //M: sposta la palla nella posizione corretta all'interno del giocatore
-
-
         Ball.current.SetPlayer(this);
         Ball.current.transform.parent = transform;
         Ball.current.transform.position = transform.GetChild(0).position;
@@ -635,10 +533,10 @@ public class Player : MonoBehaviour
         Ball.current.transform.position = transform.GetChild(7).position;
     }
 
-
     public void SetBicy()
     {
     }
+
     private void SetStatoBicicletta()
     {
         _eStatoCorrente = EStato.Bicicletta;
@@ -659,7 +557,6 @@ public class Player : MonoBehaviour
         }
     }
 
-
     public void SetSwim(Vector3 nextPos, bool backSwim)
     {
         if (!Ball.current.isShooted && _eStatoCorrente != EStato.Possesso
@@ -674,6 +571,7 @@ public class Player : MonoBehaviour
                 case true:
                     _eStatoCorrente = EStato.Dorso;
                     break;
+
                 case false:
                     _eStatoCorrente = EStato.Nuoto;
                     break;
@@ -683,7 +581,6 @@ public class Player : MonoBehaviour
 
     public void Swim() //M: nuova funzione per il nuoto
     {
-
         /* float distanzaMancante = (this.transform.position - posFinal).sqrMagnitude;
 
          if (distanzaMancante > 0)
@@ -691,18 +588,15 @@ public class Player : MonoBehaviour
              Vector3 nuova_Pos = Vector3.MoveTowards(transform.position, posFinal, (speed + 2) * Time.deltaTime);
              GetComponent<Rigidbody2D>().MovePosition(nuova_Pos);
              Utility.RotateObjToPoint(this.gameObject, posFinal);
-
          }
          else
          {
-
              if (swimKeep)
              {
                  SetKeep();
              }
              else
              {
-
                  SetBicy();
              }
          }*/
@@ -713,8 +607,6 @@ public class Player : MonoBehaviour
         //  UnityEngine.Debug.Log(name + " ->possesso" + Time.time);
         /*  if (!keep && !stun)
           {
-
-
               //animator.SetInteger("IdAnim", 2);
               keep = true;
               keepBoa = false;
@@ -730,11 +622,9 @@ public class Player : MonoBehaviour
               sciarpa = false;
               rovesciata = false;
 
-
               SetBall();
               AnimTrigger();
               Utility.RotateObjToPoint(this.gameObject, posGoal);
-
 
               if (cpuFlag)
               {
@@ -745,9 +635,9 @@ public class Player : MonoBehaviour
                       Invoke("SetSwimKeep", 1);
                   }
               }
-
           }*/
     }
+
     public void SetKeepBoa()
     {
         /*    if (!keep && !keepBoa && !selected && !swimKeep)
@@ -779,8 +669,6 @@ public class Player : MonoBehaviour
 
     public void SetShoot()
     {
-
-
         /*   keep = false;
            swim = false;
            backSwim = false;
@@ -803,8 +691,6 @@ public class Player : MonoBehaviour
                }
            }
            //   animator.SetTrigger("Shoot");*/
-
-
     }
 
     public void SetShootBoaRovesciata()
@@ -836,6 +722,7 @@ public class Player : MonoBehaviour
                   //   animator.SetTrigger("Rovesciata");
               }*/
     }
+
     public void SetShootBoaSciarpa()
     {
         /*  if (keepBoa)
@@ -865,6 +752,7 @@ public class Player : MonoBehaviour
               //animator.SetTrigger("Sciarpa");
           }*/
     }
+
     public void SetShootBoaColonnello()
     {
         /*    if (keepBoa)
@@ -890,9 +778,9 @@ public class Player : MonoBehaviour
                     }
                 }
                 // animator.SetTrigger("Colonnello");
-
             }*/
     }
+
     public void LoadShoot(Vector3 directions, bool flag, int idShoot) //idShoot= 0: classico, 1 rovesciata, 2 sciarpa, 3 colonnello
     {
         /*   uploadShoot = true;
@@ -903,22 +791,17 @@ public class Player : MonoBehaviour
            }
            if (cpuFlag)
            {
-
                selected = true;
            }
            if (keep || swimKeep || keepBoa)
            {
-               Ball.current.transform.parent = null; //Libera la palla 
-
-
+               Ball.current.transform.parent = null; //Libera la palla
 
                switch (idShoot)
                {
                    case 0:
 
-
                        SetShoot();
-
 
                        break;
 
@@ -926,23 +809,19 @@ public class Player : MonoBehaviour
 
                        SetShootBoaRovesciata();
 
-
-
                        break;
-                   case 2:
 
+                   case 2:
 
                        SetShootBoaSciarpa();
 
-
                        break;
-                   case 3:
 
+                   case 3:
 
                        SetShootBoaColonnello();
 
                        break;
-
                }
                destShoot = directions;
                flagShoot = flag;
@@ -958,6 +837,7 @@ public class Player : MonoBehaviour
 
              Invoke("UpdateLoadShoot", waitAfterShoot); //tempo di attesa dopo aver tirato*/
     }
+
     public void UpdateLoadShoot() //M:fine tiro
     {
         /*  if (loadShoot)
@@ -965,11 +845,11 @@ public class Player : MonoBehaviour
               SetBicy();
           }*/
     }
+
     public void SetDef() //M: setta lo stato def
     {
         /*   if (!def && !keep && !keepBoa && !swimKeep && !stun)
            {
-
                keep = false;
                swim = false;
                backSwim = false;
@@ -983,11 +863,8 @@ public class Player : MonoBehaviour
                sciarpa = false;
                rovesciata = false;
 
-
                Utility.RotateObjAtoB(this.gameObject, opponent.gameObject);
-
            }*/
-
     }
 
     public void SetStun()
@@ -1008,16 +885,13 @@ public class Player : MonoBehaviour
                rovesciata = false;
                GameCore.current.AddPlayerStun(this);
                Utility.RotateObjToPoint(this.gameObject, posFinal);
-
            }*/
-
     }
+
     public void SetSwimKeep()
     {
-
         /*    if (keep && !swimKeep && !selected && !arrivedFlagAtt)
             {
-
                 posFinal = posAtt;
                 swimKeep = true;
                 keepBoa = false;
@@ -1033,22 +907,18 @@ public class Player : MonoBehaviour
                 sciarpa = false;
                 rovesciata = false;
 
-
                 Utility.RotateObjToPoint(this.gameObject, posFinal);
             }*/
-
-
     }
 
-
-    public virtual void SetPosition() { } //M: imposta le posizioni all'interno del campo
+    public virtual void SetPosition()
+    {
+    } //M: imposta le posizioni all'interno del campo
 
     public void SetCpuFlag(bool flag)
     {
         this.cpuFlag = flag;
-
     }
-
 
     public void SetCounterAttFlag(bool flag)
     {
@@ -1057,10 +927,7 @@ public class Player : MonoBehaviour
 
     public void StartGame()
     {
-
     }
-
-
 
     public float DistanceFromBall()
     { //M calcola la distanza tra il giocatore e la palla
@@ -1079,7 +946,6 @@ public class Player : MonoBehaviour
              Utility.RotateObjToPoint(this.gameObject, posGoal);
              return;
          }
-
          else if (arrivedFlagDef && bicy)
          {
              Utility.RotateObjAtoB(this.gameObject, opponent.gameObject);
@@ -1088,32 +954,27 @@ public class Player : MonoBehaviour
         */
     }
 
-
     public bool CheckOpponent(string name)
     {
         if (GameObject.Find(name))
             return true;
         else return false;
-
     }
+
     public void SetFightFlag(bool flag)
     {
         fightFlag = flag;
-
     }
-
 
     public void UpdateFlagCounterAtt()
     {
         if (Vector3.Distance(posGoal, transform.position) < Vector3.Distance(posGoal, opponent.transform.position))
         {
             counterAttFlag = true;
-
         }
         else
         {
             counterAttFlag = false;
-
         }
     }
 
@@ -1133,7 +994,6 @@ public class Player : MonoBehaviour
                }
                if (beginPush && def && !marcaFlag)
                {
-
                    LayerMask mask = 1 << 9; //strato player
                    Vector3 posSensor = transform.GetChild(6).transform.position;
                    Vector3 dir = (opponent.transform.position - posSensor).normalized;
@@ -1142,11 +1002,8 @@ public class Player : MonoBehaviour
                    Debug.DrawRay(posSensor, dir * dist, Color.black, 5f);
                    if (hitAttPlayer.collider != null)
                    {
-
-
                        if (hitAttPlayer.collider.name == opponent.name)
                        {
-
                            pushAtt = false;
                            coverOpponent = true;
                        }
@@ -1155,14 +1012,12 @@ public class Player : MonoBehaviour
                    {
                        pushAtt = true;
                        coverOpponent = false;
-
                    }
 
                    if (pushAtt)
                    {
                        Vector3 newPos = Vector3.MoveTowards(transform.position, opponent.transform.position, speedToPush * Time.deltaTime);
                        GetComponent<Rigidbody2D>().MovePosition(newPos);
-
                    }
                    Utility.RotateObjAtoB(this.gameObject, opponent.gameObject);
                }
@@ -1173,7 +1028,6 @@ public class Player : MonoBehaviour
                beginPush = false;
                coverOpponent = false;
            }*/
-
     }
 
     public bool CheckOpponentShoot() //Ritorna true, se l'avversario è in possesso o sta caricando il tiro o ha tirato e la palla sta viaggiando
@@ -1220,9 +1074,7 @@ public class Player : MonoBehaviour
                StopCoroutine(StartDecisioMaking());
            }
            brainCpuCoroutine = StartCoroutine(StartDecisioMaking());*/
-
     }
-
 
     public IEnumerator LifeCycle()
     {
@@ -1232,9 +1084,7 @@ public class Player : MonoBehaviour
               {
                   if (GameCore.current.secExpired && keep && !loadShoot)
                   {
-
                       GameCore.current.ShootPlayer();
-
                   }
                   if (boaFlag)
                   {
@@ -1254,12 +1104,10 @@ public class Player : MonoBehaviour
                   if (!keep && !keepBoa && !stun && !Ball.current.isShooted && !fightFlag)
                   { UpdateState(); }
 
-
                   CheckBallSwim();
 
                   if ((swim || backSwim || swimKeep))
                   {
-
                       transform.GetChild(3).gameObject.SetActive(true);
                       Swim();
                       // SwimDodge();
@@ -1277,18 +1125,14 @@ public class Player : MonoBehaviour
                   UpdateFlagCounterAtt();
                   CheckArrivedToPos();
                   MoveToAttPlayer();
-
-
               }
               else if (!Ball.current.inGameFlag)
               {
-
                   AnimTrigger();
               }
   */
         yield return new WaitForFixedUpdate();
         //}
-
     }
 
     public void CheckBallSwim()
@@ -1297,16 +1141,13 @@ public class Player : MonoBehaviour
           {
               SetKeep();
           }*/
-
     }
-    void AnimTrigger()
-    {
 
+    private void AnimTrigger()
+    {
         /* foreach (AnimatorControllerParameter p in animator.parameters)
              if (p.type == AnimatorControllerParameterType.Trigger)
                  animator.ResetTrigger(p.name);
-
-
 
          if (bicy)
          {
@@ -1321,7 +1162,6 @@ public class Player : MonoBehaviour
          else if (keep)
          {
              animator.SetTrigger("Keep");
-
          }
          else if (backSwim)
          {
@@ -1347,9 +1187,7 @@ public class Player : MonoBehaviour
          {
              animator.SetTrigger("Stun");
              return;
-
          }*/
-
     }
 
     public void ChangeLvlSprite() //caambia il livello di render a seconda dello stato del giocatore
@@ -1362,13 +1200,10 @@ public class Player : MonoBehaviour
             {
                 GetComponent<SpriteRenderer>().sortingLayerName = "Player";
             }*/
-
     }
 
     public void SwimDodge() //M: nuova funzione per il nunoto
     {
-
-
         /*  if (!head.inCollision)
           {
               float distanzaMancante = (this.transform.position - posFinal).sqrMagnitude;
@@ -1378,18 +1213,15 @@ public class Player : MonoBehaviour
                   Vector3 nuova_Pos = Vector3.MoveTowards(transform.position, posFinal, (speed + 2) * Time.deltaTime);
                   GetComponent<Rigidbody2D>().MovePosition(nuova_Pos);
                   Utility.RotateObjToPoint(this.gameObject, posFinal);
-
               }
               else
               {
-
                   if (swimKeep)
                   {
                       SetKeep();
                   }
                   else
                   {
-
                       SetBicy();
                   }
               }
@@ -1401,13 +1233,9 @@ public class Player : MonoBehaviour
           }*/
     }
 
-
-
-
     //Controlla se il giocatore può entrare in combattimento
     public bool CanFight(string _name)
     {
-
         /*   bool result = (swim || backSwim) && !stun && !arrivedFlagDef && !arrivedFlagAtt && Ball.current.inGameFlag && !marcaFlag && !fightFlag && opponent.name == _name && !boaFlag;
            Debug.Log(name + " Can Fight:" + result);
            return result;*/
@@ -1418,7 +1246,6 @@ public class Player : MonoBehaviour
     {
         GetComponent<Renderer>().enabled = false;
         GetComponent<CircleCollider2D>().enabled = false;
-
     }
 
     public void ShowPlayer()
@@ -1472,14 +1299,9 @@ public class Player : MonoBehaviour
              {
                  animator.CrossFade("STUN", 0.1f);
                  return;
-
              }
-
          }*/
-
-
     }
-
 
     public enum EPosizionePalla
     {
@@ -1516,9 +1338,4 @@ public class Player : MonoBehaviour
         SullaPalla,
         InPosControfuga
     }
-
 }
-
-
-
-

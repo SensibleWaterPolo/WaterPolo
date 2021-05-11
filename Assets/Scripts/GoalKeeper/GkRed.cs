@@ -22,6 +22,7 @@ public class GkRed : GoalKeeper
     {
         base.SaveUP(save);
     }
+
     public override void SaveLeft(bool save)
     {
         base.SaveLeft(save);
@@ -40,8 +41,6 @@ public class GkRed : GoalKeeper
     {
         base.SaveMid(save);
     }
-
-
 
     public override void UpdateFinalPos()
     {
@@ -85,7 +84,6 @@ public class GkRed : GoalKeeper
                           return true;
                       }
            }
-
                   else if (pR5.counterAttFlag)
                   {
                       destBall = GameObject.Find("PosCounterAttR5").transform.position;
@@ -114,7 +112,6 @@ public class GkRed : GoalKeeper
                           Utility.RotateObjToPoint(this.gameObject, destBall);
                           this.LoadShoot(destBall);
                           return true;
-
                       }
                       else
                       {
@@ -124,7 +121,6 @@ public class GkRed : GoalKeeper
                           return true;
                       }
                   }
-
                        else if (pR5.arrivedFlagAtt)
                   {
                       destBall = pR5.transform.position;

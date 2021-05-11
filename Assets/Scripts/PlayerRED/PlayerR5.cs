@@ -74,7 +74,6 @@ public class PlayerR5 : Player
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 2;
                             return true;
-
                         }
                         else
                         {
@@ -102,6 +101,7 @@ public class PlayerR5 : Player
                         return true;
                     }
                     break;
+
                 case 1:
                     {
                      if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name))
@@ -150,7 +150,6 @@ public class PlayerR5 : Player
                             idDecisionCPU = 11;
                             return true;
                         }
-
                         else if (pR1.arrivedFlagAtt && pR3.arrivedFlagAtt)
                         {
                             if (Random.value > 0.5)
@@ -160,7 +159,6 @@ public class PlayerR5 : Player
                                 this.LoadShoot(destBall, false, 0);
                                 idDecisionCPU = 13;
                                 return true;
-
                             }
                             else
                             {
@@ -189,7 +187,6 @@ public class PlayerR5 : Player
                         }
                     }
                     break;
-
             }
         }
         //  Debug.Log(name + " Non ho preso nessuna decisione");

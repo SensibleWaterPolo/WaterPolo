@@ -7,7 +7,6 @@ public class PlayerR3 : Player
     public Battle battle;
     public Battle battlePrefab;
 
-
     public override void Awake()
     {
         base.Awake();
@@ -24,12 +23,12 @@ public class PlayerR3 : Player
         armDx = false;
         cpuFlag = true;
     }
+
     /*public override void OnTriggerStay2D(Collider2D collision)
     {
         base.OnTriggerStay2D(collision);
         if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && !opponent.swimKeep && idBall==3)
-        {            
-            
+        {
             battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, Utility.GetAngleBetweenObjAB(opponent.gameObject, Ball.current.gameObject))));
             battlePrefab.CreateBattle(opponent, this);
         }
@@ -37,13 +36,9 @@ public class PlayerR3 : Player
 
       /*  if (obj.tag == "Ball" && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(20) && !marcaFlag)
         {
-
             Ball.current.freeFlag = false;
             SetKeep();
-
         }*/
-
-
 }
 
 /*  public override void OnTriggerEnter2D(Collider2D collision)
@@ -54,12 +49,10 @@ public class PlayerR3 : Player
           {
               if (Ball.current.idTeam != idTeam)
               {
-
                   GameCore.current.RestartTimeAction();
               }
               Ball.current.freeFlag = false;
               SetKeep();
-
           }
   }
   public override bool PlayerCpu()
@@ -72,11 +65,8 @@ public class PlayerR3 : Player
       Player pR6 = GameObject.Find("PlayerR6").GetComponent<Player>();
       bool shoot = IA.current.DecisionShoot(this);
 
-
       if (shoot) //Tiro in porta
       {
-
-
           if (GameCore.current.levelCPUHard)
           {
               destBall = IA.current.ShootHardR3();
@@ -93,7 +83,6 @@ public class PlayerR3 : Player
       /*********PASSAGGIO********************/
 /*  else
   {
-
       switch (idZone)
       {
           case 0:
@@ -108,7 +97,7 @@ public class PlayerR3 : Player
                       idDecisionCPU = 2;
                       return true;
                   }
-                  else 
+                  else
                   {
                       destBall = GameObject.Find("PosCounterAttR1").transform.position;
                       Utility.RotateObjToPoint(this.gameObject, destBall);
@@ -117,7 +106,6 @@ public class PlayerR3 : Player
                       return true;
                   }
               }
-
               else if (pR5.arrivedFlagCounterAtt)
               {
                   destBall = GameObject.Find("PosCounterAttR5").transform.position;
@@ -134,7 +122,6 @@ public class PlayerR3 : Player
                   idDecisionCPU = 5;
                   return true;
               }
-
               else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
               {
                   if (Random.value > 0.5)
@@ -144,7 +131,6 @@ public class PlayerR3 : Player
                       this.LoadShoot(destBall, false, 0);
                       idDecisionCPU = 6;
                       return true;
-
                   }
                   else
                   {
@@ -172,6 +158,7 @@ public class PlayerR3 : Player
                   return true;
               }
               break;
+
           case 1:
               {
                 if (pr1.arrivedFlagCounterAtt && pR5.arrivedFlagCounterAtt)
@@ -193,7 +180,6 @@ public class PlayerR3 : Player
                           return true;
                       }
                   }
-
                   else if (pR5.arrivedFlagCounterAtt)
                   {
                       destBall = GameObject.Find("PosCounterAttR5").transform.position;
@@ -210,7 +196,6 @@ public class PlayerR3 : Player
                       idDecisionCPU = 14;
                       return true;
                   }
-
                   else if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name) && !opponent.def)
                   {
                       destBall = GameObject.Find("SensorBoaR6").transform.position;
@@ -228,7 +213,6 @@ public class PlayerR3 : Player
                           this.LoadShoot(destBall, false, 0);
                           idDecisionCPU = 16;
                           return true;
-
                       }
                       else
                       {
@@ -261,7 +245,7 @@ public class PlayerR3 : Player
           case 2:
               {
                 if (pR6.marcaFlag && IA.current.PingBoaIsFree(this.name) && IA.current.PingBoaIsFree("PlayerR3") && !opponent.def)
-                  {   
+                  {
                       destBall = GameObject.Find("SensorBoaR6").transform.position;
                       Utility.RotateObjToPoint(this.gameObject, destBall);
                       this.LoadShoot(destBall, false, 0);
@@ -287,7 +271,6 @@ public class PlayerR3 : Player
                           return true;
                       }
                   }
-
                   else if (pR5.arrivedFlagCounterAtt)
                   {
                       destBall = GameObject.Find("PosCounterAttR5").transform.position;
@@ -313,7 +296,6 @@ public class PlayerR3 : Player
                           this.LoadShoot(destBall, false, 0);
                           idDecisionCPU = 26;
                               return true;
-
                       }
                       else
                       {
@@ -342,7 +324,6 @@ public class PlayerR3 : Player
                   }
               }
               break;
-
       }
   }
   selected = false;
@@ -352,5 +333,4 @@ public class PlayerR3 : Player
   }
   return hasChoose;
 }
-
 }*/

@@ -10,13 +10,12 @@ public class TapZone : MonoBehaviour
         player = transform.parent.GetComponent<Player>();
     }
 
-    void Start()
+    private void Start()
     {
-
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         /* if (player.keep)
              GetComponent<CircleCollider2D>().enabled = true;

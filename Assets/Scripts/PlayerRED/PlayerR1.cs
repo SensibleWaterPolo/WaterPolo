@@ -2,8 +2,6 @@
 
 public class PlayerR1 : Player
 {
-
-
     // Start is called before the first frame update
     public override void Awake()
     {
@@ -22,6 +20,7 @@ public class PlayerR1 : Player
         armDx = false;
         cpuFlag = true;
     }
+
     /* public override bool PlayerCpu()
      {
          bool hasChoose = false;
@@ -35,8 +34,6 @@ public class PlayerR1 : Player
 
          if (shoot) //Tiro in porta
          {
-
-
              if (GameCore.current.levelCPUHard)
              {
                  destBall = IA.current.ShootHardR1();
@@ -55,7 +52,6 @@ public class PlayerR1 : Player
          /*********PASSAGGIO********************/
     /*   else
        {
-
            switch (idZone)
            {
                case 0:
@@ -78,7 +74,6 @@ public class PlayerR1 : Player
                            this.LoadShoot(destBall, false, 0);
                            idDecisionCPU = 2;
                            return true;
-
                        }
                        else
                        {
@@ -109,6 +104,7 @@ public class PlayerR1 : Player
                        return true;
                    }
                    break;
+
                case 1:
                    {
                        if (pR6.marcaFlag && (IA.current.PingBoaIsFree(this.name)))
@@ -160,8 +156,6 @@ public class PlayerR1 : Player
                            idDecisionCPU = 11;
                            return true;
                        }
-
-
                        else if (pR5.arrivedFlagAtt && pR3.arrivedFlagAtt)
                        {
                            if (Random.value > 0.5)
@@ -172,7 +166,6 @@ public class PlayerR1 : Player
                                this.LoadShoot(destBall, false, 0);
                                idDecisionCPU = 13;
                                return true;
-
                            }
                            else
                            {
@@ -203,7 +196,6 @@ public class PlayerR1 : Player
                        }
                    }
                    break;
-
            }
        }
        if (!swimKeep && !arrivedFlagAtt)

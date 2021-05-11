@@ -29,7 +29,6 @@ public class PlayerY3 : Player
           base.OnTriggerStay2D(collision);
           if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && !opponent.swimKeep && idBall==3)
           {
-
               battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
               battlePrefab.CreateBattle(opponent, this);
           }
@@ -38,12 +37,9 @@ public class PlayerY3 : Player
 
           if (obj.tag == "Ball" && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(20) && !marcaFlag)
           {
-
               Ball.current.freeFlag = false;
               SetKeep();
-
           }
-
       }
       public override void OnTriggerEnter2D(Collider2D collision)
       {
@@ -53,13 +49,10 @@ public class PlayerY3 : Player
           {
               if (Ball.current.idTeam != idTeam)
               {
-
                   GameCore.current.RestartTimeAction();
               }
               Ball.current.freeFlag = false;
               SetKeep();
-
           }
-
       }*/
 }

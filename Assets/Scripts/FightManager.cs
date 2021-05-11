@@ -17,24 +17,20 @@ public class FightManager : MonoBehaviour
         start = false;
     }
 
-
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-
         numClickP1 = 0;
         numClickP2 = 0;
-
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (start)
         {
             //    playerY.SetBicy();
             //    playerR.SetBicy();
-
         }
     }
 
@@ -46,14 +42,12 @@ public class FightManager : MonoBehaviour
         {
             Debug.Log("Click cpu:" + numClickCpu + "p1: " + (numClickP1 + playerY.stamina) + " p2: " + (playerR.stamina + numClickCpu));
             return 0;
-
         }
         else
          if (numClickP1 + playerY.stamina < playerR.stamina + numClickCpu)
         {
             Debug.Log("Click cpu:" + numClickCpu + "p1: " + (numClickP1 + playerY.stamina) + " p2: " + (playerR.stamina + numClickCpu));
             return 1;
-
         }
         else
         if (numClickP1 == playerR.stamina)
@@ -70,13 +64,11 @@ public class FightManager : MonoBehaviour
         if (numClickP1 + playerY.stamina > numClickP2 + playerR.stamina)
         {
             return 0;
-
         }
         else
             if (numClickP1 + playerY.stamina < numClickP2 + playerR.stamina)
         {
             return 1;
-
         }
         else
            if (numClickP1 + playerY.stamina == numClickP2 + playerR.stamina)
@@ -109,6 +101,7 @@ public class FightManager : MonoBehaviour
         playerR.ShowPlayer();
         Destroy(this.gameObject);
     }
+
     public void SolveFightVsP2()
     {
         solve = true;
@@ -117,12 +110,10 @@ public class FightManager : MonoBehaviour
         if (id == 0)
         {
             playerR.SetStun();
-
         }
         else
         {
             playerY.SetStun();
-
         }
 
         Destroy(this.gameObject);
@@ -133,6 +124,7 @@ public class FightManager : MonoBehaviour
         numClickP1++;
         Debug.Log("Click: " + numClickP1);
     }
+
     public void P2AddClickLocal()
     {
         numClickP2++;
@@ -150,7 +142,6 @@ public class FightManager : MonoBehaviour
         //  playerR.SetBicy();
         //  playerY.SetBicy();
 
-
         playerR.transform.position = transform.position;
         playerY.transform.position = transform.position;
         start = true;
@@ -162,11 +153,5 @@ public class FightManager : MonoBehaviour
         {
             Invoke("SolveFightVsP2", lenghtFight);
         }
-
     }
-
-
-
-
-
 }

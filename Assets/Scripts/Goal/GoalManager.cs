@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class GoalManager : MonoBehaviour
@@ -14,20 +11,14 @@ public class GoalManager : MonoBehaviour
     private void Awake()
     {
         goal = false;
-
-
     }
 
-    void Start()
+    private void Start()
     {
-
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
     }
-
-
 }

@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Responsive Camera Scaler
@@ -14,8 +10,8 @@ public class CameraAspectRatioScaler : MonoBehaviour
         // set the desired aspect ratio (the values in this example are
         // hard-coded for 16:9, but you could make them into public
         // variables instead so you can set them at design time)
-        float targetaspect =9/18f;
-      
+        float targetaspect = 9 / 18f;
+
         // determine the game window's current aspect ratio
         float windowaspect = (float)Screen.width / (float)Screen.height;
 

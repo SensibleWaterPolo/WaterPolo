@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Referee : MonoBehaviour
 {
@@ -9,46 +7,46 @@ public class Referee : MonoBehaviour
 
     public Animator anim;
 
-    public static Referee current; 
+    public static Referee current;
 
-
-
-    void Start()
+    private void Start()
     {
         anim = GetComponent<Animator>();
         current = this;
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         UpdatePos();
-        
-
     }
 
     public void SetWatch()
     {
         anim.SetInteger("IdAnim", 0);
     }
+
     public void SetWalkDown()
     {
         anim.SetInteger("IdAnim", 2);
     }
-    public void SetWalkUp() 
+
+    public void SetWalkUp()
     {
         anim.SetInteger("IdAnim", 1);
     }
+
     public void SetArmLeft()
     {
-        anim.SetInteger("IdAnim",3 );
+        anim.SetInteger("IdAnim", 3);
     }
 
-    public void SetArmRight() 
+    public void SetArmRight()
     {
         anim.SetInteger("IdAnim", 4);
     }
-    public void SetArmFront() 
+
+    public void SetArmFront()
     {
         anim.SetInteger("IdAnim", 5);
     }
@@ -59,12 +57,10 @@ public class Referee : MonoBehaviour
         SetArmFront();
     }
 
-
-    public void UpdatePos() 
+    public void UpdatePos()
     {
+        if (Ball.current.inGameFlag && !GameObject.Find("RedGK").GetComponent<GoalKeeper>().keep && !GameObject.Find("YellowGK").GetComponent<GoalKeeper>().keep)
 
-        if (Ball.current.inGameFlag && !GameObject.Find("RedGK").GetComponent<GoalKeeper>().keep && !GameObject.Find("YellowGK").GetComponent<GoalKeeper>().keep) 
-        
         {
             float Y = Ball.current.transform.position.y;
 
@@ -72,7 +68,6 @@ public class Referee : MonoBehaviour
             {
                 SetWalkUp();
                 transform.Translate(Vector3.up * 3 * Time.deltaTime);
-                
             }
             else if (Y - transform.position.y < 0 && Y - transform.position.y < -15)
             {
@@ -82,10 +77,7 @@ public class Referee : MonoBehaviour
             else
             {
                 SetWatch();
-            }         
-            
+            }
         }
     }
-
 }
-

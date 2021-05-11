@@ -21,6 +21,7 @@ public class PlayerR6 : Player
         armDx = true;
         cpuFlag = true;
     }
+
     /* public override void FixedUpdate()
      {
          base.FixedUpdate();
@@ -32,7 +33,6 @@ public class PlayerR6 : Player
                  GetComponent<CircleCollider2D>().enabled = true;
              }
          }
-
      }
 
      /*public override void OnTriggerEnter2D(Collider2D collision)
@@ -42,12 +42,9 @@ public class PlayerR6 : Player
          {
              if (collision.CompareTag("Ball") && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && marcaFlag)
              {
-
                  SetKeepBoa();
-
              }
          }
-
      }*/
 
     /* public override void OnTriggerStay2D(Collider2D collision)
@@ -98,9 +95,6 @@ public class PlayerR6 : Player
                   int idPosBoa = IA.current.IdPosBoa();
                   switch (idPosBoa)
                   {
-
-
-
                       case 0:
                           if (destBall.x < 0)
                           {
@@ -112,12 +106,15 @@ public class PlayerR6 : Player
                           }
 
                           break;
+
                       case 1:
                           idShoot = 3;
                           break;
+
                       case 2:
                           idShoot = 1;
                           break;
+
                       case 3:
                           idShoot = 2;
                           break;
@@ -126,7 +123,6 @@ public class PlayerR6 : Player
                   idDecisionCPU = 1;
                   return true;
               }
-
           }
           /*********PASSAGGIO********************/
     /*    else
@@ -155,7 +151,6 @@ public class PlayerR6 : Player
                             return true;
                         }
                     }
-
                     else if (pR5.arrivedFlagCounterAtt)
                     {
                         destBall = GameObject.Find("PosCounterAttR5").transform.position;
@@ -172,7 +167,6 @@ public class PlayerR6 : Player
                         idDecisionCPU = 5;
                         return true;
                     }
-
                     else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
                     {
                         if (Random.value > 0.5)
@@ -182,7 +176,6 @@ public class PlayerR6 : Player
                             this.LoadShoot(destBall, false, 0);
                             idDecisionCPU = 6;
                             return true;
-
                         }
                         else
                         {
@@ -210,6 +203,7 @@ public class PlayerR6 : Player
                         return true;
                     }
                     break;
+
                 case 1:
                     {
                         /*if (pr1.counterAttFlag && pR5.counterAttFlag)
@@ -231,7 +225,6 @@ public class PlayerR6 : Player
                                    return true;
                                }
                            }
-
                            else if (pR5.counterAttFlag)
                            {
                                destBall = GameObject.Find("PosCounterAttR5").transform.position;
@@ -259,7 +252,6 @@ public class PlayerR6 : Player
                 this.LoadShoot(destBall, false, 0);
                 idDecisionCPU = 14;
                 return true;
-
             }
             else
             {
@@ -310,7 +302,6 @@ case 2:
                     return true;
                 }
             }
-
             else if (pR5.counterAttFlag)
             {
                 destBall = GameObject.Find("PosCounterAttR5").transform.position;
@@ -338,7 +329,6 @@ case 2:
                  this.LoadShoot(destBall, false, 0);
                  idDecisionCPU = 23;
                  return true;
-
              }
              else
              {
@@ -367,7 +357,6 @@ case 2:
          }
      }
      break;
-
 }
 }
 //   Debug.Log(name + " Non ho preso nessuna decisione");

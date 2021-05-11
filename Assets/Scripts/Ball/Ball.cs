@@ -1,16 +1,17 @@
 ﻿using UnityEngine;
+
 public class Ball : MonoBehaviour
 {
-    public static Ball current; //M:la palla è un singolo oggetto per tutti quindi fa riferimento ad un Singleton 
-
+    public static Ball current; //M:la palla è un singolo oggetto per tutti quindi fa riferimento ad un Singleton
 
     [Header("STAT Var")] //M:
     public float speed; //M: velocità palla
 
     [Header("FLAG Var")]
     public bool freeFlag; //M: TRUE se non è in possesso di un giocatore
+
     public bool inGameFlag; //M: TRUE se la palla è in gioco e non uscita fuori
-    public bool deceleratePass; //M: decelera la palla dopo un passaggio 
+    public bool deceleratePass; //M: decelera la palla dopo un passaggio
     public bool decelerateShoot; //M:decelera in caso di tiro
     public bool motionlessFlag; //M: true se la palla è ferma
     public bool shootFlag; //M: true se è un tiro, false se è un passaggio
@@ -42,9 +43,7 @@ public class Ball : MonoBehaviour
     public string yellowNear;
     public string moreNear;
 
-
-
-    private void Awake() //M:inizializzazione variabili 
+    private void Awake() //M:inizializzazione variabili
     {
         current = this;
         freeFlag = true;
@@ -57,10 +56,7 @@ public class Ball : MonoBehaviour
         idTeam = -1;
         respawn = false;
         isEnable = true;
-
     }
-
-
 
     private void FixedUpdate()
     {
@@ -74,7 +70,6 @@ public class Ball : MonoBehaviour
         else if (decelerateShoot)
         {
             DecelerateVelShoot();
-
         }
 
         if (!shootFlag)
@@ -86,18 +81,11 @@ public class Ball : MonoBehaviour
 
         UpdateSideBall();
 
-
-
         redNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(1, false);
         yellowNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(0, false);
         moreNear = PosPlayerMng.curret.GetPlayerNameNearBall();
 
         //  Debug.Log("SPEED "+speed+ " /shootflag " +shootFlag+ " /player "+player+ " /libera :"+freeFlag+" /ferma "+motionlessFlag+ " /shooted "+isShooted);
-
-
-
-
-
     }
 
     public void ShootBall(Vector3 finalPos, bool shootFlag, int id) //M: prepara la palla al tiro e ne calcola la forza, id=0 giocatore, id=1 portiere
@@ -153,16 +141,12 @@ public class Ball : MonoBehaviour
             player = null;
         }
         isShooted = true;
-
-
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
         // Debug.Log(collision.gameObject.name);
     }
-
-
 
     public void EnableBall()
     {
@@ -173,15 +157,12 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         respawn = true;
         isEnable = true;
-
     }
 
     public void CheckVel()  //M: se la velocità è quasi zero(3) blocca la palla
     {
         if (rb != null)
         {
-
-
             speed = rb.velocity.magnitude;
             if (speed > 0 && respawn)
             {
@@ -190,7 +171,6 @@ public class Ball : MonoBehaviour
 
             if (speed <= 3 && !respawn && freeFlag)
             {
-
                 StopBall();
 
                 deceleratePass = false;
@@ -202,16 +182,13 @@ public class Ball : MonoBehaviour
                   {
                       player = null;
                   }*/
-
             }
             else
             {
                 motionlessFlag = false;
                 deceleratePass = true;
                 decelerateShoot = true;
-
             }
-
         }
     }
 
@@ -220,11 +197,13 @@ public class Ball : MonoBehaviour
         if (rb != null)
             rb.velocity = rb.velocity - (rb.velocity * 1.4f * Time.deltaTime);
     }
+
     public void DecelerateVelShoot() //M: Diminuisce la velocità della palla
     {
         if (rb != null)
             rb.velocity = rb.velocity - (rb.velocity * 0.4f * Time.deltaTime);
     }
+
     public void SetPlayer(Player player) //M: assegna alla palla il giocatore in possesso
     {
         DisableBall();
@@ -236,17 +215,16 @@ public class Ball : MonoBehaviour
             idTeam = player.idTeam;
             isShooted = false;
         }
-
     }
+
     public void SetGK(GoalKeeper _gk)
     {
         DisableBall();
         isShooted = false;
         this.gk = _gk;
         idTeam = _gk.idTeam;
-
-
     }
+
     public void DisableBall()
     {
         GetComponent<Renderer>().enabled = false;
@@ -258,7 +236,6 @@ public class Ball : MonoBehaviour
         isEnable = false;
         //CheckFreeBall();
     }
-
 
     public void CheckPositionPass() //M: in caso di passaggio controlla la posizione della palla
     {
@@ -272,16 +249,13 @@ public class Ball : MonoBehaviour
                 rb.velocity = Vector2.zero;
             }
         }
-
     }
 
     public void StopBall() //M:ferma immediatamente la palla
     {
         rb.velocity = Vector2.zero;
         //  rb.angularVelocity = 0;
-
     }
-
 
     public void UpdateStatePos()  //M: determina in quale settore di campo si trova  la palla
     {
@@ -294,7 +268,6 @@ public class Ball : MonoBehaviour
          else if (GameObject.Find("LimitMidRight ").transform.position.x < transform.position.x && GameObject.Find("LimitRight").transform.position.x >= transform.position.x)
              statePos = 3;
          else statePos = -1;*/
-
     }
 
     public void UpdateSideBall()  //M:aggiorna la posione della palla rispetto la metà campo
@@ -307,7 +280,6 @@ public class Ball : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
 
     {
-
         isShooted = false;
         if (collision.gameObject.CompareTag("Side"))
         {
@@ -323,8 +295,6 @@ public class Ball : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
-
         if (collision.CompareTag("EndRed") && inGameFlag)
         {
             inGameFlag = false;
@@ -334,7 +304,6 @@ public class Ball : MonoBehaviour
         {
             inGameFlag = false;
             Invoke("SetYellowSideBall", 1.5f);
-
         }
     }
 
@@ -356,12 +325,12 @@ public class Ball : MonoBehaviour
         transform.position = GameObject.Find("RedSideBall").transform.position;
         inGameFlag = true;
     }
+
     public void SetYellowSideBall()
     {
         transform.position = GameObject.Find("YellowSideBall").transform.position;
         inGameFlag = true;
     }
-
 
     public bool CheckBallIsPlayable(float limitVel) //controlla se la palla è giocabile sotto un limite di velocità
     {
@@ -376,9 +345,7 @@ public class Ball : MonoBehaviour
         }
         else
             return false;
-
     }
-
 
     public enum EStatoPalla
     {
@@ -387,11 +354,5 @@ public class Ball : MonoBehaviour
         LiberaCentro,
         InPossesso,
         Fuori
-
     }
-
-
-
-
-
 }

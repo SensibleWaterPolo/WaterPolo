@@ -17,7 +17,6 @@ public class Battle : MonoBehaviour
     public int idWin;
     public float angle;
 
-
     private void Awake()
     {
         start = false;
@@ -27,16 +26,16 @@ public class Battle : MonoBehaviour
         idWin = -1;
         speed = 40;
     }
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         WhoWin();
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
     }
 
     private void FixedUpdate()
@@ -48,9 +47,7 @@ public class Battle : MonoBehaviour
              {
                UpdateAngle();
              }
-
          }*/
-
     }
 
     public void CreateBattle(Player att, Player def)
@@ -66,8 +63,6 @@ public class Battle : MonoBehaviour
         def.transform.parent = transform;
 
         start = true;
-
-
     }
 
     public void UpdateAngle()
@@ -82,8 +77,6 @@ public class Battle : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(transform.rotation, wantedRotation, speedRot);
             att.angleBoaZ = transform.rotation.z;
             att.angleBoaW = transform.rotation.w;
-
-
         }
     }
 
@@ -109,12 +102,10 @@ public class Battle : MonoBehaviour
         def.marcaFlag = false;
 
         Destroy(this.gameObject);
-
     }
 
     public void WhoWin()
     {
-
         int newId;
         if (Random.Range(0, 100) < 40)
         {
@@ -127,20 +118,15 @@ public class Battle : MonoBehaviour
             idWin = newId;
             if (idWin == 0)
             {
-
                 degree = 180;
             }
             else
             {
-
                 degree = 0;
             }
             if (Random.Range(0, 100) > 80)
                 speed *= -1;
         }
-
-
-
 
         whoWin = false;
     }
@@ -148,9 +134,5 @@ public class Battle : MonoBehaviour
     public void AddClick()
     {
         numclick++;
-
     }
-
-
-
 }
