@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerY1 : Player
 {
@@ -23,27 +21,35 @@ public class PlayerY1 : Player
         cpuFlag = false;
     }
 
-    public override void OnTriggerEnter2D(Collider2D collision)
+    private bool CheckOpponent(string v)
     {
-        base.OnTriggerEnter2D(collision);
-     
-        
-        if (collision.CompareTag("Player"))
-        {
-            Player player = collision.GetComponent<Player>();
-            
-            if (player.idTeam == 1)
-            {
-                bool canFight = CanFight(player.name);
-                bool enemyCanFight = player.CanFight(name);
-               
-                if (prefabFight == null && canFight && enemyCanFight)
-                {
-                    prefabFight = Instantiate(fightManager, new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0), Quaternion.identity);
-                    prefabFight.CreateFight(this, player);
-                }
-            }
-
-        }
+        return true;
     }
+
+
+
+
+    /*  public override void OnTriggerEnter2D(Collider2D collision)
+      {
+          base(collision);
+
+
+          if (collision.CompareTag("Player"))
+          {
+              Player player = collision.GetComponent<Player>();
+
+              if (player.idTeam == 1)
+              {
+                  bool canFight = CanFight(player.name);
+                  bool enemyCanFight = player.CanFight(name);
+
+                  if (prefabFight == null && canFight && enemyCanFight)
+                  {
+                      prefabFight = Instantiate(fightManager, new Vector3((transform.position.x + player.transform.position.x) / 2, (transform.position.y + player.transform.position.y) / 2, 0), Quaternion.identity);
+                      prefabFight.CreateFight(this, player);
+                  }
+              }
+
+          }
+      }*/
 }

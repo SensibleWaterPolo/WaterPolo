@@ -285,15 +285,15 @@ public class Ball : MonoBehaviour
 
     public void UpdateStatePos()  //M: determina in quale settore di campo si trova  la palla
     {
-        if (!freeFlag)
-            statePos = 0;
-        else if (GameObject.Find("LimitLeft").transform.position.x < transform.position.x && GameObject.Find("LimitMidLeft").transform.position.x >= transform.position.x)
-            statePos = 1;
-        else if (GameObject.Find("LimitMidLeft").transform.position.x < transform.position.x && GameObject.Find("LimitMidRight ").transform.position.x >= transform.position.x)
-            statePos = 2;
-        else if (GameObject.Find("LimitMidRight ").transform.position.x < transform.position.x && GameObject.Find("LimitRight").transform.position.x >= transform.position.x)
-            statePos = 3;
-        else statePos = -1;
+        /* if (!freeFlag)
+             statePos = 0;
+         else if (GameObject.Find("LimitLeft").transform.position.x < transform.position.x && GameObject.Find("LimitMidLeft").transform.position.x >= transform.position.x)
+             statePos = 1;
+         else if (GameObject.Find("LimitMidLeft").transform.position.x < transform.position.x && GameObject.Find("LimitMidRight ").transform.position.x >= transform.position.x)
+             statePos = 2;
+         else if (GameObject.Find("LimitMidRight ").transform.position.x < transform.position.x && GameObject.Find("LimitRight").transform.position.x >= transform.position.x)
+             statePos = 3;
+         else statePos = -1;*/
 
     }
 

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using TMPro.Examples;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -50,7 +47,7 @@ public class GameCore : MonoBehaviour
     void Update()
     {
         if (isPlay)
-        {    
+        {
             if (timeCurrentMatch > 1)
             {
                 time = Time.time - timeStart;
@@ -63,7 +60,7 @@ public class GameCore : MonoBehaviour
                     stopShoot = true;
 
                 }
-                else 
+                else
                 {
                     stopShoot = false;
                 }
@@ -77,7 +74,7 @@ public class GameCore : MonoBehaviour
                     secExpired = true;
 
                     startSec = false;
-                 
+
                 }
 
                 UpdateTimeGame();
@@ -90,11 +87,12 @@ public class GameCore : MonoBehaviour
                 Time.timeScale = 0;
 
             }
-        } else if (!isPlay && timeCurrentMatch <= 1) 
-        {         
-          
-                ShowFinalPanel();
-            
+        }
+        else if (!isPlay && timeCurrentMatch <= 1)
+        {
+
+            ShowFinalPanel();
+
         }
 
 
@@ -106,7 +104,7 @@ public class GameCore : MonoBehaviour
         timeStart = Time.time;
         Referee.current.SetArmFront();
         AudioController.current.DoFischio();
-        
+
 
     }
     public void Stop()
@@ -119,44 +117,44 @@ public class GameCore : MonoBehaviour
 
     public int GetMin(float time)
     {
-        return Mathf.FloorToInt (time / 60);
-        
+        return Mathf.FloorToInt(time / 60);
+
     }
-    public int GetSec(float time) 
+    public int GetSec(float time)
     {
-        
-    return Mathf.FloorToInt(time % 60);
-    
+
+        return Mathf.FloorToInt(time % 60);
+
     }
 
-    public void RestartTimeAction() 
+    public void RestartTimeAction()
     {
         secCurrent = secAction;
         StartSecond();
         Invoke("WakeUpPlayer", 0.5f);
-       
+
     }
 
-    public void UpdateTimeGame() 
+    public void UpdateTimeGame()
     {
         int min = GetMin(timeCurrentMatch);
         int sec = GetSec(timeCurrentMatch);
-        if (sec <10 )
+        if (sec < 10)
         {
-            GameObject.Find("Time").GetComponent<Text>().text = min + ":0"+sec; 
+            GameObject.Find("Time").GetComponent<Text>().text = min + ":0" + sec;
         }
         else
         {
             GameObject.Find("Time").GetComponent<Text>().text = min + ":" + sec;
         }
-        GameObject.Find("Seconds").GetComponent<Text>().text = Mathf.FloorToInt(secCurrent) +"' ";
-        
+        GameObject.Find("Seconds").GetComponent<Text>().text = Mathf.FloorToInt(secCurrent) + "' ";
+
     }
 
     public void ShowFinalPanel()
     {
         finalMenu.SetActive(true);
-        int golY = int.Parse( GameObject.Find("HomeScore").GetComponent<Text>().text);
+        int golY = int.Parse(GameObject.Find("HomeScore").GetComponent<Text>().text);
         int golR = int.Parse(GameObject.Find("AwayScore").GetComponent<Text>().text);
 
         if (golY > golR)
@@ -171,17 +169,17 @@ public class GameCore : MonoBehaviour
             GameObject.Find("TestoFinale").GetComponent<Text>().text = " You Suck!!! ";
 
         }
-        else 
+        else
         {
             GameObject.Find("TestoFinale").GetComponent<Text>().text = " Bored Match ";
         }
 
-            
+
     }
     public void ShowGoalAnimation()
     {
         goalAnimation.SetActive(true);
- 
+
     }
     public void DeleteGoalAnimation()
     {
@@ -190,51 +188,51 @@ public class GameCore : MonoBehaviour
     }
     public void UpdateSecond()
     {
-        
-       
+
+
         secCurrent = secAction - (Time.time - secStart);
-        
+
     }
 
     public void StartSecond()
     {
-        secStart= Time.time;
+        secStart = Time.time;
         startSec = true;
         secExpired = false;
-       
+
     }
 
     public void ShootPlayer()
     {
-        Player player = Ball.current.player;
-        if (player != null)
-        {
-            if (player.keep && !player.loadShoot)
-            {
+        /*   Player player = Ball.current.player;
+           if (player != null)
+           {
+               if (player.keep && !player.loadShoot)
+               {
 
-                player.LoadShoot(player.posBallEndAction, false, 0);
+                   player.LoadShoot(player.posBallEndAction, false, 0);
 
-            }
-            else if (player.keepBoa && !player.loadShoot)
-            {
-                Debug.Log("Sono una boa e devo provare a tirare  fuori");
+               }
+               else if (player.keepBoa && !player.loadShoot)
+               {
+                   Debug.Log("Sono una boa e devo provare a tirare  fuori");
 
-                if (IA.current.BoaWatchGk(player.idTeam))
+                   if (IA.current.BoaWatchGk(player.idTeam))
 
-                {
-                    player.LoadShoot(player.posBallEndAction, false, 3);
-                }
-                else
-                {
-                    player.LoadShoot(player.posBallEndAction, false, 1);
+                   {
+                       player.LoadShoot(player.posBallEndAction, false, 3);
+                   }
+                   else
+                   {
+                       player.LoadShoot(player.posBallEndAction, false, 1);
 
-                }
+                   }
 
-            }
-        }
-        startSec = false;
+               }
+           }
+           startSec = false;*/
     }
-    public void ShootGk() 
+    public void ShootGk()
     {
         if (Ball.current.gk != null)
         {
@@ -247,16 +245,16 @@ public class GameCore : MonoBehaviour
 
             }
         }
-            startSec = false;
-        
+        startSec = false;
+
 
     }
     public void Fischia()
     {
         AudioController.current.DoFischio();
-      
+
         PosPlayerMng.curret.SetAllBicy();
-         Ball.current.inGameFlag = false;
+        Ball.current.inGameFlag = false;
         if (Ball.current.idTeam == 1)
         {
             Referee.current.SetArmRight();
@@ -270,7 +268,7 @@ public class GameCore : MonoBehaviour
 
     }
 
-    public void KeepToGk() 
+    public void KeepToGk()
     {
         if (Ball.current.idTeam == 1)
         {
@@ -278,26 +276,27 @@ public class GameCore : MonoBehaviour
 
 
         }
-        else {
+        else
+        {
 
             GameObject.Find("RedGK").GetComponent<GoalKeeper>().SetKeep();
         }
         Ball.current.inGameFlag = true;
-    
+
     }
 
-    public void AddPlayerStun(Player player) 
+    public void AddPlayerStun(Player player)
     {
         this.stunPlayer.Add(player);
-    
+
     }
 
-    public void WakeUpPlayer() 
+    public void WakeUpPlayer()
     {
-        for (int i = 0; i < stunPlayer.Count; i++) 
-        {  
+        for (int i = 0; i < stunPlayer.Count; i++)
+        {
             stunPlayer[i].SetBicy();
-           
+
         }
         stunPlayer.Clear();
     }

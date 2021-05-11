@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerY6 : Player
 {
@@ -17,38 +15,38 @@ public class PlayerY6 : Player
         posStart = GameObject.Find("PosStartY6").transform.position;
         posCounter = GameObject.Find("PosCounterAttY6").transform.position;
         posBallEndAction = GameObject.Find("UpSx").transform.position;
-        if (CheckOpponent("PlayerR3"))
-            opponent = GameObject.Find("PlayerR3").GetComponent<Player>();
+        /*  if (CheckOpponent("PlayerR3"))
+              opponent = GameObject.Find("PlayerR3").GetComponent<Player>();*/
         boaFlag = true;
         armDx = true;
         cpuFlag = false;
     }
 
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
+    /* public override void FixedUpdate()
+     {
+         base.FixedUpdate();
 
-    }
+     }*/
 
-    public override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
-        if (collision.CompareTag("Ball"))
-        {
-            if (collision.CompareTag("Ball") && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && marcaFlag)
-            {
-                Debug.Log(name+"prendo possesso"+Time.time);
-                SetKeepBoa();
-                // SetBallBoa();
+    /*  public override void OnTriggerEnter2D(Collider2D collision)
+      {
+          base.OnTriggerEnter2D(collision);
+          if (collision.CompareTag("Ball"))
+          {
+              if (collision.CompareTag("Ball") && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && marcaFlag)
+              {
+                  Debug.Log(name+"prendo possesso"+Time.time);
+                  SetKeepBoa();
+                  // SetBallBoa();
 
-            }
-        }
+              }
+          }
 
-       
-    }
 
-    public override void OnTriggerStay2D(Collider2D collision)
-    {
-        base.OnTriggerStay2D(collision);
-    }
+      }*/
+
+    /*   public override void OnTriggerStay2D(Collider2D collision)
+       {
+           base.OnTriggerStay2D(collision);
+       }*/
 }

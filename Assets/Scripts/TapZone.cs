@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class TapZone : MonoBehaviour
 {
@@ -14,15 +12,15 @@ public class TapZone : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (player.keep)
-            GetComponent<CircleCollider2D>().enabled = true;
-        else
-            GetComponent<CircleCollider2D>().enabled = false;
+        /* if (player.keep)
+             GetComponent<CircleCollider2D>().enabled = true;
+         else
+             GetComponent<CircleCollider2D>().enabled = false;*/
     }
 }

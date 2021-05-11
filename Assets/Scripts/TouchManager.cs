@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class TouchManager : MonoBehaviour
 {
@@ -17,7 +13,7 @@ public class TouchManager : MonoBehaviour
 
     private float minShoot;
     private float maxShoot;
-    private int layerMaskPlayer;  
+    private int layerMaskPlayer;
     private int layerMaskFight = 1 << 12;
     private int layerMaskGk;
     private bool shootFlag;
@@ -35,19 +31,19 @@ public class TouchManager : MonoBehaviour
     private void Awake()
     {
         loadShoot = false;
-        okShoot = true;       
-        minShoot= GameObject.Find("ShootLimitDown").transform.position.y; //M: limite inferiore e superiore che contraddistingue
-        maxShoot= GameObject.Find("ShootLimitUp").transform.position.y;//un passaggio da un tiro
-        layerMaskPlayer= 1 << LayerMask.NameToLayer("Player");
+        okShoot = true;
+        minShoot = GameObject.Find("ShootLimitDown").transform.position.y; //M: limite inferiore e superiore che contraddistingue
+        maxShoot = GameObject.Find("ShootLimitUp").transform.position.y;//un passaggio da un tiro
+        layerMaskPlayer = 1 << LayerMask.NameToLayer("Player");
         layerMaskGk = 1 << LayerMask.NameToLayer("GK");
-    shootFlag = false;
+        shootFlag = false;
         swimKeep = false;
     }
     private void Start()
     {
-        
-         }
-    void Update()
+
+    }
+    /*void Update()
     {
         numTouch = Input.touchCount;
 
@@ -385,19 +381,19 @@ public class TouchManager : MonoBehaviour
                
             }
         }
-    }
+    }*/
 
-    public void SpawnSignal(GameObject obj) 
+    public void SpawnSignal(GameObject obj)
     {
         shootSignalPrefab = Instantiate(shootSignal, obj.transform.position, Quaternion.identity);
         shootSignalPrefab.transform.parent = obj.transform;
     }
 
-    public void DestroySignal() 
+    public void DestroySignal()
     {
         Destroy(shootSignalPrefab.gameObject);
     }
-    
+
 
     public void Exit()
     {

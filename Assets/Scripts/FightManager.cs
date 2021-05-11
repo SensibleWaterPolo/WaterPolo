@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FightManager : MonoBehaviour
 {
@@ -23,37 +21,37 @@ public class FightManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
         numClickP1 = 0;
         numClickP2 = 0;
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (start) 
+        if (start)
         {
-            playerY.SetBicy();
-            playerR.SetBicy();
-        
+            //    playerY.SetBicy();
+            //    playerR.SetBicy();
+
         }
     }
 
     public int WhoWinVSCPU()
     {
-        int numClickCpu =(int) Random.Range(playerR.clickCPU.x,playerR.clickCPU.y);
+        int numClickCpu = (int)Random.Range(playerR.clickCPU.x, playerR.clickCPU.y);
 
-        if (numClickP1 + playerY.stamina> playerR.stamina + numClickCpu)
+        if (numClickP1 + playerY.stamina > playerR.stamina + numClickCpu)
         {
-            Debug.Log("Click cpu:"+numClickCpu+ "p1: "+( numClickP1 + playerY.stamina) +" p2: "+( playerR.stamina + numClickCpu));
+            Debug.Log("Click cpu:" + numClickCpu + "p1: " + (numClickP1 + playerY.stamina) + " p2: " + (playerR.stamina + numClickCpu));
             return 0;
 
         }
         else
-         if (numClickP1 +playerY.stamina < playerR.stamina + numClickCpu)
+         if (numClickP1 + playerY.stamina < playerR.stamina + numClickCpu)
         {
-            Debug.Log("Click cpu:" + numClickCpu + "p1: " + (numClickP1 + playerY.stamina) + " p2: " +( playerR.stamina + numClickCpu));
+            Debug.Log("Click cpu:" + numClickCpu + "p1: " + (numClickP1 + playerY.stamina) + " p2: " + (playerR.stamina + numClickCpu));
             return 1;
 
         }
@@ -67,21 +65,21 @@ public class FightManager : MonoBehaviour
         return -1;
     }
 
-    public int WhoWinVSP2() 
+    public int WhoWinVSP2()
     {
-        if (numClickP1+playerY.stamina > numClickP2+playerR.stamina)
+        if (numClickP1 + playerY.stamina > numClickP2 + playerR.stamina)
         {
             return 0;
 
         }
         else
-            if (numClickP1+playerY.stamina < numClickP2+playerR.stamina)
+            if (numClickP1 + playerY.stamina < numClickP2 + playerR.stamina)
         {
             return 1;
 
         }
         else
-           if (numClickP1+playerY.stamina == numClickP2+playerR.stamina)
+           if (numClickP1 + playerY.stamina == numClickP2 + playerR.stamina)
         {
             int id = Random.Range(0, 1);
             return id;
@@ -89,7 +87,7 @@ public class FightManager : MonoBehaviour
         return -1;
     }
 
-    public void SolveFightVsCPU() 
+    public void SolveFightVsCPU()
     {
         solve = true;
         start = false;
@@ -98,9 +96,9 @@ public class FightManager : MonoBehaviour
         if (id == 0)
         {
             playerR.SetStun();
-            Debug.Log(playerY.name+" ->WIN "+playerR+"->LOSE");
+            Debug.Log(playerY.name + " ->WIN " + playerR + "->LOSE");
         }
-        else 
+        else
         {
             Debug.Log(playerR.name + " ->WIN " + playerY + "->LOSE");
             playerY.SetStun();
@@ -109,31 +107,31 @@ public class FightManager : MonoBehaviour
         playerR.SetFightFlag(false);
         playerY.ShowPlayer();
         playerR.ShowPlayer();
-        Destroy(this.gameObject);    
+        Destroy(this.gameObject);
     }
     public void SolveFightVsP2()
     {
         solve = true;
         int id = WhoWinVSP2();
-        
+
         if (id == 0)
         {
             playerR.SetStun();
-        
+
         }
         else
         {
             playerY.SetStun();
-            
+
         }
-       
+
         Destroy(this.gameObject);
     }
 
-    public void P1AddClickLocal() 
+    public void P1AddClickLocal()
     {
         numClickP1++;
-        Debug.Log("Click: "+numClickP1);
+        Debug.Log("Click: " + numClickP1);
     }
     public void P2AddClickLocal()
     {
@@ -141,17 +139,18 @@ public class FightManager : MonoBehaviour
     }
 
     public void CreateFight(Player pY, Player pR)
-    {   playerY=pY;
+    {
+        playerY = pY;
         playerR = pR;
         pY.HidePlayer();
         pR.HidePlayer();
-        
+
         playerY.SetFightFlag(true);
         playerR.SetFightFlag(true);
-        playerR.SetBicy();
-        playerY.SetBicy();
-      
-        
+        //  playerR.SetBicy();
+        //  playerY.SetBicy();
+
+
         playerR.transform.position = transform.position;
         playerY.transform.position = transform.position;
         start = true;
@@ -166,8 +165,8 @@ public class FightManager : MonoBehaviour
 
     }
 
-    
-        
+
+
 
 
 }

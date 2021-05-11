@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GkRed : GoalKeeper
 {
@@ -19,7 +17,7 @@ public class GkRed : GoalKeeper
         idTeam = 1;
         cpuFlag = true;
     }
-   
+
     public override void SaveUP(bool save)
     {
         base.SaveUP(save);
@@ -50,7 +48,7 @@ public class GkRed : GoalKeeper
         UpdateDist_PosBall();
         if (transform.position != finalPos)
             arrived = false;
-        if (!Ball.current.fieldYellow && Ball.current.idTeam!=idTeam && Ball.current.idTeam > -1)
+        if (!Ball.current.fieldYellow && Ball.current.idTeam != idTeam && Ball.current.idTeam > -1)
         {
             if (-8 <= posXBall && posXBall <= 8)
                 finalPos = posMid;
@@ -69,80 +67,80 @@ public class GkRed : GoalKeeper
         Player pR5 = GameObject.Find("PlayerR5").GetComponent<Player>();
         Player pr1 = GameObject.Find("PlayerR1").GetComponent<Player>();
         Player pR3 = GameObject.Find("PlayerR3").GetComponent<Player>();
-       
-          /*   if (pr1.counterAttFlag && pR5.counterAttFlag)
-             {
-                       if (Random.value > 0.5)
-                        {
-                            destBall = GameObject.Find("PosCounterAttR5").transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall);
-                            return true;
-                        }
-                        else
-                        {
-                            destBall = GameObject.Find("PosCounterAttR1").transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall);
-                            return true;
-                        }
-             }
 
-                    else if (pR5.counterAttFlag)
-                    {
-                        destBall = GameObject.Find("PosCounterAttR5").transform.position;
-                        Utility.RotateObjToPoint(this.gameObject, destBall);
-                        this.LoadShoot(destBall);
-                        return true;
-                    }
-                    else if (pr1.counterAttFlag)
-                    {
-                        destBall = GameObject.Find("PosCounterAttR1").transform.position;
-                        Utility.RotateObjToPoint(this.gameObject, destBall);
-                        this.LoadShoot(destBall);
-                        return true;
-                    }
-                        else*/ if (pR3.arrivedFlagAtt)
-                        {
-                        destBall = pR3.transform.position;
-                        Utility.RotateObjToPoint(this.gameObject, destBall);
-                        this.LoadShoot(destBall);
-                         }
-                         else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
-                         {
-                          if (Random.value > 0.5)
-                        {
-                            destBall = pR5.transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall);
-                            return true;
+        /*   if (pr1.counterAttFlag && pR5.counterAttFlag)
+           {
+                     if (Random.value > 0.5)
+                      {
+                          destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                          Utility.RotateObjToPoint(this.gameObject, destBall);
+                          this.LoadShoot(destBall);
+                          return true;
+                      }
+                      else
+                      {
+                          destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                          Utility.RotateObjToPoint(this.gameObject, destBall);
+                          this.LoadShoot(destBall);
+                          return true;
+                      }
+           }
 
-                        }
-                        else
-                        {
-                            destBall = pr1.transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall);
-                            return true;
-                        }
-                    }
-                    
-                         else if (pR5.arrivedFlagAtt)
-                    {
-                        destBall = pR5.transform.position;
-                        Utility.RotateObjToPoint(this.gameObject, destBall);
-                        this.LoadShoot(destBall);
-                        return true;
-                    }
-                    else if (pr1.arrivedFlagAtt)
-                    {
-                        destBall = pr1.transform.position;
-                        Utility.RotateObjToPoint(this.gameObject, destBall);
-                        this.LoadShoot(destBall);
-                        return true;
-                    }
-                 
-        
+                  else if (pR5.counterAttFlag)
+                  {
+                      destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                      Utility.RotateObjToPoint(this.gameObject, destBall);
+                      this.LoadShoot(destBall);
+                      return true;
+                  }
+                  else if (pr1.counterAttFlag)
+                  {
+                      destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                      Utility.RotateObjToPoint(this.gameObject, destBall);
+                      this.LoadShoot(destBall);
+                      return true;
+                  }
+                      else if (pR3.arrivedFlagAtt)
+                      {
+                      destBall = pR3.transform.position;
+                      Utility.RotateObjToPoint(this.gameObject, destBall);
+                      this.LoadShoot(destBall);
+                       }
+                       else if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+                       {
+                        if (Random.value > 0.5)
+                      {
+                          destBall = pR5.transform.position;
+                          Utility.RotateObjToPoint(this.gameObject, destBall);
+                          this.LoadShoot(destBall);
+                          return true;
+
+                      }
+                      else
+                      {
+                          destBall = pr1.transform.position;
+                          Utility.RotateObjToPoint(this.gameObject, destBall);
+                          this.LoadShoot(destBall);
+                          return true;
+                      }
+                  }
+
+                       else if (pR5.arrivedFlagAtt)
+                  {
+                      destBall = pR5.transform.position;
+                      Utility.RotateObjToPoint(this.gameObject, destBall);
+                      this.LoadShoot(destBall);
+                      return true;
+                  }
+                  else if (pr1.arrivedFlagAtt)
+                  {
+                      destBall = pr1.transform.position;
+                      Utility.RotateObjToPoint(this.gameObject, destBall);
+                      this.LoadShoot(destBall);
+                      return true;
+                  }
+
+      */
         return hasChoose;
     }
 }

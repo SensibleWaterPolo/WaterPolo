@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerY3 : Player
 {
     public Battle battle;
     public Battle battlePrefab;
-    
+
     // Start is called before the first frame update
     public override void Awake()
     {
@@ -22,46 +20,46 @@ public class PlayerY3 : Player
         posBallEndAction = GameObject.Find("UppDx").transform.position;
         if (CheckOpponent("PlayerR6"))
             opponent = GameObject.Find("PlayerR6").GetComponent<Player>();
-         armDx = false;
+        armDx = false;
         cpuFlag = false;
     }
 
-    public override void OnTriggerStay2D(Collider2D collision)
-    {
-        base.OnTriggerStay2D(collision);
-        if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && !opponent.swimKeep && idBall==3)
-        {
-           
-            battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
-            battlePrefab.CreateBattle(opponent, this);
-        }
+    /*  public override void OnTriggerStay2D(Collider2D collision)
+      {
+          base.OnTriggerStay2D(collision);
+          if (collision.gameObject.name == opponent.name && opponent.arrivedFlagAtt && arrivedFlagDef && !marcaFlag && !keep && !opponent.keep && !opponent.swimKeep && idBall==3)
+          {
 
-        GameObject obj = collision.gameObject;
+              battlePrefab = Instantiate(battle, opponent.transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+              battlePrefab.CreateBattle(opponent, this);
+          }
 
-        if (obj.tag == "Ball" && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(20) && !marcaFlag)
-        {
+          GameObject obj = collision.gameObject;
 
-            Ball.current.freeFlag = false;
-            SetKeep();
+          if (obj.tag == "Ball" && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(20) && !marcaFlag)
+          {
 
-        }
+              Ball.current.freeFlag = false;
+              SetKeep();
 
-    }
-    public override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
+          }
 
-        if (collision.CompareTag("Ball") && !keep && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(60) && !Ball.current.shootFlag && marcaFlag)
-        {
-            if (Ball.current.idTeam != idTeam)
-            {
+      }
+      public override void OnTriggerEnter2D(Collider2D collision)
+      {
+          base.OnTriggerEnter2D(collision);
 
-                GameCore.current.RestartTimeAction();
-            }
-            Ball.current.freeFlag = false;
-            SetKeep();
+          if (collision.CompareTag("Ball") && !keep && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(60) && !Ball.current.shootFlag && marcaFlag)
+          {
+              if (Ball.current.idTeam != idTeam)
+              {
 
-        }
-        
-    }
+                  GameCore.current.RestartTimeAction();
+              }
+              Ball.current.freeFlag = false;
+              SetKeep();
+
+          }
+
+      }*/
 }

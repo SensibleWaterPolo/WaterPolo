@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Xml;
-using UnityEditor;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Battle : MonoBehaviour
 {
@@ -20,7 +16,7 @@ public class Battle : MonoBehaviour
     public int speed; //M: velocità rotazione
     public int idWin;
     public float angle;
-      
+
 
     private void Awake()
     {
@@ -40,24 +36,24 @@ public class Battle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
     {
-        if (start)
-        {
-            CheckId();
-            if (!att.keepBoa)
-            {
-              UpdateAngle();
-            }
-            
-        }
-        
+        /* if (start)
+         {
+             CheckId();
+             if (!att.keepBoa)
+             {
+               UpdateAngle();
+             }
+
+         }*/
+
     }
 
-    public void CreateBattle(Player att, Player def) 
+    public void CreateBattle(Player att, Player def)
     {
         this.att = att;
         this.def = def;
@@ -70,90 +66,91 @@ public class Battle : MonoBehaviour
         def.transform.parent = transform;
 
         start = true;
-        
-        
+
+
     }
 
     public void UpdateAngle()
     {
-        if (!Ball.current.isShooted && !Ball.current.freeFlag )
+        if (!Ball.current.isShooted && !Ball.current.freeFlag)
         {
             Vector3 direction = Ball.current.transform.position - transform.position;
             float speedRot = speed * Time.deltaTime;
-            float angle = Utility.GetAngleBetweenObjAB(this.gameObject,Ball.current.gameObject);
-            Quaternion wantedRotation = Quaternion.Euler(0, 0, angle+degree);
-            
-            transform.rotation= Quaternion.RotateTowards(transform.rotation, wantedRotation,speedRot );
+            float angle = Utility.GetAngleBetweenObjAB(this.gameObject, Ball.current.gameObject);
+            Quaternion wantedRotation = Quaternion.Euler(0, 0, angle + degree);
+
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, wantedRotation, speedRot);
             att.angleBoaZ = transform.rotation.z;
             att.angleBoaW = transform.rotation.w;
-            
-                                 
+
+
         }
     }
 
-        public void CheckId()
+    public void CheckId()
 
     {
-        if (!whoWin) 
-        {
-            whoWin = true;
-            Invoke("WhoWin",3f);
-        }
-        
-        if (att.idBall==3 || def.idBall==2 || att.swim || def.swim || att.keep || def.keep)
-            StopBattle();
+        /* if (!whoWin)
+         {
+             whoWin = true;
+             Invoke("WhoWin", 3f);
+         }
+
+         if (att.idBall == 3 || def.idBall == 2 || att.swim || def.swim || att.keep || def.keep)
+             StopBattle();*/
     }
 
-    public void StopBattle() 
+    public void StopBattle()
     {
         start = false;
         att.transform.parent = null;
         def.transform.parent = null;
         att.marcaFlag = false;
         def.marcaFlag = false;
-       
-         Destroy(this.gameObject);
+
+        Destroy(this.gameObject);
 
     }
 
-    public void WhoWin() 
+    public void WhoWin()
     {
-        
+
         int newId;
-        if (Random.Range(0, 100) < 40) 
+        if (Random.Range(0, 100) < 40)
         {
-            newId = 0; }
-        else newId = 1; 
+            newId = 0;
+        }
+        else newId = 1;
 
         if (newId != idWin)
         {
             idWin = newId;
             if (idWin == 0)
             {
-               
+
                 degree = 180;
             }
-            else 
+            else
             {
-            
+
                 degree = 0;
             }
-            if (Random.Range(0,100) > 80)
+            if (Random.Range(0, 100) > 80)
                 speed *= -1;
         }
-       
 
-       
+
+
 
         whoWin = false;
     }
 
-    public void AddClick() 
+    public void AddClick()
     {
         numclick++;
-        
+
     }
 
-   
+
 
 }

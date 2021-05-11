@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerR6 : Player
 {
@@ -23,119 +21,122 @@ public class PlayerR6 : Player
         armDx = true;
         cpuFlag = true;
     }
-    public override void FixedUpdate()
-    {
-        base.FixedUpdate();
-        if (marcaFlag) {
-            if (keepBoa) { GetComponent<CircleCollider2D>().enabled = true; }
-            else {
-                GetComponent<CircleCollider2D>().enabled = true;
-            }
-        }
-       
-    }
+    /* public override void FixedUpdate()
+     {
+         base.FixedUpdate();
+         if (marcaFlag)
+         {
+             if (keepBoa) { GetComponent<CircleCollider2D>().enabled = true; }
+             else
+             {
+                 GetComponent<CircleCollider2D>().enabled = true;
+             }
+         }
 
-    public override void OnTriggerEnter2D(Collider2D collision)
-    {
-        base.OnTriggerEnter2D(collision);
-        if (collision.CompareTag("Ball"))
-        {
-            if (collision.CompareTag("Ball") && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && marcaFlag)
-            {
-                
-                SetKeepBoa();
-              
-            }
-        }
+     }
 
-    }
+     /*public override void OnTriggerEnter2D(Collider2D collision)
+     {
+         base.OnTriggerEnter2D(collision);
+         if (collision.CompareTag("Ball"))
+         {
+             if (collision.CompareTag("Ball") && !keep && !keepBoa && !swimKeep && !loadShoot && Ball.current.CheckBallIsPlayable(4) && marcaFlag)
+             {
 
-    public override void OnTriggerStay2D(Collider2D collision)
-    {
-        base.OnTriggerStay2D(collision);
-    }
+                 SetKeepBoa();
 
-    public override bool PlayerCpu()
-    {
-        bool hasChoose = false;
-        Vector3 destBall = Vector3.zero;
-        int idZone = IA.current.ZoneBall(this);
-        Player pR5 = GameObject.Find("PlayerR5").GetComponent<Player>();
-        Player pr1 = GameObject.Find("PlayerR1").GetComponent<Player>();
-        Player pR3 = GameObject.Find("PlayerR3").GetComponent<Player>();
-        bool shoot = IA.current.DecisionShoot(this);
-      //  Debug.Log(name + " decisione Tiro?: " + shoot);
+             }
+         }
 
-        if (shoot) //Tiro in porta
-        {
-            int idShoot = 0;
-          //  Debug.Log(name + " Decido di tirare");
-         if (!marcaFlag)
-        {
-                if (GameCore.current.levelCPUHard)
-                {
-                    destBall = IA.current.ShootHardR3();
-                }
-                else
-                {
-                   // destBall = IA.current.ShootNormalR3();
-                }
-                Utility.RotateObjToPoint(this.gameObject, destBall);
-                this.LoadShoot(destBall, shoot, idShoot);
-                idDecisionCPU = 0;
-                return true;
+     }*/
+
+    /* public override void OnTriggerStay2D(Collider2D collision)
+     {
+         base.OnTriggerStay2D(collision);
+     }*/
+
+    /*  public override bool PlayerCpu()
+      {
+          bool hasChoose = false;
+          Vector3 destBall = Vector3.zero;
+          int idZone = IA.current.ZoneBall(this);
+          Player pR5 = GameObject.Find("PlayerR5").GetComponent<Player>();
+          Player pr1 = GameObject.Find("PlayerR1").GetComponent<Player>();
+          Player pR3 = GameObject.Find("PlayerR3").GetComponent<Player>();
+          bool shoot = IA.current.DecisionShoot(this);
+          //  Debug.Log(name + " decisione Tiro?: " + shoot);
+
+          if (shoot) //Tiro in porta
+          {
+              int idShoot = 0;
+              //  Debug.Log(name + " Decido di tirare");
+              if (!marcaFlag)
+              {
+                  if (GameCore.current.levelCPUHard)
+                  {
+                      destBall = IA.current.ShootHardR3();
+                  }
+                  else
+                  {
+                      // destBall = IA.current.ShootNormalR3();
+                  }
+                  Utility.RotateObjToPoint(this.gameObject, destBall);
+                  this.LoadShoot(destBall, shoot, idShoot);
+                  idDecisionCPU = 0;
+                  return true;
+              }
+              else
+              {
+                  if (GameCore.current.levelCPUHard)
+                  {
+                      destBall = IA.current.ShootHardR3();
+                  }
+                  else
+                  {
+                      //  destBall = IA.current.ShootNormalR3();
+                  }
+                  int idPosBoa = IA.current.IdPosBoa();
+                  switch (idPosBoa)
+                  {
+
+
+
+                      case 0:
+                          if (destBall.x < 0)
+                          {
+                              idShoot = 2;
+                          }
+                          else if (destBall.x >= 0)
+                          {
+                              idShoot = 1;
+                          }
+
+                          break;
+                      case 1:
+                          idShoot = 3;
+                          break;
+                      case 2:
+                          idShoot = 1;
+                          break;
+                      case 3:
+                          idShoot = 2;
+                          break;
+                  }
+                  this.LoadShoot(destBall, shoot, idShoot);
+                  idDecisionCPU = 1;
+                  return true;
+              }
+
           }
-            else 
-            {
-                if (GameCore.current.levelCPUHard)
-                {
-                    destBall = IA.current.ShootHardR3();
-                }
-                else
-                {
-                  //  destBall = IA.current.ShootNormalR3();
-                }
-                int idPosBoa = IA.current.IdPosBoa();
-                switch (idPosBoa) 
-                {
-
-
-                    
-                    case 0:
-                        if (destBall.x < 0)
-                        {
-                            idShoot = 2;
-                        }
-                        else if (destBall.x >= 0) {
-                            idShoot = 1;
-                        }
-
-                         break;
-                    case 1:
-                        idShoot = 3;
-                       break;
-                    case 2:
-                        idShoot = 1;
-                        break;
-                    case 3:
-                        idShoot = 2;
-                        break;
-                }
-                this.LoadShoot(destBall, shoot, idShoot);
-                idDecisionCPU = 1;
-                return true;
-            }
-            
-        }
-        /*********PASSAGGIO********************/
-        else
+          /*********PASSAGGIO********************/
+    /*    else
         {
-          //  Debug.Log(name + " Decido di passare, sono nella zona " + idZone);
+            //  Debug.Log(name + " Decido di passare, sono nella zona " + idZone);
             switch (idZone)
             {
                 case 0:
 
-                 if (pr1.arrivedFlagCounterAtt && pR5.arrivedFlagCounterAtt)
+                    if (pr1.arrivedFlagCounterAtt && pR5.arrivedFlagCounterAtt)
                     {
                         if (Random.value > 0.5)
                         {
@@ -153,7 +154,7 @@ public class PlayerR6 : Player
                             idDecisionCPU = 3;
                             return true;
                         }
-                  }
+                    }
 
                     else if (pR5.arrivedFlagCounterAtt)
                     {
@@ -211,170 +212,175 @@ public class PlayerR6 : Player
                     break;
                 case 1:
                     {
-                     /*if (pr1.counterAttFlag && pR5.counterAttFlag)
-                        {
-                            if (Random.value > 0.5)
-                            {
-                                destBall = GameObject.Find("PosCounterAttR5").transform.position;
-                                Utility.RotateObjToPoint(this.gameObject, destBall);
-                                this.LoadShoot(destBall, false, 0);
-                                idDecisionCPU = 10;
-                                return true;
-                            }
-                            else
-                            {
-                                destBall = GameObject.Find("PosCounterAttR1").transform.position;
-                                Utility.RotateObjToPoint(this.gameObject, destBall);
-                                this.LoadShoot(destBall, false, 0);
-                                idDecisionCPU = 11;
-                                return true;
-                            }
-                        }
+                        /*if (pr1.counterAttFlag && pR5.counterAttFlag)
+                           {
+                               if (Random.value > 0.5)
+                               {
+                                   destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                                   Utility.RotateObjToPoint(this.gameObject, destBall);
+                                   this.LoadShoot(destBall, false, 0);
+                                   idDecisionCPU = 10;
+                                   return true;
+                               }
+                               else
+                               {
+                                   destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                                   Utility.RotateObjToPoint(this.gameObject, destBall);
+                                   this.LoadShoot(destBall, false, 0);
+                                   idDecisionCPU = 11;
+                                   return true;
+                               }
+                           }
 
-                        else if (pR5.counterAttFlag)
-                        {
-                            destBall = GameObject.Find("PosCounterAttR5").transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 12;
-                            return true;
-                        }
-                        else if (pr1.counterAttFlag)
-                        {
-                            destBall = GameObject.Find("PosCounterAttR1").transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 13;
-                            return true;
-                        }
+                           else if (pR5.counterAttFlag)
+                           {
+                               destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                               Utility.RotateObjToPoint(this.gameObject, destBall);
+                               this.LoadShoot(destBall, false, 0);
+                               idDecisionCPU = 12;
+                               return true;
+                           }
+                           else if (pr1.counterAttFlag)
+                           {
+                               destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                               Utility.RotateObjToPoint(this.gameObject, destBall);
+                               this.LoadShoot(destBall, false, 0);
+                               idDecisionCPU = 13;
+                               return true;
+                           }
 
-                        else*/ if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
-                        {
-                            if (Random.value > 0.5)
-                            {
-                                destBall = pR5.transform.position;
-                                Utility.RotateObjToPoint(this.gameObject, destBall);
-                                this.LoadShoot(destBall, false, 0);
-                                idDecisionCPU = 14;
-                                return true;
-
-                            }
-                            else
-                            {
-                                destBall = pr1.transform.position;
-                                Utility.RotateObjToPoint(this.gameObject, destBall);
-                                this.LoadShoot(destBall, false, 0);
-                                idDecisionCPU = 15;
-                                return true;
-                            }
-                        }
-                        else if (pR5.arrivedFlagAtt)
-                        {
-                            destBall = pR5.transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 16;
-                            return true;
-                        }
-                        else if (pr1.arrivedFlagAtt)
-                        {
-                            destBall = pr1.transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 17;
-                            return true;
-                        }
-                    }
-                    break;
-
-                case 2:
-                    {
-                    /*if (pr1.counterAttFlag && pR5.counterAttFlag)
-                        {
-                            if (Random.value > 0.5)
-                            {
-                                destBall = GameObject.Find("PosCounterAttR5").transform.position;
-                                Utility.RotateObjToPoint(this.gameObject, destBall);
-                                this.LoadShoot(destBall, false, 0);
-                                idDecisionCPU = 18;
-                                return true;
-                            }
-                            else
-                            {
-                                destBall = GameObject.Find("PosCounterAttR1").transform.position;
-                                Utility.RotateObjToPoint(this.gameObject, destBall);
-                                this.LoadShoot(destBall, false, 0);
-                                idDecisionCPU = 19;
-                                return true;
-                            }
-                        }
-
-                        else if (pR5.counterAttFlag)
-                        {
-                            destBall = GameObject.Find("PosCounterAttR5").transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 20;
-                            idDecisionCPU = 21;
-                            return true;
-                        }
-                        else if (pr1.counterAttFlag)
-                        {
-                            destBall = GameObject.Find("PosCounterAttR1").transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 22;
-                            return true;
-                        }
-                        else */if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
-                        {
-                            if (Random.value > 0.5)
-                            {
-                                destBall = pR5.transform.position;
-                                Utility.RotateObjToPoint(this.gameObject, destBall);
-                                this.LoadShoot(destBall, false, 0);
-                                idDecisionCPU = 23;
-                                return true;
-
-                            }
-                            else
-                            {
-                                destBall = pr1.transform.position;
-                                Utility.RotateObjToPoint(this.gameObject, destBall);
-                                this.LoadShoot(destBall, false, 0);
-                                idDecisionCPU = 24;
-                                return true;
-                            }
-                        }
-                        else if (pR5.arrivedFlagAtt)
-                        {
-                            destBall = pR5.transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 25;
-                            return true;
-                        }
-                        else if (pr1.arrivedFlagAtt)
-                        {
-                            destBall = pr1.transform.position;
-                            Utility.RotateObjToPoint(this.gameObject, destBall);
-                            this.LoadShoot(destBall, false, 0);
-                            idDecisionCPU = 26;
-                            return true;
-                        }
-                    }
-                    break;
+                           else*/
+    /*    if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+        {
+            if (Random.value > 0.5)
+            {
+                destBall = pR5.transform.position;
+                Utility.RotateObjToPoint(this.gameObject, destBall);
+                this.LoadShoot(destBall, false, 0);
+                idDecisionCPU = 14;
+                return true;
 
             }
+            else
+            {
+                destBall = pr1.transform.position;
+                Utility.RotateObjToPoint(this.gameObject, destBall);
+                this.LoadShoot(destBall, false, 0);
+                idDecisionCPU = 15;
+                return true;
+            }
         }
-        //   Debug.Log(name + " Non ho preso nessuna decisione");
-        if (!swimKeep && !arrivedFlagAtt)
+        else if (pR5.arrivedFlagAtt)
         {
-            SetSwimKeep();
+            destBall = pR5.transform.position;
+            Utility.RotateObjToPoint(this.gameObject, destBall);
+            this.LoadShoot(destBall, false, 0);
+            idDecisionCPU = 16;
+            return true;
         }
-        selected = false;
-        return hasChoose;
+        else if (pr1.arrivedFlagAtt)
+        {
+            destBall = pr1.transform.position;
+            Utility.RotateObjToPoint(this.gameObject, destBall);
+            this.LoadShoot(destBall, false, 0);
+            idDecisionCPU = 17;
+            return true;
+        }
     }
+    break;
 
+case 2:
+    {
+        /*if (pr1.counterAttFlag && pR5.counterAttFlag)
+            {
+                if (Random.value > 0.5)
+                {
+                    destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                    Utility.RotateObjToPoint(this.gameObject, destBall);
+                    this.LoadShoot(destBall, false, 0);
+                    idDecisionCPU = 18;
+                    return true;
+                }
+                else
+                {
+                    destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                    Utility.RotateObjToPoint(this.gameObject, destBall);
+                    this.LoadShoot(destBall, false, 0);
+                    idDecisionCPU = 19;
+                    return true;
+                }
+            }
 
+            else if (pR5.counterAttFlag)
+            {
+                destBall = GameObject.Find("PosCounterAttR5").transform.position;
+                Utility.RotateObjToPoint(this.gameObject, destBall);
+                this.LoadShoot(destBall, false, 0);
+                idDecisionCPU = 20;
+                idDecisionCPU = 21;
+                return true;
+            }
+            else if (pr1.counterAttFlag)
+            {
+                destBall = GameObject.Find("PosCounterAttR1").transform.position;
+                Utility.RotateObjToPoint(this.gameObject, destBall);
+                this.LoadShoot(destBall, false, 0);
+                idDecisionCPU = 22;
+                return true;
+            }
+            else */
+    /*     if (pR5.arrivedFlagAtt && pr1.arrivedFlagAtt)
+         {
+             if (Random.value > 0.5)
+             {
+                 destBall = pR5.transform.position;
+                 Utility.RotateObjToPoint(this.gameObject, destBall);
+                 this.LoadShoot(destBall, false, 0);
+                 idDecisionCPU = 23;
+                 return true;
+
+             }
+             else
+             {
+                 destBall = pr1.transform.position;
+                 Utility.RotateObjToPoint(this.gameObject, destBall);
+                 this.LoadShoot(destBall, false, 0);
+                 idDecisionCPU = 24;
+                 return true;
+             }
+         }
+         else if (pR5.arrivedFlagAtt)
+         {
+             destBall = pR5.transform.position;
+             Utility.RotateObjToPoint(this.gameObject, destBall);
+             this.LoadShoot(destBall, false, 0);
+             idDecisionCPU = 25;
+             return true;
+         }
+         else if (pr1.arrivedFlagAtt)
+         {
+             destBall = pr1.transform.position;
+             Utility.RotateObjToPoint(this.gameObject, destBall);
+             this.LoadShoot(destBall, false, 0);
+             idDecisionCPU = 26;
+             return true;
+         }
+     }
+     break;
+
+}
+}
+//   Debug.Log(name + " Non ho preso nessuna decisione");
+if (!swimKeep && !arrivedFlagAtt)
+{
+SetSwimKeep();
+}
+selected = false;
+return hasChoose;
+}
+
+private void LoadShoot(Vector3 destBall, bool shoot, int idShoot)
+{
+throw new System.NotImplementedException();
+}*/
 }

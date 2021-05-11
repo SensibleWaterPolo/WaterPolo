@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerR5 : Player
 {
@@ -14,7 +12,7 @@ public class PlayerR5 : Player
         posDef = GameObject.Find("PosDefR5").transform.position;
         posMiddle = GameObject.Find("PosBattutaR5").transform.position;
         posStart = GameObject.Find("PosStartR5").transform.position;
-        posCounter= GameObject.Find("PosCounterAttR5").transform.position;
+        posCounter = GameObject.Find("PosCounterAttR5").transform.position;
         posGoal = GameObject.Find("GolLineYellow").transform.position;
         opponent = GameObject.Find("PlayerY1").GetComponent<Player>();
         posBallEndAction = GameObject.Find("DownDx").transform.position;
@@ -22,37 +20,37 @@ public class PlayerR5 : Player
         cpuFlag = true;
     }
 
-    public override bool PlayerCpu()
-    {
-        bool hasChoose = false;
-        Vector3 destBall = Vector3.zero;
-        int idZone = IA.current.ZoneBall(this);
-        Player pR1 = GameObject.Find("PlayerR1").GetComponent<Player>();
-        Player pR3 = GameObject.Find("PlayerR3").GetComponent<Player>();
-        Player pR6 = GameObject.Find("PlayerR6").GetComponent<Player>();
-        bool shoot = IA.current.DecisionShoot(this);
-     //   Debug.Log(name + " decisione Tiro?: " + shoot);
+    /* public override bool PlayerCpu()
+     {
+         bool hasChoose = false;
+         Vector3 destBall = Vector3.zero;
+         int idZone = IA.current.ZoneBall(this);
+         Player pR1 = GameObject.Find("PlayerR1").GetComponent<Player>();
+         Player pR3 = GameObject.Find("PlayerR3").GetComponent<Player>();
+         Player pR6 = GameObject.Find("PlayerR6").GetComponent<Player>();
+         bool shoot = IA.current.DecisionShoot(this);
+      //   Debug.Log(name + " decisione Tiro?: " + shoot);
 
-        if (shoot) //Tiro in porta
-        {
-          //  Debug.Log(name + " Decido di tirare");
+         if (shoot) //Tiro in porta
+         {
+           //  Debug.Log(name + " Decido di tirare");
 
-            if (GameCore.current.levelCPUHard)
-            {
-                destBall = IA.current.ShootHardR5();
-            }
-            else
-            {
-              //  destBall = IA.current.ShootNormalR5();
-            }
-            Utility.RotateObjToPoint(this.gameObject, destBall);
-            this.LoadShoot(destBall, shoot, 0);
-            idDecisionCPU =0 ;
-          //  Debug.Log("Tiro indirizzato a : " + destBall);
-            return true;
-        }
-        /*********PASSAGGIO********************/
-        else
+             if (GameCore.current.levelCPUHard)
+             {
+                 destBall = IA.current.ShootHardR5();
+             }
+             else
+             {
+               //  destBall = IA.current.ShootNormalR5();
+             }
+             Utility.RotateObjToPoint(this.gameObject, destBall);
+             this.LoadShoot(destBall, shoot, 0);
+             idDecisionCPU =0 ;
+           //  Debug.Log("Tiro indirizzato a : " + destBall);
+             return true;
+         }
+         /*********PASSAGGIO********************/
+    /*    else
         {
           //  Debug.Log(name + " Decido di passare");
             switch (idZone)
@@ -201,5 +199,5 @@ public class PlayerR5 : Player
         selected = false;
         return hasChoose;
     }
-
+    */
 }
