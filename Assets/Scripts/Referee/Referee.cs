@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using TouchScript.Gestures;
+using TouchScript.Gestures.TransformGestures;
+using UnityEngine;
 
 public class Referee : MonoBehaviour
 {
@@ -7,19 +10,49 @@ public class Referee : MonoBehaviour
 
     public static Referee current;
 
+    [SerializeField]
     private RefereeAnimationController _animationController;
+
+    [SerializeField]
+    private TransformGesture _transformGesture;
+
+    [SerializeField]
+    private TapGesture _tapGesture;
+
+    private Vector2 _startTap;
 
     private void Start()
     {
-        _animationController = GetComponent<RefereeAnimationController>();
         _animationController.PlayAnimation(RefereeAnimationController.ERefereeAnim.Watch);
+
+        _transformGesture.TransformStarted += HandleStartTransform;
+        _transformGesture.Transformed += HandleTrasformGesture;
+        _tapGesture.Tapped += HandleTapGesture;
+
+    }
+
+    private void HandleTapGesture(object sender, EventArgs e)
+    {
+        Debug.Log("TAPPED");
+    }
+
+    private void HandleTrasformGesture(object sender, EventArgs e)
+    {
+        transform.position = _transformGesture.GetScreenPositionHitData().Point;
+
+
+
+    }
+
+    private void HandleStartTransform(object sender, EventArgs e)
+    {
+        _startTap = _transformGesture.ScreenPosition;
 
     }
 
     // Update is called once per frame
     private void Update()
     {
-
     }
 
     /* public void UpdatePos()

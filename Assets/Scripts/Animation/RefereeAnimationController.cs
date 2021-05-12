@@ -1,10 +1,11 @@
 using UnityEngine;
 using UnityEngine.Playables;
 
-[RequireComponent(typeof(Animator))]
 public class RefereeAnimationController : MonoBehaviour
 {
     private string _currentClipName;
+
+    [SerializeField]
     private Animator _animator;
 
     [SerializeField]
@@ -29,7 +30,7 @@ public class RefereeAnimationController : MonoBehaviour
 
     private void Start()
     {
-        _animator = GetComponent<Animator>();
+
     }
 
     public void PlayAnimation(ERefereeAnim anim)
