@@ -39,9 +39,6 @@ public class Referee : MonoBehaviour
     private void HandleTrasformGesture(object sender, EventArgs e)
     {
         transform.position = _transformGesture.GetScreenPositionHitData().Point;
-
-
-
     }
 
     private void HandleStartTransform(object sender, EventArgs e)
