@@ -3,7 +3,7 @@ using UnityEngine.Playables;
 
 public class RefereeAnimationController : MonoBehaviour
 {
-    private string _currentClipName;
+    private ERefereeAnim _currentAnimations;
 
     [SerializeField]
     private Animator _animator;
@@ -35,7 +35,7 @@ public class RefereeAnimationController : MonoBehaviour
 
     public void PlayAnimation(ERefereeAnim anim)
     {
-        if (_currentClipName == ConvertEnumToString(anim))
+        if (_currentAnimations == anim)
             return;
 
         switch (anim)
@@ -43,42 +43,42 @@ public class RefereeAnimationController : MonoBehaviour
             case ERefereeAnim.WalkUp:
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _walkUp, out _playableGraph);
-                    _currentClipName = "WalkUp";
+                    _currentAnimations = ERefereeAnim.WalkUp;
                 }
                 break;
 
             case ERefereeAnim.WalkDown:
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _walkDown, out _playableGraph);
-                    _currentClipName = "WalkDown";
+                    _currentAnimations = ERefereeAnim.WalkDown;
                 }
                 break;
 
             case ERefereeAnim.UpLeftArm:
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _upLeftArm, out _playableGraph);
-                    _currentClipName = "UpLeftArm";
+                    _currentAnimations = ERefereeAnim.UpLeftArm;
                 }
                 break;
 
             case ERefereeAnim.UpRightArm:
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _upRightArm, out _playableGraph);
-                    _currentClipName = "UpRightArm";
+                    _currentAnimations = ERefereeAnim.UpRightArm;
                 }
                 break;
 
             case ERefereeAnim.UpFrontArms:
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _upFrontArms, out _playableGraph);
-                    _currentClipName = "UpFrontArms";
+                    _currentAnimations = ERefereeAnim.UpFrontArms;
                 }
                 break;
 
             case ERefereeAnim.Watch:
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _watch, out _playableGraph);
-                    _currentClipName = "Watch";
+                    _currentAnimations = ERefereeAnim.Watch;
                 }
                 break;
         }
@@ -89,37 +89,6 @@ public class RefereeAnimationController : MonoBehaviour
         _playableGraph.Destroy();
     }
 
-    private string ConvertEnumToString(ERefereeAnim anim)
-    {
-        string result = "";
-        switch (anim)
-        {
-            case ERefereeAnim.Watch:
-                result = "Watch";
-                break;
-
-            case ERefereeAnim.UpLeftArm:
-                result = "UpLeftArm";
-                break;
-
-            case ERefereeAnim.UpRightArm:
-                result = "UpRightArm";
-                break;
-
-            case ERefereeAnim.UpFrontArms:
-                result = "UpFrontArms";
-                break;
-
-            case ERefereeAnim.WalkUp:
-                result = "WalkUp";
-                break;
-
-            case ERefereeAnim.WalkDown:
-                result = "WalkDown";
-                break;
-        }
-        return result;
-    }
 
     public enum ERefereeAnim
     {
