@@ -24,10 +24,25 @@ public class Referee : MonoBehaviour
     private void Start()
     {
         _animationController.PlayAnimation(RefereeAnimationController.ERefereeAnim.Watch);
+
+
         _transformGesture.TransformStarted += HandleStartTransform;
         _transformGesture.Transformed += HandleTrasformGesture;
+        _transformGesture.TransformCompleted += HandleTrasformCompleted;
+
         _tapGesture.Tapped += HandleTapGesture;
 
+
+    }
+
+    private void HandleTrasformCompleted(object sender, EventArgs e)
+    {
+
+    }
+
+    private void StampaPluto(object sender, EventArgs e)
+    {
+        Debug.Log("Pluto");
     }
 
     private void HandleTapGesture(object sender, EventArgs e)

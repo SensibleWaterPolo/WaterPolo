@@ -45,6 +45,7 @@ public class PlayerAnimationController : MonoBehaviour
     private void Start()
     {
         _animator = transform.GetComponent<Animator>();
+
     }
 
     public void PlayAnimation(ETypeAnimation animation)
@@ -140,6 +141,7 @@ public class PlayerAnimationController : MonoBehaviour
 
     public enum ETypeAnimation
     {
+        None,
         Bicicletta,
         NuotoDorso,
         NuotoStile,

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 
 {
-    [SerializeField]
+
     private PlayerAnimationController _playerAnimationController;
 
     private EPosizionePalla _ePosizionePalla;
@@ -45,31 +45,40 @@ public class Player : MonoBehaviour
         _shoot = Random.Range(6, 10);
         _pass = Random.Range(6, 10);
         _speed = Random.Range(6, 10);
+
         _playerAnimationController = transform.GetComponent<PlayerAnimationController>();
         _tapGesture = transform.GetComponent<TapGesture>();
         _transformGesture = transform.GetComponent<TransformGesture>();
-        _eStatoCorrente = EStato.Default;
+
+        _tapGesture.Tapped += HandleTapGesture;
+        _transformGesture.TransformCompleted += HandleTransformCompleted;
+        _transformGesture.Transformed += HandleTransformUpdate;
+
+
+        _eStatoCorrente = EStato.None;
+
         SetBicicletta();
     }
 
     private void HandleTransformCompleted(object sender, System.EventArgs e)
     {
-        throw new System.NotImplementedException();
+
+        transform.position = new Vector3(0, 0, 0);
     }
 
     private void HandleTransformUpdate(object sender, System.EventArgs e)
     {
-        throw new System.NotImplementedException();
+        Debug.Log(_transformGesture.DeltaPosition);
     }
 
     private void HandleStartTransform(object sender, System.EventArgs e)
     {
-        throw new System.NotImplementedException();
+
     }
 
     private void HandleTapGesture(object sender, System.EventArgs e)
     {
-        throw new System.NotImplementedException();
+        //       SetNuotoStile();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -464,6 +473,7 @@ public class Player : MonoBehaviour
     {
         if (_eStatoCorrente == EStato.Bicicletta)
             return;
+
         _eStatoCorrente = EStato.Bicicletta;
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.Bicicletta);
     }
@@ -1217,6 +1227,7 @@ public class Player : MonoBehaviour
 
     public enum EStato
     {
+        None,
         Bicicletta,
         NuotoStile,
         Possesso,
@@ -1230,7 +1241,7 @@ public class Player : MonoBehaviour
         Sciarpa,
         FRovesciata,
         InFight,
-        Default
+
     }
 
     public enum EPosizione

@@ -28,10 +28,6 @@ public class RefereeAnimationController : MonoBehaviour
 
     private PlayableGraph _playableGraph;
 
-    private void Start()
-    {
-
-    }
 
     public void PlayAnimation(ERefereeAnim anim)
     {
