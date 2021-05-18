@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-
-public class PlayerY6 : Player
+﻿public class PlayerY6 : Player
 {
     // Start is called before the first frame update
-    public override void Awake()
+    /*public override void Awake()
     {
         base.Awake();
         this.idTeam = 0;
@@ -17,15 +15,15 @@ public class PlayerY6 : Player
         posBallEndAction = GameObject.Find("UpSx").transform.position;
         /*  if (CheckOpponent("PlayerR3"))
               opponent = GameObject.Find("PlayerR3").GetComponent<Player>();*/
-        boaFlag = true;
-        armDx = true;
-        cpuFlag = false;
-    }
+    /*      boaFlag = true;
+          armDx = true;
+          cpuFlag = false;
+      }
 
-    /* public override void FixedUpdate()
-     {
-         base.FixedUpdate();
-     }*/
+      /* public override void FixedUpdate()
+       {
+           base.FixedUpdate();
+       }*/
 
     /*  public override void OnTriggerEnter2D(Collider2D collision)
       {

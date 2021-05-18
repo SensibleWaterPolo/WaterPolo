@@ -391,11 +391,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 31590398}
-  - component: {fileID: 31590399}
   - component: {fileID: 31590403}
   - component: {fileID: 31590402}
   - component: {fileID: 31590401}
   - component: {fileID: 31590400}
+  - component: {fileID: 31590399}
+  - component: {fileID: 31590404}
   m_Layer: 9
   m_Name: PlayerY5
   m_TagString: Player
@@ -411,7 +412,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31590397}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: -20.2, y: -34.3, z: 0}
+  m_LocalPosition: {x: -16.7, y: -13.9, z: 0}
   m_LocalScale: {x: 1.3000002, y: 1.3000002, z: 1}
   m_Children:
   - {fileID: 1119873325}
@@ -434,58 +435,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 31590397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a33bb59543c56334bae4c6758152571c, type: 3}
+  m_Script: {fileID: 11500000, guid: eec44493e23df7b4887734637ea0d29d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorAction: 0
-  idDecisionMaking: 0
-  idDecisionCPU: 0
-  idAnim: 0
-  speed: 5
-  pass: 0
-  shoot: 10
-  stamina: 0
-  brain: 0
-  clickCPU: {x: 0, y: 0}
-  isInContact: 0
-  cpuFlag: 0
-  ballFlag: 0
-  counterAttFlag: 0
-  fightFlag: 0
-  flagShoot: 0
-  loadShoot: 0
-  destShoot: {x: 0, y: 0, z: 0}
-  posAtt: {x: 0, y: 0, z: 0}
-  posDef: {x: 0, y: 0, z: 0}
-  posStart: {x: 0, y: 0, z: 0}
-  posMiddle: {x: 0, y: 0, z: 0}
-  posFinal: {x: 0, y: 0, z: 0}
-  nextPosFinal: {x: 0, y: 0, z: 0}
-  posToWatch: {x: 0, y: 0, z: 0}
-  posGoal: {x: 0, y: 0, z: 0}
-  posCounter: {x: 0, y: 0, z: 0}
-  posBallEndAction: {x: 0, y: 0, z: 0}
-  opponent: {fileID: 0}
-  limitVelBall: 0
-  selected: 0
-  idTeam: 0
-  marcaFlag: 0
-  boaFlag: 0
-  angleBoaZ: 0
-  angleBoaW: 0
-  distaceBall: 0
-  distanceAtt: 0
-  distanceDef: 0
-  pushAtt: 0
-  beginPush: 0
-  speedToPush: 0
-  coverOpponent: 0
-  distOpponentToDef: 0
-  waitAfterShoot: 3
-  fightManager: {fileID: 4510739488602134470, guid: b4c42f95f4d546e4d9e10f6bfde188e8,
-    type: 3}
-  prefabFight: {fileID: 0}
-  head: {fileID: 0}
+  _possesso: {fileID: 7400000, guid: 44cc467ee90c19e448d2a70924fa7978, type: 2}
+  _bicicletta: {fileID: 7400000, guid: 68936813011edc141b51938b14ce839d, type: 2}
+  _nuotoDorso: {fileID: 7400000, guid: 7b3d2065689a00a4e8a3737755788c21, type: 2}
+  _nuotoConPalla: {fileID: 7400000, guid: 7c04e97bcd2d7f640b6aee7c61dfcc2b, type: 2}
+  _tiro: {fileID: 7400000, guid: e11f4fe372d10914a8e0ccee23b6e8a4, type: 2}
+  _nuotoStile: {fileID: 7400000, guid: 9275aabe5fa797148bac51a3b378aee6, type: 2}
+  _tiroColonnello: {fileID: 7400000, guid: ff202415dcdf9644291b6d27bdcaeb5f, type: 2}
+  _tiroRovesciata: {fileID: 7400000, guid: dc07cd8369ba26c4aaa9f0f519de5428, type: 2}
+  _tiroSciarpa: {fileID: 7400000, guid: 3ff963d311a842b42aae6c4247d36180, type: 2}
+  _stunnato: {fileID: 7400000, guid: 7ca03b65459668b488e008a219020309, type: 2}
+  _difesaBraccio: {fileID: 7400000, guid: 5a2d73d7bf944ca4085346abe07a6e86, type: 2}
 --- !u!58 &31590400
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -533,7 +496,7 @@ Animator:
   m_GameObject: {fileID: 31590397}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: cb50d1a72ef1a0346a9153e058e42e4d, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -594,6 +557,66 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &31590404
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31590397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 123265be8dc50554fa3c9341ebc6af48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorAction: 0
+  idDecisionMaking: 0
+  idDecisionCPU: 0
+  idAnim: 0
+  speed: 0
+  pass: 0
+  shoot: 0
+  stamina: 0
+  brain: 0
+  clickCPU: {x: 0, y: 0}
+  isInContact: 0
+  cpuFlag: 0
+  ballFlag: 0
+  counterAttFlag: 0
+  fightFlag: 0
+  flagShoot: 0
+  loadShoot: 0
+  destShoot: {x: 0, y: 0, z: 0}
+  posAtt: {x: 0, y: 0, z: 0}
+  posDef: {x: 0, y: 0, z: 0}
+  posStart: {x: 0, y: 0, z: 0}
+  posMiddle: {x: 0, y: 0, z: 0}
+  posFinal: {x: 0, y: 0, z: 0}
+  nextPosFinal: {x: 0, y: 0, z: 0}
+  posToWatch: {x: 0, y: 0, z: 0}
+  posGoal: {x: 0, y: 0, z: 0}
+  posCounter: {x: 0, y: 0, z: 0}
+  posBallEndAction: {x: 0, y: 0, z: 0}
+  opponent: {fileID: 0}
+  limitVelBall: 0
+  selected: 0
+  idTeam: 0
+  marcaFlag: 0
+  boaFlag: 0
+  angleBoaZ: 0
+  angleBoaW: 0
+  distaceBall: 0
+  distanceAtt: 0
+  distanceDef: 0
+  pushAtt: 0
+  beginPush: 0
+  speedToPush: 0
+  coverOpponent: 0
+  distOpponentToDef: 0
+  waitAfterShoot: 0
+  fightManager: {fileID: 0}
+  prefabFight: {fileID: 0}
+  head: {fileID: 0}
 --- !u!1 &44859364
 GameObject:
   m_ObjectHideFlags: 0
@@ -12850,7 +12873,7 @@ Transform:
   - {fileID: 924167163}
   - {fileID: 776994317}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352276334
 GameObject:
@@ -13605,7 +13628,7 @@ Transform:
   - {fileID: 1290246201}
   - {fileID: 407702761}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &456607985
 GameObject:
@@ -18988,7 +19011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &502280329
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -19796,7 +19819,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &563600096
 Transform:
   m_ObjectHideFlags: 0
@@ -20187,7 +20210,7 @@ Transform:
   - {fileID: 112479171}
   - {fileID: 264174414}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &614511608
 GameObject:
@@ -30381,7 +30404,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &724283303
 GameObject:
@@ -41812,7 +41835,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42300,7 +42323,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &978647575
 GameObject:
@@ -42409,7 +42432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!58 &1013301995
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -43327,8 +43350,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 750678747}
+  - {fileID: 1784266191}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -49414,7 +49438,7 @@ Transform:
   m_Children:
   - {fileID: 128024609}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1334154688
 GameObject:
@@ -49883,7 +49907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22401058, guid: c0dc5781cae4a6348b42ea6b818a3f9c, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 22401058, guid: c0dc5781cae4a6348b42ea6b818a3f9c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -50118,7 +50142,7 @@ Transform:
   - {fileID: 195362127}
   - {fileID: 242118986}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1455297691
 GameObject:
@@ -50229,7 +50253,7 @@ Transform:
   - {fileID: 521265665}
   - {fileID: 1061900262}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492399042
 GameObject:
@@ -71244,7 +71268,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1784266191
 Transform:
   m_ObjectHideFlags: 0
@@ -71252,7 +71276,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784266190}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: -8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -71261,8 +71285,8 @@ Transform:
   - {fileID: 563600096}
   - {fileID: 31590398}
   - {fileID: 502280334}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1137873700}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1784856029
 GameObject:
@@ -81756,7 +81780,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1891352504
 Transform:
   m_ObjectHideFlags: 0
@@ -82478,7 +82502,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2050683472
 Transform:
   m_ObjectHideFlags: 0

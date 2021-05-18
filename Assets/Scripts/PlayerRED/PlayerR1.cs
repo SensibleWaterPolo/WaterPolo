@@ -1,53 +1,53 @@
 ﻿public class PlayerR1 : Player
 {
     // Start is called before the first frame update
-    public override void Awake()
-    {
-        base.Awake();
-        this.idTeam = 1;
-        sectorAction = 1;
-        /*posAtt = GameObject.Find("PosAttR1").transform.position;
-        posDef = GameObject.Find("PosDefR1").transform.position;
-        posMiddle = GameObject.Find("PosBattutaR1").transform.position;
-        posStart = GameObject.Find("PosStartR1").transform.position;
-        posGoal = GameObject.Find("GolLineYellow").transform.position;
-        opponent = GameObject.Find("PlayerY5").GetComponent<Player>();
-        posCounter = GameObject.Find("PosCounterAttR1").transform.position;
-        posBallEndAction = GameObject.Find("DownSx").transform.position;*/
+    /*   public override void Awake()
+       {
+           base.Awake();
+           this.idTeam = 1;
+           sectorAction = 1;
+           /*posAtt = GameObject.Find("PosAttR1").transform.position;
+           posDef = GameObject.Find("PosDefR1").transform.position;
+           posMiddle = GameObject.Find("PosBattutaR1").transform.position;
+           posStart = GameObject.Find("PosStartR1").transform.position;
+           posGoal = GameObject.Find("GolLineYellow").transform.position;
+           opponent = GameObject.Find("PlayerY5").GetComponent<Player>();
+           posCounter = GameObject.Find("PosCounterAttR1").transform.position;
+           posBallEndAction = GameObject.Find("DownSx").transform.position;
 
-        armDx = false;
-        cpuFlag = true;
-    }
+           armDx = false;
+           cpuFlag = true;
+       }
 
-    /* public override bool PlayerCpu()
-     {
-         bool hasChoose = false;
-         Vector3 destBall = Vector3.zero;
-         int idZone = IA.current.ZoneBall(this);
-         Player pR5 = GameObject.Find("PlayerR5").GetComponent<Player>();
-         Player pR3 = GameObject.Find("PlayerR3").GetComponent<Player>();
-         Player pR6 = GameObject.Find("PlayerR6").GetComponent<Player>();
-         bool shoot = IA.current.DecisionShoot(this);
-         //  Debug.Log(name + " decisione Tiro?: " + shoot);
+       /* public override bool PlayerCpu()
+        {
+            bool hasChoose = false;
+            Vector3 destBall = Vector3.zero;
+            int idZone = IA.current.ZoneBall(this);
+            Player pR5 = GameObject.Find("PlayerR5").GetComponent<Player>();
+            Player pR3 = GameObject.Find("PlayerR3").GetComponent<Player>();
+            Player pR6 = GameObject.Find("PlayerR6").GetComponent<Player>();
+            bool shoot = IA.current.DecisionShoot(this);
+            //  Debug.Log(name + " decisione Tiro?: " + shoot);
 
-         if (shoot) //Tiro in porta
-         {
-             if (GameCore.current.levelCPUHard)
-             {
-                 destBall = IA.current.ShootHardR1();
-             }
-             else
-             {
-                 // destBall = IA.current.ShootNormalR1();
-             }
-             idDecisionCPU = 0;
-             Utility.RotateObjToPoint(this.gameObject, destBall);
+            if (shoot) //Tiro in porta
+            {
+                if (GameCore.current.levelCPUHard)
+                {
+                    destBall = IA.current.ShootHardR1();
+                }
+                else
+                {
+                    // destBall = IA.current.ShootNormalR1();
+                }
+                idDecisionCPU = 0;
+                Utility.RotateObjToPoint(this.gameObject, destBall);
 
-             this.LoadShoot(destBall, shoot, 0);
+                this.LoadShoot(destBall, shoot, 0);
 
-             return true;
-         }
-         /*********PASSAGGIO********************/
+                return true;
+            }
+            /*********PASSAGGIO********************/
     /*   else
        {
            switch (idZone)

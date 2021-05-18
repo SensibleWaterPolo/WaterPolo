@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class GoalKeeper : MonoBehaviour
 {
@@ -85,268 +84,268 @@ public class GoalKeeper : MonoBehaviour
     {
     }
 
-    private void FixedUpdate()
-    {
-        if (GameCore.current.isPlay)
-        {
-            readyToBlock = GetComponent<BoxCollider2D>().enabled;
-            UpdateFinalPos();
+    /*  private void FixedUpdate()
+      {
+          if (GameCore.current.isPlay)
+          {
+              readyToBlock = GetComponent<BoxCollider2D>().enabled;
+              UpdateFinalPos();
 
-            if (!arrived && !flagJump && !keep)
-            {
-                SwimGk();
-            }
+              if (!arrived && !flagJump && !keep)
+              {
+                  SwimGk();
+              }
 
-            if (!keep)
-            {
-                GetComponent<CircleCollider2D>().enabled = false;
-            }
-            else
-            {
-                GetComponent<CircleCollider2D>().enabled = true;
-            }
+              if (!keep)
+              {
+                  GetComponent<CircleCollider2D>().enabled = false;
+              }
+              else
+              {
+                  GetComponent<CircleCollider2D>().enabled = true;
+              }
 
-            if (GameCore.current.isPlay && Ball.current.inGameFlag)
-            {
-                if (GameCore.current.secExpired && keep && !loadShoot)
-                {
-                    GameCore.current.ShootGk();
-                }
+              if (GameCore.current.isPlay && Ball.current.inGameFlag)
+              {
+                  if (GameCore.current.secExpired && keep && !loadShoot)
+                  {
+                      GameCore.current.ShootGk();
+                  }
 
-                if (transform.position == posMid)
-                {
-                    Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
-                }
-            }
-        }
-    }
+                  if (transform.position == posMid)
+                  {
+                      Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
+                  }
+              }
+          }
+      }
 
-    public void SwimGk()
-    {
-        float distanzaMancante = (this.transform.position - finalPos).sqrMagnitude;
-        if (distanzaMancante > 0)
+      public void SwimGk()
+      {
+          float distanzaMancante = (this.transform.position - finalPos).sqrMagnitude;
+          if (distanzaMancante > 0)
 
-        {
-            arrived = false;
-            Vector3 nuova_Pos = Vector3.MoveTowards(transform.position, finalPos, vel * Time.deltaTime);
-            rb.MovePosition(nuova_Pos);
-        }
-        else
-        {
-            arrived = true;
-            if (finalPos == posMid)
-            {
-                Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
-            }
-        }
-    }
+          {
+              arrived = false;
+              Vector3 nuova_Pos = Vector3.MoveTowards(transform.position, finalPos, vel * Time.deltaTime);
+              rb.MovePosition(nuova_Pos);
+          }
+          else
+          {
+              arrived = true;
+              if (finalPos == posMid)
+              {
+                  Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
+              }
+          }
+      }
 
-    public virtual void UpdateFinalPos()
-    {
-    }
+      public virtual void UpdateFinalPos()
+      {
+      }
 
-    public void UpdateDist_PosBall()
-    {
-        if (Ball.current.inGameFlag)
-        {
-            distanceBall = Vector3.Distance(transform.position, Ball.current.transform.position);
-            posXBall = Ball.current.transform.position.x;
-        }
-    }
+      public void UpdateDist_PosBall()
+      {
+          if (Ball.current.inGameFlag)
+          {
+              distanceBall = Vector3.Distance(transform.position, Ball.current.transform.position);
+              posXBall = Ball.current.transform.position.x;
+          }
+      }
 
-    public bool CalcBlock() //M: Calcola se il portiere effettua o no la parata considenrando la velocità della palla, variabile block del portiere, casualità 1/4
-    {
-        bool save;
+      public bool CalcBlock() //M: Calcola se il portiere effettua o no la parata considenrando la velocità della palla, variabile block del portiere, casualità 1/4
+      {
+          bool save;
 
-        float coeffVelBall = Ball.current.speed / 5;
+          float coeffVelBall = Ball.current.speed / 5;
 
-        float coeffGk = (block * 10) + 5;
+          float coeffGk = (block * 10) + 5;
 
-        float coeff = coeffGk - coeffVelBall;
-        float prob = Random.Range(0, 99);
+          float coeff = coeffGk - coeffVelBall;
+          float prob = Random.Range(0, 99);
 
-        if (prob <= coeff)
-            save = true;
-        else save = false;
-        //  Debug.Log("coeffBall " + coeffVelBall + " probabilità parare ->" + coeff + " valore estratto->" + prob + " save->"+save);
-        return save;
-    }
+          if (prob <= coeff)
+              save = true;
+          else save = false;
+          //  Debug.Log("coeffBall " + coeffVelBall + " probabilità parare ->" + coeff + " valore estratto->" + prob + " save->"+save);
+          return save;
+      }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        bool save;
+      private void OnTriggerEnter2D(Collider2D collision)
+      {
+          bool save;
 
-        if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && readyToBlock && Ball.current.freeFlag)
-        {
-            flagJump = true;
-            save = CalcBlock();
-            agility = Random.Range(4, 7);
-            float x = transform.position.x - Ball.current.transform.position.x;
+          if (collision.gameObject.tag == "Ball" && !flagJump && Ball.current.transform.position.x > limitGKL && Ball.current.transform.position.x < limitGKR && readyToBlock && Ball.current.freeFlag)
+          {
+              flagJump = true;
+              save = CalcBlock();
+              agility = Random.Range(4, 7);
+              float x = transform.position.x - Ball.current.transform.position.x;
 
-            if (x <= -2.5) //M:se la palla si trova alla destra
-            {
-                if (idTeam == 1)
-                    SaveLeft(save);
-                else
-                    SaveRight(save);
-            }
-            else if (x >= 2.5) //M:se la palla si trova alla sinistra
-            {
-                if (idTeam == 1)
-                    SaveRight(save);
-                else
-                    SaveLeft(save);
-            }
-            else if (-1 <= x && x <= 1)
-            {
-                SaveUP(save);
-            }
-            else
-            {
-                SaveMid(save);
-            }
-        }
-    }
+              if (x <= -2.5) //M:se la palla si trova alla destra
+              {
+                  if (idTeam == 1)
+                      SaveLeft(save);
+                  else
+                      SaveRight(save);
+              }
+              else if (x >= 2.5) //M:se la palla si trova alla sinistra
+              {
+                  if (idTeam == 1)
+                      SaveRight(save);
+                  else
+                      SaveLeft(save);
+              }
+              else if (-1 <= x && x <= 1)
+              {
+                  SaveUP(save);
+              }
+              else
+              {
+                  SaveMid(save);
+              }
+          }
+      }
 
-    public virtual void SaveUP(bool save)
-    {
-        animator.SetTrigger("Up");
-        if (save)
-        {
-            transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Side");
-            EnableSave();
-        }
-        Invoke("DisableSave", 1f);
-    }
+      public virtual void SaveUP(bool save)
+      {
+          animator.SetTrigger("Up");
+          if (save)
+          {
+              transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Side");
+              EnableSave();
+          }
+          Invoke("DisableSave", 1f);
+      }
 
-    public virtual void SaveLeft(bool save)
-    {
-        animator.SetTrigger("Left");
-        if (save)
-        {
-            transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("Side");
-            EnableSave();
-        }
-    }
+      public virtual void SaveLeft(bool save)
+      {
+          animator.SetTrigger("Left");
+          if (save)
+          {
+              transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("Side");
+              EnableSave();
+          }
+      }
 
-    public virtual void SaveRight(bool save)
-    {
-        animator.SetTrigger("Right");
-        if (save)
-        {
-            transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Side");
-            EnableSave();
-        }
-    }
+      public virtual void SaveRight(bool save)
+      {
+          animator.SetTrigger("Right");
+          if (save)
+          {
+              transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Side");
+              EnableSave();
+          }
+      }
 
-    public virtual void SaveMid(bool save)
-    {
-        animator.SetTrigger("Front");
-        if (save)
-        {
-            transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("Side");
-            EnableSave();
-            transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("Side");
-        }
-        Invoke("DisableSave", 1f);
-    }
+      public virtual void SaveMid(bool save)
+      {
+          animator.SetTrigger("Front");
+          if (save)
+          {
+              transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("Side");
+              EnableSave();
+              transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("Side");
+          }
+          Invoke("DisableSave", 1f);
+      }
 
-    public void DisableSave()
-    {
-        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
-        transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
-        transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
-        transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
-        transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
+      public void DisableSave()
+      {
+          transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
+          transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
+          transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
+          transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
+          transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("DisableCollision");
 
-        flagJump = false;
-    }
+          flagJump = false;
+      }
 
-    public void EnableSave()
-    {
-        transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Side");
-        transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("Side");
-        transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Side");
-        transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("Side");
-        transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("Side");
-    }
+      public void EnableSave()
+      {
+          transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Side");
+          transform.GetChild(1).gameObject.layer = LayerMask.NameToLayer("Side");
+          transform.GetChild(2).gameObject.layer = LayerMask.NameToLayer("Side");
+          transform.GetChild(3).gameObject.layer = LayerMask.NameToLayer("Side");
+          transform.GetChild(4).gameObject.layer = LayerMask.NameToLayer("Side");
+      }
 
-    public void SetKeep()
-    {
-        keep = true;
-        animator.SetInteger("IdAnim", 1);
-        SetBallGK();
-        Ball.current.SetGK(this);
-        if (cpuFlag)
-        {
-            Invoke("BrainCpu", 2);
-        }
-        GameCore.current.RestartTimeAction();
-    }
+      public void SetKeep()
+      {
+          keep = true;
+          animator.SetInteger("IdAnim", 1);
+          SetBallGK();
+          Ball.current.SetGK(this);
+          if (cpuFlag)
+          {
+              Invoke("BrainCpu", 2);
+          }
+          GameCore.current.RestartTimeAction();
+      }
 
-    public void SetShoot()
-    {
-    }
+      public void SetShoot()
+      {
+      }
 
-    public void SetBallGK()
-    { //M: sposta la palla nella posizione corretta all'interno del giocatore
-        GetComponent<BoxCollider2D>().enabled = false;
-        GetComponent<CircleCollider2D>().enabled = true;
-        transform.position = posThrowIn;
-        Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
-        Ball.current.transform.parent = transform;
-        Ball.current.transform.position = transform.GetChild(6).position;
-        Ball.current.freeFlag = false;
-    }
+      public void SetBallGK()
+      { //M: sposta la palla nella posizione corretta all'interno del giocatore
+          GetComponent<BoxCollider2D>().enabled = false;
+          GetComponent<CircleCollider2D>().enabled = true;
+          transform.position = posThrowIn;
+          Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
+          Ball.current.transform.parent = transform;
+          Ball.current.transform.position = transform.GetChild(6).position;
+          Ball.current.freeFlag = false;
+      }
 
-    public void Shoot()  //M: chiamata dall'animazione
-    {
-        Ball.current.throwIn = throwin;
-        Ball.current.ShootBall(direction, false, 1); //IL GK effettua sempre un passaggio mai un tiro
-        Invoke("ResetGk", 2f);
-    }
+      public void Shoot()  //M: chiamata dall'animazione
+      {
+          Ball.current.throwIn = throwin;
+          Ball.current.ShootBall(direction, false, 1); //IL GK effettua sempre un passaggio mai un tiro
+          Invoke("ResetGk", 2f);
+      }
 
-    public void LoadShoot(Vector3 dir)
-    {
-        direction = dir;
-        animator.SetInteger("IdAnim", 2);
-    }
+      public void LoadShoot(Vector3 dir)
+      {
+          direction = dir;
+          animator.SetInteger("IdAnim", 2);
+      }
 
-    public void ResetGk()
-    {
-        GetComponent<BoxCollider2D>().enabled = true;
-        GetComponent<CircleCollider2D>().enabled = false;
-        keep = false;
-        bicy = true;
-        Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
-    }
+      public void ResetGk()
+      {
+          GetComponent<BoxCollider2D>().enabled = true;
+          GetComponent<CircleCollider2D>().enabled = false;
+          keep = false;
+          bicy = true;
+          Utility.RotateObjToPoint(this.gameObject, Vector3.zero);
+      }
 
-    public IEnumerator StartDecisioMaking()
-    {
-        while (true)
-        {
-            bool stop = this.GkCpu();
-            if (stop)
-            {
-                yield break;
-            }
+      public IEnumerator StartDecisioMaking()
+      {
+          while (true)
+          {
+              bool stop = this.GkCpu();
+              if (stop)
+              {
+                  yield break;
+              }
 
-            yield return new WaitForSeconds(1);
-        }
-    }
+              yield return new WaitForSeconds(1);
+          }
+      }
 
-    public void BrainCpu()
-    {
-        //  Debug.Log(name + "inizio a ragionare");
-        if (brainCpuCoroutine != null)
-        {
-            StopCoroutine(StartDecisioMaking());
-        }
-        brainCpuCoroutine = StartCoroutine(StartDecisioMaking());
-    }
+      public void BrainCpu()
+      {
+          //  Debug.Log(name + "inizio a ragionare");
+          if (brainCpuCoroutine != null)
+          {
+              StopCoroutine(StartDecisioMaking());
+          }
+          brainCpuCoroutine = StartCoroutine(StartDecisioMaking());
+      }
 
-    public virtual bool GkCpu()
-    {
-        return false;
-    }
+      public virtual bool GkCpu()
+      {
+          return false;
+      }*/
 }

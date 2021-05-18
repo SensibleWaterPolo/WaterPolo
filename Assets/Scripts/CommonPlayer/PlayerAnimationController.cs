@@ -82,6 +82,13 @@ public class PlayerAnimationController : MonoBehaviour
                 }
                 break;
 
+            case ETypeAnimation.Possesso:
+                {
+                    AnimationPlayableUtilities.PlayClip(_animator, _possesso, out _playableGraph);
+                    _currentAnimation = ETypeAnimation.Possesso;
+                }
+                break;
+
             case ETypeAnimation.Tiro:
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _tiro, out _playableGraph);
@@ -137,6 +144,7 @@ public class PlayerAnimationController : MonoBehaviour
         NuotoDorso,
         NuotoStile,
         NuotoConPalla,
+        Possesso,
         Tiro,
         TiroColonnello,
         TiroRovesciata,

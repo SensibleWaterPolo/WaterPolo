@@ -42,311 +42,311 @@ public class Ball : MonoBehaviour
     public string redNear;
     public string yellowNear;
     public string moreNear;
+    /*
+      private void Awake() //M:inizializzazione variabili
+      {
+          current = this;
+          freeFlag = true;
+          inGameFlag = true;
+          deceleratePass = true;
+          decelerateShoot = true;
+          rb = GetComponent<Rigidbody2D>();
+          shootFlag = true;
+          isShooted = false;
+          idTeam = -1;
+          respawn = false;
+          isEnable = true;
+      }
 
-    private void Awake() //M:inizializzazione variabili
-    {
-        current = this;
-        freeFlag = true;
-        inGameFlag = true;
-        deceleratePass = true;
-        decelerateShoot = true;
-        rb = GetComponent<Rigidbody2D>();
-        shootFlag = true;
-        isShooted = false;
-        idTeam = -1;
-        respawn = false;
-        isEnable = true;
-    }
+      private void FixedUpdate()
+      {
+          //CheckFreeBall();
+          CheckVel(); //M: se la velocità è prossima allo zero ferma la palla
 
-    private void FixedUpdate()
-    {
-        //CheckFreeBall();
-        CheckVel(); //M: se la velocità è prossima allo zero ferma la palla
+          if (deceleratePass)
+          {
+              DecelerateVelPass();
+          }
+          else if (decelerateShoot)
+          {
+              DecelerateVelShoot();
+          }
 
-        if (deceleratePass)
-        {
-            DecelerateVelPass();
-        }
-        else if (decelerateShoot)
-        {
-            DecelerateVelShoot();
-        }
+          if (!shootFlag)
+          {
+              CheckPositionPass();
+          }
 
-        if (!shootFlag)
-        {
-            CheckPositionPass();
-        }
+          UpdateStatePos();
 
-        UpdateStatePos();
+          UpdateSideBall();
 
-        UpdateSideBall();
+          redNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(1, false);
+          yellowNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(0, false);
+          moreNear = PosPlayerMng.curret.GetPlayerNameNearBall();
 
-        redNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(1, false);
-        yellowNear = PosPlayerMng.curret.GetPlayerForTeamNearBall(0, false);
-        moreNear = PosPlayerMng.curret.GetPlayerNameNearBall();
+          //  Debug.Log("SPEED "+speed+ " /shootflag " +shootFlag+ " /player "+player+ " /libera :"+freeFlag+" /ferma "+motionlessFlag+ " /shooted "+isShooted);
+      }
 
-        //  Debug.Log("SPEED "+speed+ " /shootflag " +shootFlag+ " /player "+player+ " /libera :"+freeFlag+" /ferma "+motionlessFlag+ " /shooted "+isShooted);
-    }
+      public void ShootBall(Vector3 finalPos, bool shootFlag, int id) //M: prepara la palla al tiro e ne calcola la forza, id=0 giocatore, id=1 portiere
+      {
+          this.finalPos = finalPos;
+          this.shootFlag = shootFlag;
 
-    public void ShootBall(Vector3 finalPos, bool shootFlag, int id) //M: prepara la palla al tiro e ne calcola la forza, id=0 giocatore, id=1 portiere
-    {
-        this.finalPos = finalPos;
-        this.shootFlag = shootFlag;
-
-        EnableBall();
-        distance = Vector2.Distance(transform.position, finalPos);
-        maxHightBall = distance / 2f;
-        Vector3 pos = GetComponent<Transform>().position;
-        Vector3 direct = new Vector2(finalPos.x - pos.x, finalPos.y - pos.y).normalized;
-        if (id == 0)
-        {
-            if (shootFlag)
-            {
-                if (!GameCore.current.secExpired)
-                {
-                    GetComponent<Rigidbody2D>().AddForce(direct * shoot * 450);
-                }
-                else
-                {
-                    GetComponent<Rigidbody2D>().AddForce(direct * shoot * 600);
-                }
-                decelerateShoot = true;
-                deceleratePass = false;
-            }
-            else
-            {
-                GetComponent<Rigidbody2D>().AddForce(direct * pas * 500);
-                deceleratePass = true;
-                decelerateShoot = false;
-            }
-        }
-        else if (id == 1)
-        {
-            if (!GameCore.current.secExpired)
-            {
-                GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 500);
-            }
-            else { GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 800); }
-            decelerateShoot = false;
-            deceleratePass = true;
-        }
-
-        if (gk != null)
-        {
-            gk = null;
-        }
-        if (player != null)
-        {
-            player.ballFlag = false;
-            player = null;
-        }
-        isShooted = true;
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        // Debug.Log(collision.gameObject.name);
-    }
-
-    public void EnableBall()
-    {
-        freeFlag = true;
-        transform.parent = null;
-        GetComponent<Renderer>().enabled = true;
-        this.gameObject.AddComponent<Rigidbody2D>();
-        rb = GetComponent<Rigidbody2D>();
-        respawn = true;
-        isEnable = true;
-    }
-
-    public void CheckVel()  //M: se la velocità è quasi zero(3) blocca la palla
-    {
-        if (rb != null)
-        {
-            speed = rb.velocity.magnitude;
-            if (speed > 0 && respawn)
-            {
-                respawn = false;
-            }
-
-            if (speed <= 3 && !respawn && freeFlag)
-            {
-                StopBall();
-
-                deceleratePass = false;
-                decelerateShoot = false;
-                motionlessFlag = true;
-                speed = 0;
-                isShooted = false;
-                /*  if (player != null)
+          EnableBall();
+          distance = Vector2.Distance(transform.position, finalPos);
+          maxHightBall = distance / 2f;
+          Vector3 pos = GetComponent<Transform>().position;
+          Vector3 direct = new Vector2(finalPos.x - pos.x, finalPos.y - pos.y).normalized;
+          if (id == 0)
+          {
+              if (shootFlag)
+              {
+                  if (!GameCore.current.secExpired)
                   {
-                      player = null;
-                  }*/
-            }
-            else
-            {
-                motionlessFlag = false;
-                deceleratePass = true;
-                decelerateShoot = true;
-            }
-        }
-    }
+                      GetComponent<Rigidbody2D>().AddForce(direct * shoot * 450);
+                  }
+                  else
+                  {
+                      GetComponent<Rigidbody2D>().AddForce(direct * shoot * 600);
+                  }
+                  decelerateShoot = true;
+                  deceleratePass = false;
+              }
+              else
+              {
+                  GetComponent<Rigidbody2D>().AddForce(direct * pas * 500);
+                  deceleratePass = true;
+                  decelerateShoot = false;
+              }
+          }
+          else if (id == 1)
+          {
+              if (!GameCore.current.secExpired)
+              {
+                  GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 500);
+              }
+              else { GetComponent<Rigidbody2D>().AddForce(direct * throwIn * 800); }
+              decelerateShoot = false;
+              deceleratePass = true;
+          }
 
-    public void DecelerateVelPass() //M: Diminuisce la velocità della palla
-    {
-        if (rb != null)
-            rb.velocity = rb.velocity - (rb.velocity * 1.4f * Time.deltaTime);
-    }
+          if (gk != null)
+          {
+              gk = null;
+          }
+          if (player != null)
+          {
+              player.ballFlag = false;
+              player = null;
+          }
+          isShooted = true;
+      }
 
-    public void DecelerateVelShoot() //M: Diminuisce la velocità della palla
-    {
-        if (rb != null)
-            rb.velocity = rb.velocity - (rb.velocity * 0.4f * Time.deltaTime);
-    }
+      private void OnCollisionStay2D(Collision2D collision)
+      {
+          // Debug.Log(collision.gameObject.name);
+      }
 
-    public void SetPlayer(Player player) //M: assegna alla palla il giocatore in possesso
-    {
-        DisableBall();
-        this.player = player;
-        if (player.idTeam != idTeam)
-        {
-            /* GameCore.current.RestartTimeAction();
-             GameCore.current.startSec = true;*/
-            idTeam = player.idTeam;
-            isShooted = false;
-        }
-    }
+      public void EnableBall()
+      {
+          freeFlag = true;
+          transform.parent = null;
+          GetComponent<Renderer>().enabled = true;
+          this.gameObject.AddComponent<Rigidbody2D>();
+          rb = GetComponent<Rigidbody2D>();
+          respawn = true;
+          isEnable = true;
+      }
 
-    public void SetGK(GoalKeeper _gk)
-    {
-        DisableBall();
-        isShooted = false;
-        this.gk = _gk;
-        idTeam = _gk.idTeam;
-    }
+      public void CheckVel()  //M: se la velocità è quasi zero(3) blocca la palla
+      {
+          if (rb != null)
+          {
+              speed = rb.velocity.magnitude;
+              if (speed > 0 && respawn)
+              {
+                  respawn = false;
+              }
 
-    public void DisableBall()
-    {
-        GetComponent<Renderer>().enabled = false;
-        if (GetComponent<Rigidbody2D>() != null)
-        {
-            Destroy(GetComponent<Rigidbody2D>());
-        }
-        speed = -1;
-        isEnable = false;
-        //CheckFreeBall();
-    }
+              if (speed <= 3 && !respawn && freeFlag)
+              {
+                  StopBall();
 
-    public void CheckPositionPass() //M: in caso di passaggio controlla la posizione della palla
-    {
-        Vector2 pos = transform.position;
-        Vector2 dest = finalPos;
+                  deceleratePass = false;
+                  decelerateShoot = false;
+                  motionlessFlag = true;
+                  speed = 0;
+                  isShooted = false;
+                  /*  if (player != null)
+                    {
+                        player = null;
+                    }
+              }
+              else
+              {
+                  motionlessFlag = false;
+                  deceleratePass = true;
+                  decelerateShoot = true;
+              }
+          }
+      }
 
-        if ((pos - dest).sqrMagnitude <= 1)
-        {
-            if (rb != null)
-            {
-                rb.velocity = Vector2.zero;
-            }
-        }
-    }
+      public void DecelerateVelPass() //M: Diminuisce la velocità della palla
+      {
+          if (rb != null)
+              rb.velocity = rb.velocity - (rb.velocity * 1.4f * Time.deltaTime);
+      }
 
-    public void StopBall() //M:ferma immediatamente la palla
-    {
-        rb.velocity = Vector2.zero;
-        //  rb.angularVelocity = 0;
-    }
+      public void DecelerateVelShoot() //M: Diminuisce la velocità della palla
+      {
+          if (rb != null)
+              rb.velocity = rb.velocity - (rb.velocity * 0.4f * Time.deltaTime);
+      }
 
-    public void UpdateStatePos()  //M: determina in quale settore di campo si trova  la palla
-    {
-        /* if (!freeFlag)
-             statePos = 0;
-         else if (GameObject.Find("LimitLeft").transform.position.x < transform.position.x && GameObject.Find("LimitMidLeft").transform.position.x >= transform.position.x)
-             statePos = 1;
-         else if (GameObject.Find("LimitMidLeft").transform.position.x < transform.position.x && GameObject.Find("LimitMidRight ").transform.position.x >= transform.position.x)
-             statePos = 2;
-         else if (GameObject.Find("LimitMidRight ").transform.position.x < transform.position.x && GameObject.Find("LimitRight").transform.position.x >= transform.position.x)
-             statePos = 3;
-         else statePos = -1;*/
-    }
+      public void SetPlayer(Player player) //M: assegna alla palla il giocatore in possesso
+      {
+          DisableBall();
+          this.player = player;
+          if (player.idTeam != idTeam)
+          {
+              /* GameCore.current.RestartTimeAction();
+               GameCore.current.startSec = true;
+              idTeam = player.idTeam;
+              isShooted = false;
+          }
+      }
 
-    public void UpdateSideBall()  //M:aggiorna la posione della palla rispetto la metà campo
-    {
-        if (transform.position.y < GameObject.Find("MiddleY").transform.position.y)
-            fieldYellow = true;
-        else fieldYellow = false;
-    }
+      public void SetGK(GoalKeeper _gk)
+      {
+          DisableBall();
+          isShooted = false;
+          this.gk = _gk;
+          idTeam = _gk.idTeam;
+      }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+      public void DisableBall()
+      {
+          GetComponent<Renderer>().enabled = false;
+          if (GetComponent<Rigidbody2D>() != null)
+          {
+              Destroy(GetComponent<Rigidbody2D>());
+          }
+          speed = -1;
+          isEnable = false;
+          //CheckFreeBall();
+      }
 
-    {
-        isShooted = false;
-        if (collision.gameObject.CompareTag("Side"))
-        {
-            rb.velocity = rb.velocity / 3;
-        }
+      public void CheckPositionPass() //M: in caso di passaggio controlla la posizione della palla
+      {
+          Vector2 pos = transform.position;
+          Vector2 dest = finalPos;
 
-        if (collision.gameObject.CompareTag("Arm"))
-        {
-            rb.velocity = rb.velocity / 2;
-            GameCore.current.RestartTimeAction();
-        }
-    }
+          if ((pos - dest).sqrMagnitude <= 1)
+          {
+              if (rb != null)
+              {
+                  rb.velocity = Vector2.zero;
+              }
+          }
+      }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("EndRed") && inGameFlag)
-        {
-            inGameFlag = false;
-            Invoke("SetRedSideBall", 1.5f);
-        }
-        if (collision.CompareTag("EndYellow"))
-        {
-            inGameFlag = false;
-            Invoke("SetYellowSideBall", 1.5f);
-        }
-    }
+      public void StopBall() //M:ferma immediatamente la palla
+      {
+          rb.velocity = Vector2.zero;
+          //  rb.angularVelocity = 0;
+      }
 
-    public string GetNamePlayer()
-    {
-        if (player)
-            return player.name;
-        else return null;
-    }
+      public void UpdateStatePos()  //M: determina in quale settore di campo si trova  la palla
+      {
+          /* if (!freeFlag)
+               statePos = 0;
+           else if (GameObject.Find("LimitLeft").transform.position.x < transform.position.x && GameObject.Find("LimitMidLeft").transform.position.x >= transform.position.x)
+               statePos = 1;
+           else if (GameObject.Find("LimitMidLeft").transform.position.x < transform.position.x && GameObject.Find("LimitMidRight ").transform.position.x >= transform.position.x)
+               statePos = 2;
+           else if (GameObject.Find("LimitMidRight ").transform.position.x < transform.position.x && GameObject.Find("LimitRight").transform.position.x >= transform.position.x)
+               statePos = 3;
+           else statePos = -1;
+      }
 
-    public void SetMidPos()
-    {
-        transform.position = GameObject.Find("MidBall").transform.position;
-        inGameFlag = true;
-    }
+      public void UpdateSideBall()  //M:aggiorna la posione della palla rispetto la metà campo
+      {
+          if (transform.position.y < GameObject.Find("MiddleY").transform.position.y)
+              fieldYellow = true;
+          else fieldYellow = false;
+      }
 
-    public void SetRedSideBall()
-    {
-        transform.position = GameObject.Find("RedSideBall").transform.position;
-        inGameFlag = true;
-    }
+      private void OnCollisionEnter2D(Collision2D collision)
 
-    public void SetYellowSideBall()
-    {
-        transform.position = GameObject.Find("YellowSideBall").transform.position;
-        inGameFlag = true;
-    }
+      {
+          isShooted = false;
+          if (collision.gameObject.CompareTag("Side"))
+          {
+              rb.velocity = rb.velocity / 3;
+          }
 
-    public bool CheckBallIsPlayable(float limitVel) //controlla se la palla è giocabile sotto un limite di velocità
-    {
-        if (inGameFlag)
-        {
-            if ((isShooted && speed <= limitVel && speed >= 0 && freeFlag && !respawn) || !isShooted && speed == 0 && freeFlag && !respawn)
-            {
-                return true;
-            }
-            else
-                return false;
-        }
-        else
-            return false;
-    }
+          if (collision.gameObject.CompareTag("Arm"))
+          {
+              rb.velocity = rb.velocity / 2;
+              GameCore.current.RestartTimeAction();
+          }
+      }
 
+      private void OnTriggerEnter2D(Collider2D collision)
+      {
+          if (collision.CompareTag("EndRed") && inGameFlag)
+          {
+              inGameFlag = false;
+              Invoke("SetRedSideBall", 1.5f);
+          }
+          if (collision.CompareTag("EndYellow"))
+          {
+              inGameFlag = false;
+              Invoke("SetYellowSideBall", 1.5f);
+          }
+      }
+
+      public string GetNamePlayer()
+      {
+          if (player)
+              return player.name;
+          else return null;
+      }
+
+      public void SetMidPos()
+      {
+          transform.position = GameObject.Find("MidBall").transform.position;
+          inGameFlag = true;
+      }
+
+      public void SetRedSideBall()
+      {
+          transform.position = GameObject.Find("RedSideBall").transform.position;
+          inGameFlag = true;
+      }
+
+      public void SetYellowSideBall()
+      {
+          transform.position = GameObject.Find("YellowSideBall").transform.position;
+          inGameFlag = true;
+      }
+
+      public bool CheckBallIsPlayable(float limitVel) //controlla se la palla è giocabile sotto un limite di velocità
+      {
+          if (inGameFlag)
+          {
+              if ((isShooted && speed <= limitVel && speed >= 0 && freeFlag && !respawn) || !isShooted && speed == 0 && freeFlag && !respawn)
+              {
+                  return true;
+              }
+              else
+                  return false;
+          }
+          else
+              return false;
+      }
+    */
     public enum EStatoPalla
     {
         LiberaSx,

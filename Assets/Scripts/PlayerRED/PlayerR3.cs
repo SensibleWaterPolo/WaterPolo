@@ -1,13 +1,11 @@
-﻿using UnityEngine;
-
-public class PlayerR3 : Player
+﻿public class PlayerR3 : Player
 {
     // Start is called before the first frame update
 
     public Battle battle;
     public Battle battlePrefab;
 
-    public override void Awake()
+    /*public override void Awake()
     {
         base.Awake();
         this.idTeam = 1;
