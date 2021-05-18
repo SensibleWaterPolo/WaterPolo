@@ -24,7 +24,6 @@ public class Referee : MonoBehaviour
     private void Start()
     {
         _animationController.PlayAnimation(RefereeAnimationController.ERefereeAnim.Watch);
-
         _transformGesture.TransformStarted += HandleStartTransform;
         _transformGesture.Transformed += HandleTrasformGesture;
         _tapGesture.Tapped += HandleTapGesture;

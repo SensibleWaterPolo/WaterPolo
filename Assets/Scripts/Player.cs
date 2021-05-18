@@ -6,6 +6,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 
 {
+    [SerializeField]
     private PlayerAnimationController _playerAnimationController;
 
     private EPosizionePalla _ePosizionePalla;
@@ -47,6 +48,7 @@ public class Player : MonoBehaviour
         _playerAnimationController = transform.GetComponent<PlayerAnimationController>();
         _tapGesture = transform.GetComponent<TapGesture>();
         _transformGesture = transform.GetComponent<TransformGesture>();
+        _eStatoCorrente = EStato.Default;
         SetBicicletta();
     }
 
@@ -1227,7 +1229,8 @@ public class Player : MonoBehaviour
         Collonnello,
         Sciarpa,
         FRovesciata,
-        InFight
+        InFight,
+        Default
     }
 
     public enum EPosizione
