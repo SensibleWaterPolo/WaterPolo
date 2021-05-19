@@ -1,4 +1,5 @@
-﻿using TouchScript.Gestures;
+﻿using DG.Tweening;
+using TouchScript.Gestures;
 using TouchScript.Gestures.TransformGestures;
 using UnityEngine;
 
@@ -6,7 +7,6 @@ using UnityEngine;
 public class Player : MonoBehaviour
 
 {
-
     private PlayerAnimationController _playerAnimationController;
 
     private EPosizionePalla _ePosizionePalla;
@@ -35,9 +35,10 @@ public class Player : MonoBehaviour
 
     private TransformGesture _transformGesture;
 
+    private Sequence _sequence;
+
     private void Awake()
     {
-
     }
 
     public virtual void Start()
@@ -54,7 +55,6 @@ public class Player : MonoBehaviour
         _transformGesture.TransformCompleted += HandleTransformCompleted;
         _transformGesture.Transformed += HandleTransformUpdate;
 
-
         _eStatoCorrente = EStato.None;
 
         SetBicicletta();
@@ -62,18 +62,28 @@ public class Player : MonoBehaviour
 
     private void HandleTransformCompleted(object sender, System.EventArgs e)
     {
+        _sequence?.Kill();
+        var posInWorld = Camera.main.ScreenToWorldPoint(_transformGesture.ScreenPosition);
+        var finalPos = new Vector3(posInWorld.x, posInWorld.y, transform.position.z);
+        var dir = finalPos - transform.position;
+        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+        var rot = Quaternion.AngleAxis(angle, Vector3.forward);
+        var distance = Vector2.Distance(finalPos, transform.position);
 
-        transform.position = new Vector3(0, 0, 0);
+        SetNuotoStile();
+        _sequence = DOTween.Sequence();
+        _sequence.Append(transform.DORotateQuaternion(rot, 0.2f))
+        .Append(transform.DOMove(finalPos, distance / _speed)).Play().OnComplete(() => SetBicicletta());
+
+
     }
 
     private void HandleTransformUpdate(object sender, System.EventArgs e)
     {
-        Debug.Log(_transformGesture.DeltaPosition);
     }
 
     private void HandleStartTransform(object sender, System.EventArgs e)
     {
-
     }
 
     private void HandleTapGesture(object sender, System.EventArgs e)
@@ -83,8 +93,9 @@ public class Player : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Ball")
+        if (collision.gameObject.tag == "Ball")
         {
+            _sequence?.Kill();
             SetPossesso();
         }
     }
@@ -469,6 +480,7 @@ public class Player : MonoBehaviour
          Ball.current.transform.position = transform.GetChild(7).position;
      }
     */
+
     public void SetBicicletta()
     {
         if (_eStatoCorrente == EStato.Bicicletta)
@@ -512,6 +524,7 @@ public class Player : MonoBehaviour
 
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.NuotoConPalla);
     }
+
     /*
      public void SetKeep()
      {
@@ -738,7 +751,6 @@ public class Player : MonoBehaviour
                 flagShoot = flag;
             }
 
-
      public void Shoot()  //M: chiamata dall'animazione
      {
          /*     Ball.current.shoot = shoot;
@@ -862,7 +874,6 @@ public class Player : MonoBehaviour
               Utility.RotateObjAtoB(this.gameObject, opponent.gameObject);
               return;
           }
-
      }
 
      public bool CheckOpponent(string name)
@@ -1241,7 +1252,6 @@ public class Player : MonoBehaviour
         Sciarpa,
         FRovesciata,
         InFight,
-
     }
 
     public enum EPosizione

@@ -42,6 +42,9 @@ public class PlayerAnimationController : MonoBehaviour
     private Animator _animator;
     private PlayableGraph _playableGraph;
 
+    [SerializeField]
+    private GameObject _effect;
+
     private void Start()
     {
         _animator = transform.GetComponent<Animator>();
@@ -52,6 +55,8 @@ public class PlayerAnimationController : MonoBehaviour
     {
         if (_currentAnimation == animation)
             return;
+
+        _effect.SetActive(false);
 
         switch (animation)
         {
@@ -66,6 +71,8 @@ public class PlayerAnimationController : MonoBehaviour
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _nuotoStile, out _playableGraph);
                     _currentAnimation = ETypeAnimation.NuotoStile;
+                    _effect.SetActive(true);
+
                 }
                 break;
 
@@ -73,6 +80,7 @@ public class PlayerAnimationController : MonoBehaviour
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _nuotoDorso, out _playableGraph);
                     _currentAnimation = ETypeAnimation.NuotoDorso;
+                    _effect.SetActive(true);
                 }
                 break;
 
@@ -80,6 +88,7 @@ public class PlayerAnimationController : MonoBehaviour
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _nuotoConPalla, out _playableGraph);
                     _currentAnimation = ETypeAnimation.NuotoConPalla;
+                    _effect.SetActive(true);
                 }
                 break;
 

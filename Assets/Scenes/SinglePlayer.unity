@@ -397,6 +397,8 @@ GameObject:
   - component: {fileID: 31590400}
   - component: {fileID: 31590399}
   - component: {fileID: 31590404}
+  - component: {fileID: 31590406}
+  - component: {fileID: 31590405}
   m_Layer: 9
   m_Name: PlayerY5
   m_TagString: Player
@@ -411,9 +413,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31590397}
-  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -16.7, y: -13.9, z: 0}
-  m_LocalScale: {x: 1.3000002, y: 1.3000002, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1119873325}
   - {fileID: 1904965081}
@@ -449,6 +451,7 @@ MonoBehaviour:
   _tiroSciarpa: {fileID: 7400000, guid: 3ff963d311a842b42aae6c4247d36180, type: 2}
   _stunnato: {fileID: 7400000, guid: 7ca03b65459668b488e008a219020309, type: 2}
   _difesaBraccio: {fileID: 7400000, guid: 5a2d73d7bf944ca4085346abe07a6e86, type: 2}
+  _effect: {fileID: 1891352503}
 --- !u!58 &31590400
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -569,54 +572,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 123265be8dc50554fa3c9341ebc6af48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorAction: 0
-  idDecisionMaking: 0
-  idDecisionCPU: 0
-  idAnim: 0
-  speed: 0
-  pass: 0
-  shoot: 0
-  stamina: 0
-  brain: 0
-  clickCPU: {x: 0, y: 0}
-  isInContact: 0
-  cpuFlag: 0
-  ballFlag: 0
-  counterAttFlag: 0
-  fightFlag: 0
-  flagShoot: 0
-  loadShoot: 0
-  destShoot: {x: 0, y: 0, z: 0}
-  posAtt: {x: 0, y: 0, z: 0}
-  posDef: {x: 0, y: 0, z: 0}
-  posStart: {x: 0, y: 0, z: 0}
-  posMiddle: {x: 0, y: 0, z: 0}
-  posFinal: {x: 0, y: 0, z: 0}
-  nextPosFinal: {x: 0, y: 0, z: 0}
-  posToWatch: {x: 0, y: 0, z: 0}
-  posGoal: {x: 0, y: 0, z: 0}
-  posCounter: {x: 0, y: 0, z: 0}
-  posBallEndAction: {x: 0, y: 0, z: 0}
+  _speed: 0
+  _pass: 0
+  _shoot: 0
   opponent: {fileID: 0}
-  limitVelBall: 0
-  selected: 0
-  idTeam: 0
-  marcaFlag: 0
-  boaFlag: 0
-  angleBoaZ: 0
-  angleBoaW: 0
-  distaceBall: 0
-  distanceAtt: 0
-  distanceDef: 0
-  pushAtt: 0
-  beginPush: 0
-  speedToPush: 0
-  coverOpponent: 0
-  distOpponentToDef: 0
-  waitAfterShoot: 0
-  fightManager: {fileID: 0}
-  prefabFight: {fileID: 0}
-  head: {fileID: 0}
+--- !u!114 &31590405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31590397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ea9930ecb674732bee27116520fad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTransformStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransform:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransformComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 7
+  screenTransformThreshold: 0.1
+  minScreenPointsDistance: 0.5
+  projectionProps: 0
+  projection: 0
+  projectionPlaneNormal: {x: 0, y: 0, z: 1}
+--- !u!114 &31590406
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31590397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a878a6ff128243dfb1d89ca0273f059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTap:
+    m_PersistentCalls:
+      m_Calls: []
+  numberOfTapsRequired: 1
+  timeLimit: Infinity
+  distanceLimit: Infinity
+  combinePointers: 0
+  combinePointersInterval: 0.3
 --- !u!1 &44859364
 GameObject:
   m_ObjectHideFlags: 0
@@ -726,6 +764,9 @@ GameObject:
   - component: {fileID: 73869359}
   - component: {fileID: 73869357}
   - component: {fileID: 73869358}
+  - component: {fileID: 73869363}
+  - component: {fileID: 73869362}
+  - component: {fileID: 73869361}
   m_Layer: 9
   m_Name: PlayerR5
   m_TagString: Player
@@ -767,54 +808,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd0c5d9c380d73469e7c0837521c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorAction: 0
-  idDecisionMaking: 0
-  idDecisionCPU: 0
-  idAnim: 0
-  speed: 20
-  pass: 0
-  shoot: 10
-  stamina: 0
-  brain: 0
-  clickCPU: {x: 0, y: 0}
-  isInContact: 0
-  cpuFlag: 0
-  ballFlag: 0
-  counterAttFlag: 0
-  fightFlag: 0
-  flagShoot: 0
-  loadShoot: 0
-  destShoot: {x: 0, y: 0, z: 0}
-  posAtt: {x: 0, y: 0, z: 0}
-  posDef: {x: 0, y: 0, z: 0}
-  posStart: {x: 0, y: 0, z: 0}
-  posMiddle: {x: 0, y: 0, z: 0}
-  posFinal: {x: 0, y: 0, z: 0}
-  nextPosFinal: {x: 0, y: 0, z: 0}
-  posToWatch: {x: 0, y: 0, z: 0}
-  posGoal: {x: 0, y: 0, z: 0}
-  posCounter: {x: 0, y: 0, z: 0}
-  posBallEndAction: {x: 0, y: 0, z: 0}
+  _speed: 0
+  _pass: 0
+  _shoot: 0
   opponent: {fileID: 0}
-  limitVelBall: 0
-  selected: 0
-  idTeam: 0
-  marcaFlag: 0
-  boaFlag: 0
-  angleBoaZ: 0
-  angleBoaW: 0
-  distaceBall: 0
-  distanceAtt: 0
-  distanceDef: 0
-  pushAtt: 0
-  beginPush: 0
-  speedToPush: 0
-  coverOpponent: 0
-  distOpponentToDef: 0
-  waitAfterShoot: 3
-  fightManager: {fileID: 0}
-  prefabFight: {fileID: 0}
-  head: {fileID: 0}
 --- !u!95 &73869357
 Animator:
   serializedVersion: 3
@@ -923,6 +920,109 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &73869361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73869354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ea9930ecb674732bee27116520fad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTransformStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransform:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransformComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 7
+  screenTransformThreshold: 0.1
+  minScreenPointsDistance: 0.5
+  projectionProps: 0
+  projection: 0
+  projectionPlaneNormal: {x: 0, y: 0, z: 1}
+--- !u!114 &73869362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73869354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a878a6ff128243dfb1d89ca0273f059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTap:
+    m_PersistentCalls:
+      m_Calls: []
+  numberOfTapsRequired: 1
+  timeLimit: Infinity
+  distanceLimit: Infinity
+  combinePointers: 0
+  combinePointersInterval: 0.3
+--- !u!114 &73869363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 73869354}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec44493e23df7b4887734637ea0d29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _possesso: {fileID: 0}
+  _bicicletta: {fileID: 0}
+  _nuotoDorso: {fileID: 0}
+  _nuotoConPalla: {fileID: 0}
+  _tiro: {fileID: 0}
+  _nuotoStile: {fileID: 0}
+  _tiroColonnello: {fileID: 0}
+  _tiroRovesciata: {fileID: 0}
+  _tiroSciarpa: {fileID: 0}
+  _stunnato: {fileID: 0}
+  _difesaBraccio: {fileID: 0}
+  _effect: {fileID: 0}
 --- !u!1 &85308032
 GameObject:
   m_ObjectHideFlags: 0
@@ -12247,6 +12347,9 @@ GameObject:
   - component: {fileID: 267972310}
   - component: {fileID: 267972308}
   - component: {fileID: 267972309}
+  - component: {fileID: 267972314}
+  - component: {fileID: 267972313}
+  - component: {fileID: 267972312}
   m_Layer: 9
   m_Name: PlayerR3
   m_TagString: Player
@@ -12288,54 +12391,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b9b53687df31c46b5d000db75c45f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorAction: 0
-  idDecisionMaking: 0
-  idDecisionCPU: 0
-  idAnim: 0
-  speed: 20
-  pass: 0
-  shoot: 10
-  stamina: 0
-  brain: 0
-  clickCPU: {x: 0, y: 0}
-  isInContact: 0
-  cpuFlag: 0
-  ballFlag: 0
-  counterAttFlag: 0
-  fightFlag: 0
-  flagShoot: 0
-  loadShoot: 0
-  destShoot: {x: 0, y: 0, z: 0}
-  posAtt: {x: 0, y: 0, z: 0}
-  posDef: {x: 0, y: 0, z: 0}
-  posStart: {x: 0, y: 0, z: 0}
-  posMiddle: {x: 0, y: 0, z: 0}
-  posFinal: {x: 0, y: 0, z: 0}
-  nextPosFinal: {x: 0, y: 0, z: 0}
-  posToWatch: {x: 0, y: 0, z: 0}
-  posGoal: {x: 0, y: 0, z: 0}
-  posCounter: {x: 0, y: 0, z: 0}
-  posBallEndAction: {x: 0, y: 0, z: 0}
+  _speed: 0
+  _pass: 0
+  _shoot: 0
   opponent: {fileID: 0}
-  limitVelBall: 0
-  selected: 0
-  idTeam: 0
-  marcaFlag: 0
-  boaFlag: 0
-  angleBoaZ: 0
-  angleBoaW: 0
-  distaceBall: 0
-  distanceAtt: 0
-  distanceDef: 0
-  pushAtt: 0
-  beginPush: 0
-  speedToPush: 0
-  coverOpponent: 0
-  distOpponentToDef: 0
-  waitAfterShoot: 3
-  fightManager: {fileID: 0}
-  prefabFight: {fileID: 0}
-  head: {fileID: 0}
   battle: {fileID: 6785614088860273912, guid: 1bbd3c657494e7647bbc225939b02d8b, type: 3}
   battlePrefab: {fileID: 0}
 --- !u!95 &267972308
@@ -12446,6 +12505,109 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &267972312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267972305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ea9930ecb674732bee27116520fad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTransformStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransform:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransformComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 7
+  screenTransformThreshold: 0.1
+  minScreenPointsDistance: 0.5
+  projectionProps: 0
+  projection: 0
+  projectionPlaneNormal: {x: 0, y: 0, z: 1}
+--- !u!114 &267972313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267972305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a878a6ff128243dfb1d89ca0273f059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTap:
+    m_PersistentCalls:
+      m_Calls: []
+  numberOfTapsRequired: 1
+  timeLimit: Infinity
+  distanceLimit: Infinity
+  combinePointers: 0
+  combinePointersInterval: 0.3
+--- !u!114 &267972314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 267972305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec44493e23df7b4887734637ea0d29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _possesso: {fileID: 0}
+  _bicicletta: {fileID: 0}
+  _nuotoDorso: {fileID: 0}
+  _nuotoConPalla: {fileID: 0}
+  _tiro: {fileID: 0}
+  _nuotoStile: {fileID: 0}
+  _tiroColonnello: {fileID: 0}
+  _tiroRovesciata: {fileID: 0}
+  _tiroSciarpa: {fileID: 0}
+  _stunnato: {fileID: 0}
+  _difesaBraccio: {fileID: 0}
+  _effect: {fileID: 0}
 --- !u!1 &271552354
 GameObject:
   m_ObjectHideFlags: 0
@@ -12866,14 +13028,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 344568391}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -8, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: -8.9, z: 0}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_Children:
   - {fileID: 1388443747}
   - {fileID: 924167163}
   - {fileID: 776994317}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &352276334
 GameObject:
@@ -13628,7 +13790,7 @@ Transform:
   - {fileID: 1290246201}
   - {fileID: 407702761}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &456607985
 GameObject:
@@ -19170,7 +19332,7 @@ Transform:
   m_GameObject: {fileID: 502280328}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: -38, z: 0}
-  m_LocalScale: {x: 1.3000001, y: 1.3000001, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 136203645}
   - {fileID: 285781273}
@@ -19813,6 +19975,9 @@ GameObject:
   - component: {fileID: 563600100}
   - component: {fileID: 563600099}
   - component: {fileID: 563600098}
+  - component: {fileID: 563600104}
+  - component: {fileID: 563600103}
+  - component: {fileID: 563600102}
   m_Layer: 9
   m_Name: PlayerY1
   m_TagString: Player
@@ -19829,7 +19994,7 @@ Transform:
   m_GameObject: {fileID: 563600095}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 19.6, y: -33.5, z: 0}
-  m_LocalScale: {x: 1.3000002, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1136918032}
   - {fileID: 1248991021}
@@ -19854,55 +20019,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8f37f17f5e9e54bb327458436845a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorAction: 0
-  idDecisionMaking: 0
-  idDecisionCPU: 0
-  idAnim: 0
-  speed: 24.4
-  pass: 0
-  shoot: 10
-  stamina: 0
-  brain: 0
-  clickCPU: {x: 0, y: 0}
-  isInContact: 0
-  cpuFlag: 0
-  ballFlag: 0
-  counterAttFlag: 0
-  fightFlag: 0
-  flagShoot: 0
-  loadShoot: 0
-  destShoot: {x: 0, y: 0, z: 0}
-  posAtt: {x: 0, y: 0, z: 0}
-  posDef: {x: 0, y: 0, z: 0}
-  posStart: {x: 0, y: 0, z: 0}
-  posMiddle: {x: 0, y: 0, z: 0}
-  posFinal: {x: 0, y: 0, z: 0}
-  nextPosFinal: {x: 0, y: 0, z: 0}
-  posToWatch: {x: 0, y: 0, z: 0}
-  posGoal: {x: 0, y: 0, z: 0}
-  posCounter: {x: 0, y: 0, z: 0}
-  posBallEndAction: {x: 0, y: 0, z: 0}
+  _speed: 0
+  _pass: 0
+  _shoot: 0
   opponent: {fileID: 0}
-  limitVelBall: 0
-  selected: 0
-  idTeam: 0
-  marcaFlag: 0
-  boaFlag: 0
-  angleBoaZ: 0
-  angleBoaW: 0
-  distaceBall: 0
-  distanceAtt: 0
-  distanceDef: 0
-  pushAtt: 0
-  beginPush: 0
-  speedToPush: 0
-  coverOpponent: 0
-  distOpponentToDef: 0
-  waitAfterShoot: 3
-  fightManager: {fileID: 4510739488602134470, guid: b4c42f95f4d546e4d9e10f6bfde188e8,
-    type: 3}
-  prefabFight: {fileID: 0}
-  head: {fileID: 0}
 --- !u!58 &563600098
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -20011,6 +20131,109 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &563600102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563600095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ea9930ecb674732bee27116520fad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTransformStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransform:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransformComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 7
+  screenTransformThreshold: 0.1
+  minScreenPointsDistance: 0.5
+  projectionProps: 0
+  projection: 0
+  projectionPlaneNormal: {x: 0, y: 0, z: 1}
+--- !u!114 &563600103
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563600095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a878a6ff128243dfb1d89ca0273f059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTap:
+    m_PersistentCalls:
+      m_Calls: []
+  numberOfTapsRequired: 1
+  timeLimit: Infinity
+  distanceLimit: Infinity
+  combinePointers: 0
+  combinePointersInterval: 0.3
+--- !u!114 &563600104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 563600095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec44493e23df7b4887734637ea0d29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _possesso: {fileID: 0}
+  _bicicletta: {fileID: 0}
+  _nuotoDorso: {fileID: 0}
+  _nuotoConPalla: {fileID: 0}
+  _tiro: {fileID: 0}
+  _nuotoStile: {fileID: 0}
+  _tiroColonnello: {fileID: 0}
+  _tiroRovesciata: {fileID: 0}
+  _tiroSciarpa: {fileID: 0}
+  _stunnato: {fileID: 0}
+  _difesaBraccio: {fileID: 0}
+  _effect: {fileID: 0}
 --- !u!1 &570848976
 GameObject:
   m_ObjectHideFlags: 0
@@ -20210,7 +20433,7 @@ Transform:
   - {fileID: 112479171}
   - {fileID: 264174414}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &614511608
 GameObject:
@@ -30404,7 +30627,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &724283303
 GameObject:
@@ -35884,7 +36107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &776994316
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -41835,7 +42058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
       propertyPath: m_LocalPosition.x
@@ -41883,12 +42106,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
       propertyPath: layers.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
       propertyPath: layers.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 519420030}
     - target: {fileID: 11400000, guid: 1c4dd8a13f501b04f84fe824120f70bb, type: 3}
       propertyPath: layers.Array.data[1]
       value: 
@@ -42323,7 +42546,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &978647575
 GameObject:
@@ -42426,6 +42649,9 @@ GameObject:
   - component: {fileID: 1013301998}
   - component: {fileID: 1013301997}
   - component: {fileID: 1013301995}
+  - component: {fileID: 1013302003}
+  - component: {fileID: 1013302002}
+  - component: {fileID: 1013302001}
   m_Layer: 9
   m_Name: PlayerY6
   m_TagString: Player
@@ -42461,55 +42687,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4233071f27befe94da1611726018a1ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorAction: 0
-  idDecisionMaking: 0
-  idDecisionCPU: 0
-  idAnim: 0
-  speed: 20
-  pass: 0
-  shoot: 10
-  stamina: 0
-  brain: 0
-  clickCPU: {x: 0, y: 0}
-  isInContact: 0
-  cpuFlag: 0
-  ballFlag: 0
-  counterAttFlag: 0
-  fightFlag: 0
-  flagShoot: 0
-  loadShoot: 0
-  destShoot: {x: 0, y: 0, z: 0}
-  posAtt: {x: 0, y: 0, z: 0}
-  posDef: {x: 0, y: 0, z: 0}
-  posStart: {x: 0, y: 0, z: 0}
-  posMiddle: {x: 0, y: 0, z: 0}
-  posFinal: {x: 0, y: 0, z: 0}
-  nextPosFinal: {x: 0, y: 0, z: 0}
-  posToWatch: {x: 0, y: 0, z: 0}
-  posGoal: {x: 0, y: 0, z: 0}
-  posCounter: {x: 0, y: 0, z: 0}
-  posBallEndAction: {x: 0, y: 0, z: 0}
+  _speed: 0
+  _pass: 0
+  _shoot: 0
   opponent: {fileID: 0}
-  limitVelBall: 0
-  selected: 0
-  idTeam: 0
-  marcaFlag: 0
-  boaFlag: 0
-  angleBoaZ: 0
-  angleBoaW: 0
-  distaceBall: 0
-  distanceAtt: 0
-  distanceDef: 0
-  pushAtt: 0
-  beginPush: 0
-  speedToPush: 0
-  coverOpponent: 0
-  distOpponentToDef: 0
-  waitAfterShoot: 3
-  fightManager: {fileID: 4510739488602134470, guid: b4c42f95f4d546e4d9e10f6bfde188e8,
-    type: 3}
-  prefabFight: {fileID: 0}
-  head: {fileID: 0}
 --- !u!50 &1013301997
 Rigidbody2D:
   serializedVersion: 4
@@ -42611,7 +42792,7 @@ Transform:
   m_GameObject: {fileID: 1013301994}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: -9.9, y: -34, z: 0}
-  m_LocalScale: {x: 1.3000002, y: 1.3000002, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1510570622}
   - {fileID: 1079766975}
@@ -42628,6 +42809,109 @@ Transform:
   m_Father: {fileID: 1784266191}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!114 &1013302001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013301994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ea9930ecb674732bee27116520fad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTransformStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransform:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransformComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 7
+  screenTransformThreshold: 0.1
+  minScreenPointsDistance: 0.5
+  projectionProps: 0
+  projection: 0
+  projectionPlaneNormal: {x: 0, y: 0, z: 1}
+--- !u!114 &1013302002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013301994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a878a6ff128243dfb1d89ca0273f059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTap:
+    m_PersistentCalls:
+      m_Calls: []
+  numberOfTapsRequired: 1
+  timeLimit: Infinity
+  distanceLimit: Infinity
+  combinePointers: 0
+  combinePointersInterval: 0.3
+--- !u!114 &1013302003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013301994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec44493e23df7b4887734637ea0d29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _possesso: {fileID: 0}
+  _bicicletta: {fileID: 0}
+  _nuotoDorso: {fileID: 0}
+  _nuotoConPalla: {fileID: 0}
+  _tiro: {fileID: 0}
+  _nuotoStile: {fileID: 0}
+  _tiroColonnello: {fileID: 0}
+  _tiroRovesciata: {fileID: 0}
+  _tiroSciarpa: {fileID: 0}
+  _stunnato: {fileID: 0}
+  _difesaBraccio: {fileID: 0}
+  _effect: {fileID: 0}
 --- !u!1 &1030841221
 GameObject:
   m_ObjectHideFlags: 0
@@ -43351,8 +43635,9 @@ RectTransform:
   m_Children:
   - {fileID: 750678747}
   - {fileID: 1784266191}
+  - {fileID: 1872280688}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -44070,6 +44355,9 @@ GameObject:
   - component: {fileID: 1290246205}
   - component: {fileID: 1290246203}
   - component: {fileID: 1290246204}
+  - component: {fileID: 1290246209}
+  - component: {fileID: 1290246208}
+  - component: {fileID: 1290246207}
   m_Layer: 9
   m_Name: PlayerR6
   m_TagString: Player
@@ -44115,54 +44403,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0473797270e5ef47ba1a3af37586ab4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorAction: 0
-  idDecisionMaking: 0
-  idDecisionCPU: 0
-  idAnim: 0
-  speed: 20
-  pass: 0
-  shoot: 10
-  stamina: 0
-  brain: 0
-  clickCPU: {x: 0, y: 0}
-  isInContact: 0
-  cpuFlag: 0
-  ballFlag: 0
-  counterAttFlag: 0
-  fightFlag: 0
-  flagShoot: 0
-  loadShoot: 0
-  destShoot: {x: 0, y: 0, z: 0}
-  posAtt: {x: 0, y: 0, z: 0}
-  posDef: {x: 0, y: 0, z: 0}
-  posStart: {x: 0, y: 0, z: 0}
-  posMiddle: {x: 0, y: 0, z: 0}
-  posFinal: {x: 0, y: 0, z: 0}
-  nextPosFinal: {x: 0, y: 0, z: 0}
-  posToWatch: {x: 0, y: 0, z: 0}
-  posGoal: {x: 0, y: 0, z: 0}
-  posCounter: {x: 0, y: 0, z: 0}
-  posBallEndAction: {x: 0, y: 0, z: 0}
+  _speed: 0
+  _pass: 0
+  _shoot: 0
   opponent: {fileID: 0}
-  limitVelBall: 0
-  selected: 0
-  idTeam: 0
-  marcaFlag: 0
-  boaFlag: 0
-  angleBoaZ: 0
-  angleBoaW: 0
-  distaceBall: 0
-  distanceAtt: 0
-  distanceDef: 0
-  pushAtt: 0
-  beginPush: 0
-  speedToPush: 0
-  coverOpponent: 0
-  distOpponentToDef: 0
-  waitAfterShoot: 3
-  fightManager: {fileID: 0}
-  prefabFight: {fileID: 0}
-  head: {fileID: 0}
 --- !u!95 &1290246203
 Animator:
   serializedVersion: 3
@@ -44271,6 +44515,109 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1290246207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290246200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ea9930ecb674732bee27116520fad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTransformStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransform:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransformComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 7
+  screenTransformThreshold: 0.1
+  minScreenPointsDistance: 0.5
+  projectionProps: 0
+  projection: 0
+  projectionPlaneNormal: {x: 0, y: 0, z: 1}
+--- !u!114 &1290246208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290246200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a878a6ff128243dfb1d89ca0273f059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTap:
+    m_PersistentCalls:
+      m_Calls: []
+  numberOfTapsRequired: 1
+  timeLimit: Infinity
+  distanceLimit: Infinity
+  combinePointers: 0
+  combinePointersInterval: 0.3
+--- !u!114 &1290246209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1290246200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec44493e23df7b4887734637ea0d29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _possesso: {fileID: 0}
+  _bicicletta: {fileID: 0}
+  _nuotoDorso: {fileID: 0}
+  _nuotoConPalla: {fileID: 0}
+  _tiro: {fileID: 0}
+  _nuotoStile: {fileID: 0}
+  _tiroColonnello: {fileID: 0}
+  _tiroRovesciata: {fileID: 0}
+  _tiroSciarpa: {fileID: 0}
+  _stunnato: {fileID: 0}
+  _difesaBraccio: {fileID: 0}
+  _effect: {fileID: 0}
 --- !u!1 &1303220680
 GameObject:
   m_ObjectHideFlags: 0
@@ -49438,7 +49785,7 @@ Transform:
   m_Children:
   - {fileID: 128024609}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1334154688
 GameObject:
@@ -49519,18 +49866,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b8664e78b31c69488d06ff49be04ffb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allPlayer:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  panelStat: {fileID: 0}
-  gKRed: {fileID: 0}
-  gkYelloW: {fileID: 0}
 --- !u!1 &1342558626
 GameObject:
   m_ObjectHideFlags: 0
@@ -49907,7 +50242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 22401058, guid: c0dc5781cae4a6348b42ea6b818a3f9c, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 22401058, guid: c0dc5781cae4a6348b42ea6b818a3f9c, type: 3}
       propertyPath: m_AnchorMax.x
@@ -50142,7 +50477,7 @@ Transform:
   - {fileID: 195362127}
   - {fileID: 242118986}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1455297691
 GameObject:
@@ -50253,7 +50588,7 @@ Transform:
   - {fileID: 521265665}
   - {fileID: 1061900262}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1492399042
 GameObject:
@@ -60328,6 +60663,9 @@ GameObject:
   - component: {fileID: 1559964690}
   - component: {fileID: 1559964688}
   - component: {fileID: 1559964689}
+  - component: {fileID: 1559964694}
+  - component: {fileID: 1559964693}
+  - component: {fileID: 1559964692}
   m_Layer: 9
   m_Name: PlayerR1
   m_TagString: Player
@@ -60369,54 +60707,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abb7b3915da19fc49937f6873d0b5e15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorAction: 0
-  idDecisionMaking: 0
-  idDecisionCPU: 0
-  idAnim: 0
-  speed: 20
-  pass: 0
-  shoot: 10
-  stamina: 0
-  brain: 0
-  clickCPU: {x: 0, y: 0}
-  isInContact: 0
-  cpuFlag: 0
-  ballFlag: 0
-  counterAttFlag: 0
-  fightFlag: 0
-  flagShoot: 0
-  loadShoot: 0
-  destShoot: {x: 0, y: 0, z: 0}
-  posAtt: {x: 0, y: 0, z: 0}
-  posDef: {x: 0, y: 0, z: 0}
-  posStart: {x: 0, y: 0, z: 0}
-  posMiddle: {x: 0, y: 0, z: 0}
-  posFinal: {x: 0, y: 0, z: 0}
-  nextPosFinal: {x: 0, y: 0, z: 0}
-  posToWatch: {x: 0, y: 0, z: 0}
-  posGoal: {x: 0, y: 0, z: 0}
-  posCounter: {x: 0, y: 0, z: 0}
-  posBallEndAction: {x: 0, y: 0, z: 0}
+  _speed: 0
+  _pass: 0
+  _shoot: 0
   opponent: {fileID: 0}
-  limitVelBall: 0
-  selected: 0
-  idTeam: 0
-  marcaFlag: 0
-  boaFlag: 0
-  angleBoaZ: 0
-  angleBoaW: 0
-  distaceBall: 0
-  distanceAtt: 0
-  distanceDef: 0
-  pushAtt: 0
-  beginPush: 0
-  speedToPush: 0
-  coverOpponent: 0
-  distOpponentToDef: 0
-  waitAfterShoot: 3
-  fightManager: {fileID: 0}
-  prefabFight: {fileID: 0}
-  head: {fileID: 0}
 --- !u!95 &1559964688
 Animator:
   serializedVersion: 3
@@ -60525,6 +60819,109 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1559964692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559964685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ea9930ecb674732bee27116520fad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTransformStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransform:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransformComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 7
+  screenTransformThreshold: 0.1
+  minScreenPointsDistance: 0.5
+  projectionProps: 0
+  projection: 0
+  projectionPlaneNormal: {x: 0, y: 0, z: 1}
+--- !u!114 &1559964693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559964685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a878a6ff128243dfb1d89ca0273f059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTap:
+    m_PersistentCalls:
+      m_Calls: []
+  numberOfTapsRequired: 1
+  timeLimit: Infinity
+  distanceLimit: Infinity
+  combinePointers: 0
+  combinePointersInterval: 0.3
+--- !u!114 &1559964694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559964685}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec44493e23df7b4887734637ea0d29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _possesso: {fileID: 0}
+  _bicicletta: {fileID: 0}
+  _nuotoDorso: {fileID: 0}
+  _nuotoConPalla: {fileID: 0}
+  _tiro: {fileID: 0}
+  _nuotoStile: {fileID: 0}
+  _tiroColonnello: {fileID: 0}
+  _tiroRovesciata: {fileID: 0}
+  _tiroSciarpa: {fileID: 0}
+  _stunnato: {fileID: 0}
+  _difesaBraccio: {fileID: 0}
+  _effect: {fileID: 0}
 --- !u!1 &1567109496
 GameObject:
   m_ObjectHideFlags: 0
@@ -71277,7 +71674,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1784266190}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -8, z: 0}
+  m_LocalPosition: {x: 3.7, y: -4.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1013302000}
@@ -81465,7 +81862,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!212 &1872280687
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -81528,8 +81925,8 @@ Transform:
   m_LocalPosition: {x: 19.9, y: -0.5, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1137873700}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1872280689
 MonoBehaviour:
@@ -82496,6 +82893,9 @@ GameObject:
   - component: {fileID: 2050683476}
   - component: {fileID: 2050683475}
   - component: {fileID: 2050683474}
+  - component: {fileID: 2050683480}
+  - component: {fileID: 2050683479}
+  - component: {fileID: 2050683478}
   m_Layer: 9
   m_Name: PlayerY3
   m_TagString: Player
@@ -82512,7 +82912,7 @@ Transform:
   m_GameObject: {fileID: 2050683471}
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 10.9, y: -34.7, z: 0}
-  m_LocalScale: {x: 1.3000002, y: 1.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 462297684}
   - {fileID: 367001050}
@@ -82537,55 +82937,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 790b4ac053926304890b5e96a0fc4bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorAction: 0
-  idDecisionMaking: 0
-  idDecisionCPU: 0
-  idAnim: 0
-  speed: 20
-  pass: 0
-  shoot: 10
-  stamina: 0
-  brain: 0
-  clickCPU: {x: 0, y: 0}
-  isInContact: 0
-  cpuFlag: 0
-  ballFlag: 0
-  counterAttFlag: 0
-  fightFlag: 0
-  flagShoot: 0
-  loadShoot: 0
-  destShoot: {x: 0, y: 0, z: 0}
-  posAtt: {x: 0, y: 0, z: 0}
-  posDef: {x: 0, y: 0, z: 0}
-  posStart: {x: 0, y: 0, z: 0}
-  posMiddle: {x: 0, y: 0, z: 0}
-  posFinal: {x: 0, y: 0, z: 0}
-  nextPosFinal: {x: 0, y: 0, z: 0}
-  posToWatch: {x: 0, y: 0, z: 0}
-  posGoal: {x: 0, y: 0, z: 0}
-  posCounter: {x: 0, y: 0, z: 0}
-  posBallEndAction: {x: 0, y: 0, z: 0}
+  _speed: 0
+  _pass: 0
+  _shoot: 0
   opponent: {fileID: 0}
-  limitVelBall: 0
-  selected: 0
-  idTeam: 0
-  marcaFlag: 0
-  boaFlag: 0
-  angleBoaZ: 0
-  angleBoaW: 0
-  distaceBall: 0
-  distanceAtt: 0
-  distanceDef: 0
-  pushAtt: 0
-  beginPush: 0
-  speedToPush: 0
-  coverOpponent: 0
-  distOpponentToDef: 0
-  waitAfterShoot: 3
-  fightManager: {fileID: 4510739488602134470, guid: b4c42f95f4d546e4d9e10f6bfde188e8,
-    type: 3}
-  prefabFight: {fileID: 0}
-  head: {fileID: 0}
   battle: {fileID: 6785614088860273912, guid: 1bbd3c657494e7647bbc225939b02d8b, type: 3}
   battlePrefab: {fileID: 0}
 --- !u!58 &2050683474
@@ -82696,6 +83051,109 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2050683478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050683471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11ea9930ecb674732bee27116520fad8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTransformStart:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransform:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTransformComplete:
+    m_PersistentCalls:
+      m_Calls: []
+  type: 7
+  screenTransformThreshold: 0.1
+  minScreenPointsDistance: 0.5
+  projectionProps: 0
+  projection: 0
+  projectionPlaneNormal: {x: 0, y: 0, z: 1}
+--- !u!114 &2050683479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050683471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a878a6ff128243dfb1d89ca0273f059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnStateChange:
+    m_PersistentCalls:
+      m_Calls: []
+  basicEditor: 1
+  generalProps: 0
+  limitsProps: 0
+  advancedProps: 0
+  minPointers: 0
+  maxPointers: 0
+  useSendMessage: 0
+  sendStateChangeMessages: 0
+  sendMessageTarget: {fileID: 0}
+  useUnityEvents: 0
+  sendStateChangeEvents: 0
+  requireGestureToFail: {fileID: 0}
+  friendlyGestures: []
+  OnTap:
+    m_PersistentCalls:
+      m_Calls: []
+  numberOfTapsRequired: 1
+  timeLimit: Infinity
+  distanceLimit: Infinity
+  combinePointers: 0
+  combinePointersInterval: 0.3
+--- !u!114 &2050683480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2050683471}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec44493e23df7b4887734637ea0d29d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _possesso: {fileID: 0}
+  _bicicletta: {fileID: 0}
+  _nuotoDorso: {fileID: 0}
+  _nuotoConPalla: {fileID: 0}
+  _tiro: {fileID: 0}
+  _nuotoStile: {fileID: 0}
+  _tiroColonnello: {fileID: 0}
+  _tiroRovesciata: {fileID: 0}
+  _tiroSciarpa: {fileID: 0}
+  _stunnato: {fileID: 0}
+  _difesaBraccio: {fileID: 0}
+  _effect: {fileID: 0}
 --- !u!1 &2055832722
 GameObject:
   m_ObjectHideFlags: 0

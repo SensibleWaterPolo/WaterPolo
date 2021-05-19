@@ -347,6 +347,14 @@ public class Ball : MonoBehaviour
               return false;
       }
     */
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            gameObject.SetActive(false);
+        }
+    }
     public enum EStatoPalla
     {
         LiberaSx,
