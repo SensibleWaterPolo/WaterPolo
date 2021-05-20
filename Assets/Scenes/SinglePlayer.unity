@@ -399,6 +399,7 @@ GameObject:
   - component: {fileID: 31590404}
   - component: {fileID: 31590406}
   - component: {fileID: 31590405}
+  - component: {fileID: 31590407}
   m_Layer: 9
   m_Name: PlayerY5
   m_TagString: Player
@@ -576,6 +577,10 @@ MonoBehaviour:
   _pass: 0
   _shoot: 0
   opponent: {fileID: 0}
+  _keepBallPosition: {fileID: 1119873324}
+  _rovesciataBallPosition: {fileID: 0}
+  _sciarpaBallPosition: {fileID: 0}
+  _colonnelloBallPosition: {fileID: 0}
 --- !u!114 &31590405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -655,6 +660,18 @@ MonoBehaviour:
   distanceLimit: Infinity
   combinePointers: 0
   combinePointersInterval: 0.3
+--- !u!114 &31590407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 31590397}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2943981f36c048046bf9fde8104591c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &44859364
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +829,10 @@ MonoBehaviour:
   _pass: 0
   _shoot: 0
   opponent: {fileID: 0}
+  _keepBallPosition: {fileID: 0}
+  _rovesciataBallPosition: {fileID: 0}
+  _sciarpaBallPosition: {fileID: 0}
+  _colonnelloBallPosition: {fileID: 0}
 --- !u!95 &73869357
 Animator:
   serializedVersion: 3
@@ -12395,6 +12416,10 @@ MonoBehaviour:
   _pass: 0
   _shoot: 0
   opponent: {fileID: 0}
+  _keepBallPosition: {fileID: 0}
+  _rovesciataBallPosition: {fileID: 0}
+  _sciarpaBallPosition: {fileID: 0}
+  _colonnelloBallPosition: {fileID: 0}
   battle: {fileID: 6785614088860273912, guid: 1bbd3c657494e7647bbc225939b02d8b, type: 3}
   battlePrefab: {fileID: 0}
 --- !u!95 &267972308
@@ -20023,6 +20048,10 @@ MonoBehaviour:
   _pass: 0
   _shoot: 0
   opponent: {fileID: 0}
+  _keepBallPosition: {fileID: 0}
+  _rovesciataBallPosition: {fileID: 0}
+  _sciarpaBallPosition: {fileID: 0}
+  _colonnelloBallPosition: {fileID: 0}
 --- !u!58 &563600098
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -42691,6 +42720,10 @@ MonoBehaviour:
   _pass: 0
   _shoot: 0
   opponent: {fileID: 0}
+  _keepBallPosition: {fileID: 0}
+  _rovesciataBallPosition: {fileID: 0}
+  _sciarpaBallPosition: {fileID: 0}
+  _colonnelloBallPosition: {fileID: 0}
 --- !u!50 &1013301997
 Rigidbody2D:
   serializedVersion: 4
@@ -44407,6 +44440,10 @@ MonoBehaviour:
   _pass: 0
   _shoot: 0
   opponent: {fileID: 0}
+  _keepBallPosition: {fileID: 0}
+  _rovesciataBallPosition: {fileID: 0}
+  _sciarpaBallPosition: {fileID: 0}
+  _colonnelloBallPosition: {fileID: 0}
 --- !u!95 &1290246203
 Animator:
   serializedVersion: 3
@@ -60711,6 +60748,10 @@ MonoBehaviour:
   _pass: 0
   _shoot: 0
   opponent: {fileID: 0}
+  _keepBallPosition: {fileID: 0}
+  _rovesciataBallPosition: {fileID: 0}
+  _sciarpaBallPosition: {fileID: 0}
+  _colonnelloBallPosition: {fileID: 0}
 --- !u!95 &1559964688
 Animator:
   serializedVersion: 3
@@ -81922,7 +81963,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1872280686}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.9, y: -0.5, z: 0}
+  m_LocalPosition: {x: -4.4, y: -13.8, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1}
   m_Children: []
   m_Father: {fileID: 1137873700}
@@ -81950,7 +81991,6 @@ MonoBehaviour:
   isShooted: 0
   respawn: 0
   isEnable: 0
-  shoot: 0
   pas: 0
   throwIn: 0
   player: {fileID: 0}
@@ -82941,6 +82981,10 @@ MonoBehaviour:
   _pass: 0
   _shoot: 0
   opponent: {fileID: 0}
+  _keepBallPosition: {fileID: 0}
+  _rovesciataBallPosition: {fileID: 0}
+  _sciarpaBallPosition: {fileID: 0}
+  _colonnelloBallPosition: {fileID: 0}
   battle: {fileID: 6785614088860273912, guid: 1bbd3c657494e7647bbc225939b02d8b, type: 3}
   battlePrefab: {fileID: 0}
 --- !u!58 &2050683474

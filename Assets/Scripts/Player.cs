@@ -1,4 +1,4 @@
-﻿using DG.Tweening;
+﻿using System.Collections;
 using TouchScript.Gestures;
 using TouchScript.Gestures.TransformGestures;
 using UnityEngine;
@@ -11,21 +11,30 @@ public class Player : MonoBehaviour
 
     private EPosizionePalla _ePosizionePalla;
 
-    private EStato _eStatoCorrente;
+    private EStato _currentState;
+    public EStato GetState() => _currentState;
 
     private EPosizione _ePosizioneGiocatore;
+
+    private IEnumerator _coroutine;
+
+    private Rigidbody2D _rb;
+    private Ball _ball;
 
     [Header("STAT Var")] //M: statistiche giocatore
     [Range(0, 50)]
     [SerializeField]
     private float _speed;
+    public float GetSpeed() => _speed;
 
     [SerializeField]
     private float _pass;
+    public float GetPass() => _pass;
 
     [SerializeField]
     [Range(0f, 10f)]
     private float _shoot;
+    public float GetShoot() => _shoot;
 
     [Header("OPPONENT")]//M:fa riferimento al diretto avversario
     public Player opponent;
@@ -35,7 +44,18 @@ public class Player : MonoBehaviour
 
     private TransformGesture _transformGesture;
 
-    private Sequence _sequence;
+    //POS Ball for animation
+    [SerializeField]
+    public GameObject _keepBallPosition;
+    [SerializeField]
+    public GameObject _rovesciataBallPosition;
+    [SerializeField]
+    public GameObject _sciarpaBallPosition;
+    [SerializeField]
+    public GameObject _colonnelloBallPosition;
+
+
+
 
     private void Awake()
     {
@@ -46,59 +66,18 @@ public class Player : MonoBehaviour
         _shoot = Random.Range(6, 10);
         _pass = Random.Range(6, 10);
         _speed = Random.Range(6, 10);
-
+        _ball = Ball.current;
+        _rb = GetComponent<Rigidbody2D>();
         _playerAnimationController = transform.GetComponent<PlayerAnimationController>();
         _tapGesture = transform.GetComponent<TapGesture>();
         _transformGesture = transform.GetComponent<TransformGesture>();
 
-        _tapGesture.Tapped += HandleTapGesture;
-        _transformGesture.TransformCompleted += HandleTransformCompleted;
-        _transformGesture.Transformed += HandleTransformUpdate;
-
-        _eStatoCorrente = EStato.None;
+        _currentState = EStato.None;
 
         SetBicicletta();
     }
 
-    private void HandleTransformCompleted(object sender, System.EventArgs e)
-    {
-        _sequence?.Kill();
-        var posInWorld = Camera.main.ScreenToWorldPoint(_transformGesture.ScreenPosition);
-        var finalPos = new Vector3(posInWorld.x, posInWorld.y, transform.position.z);
-        var dir = finalPos - transform.position;
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        var rot = Quaternion.AngleAxis(angle, Vector3.forward);
-        var distance = Vector2.Distance(finalPos, transform.position);
 
-        SetNuotoStile();
-        _sequence = DOTween.Sequence();
-        _sequence.Append(transform.DORotateQuaternion(rot, 0.2f))
-        .Append(transform.DOMove(finalPos, distance / _speed)).Play().OnComplete(() => SetBicicletta());
-
-
-    }
-
-    private void HandleTransformUpdate(object sender, System.EventArgs e)
-    {
-    }
-
-    private void HandleStartTransform(object sender, System.EventArgs e)
-    {
-    }
-
-    private void HandleTapGesture(object sender, System.EventArgs e)
-    {
-        //       SetNuotoStile();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.tag == "Ball")
-        {
-            _sequence?.Kill();
-            SetPossesso();
-        }
-    }
 
     /* public virtual void FixedUpdate()
      {
@@ -483,48 +462,62 @@ public class Player : MonoBehaviour
 
     public void SetBicicletta()
     {
-        if (_eStatoCorrente == EStato.Bicicletta)
+        if (_currentState == EStato.Bicicletta)
             return;
 
-        _eStatoCorrente = EStato.Bicicletta;
+        _currentState = EStato.Bicicletta;
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.Bicicletta);
     }
 
     public void SetPossesso()
     {
-        if (_eStatoCorrente == EStato.Possesso)
+        if (_currentState == EStato.Possesso)
             return;
 
-        _eStatoCorrente = EStato.Possesso;
+        _currentState = EStato.Possesso;
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.Possesso);
     }
 
     public void SetNuotoStile()
     {
-        if (_eStatoCorrente == EStato.NuotoStile)
+
+        if (_currentState == EStato.NuotoStile)
             return;
 
-        _eStatoCorrente = EStato.NuotoStile;
+        _currentState = EStato.NuotoStile;
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.NuotoStile);
     }
 
     public void SetNuotoDorso()
     {
-        if (_eStatoCorrente == EStato.NuotoDorso)
+        if (_currentState == EStato.NuotoDorso)
             return;
 
-        _eStatoCorrente = EStato.NuotoDorso;
+        _currentState = EStato.NuotoDorso;
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.NuotoDorso);
     }
 
     public void SetNuotoConPalla()
     {
-        if (_eStatoCorrente == EStato.NuotaConPalla)
+        if (_currentState == EStato.NuotaConPalla)
             return;
 
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.NuotoConPalla);
     }
 
+    public void SetCaricaTiro()
+    {
+        if (_currentState == EStato.CaricaTiro)
+            return;
+
+        _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.Tiro);
+
+    }
+
+    public void Shoot()
+    {
+        _ball.Shoot();
+    }
     /*
      public void SetKeep()
      {
@@ -1248,7 +1241,7 @@ public class Player : MonoBehaviour
         PossessoBoa,
         NuotaConPalla,
         CaricaTiro,
-        Collonnello,
+        Colonnello,
         Sciarpa,
         FRovesciata,
         InFight,

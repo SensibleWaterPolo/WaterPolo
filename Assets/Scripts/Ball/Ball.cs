@@ -19,18 +19,19 @@ public class Ball : MonoBehaviour
     public bool respawn; //appena torna in gioco dopo un tiro non può entrare in possesso di un altro giocatore
     public bool isEnable;
 
-    public float shoot; //M: forza del giocatore
+    private float _power; //M: forza del giocatore
     public float pas;//M: forza del giocatore passaggio
 
     public float throwIn; //forza del rilancio del portiere
-    private Rigidbody2D rb;
     public Player player; //M: Giocatore in possesso della palla
     public int idTeam; //M: 0:Yellow 1: Red
     public GoalKeeper gk;
 
-    private Vector3 finalPos; //M: posizione finale della palla dopo un tiro/pass
+    private Vector3 _finalPos; //M: posizione finale della palla dopo un tiro/pass
 
-    private EStatoPalla _statoPalla; //M: stato della posizione, 0: palla in possesso, 1: palla nel settore sx, 2: palla nel settore centrale, 3: palla nel settore dx, -1:indefinito
+    private EStato _currentState; //M: stato della posizione, 0: palla in possesso, 1: palla nel settore sx, 2: palla nel settore centrale, 3: palla nel settore dx, -1:indefinito
+
+    public EStato GetState() => _currentState;
 
     public bool fieldYellow; //M; true se la palla è nella merà campo gialla
 
@@ -42,22 +43,78 @@ public class Ball : MonoBehaviour
     public string redNear;
     public string yellowNear;
     public string moreNear;
-    /*
-      private void Awake() //M:inizializzazione variabili
-      {
-          current = this;
-          freeFlag = true;
-          inGameFlag = true;
-          deceleratePass = true;
-          decelerateShoot = true;
-          rb = GetComponent<Rigidbody2D>();
-          shootFlag = true;
-          isShooted = false;
-          idTeam = -1;
-          respawn = false;
-          isEnable = true;
-      }
 
+    private Rigidbody2D _rb;
+    private Renderer _render;
+    private Transform _parent;
+
+    private void Awake() //M:inizializzazione variabili
+    {
+        current = this;
+    }
+
+    private void Start()
+    {
+        _currentState = EStato.Libera;
+        _rb = GetComponent<Rigidbody2D>();
+        _render = GetComponent<Renderer>();
+        _parent = transform.parent;
+    }
+
+    private void FixedUpdate()
+    {
+        CheckVelocity();
+
+        //  _currentState = _rb.velocity.magnitude >= 0.5f ? EStato.InMovimento : _currentState == EStato.InPossesso ? EStato.InPossesso : EStato.Libera;
+    }
+
+    public void SetFinalPos(Vector3 targetPos)
+    {
+        _finalPos = targetPos;
+    }
+
+    public void SetPower(float value)
+    {
+        _power = value;
+    }
+
+    private void CheckVelocity()
+    {
+        if (_rb.velocity.magnitude >= 3f)
+        {
+            _currentState = EStato.InMovimento;
+        }
+
+
+        if (_rb.velocity.magnitude < 3f && _currentState != EStato.InPossesso)
+        {
+            _rb.velocity = Vector2.zero;
+            _rb.angularVelocity = 0;
+            _currentState = EStato.Libera;
+        }
+    }
+
+    private void UpdateState()
+    {
+        switch (_currentState)
+        {
+            case EStato.Libera:
+                break;
+
+            case EStato.InMovimento:
+                {
+                }
+                break;
+
+            case EStato.InPossesso:
+                break;
+
+            case EStato.Fuori:
+                break;
+        }
+    }
+
+    /*
       private void FixedUpdate()
       {
           //CheckFreeBall();
@@ -88,7 +145,32 @@ public class Ball : MonoBehaviour
           //  Debug.Log("SPEED "+speed+ " /shootflag " +shootFlag+ " /player "+player+ " /libera :"+freeFlag+" /ferma "+motionlessFlag+ " /shooted "+isShooted);
       }
 
-      public void ShootBall(Vector3 finalPos, bool shootFlag, int id) //M: prepara la palla al tiro e ne calcola la forza, id=0 giocatore, id=1 portiere
+    */
+
+    public void Shoot()
+    {
+        var dir = (_finalPos - transform.position).normalized;
+        ShowBall();
+        _rb.AddForce(dir * _power * 100);
+    }
+
+    private void ShowBall()
+    {
+        transform.parent = _parent;
+        gameObject.SetActive(true);
+    }
+
+    public void KeepBall(Transform newParent)
+    {
+        transform.parent = newParent;
+        transform.localPosition = Vector3.zero;
+        gameObject.SetActive(false);
+        _currentState = EStato.InPossesso;
+    }
+
+    /*
+
+    public void ShootBall(Vector3 finalPos, bool shootFlag, int id) //M: prepara la palla al tiro e ne calcola la forza, id=0 giocatore, id=1 portiere
       {
           this.finalPos = finalPos;
           this.shootFlag = shootFlag;
@@ -348,19 +430,19 @@ public class Ball : MonoBehaviour
       }
     */
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
-        {
-            gameObject.SetActive(false);
-        }
+        /*  if (collision.gameObject.tag == "Player")
+          {
+              gameObject.SetActive(false);
+          }*/
     }
-    public enum EStatoPalla
+
+    public enum EStato
     {
-        LiberaSx,
-        LiberaDx,
-        LiberaCentro,
+        Libera,
         InPossesso,
-        Fuori
+        Fuori,
+        InMovimento
     }
 }

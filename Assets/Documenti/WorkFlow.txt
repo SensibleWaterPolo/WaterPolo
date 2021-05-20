@@ -1,0 +1,3 @@
+-Giocatore che nuota verso la palla.
+
+-Tiro del giocatore una volta in possesso di palla
