@@ -45,6 +45,9 @@ public class PlayerAnimationController : MonoBehaviour
     [SerializeField]
     private GameObject _effect;
 
+    [SerializeField]
+    private GameObject _braccioAlzato;
+
     private void Start()
     {
         _animator = transform.GetComponent<Animator>();
@@ -57,6 +60,7 @@ public class PlayerAnimationController : MonoBehaviour
             return;
 
         _effect.SetActive(false);
+        _braccioAlzato.SetActive(false);
 
         switch (animation)
         {
@@ -138,6 +142,7 @@ public class PlayerAnimationController : MonoBehaviour
                 {
                     AnimationPlayableUtilities.PlayClip(_animator, _difesaBraccio, out _playableGraph);
                     _currentAnimation = ETypeAnimation.DifesaBraccio;
+                    _braccioAlzato.SetActive(true);
                 }
                 break;
         }

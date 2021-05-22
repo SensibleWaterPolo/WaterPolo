@@ -255,7 +255,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &14099197
 Transform:
   m_ObjectHideFlags: 0
@@ -453,6 +453,7 @@ MonoBehaviour:
   _stunnato: {fileID: 7400000, guid: 7ca03b65459668b488e008a219020309, type: 2}
   _difesaBraccio: {fileID: 7400000, guid: 5a2d73d7bf944ca4085346abe07a6e86, type: 2}
   _effect: {fileID: 1891352503}
+  _braccioAlzato: {fileID: 881219641}
 --- !u!58 &31590400
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -672,6 +673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2943981f36c048046bf9fde8104591c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _minDistanzaTiro: 10
 --- !u!1 &44859364
 GameObject:
   m_ObjectHideFlags: 0
@@ -1044,6 +1046,7 @@ MonoBehaviour:
   _stunnato: {fileID: 0}
   _difesaBraccio: {fileID: 0}
   _effect: {fileID: 0}
+  _braccioAlzato: {fileID: 0}
 --- !u!1 &85308032
 GameObject:
   m_ObjectHideFlags: 0
@@ -12633,6 +12636,7 @@ MonoBehaviour:
   _stunnato: {fileID: 0}
   _difesaBraccio: {fileID: 0}
   _effect: {fileID: 0}
+  _braccioAlzato: {fileID: 0}
 --- !u!1 &271552354
 GameObject:
   m_ObjectHideFlags: 0
@@ -20263,6 +20267,7 @@ MonoBehaviour:
   _stunnato: {fileID: 0}
   _difesaBraccio: {fileID: 0}
   _effect: {fileID: 0}
+  _braccioAlzato: {fileID: 0}
 --- !u!1 &570848976
 GameObject:
   m_ObjectHideFlags: 0
@@ -30791,7 +30796,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &745991318
 Transform:
   m_ObjectHideFlags: 0
@@ -41785,7 +41790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &881219642
 Transform:
   m_ObjectHideFlags: 0
@@ -42945,6 +42950,7 @@ MonoBehaviour:
   _stunnato: {fileID: 0}
   _difesaBraccio: {fileID: 0}
   _effect: {fileID: 0}
+  _braccioAlzato: {fileID: 0}
 --- !u!1 &1030841221
 GameObject:
   m_ObjectHideFlags: 0
@@ -44655,6 +44661,7 @@ MonoBehaviour:
   _stunnato: {fileID: 0}
   _difesaBraccio: {fileID: 0}
   _effect: {fileID: 0}
+  _braccioAlzato: {fileID: 0}
 --- !u!1 &1303220680
 GameObject:
   m_ObjectHideFlags: 0
@@ -60671,7 +60678,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1548308847
 Transform:
   m_ObjectHideFlags: 0
@@ -60963,6 +60970,7 @@ MonoBehaviour:
   _stunnato: {fileID: 0}
   _difesaBraccio: {fileID: 0}
   _effect: {fileID: 0}
+  _braccioAlzato: {fileID: 0}
 --- !u!1 &1567109496
 GameObject:
   m_ObjectHideFlags: 0
@@ -71276,7 +71284,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1692288668
 Transform:
   m_ObjectHideFlags: 0
@@ -82002,6 +82010,7 @@ MonoBehaviour:
   redNear: 
   yellowNear: 
   moreNear: 
+  _inerzia: 0.95
 --- !u!50 &1872280690
 Rigidbody2D:
   serializedVersion: 4
@@ -82295,7 +82304,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1904965081
 Transform:
   m_ObjectHideFlags: 0
@@ -83198,6 +83207,7 @@ MonoBehaviour:
   _stunnato: {fileID: 0}
   _difesaBraccio: {fileID: 0}
   _effect: {fileID: 0}
+  _braccioAlzato: {fileID: 0}
 --- !u!1 &2055832722
 GameObject:
   m_ObjectHideFlags: 0

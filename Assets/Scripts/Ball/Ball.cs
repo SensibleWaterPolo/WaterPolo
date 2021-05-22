@@ -33,6 +33,10 @@ public class Ball : MonoBehaviour
 
     public EStato GetState() => _currentState;
 
+    private EPosizionePalla _currentPosizione;
+
+    public EPosizionePalla GetPosizione() => _currentPosizione;
+
     public bool fieldYellow; //M; true se la palla è nella merà campo gialla
 
     private ParticleSystem particle;
@@ -45,8 +49,10 @@ public class Ball : MonoBehaviour
     public string moreNear;
 
     private Rigidbody2D _rb;
-    private Renderer _render;
     private Transform _parent;
+
+    [SerializeField]
+    private float _inerzia;
 
     private void Awake() //M:inizializzazione variabili
     {
@@ -57,7 +63,6 @@ public class Ball : MonoBehaviour
     {
         _currentState = EStato.Libera;
         _rb = GetComponent<Rigidbody2D>();
-        _render = GetComponent<Renderer>();
         _parent = transform.parent;
     }
 
@@ -80,17 +85,22 @@ public class Ball : MonoBehaviour
 
     private void CheckVelocity()
     {
+        if (Vector2.Distance(transform.position, _finalPos) < 0.1)
+        {
+            StopBall();
+        }
+
         if (_rb.velocity.magnitude >= 3f)
         {
             _currentState = EStato.InMovimento;
+            return;
         }
 
-
-        if (_rb.velocity.magnitude < 3f && _currentState != EStato.InPossesso)
+        if (_rb.velocity.magnitude < 3f && _currentState == EStato.InMovimento)
         {
-            _rb.velocity = Vector2.zero;
-            _rb.angularVelocity = 0;
+            StopBall();
             _currentState = EStato.Libera;
+            return;
         }
     }
 
@@ -112,6 +122,12 @@ public class Ball : MonoBehaviour
             case EStato.Fuori:
                 break;
         }
+    }
+
+    private void StopBall()
+    {
+        _rb.velocity = Vector2.zero;
+        _rb.angularVelocity = 0;
     }
 
     /*
@@ -152,6 +168,7 @@ public class Ball : MonoBehaviour
         var dir = (_finalPos - transform.position).normalized;
         ShowBall();
         _rb.AddForce(dir * _power * 100);
+
     }
 
     private void ShowBall()
@@ -444,5 +461,13 @@ public class Ball : MonoBehaviour
         InPossesso,
         Fuori,
         InMovimento
+    }
+
+    public enum EPosizionePalla
+    {
+        None,
+        LatoSx,
+        Centro,
+        LatoDx,
     }
 }

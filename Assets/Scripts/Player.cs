@@ -9,10 +9,8 @@ public class Player : MonoBehaviour
 {
     private PlayerAnimationController _playerAnimationController;
 
-    private EPosizionePalla _ePosizionePalla;
-
-    private EStato _currentState;
-    public EStato GetState() => _currentState;
+    private EStatoAnimation _currentState;
+    public EStatoAnimation GetState() => _currentState;
 
     private EPosizione _ePosizioneGiocatore;
 
@@ -72,7 +70,7 @@ public class Player : MonoBehaviour
         _tapGesture = transform.GetComponent<TapGesture>();
         _transformGesture = transform.GetComponent<TransformGesture>();
 
-        _currentState = EStato.None;
+        _currentState = EStatoAnimation.None;
 
         SetBicicletta();
     }
@@ -462,44 +460,44 @@ public class Player : MonoBehaviour
 
     public void SetBicicletta()
     {
-        if (_currentState == EStato.Bicicletta)
+        if (_currentState == EStatoAnimation.Bicicletta)
             return;
 
-        _currentState = EStato.Bicicletta;
+        _currentState = EStatoAnimation.Bicicletta;
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.Bicicletta);
     }
 
     public void SetPossesso()
     {
-        if (_currentState == EStato.Possesso)
+        if (_currentState == EStatoAnimation.Possesso)
             return;
 
-        _currentState = EStato.Possesso;
+        _currentState = EStatoAnimation.Possesso;
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.Possesso);
     }
 
     public void SetNuotoStile()
     {
 
-        if (_currentState == EStato.NuotoStile)
+        if (_currentState == EStatoAnimation.NuotoStile)
             return;
 
-        _currentState = EStato.NuotoStile;
+        _currentState = EStatoAnimation.NuotoStile;
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.NuotoStile);
     }
 
     public void SetNuotoDorso()
     {
-        if (_currentState == EStato.NuotoDorso)
+        if (_currentState == EStatoAnimation.NuotoDorso)
             return;
 
-        _currentState = EStato.NuotoDorso;
+        _currentState = EStatoAnimation.NuotoDorso;
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.NuotoDorso);
     }
 
     public void SetNuotoConPalla()
     {
-        if (_currentState == EStato.NuotaConPalla)
+        if (_currentState == EStatoAnimation.NuotaConPalla)
             return;
 
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.NuotoConPalla);
@@ -507,7 +505,7 @@ public class Player : MonoBehaviour
 
     public void SetCaricaTiro()
     {
-        if (_currentState == EStato.CaricaTiro)
+        if (_currentState == EStatoAnimation.CaricaTiro)
             return;
 
         _playerAnimationController.PlayAnimation(PlayerAnimationController.ETypeAnimation.Tiro);
@@ -1218,18 +1216,9 @@ public class Player : MonoBehaviour
           }
      }*/
 
-    public enum EPosizionePalla
-    {
-        LiberaNonInZona,
-        LiberaInZona,
-        PossessoAmico,
-        PossessoAvversario,
-        Possesso,
-        PallaVicina,
-        NoSense
-    }
 
-    public enum EStato
+
+    public enum EStatoAnimation
     {
         None,
         Bicicletta,
@@ -1249,9 +1238,12 @@ public class Player : MonoBehaviour
 
     public enum EPosizione
     {
+        None,
         InPosAttacco,
         InPosDifesa,
         SullaPalla,
-        InPosControfuga
+        InPosControfuga,
+        CentroBoa,
+        MarcaBoa
     }
 }
